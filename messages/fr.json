@@ -1,0 +1,44 @@
+{
+  "common": {
+    "signIn": "Se connecter",
+    "signUp": "S'inscrire",
+    "signOut": "Se déconnecter",
+    "welcome": "Bienvenue",
+    "language": "Langue",
+    "french": "Français",
+    "english": "English",
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "success": "Succès"
+  },
+  "navigation": {
+    "home": "Accueil",
+    "bookings": "Réservations",
+    "profile": "Profil",
+    "admin": "Administration"
+  },
+  "booking": {
+    "title": "Réservation de Babyfoot",
+    "subtitle": "Réservez votre créneau de babyfoot à Ynov Toulouse",
+    "selectDate": "Sélectionner une date",
+    "selectDateDesc": "Choisissez la date qui vous convient pour votre partie de babyfoot.",
+    "selectTime": "Sélectionner un créneau",
+    "selectTimeDesc": "Sélectionnez le créneau horaire disponible.",
+    "duration": "Durée",
+    "confirm": "Confirmer la réservation",
+    "confirmDesc": "Confirmez votre réservation et profitez de votre partie !",
+    "cancel": "Annuler",
+    "myBookings": "Mes réservations",
+    "noBookings": "Aucune réservation trouvée"
+  },
+  "auth": {
+    "signInTitle": "Connexion",
+    "signUpTitle": "Inscription",
+    "email": "Email",
+    "password": "Mot de passe",
+    "confirmPassword": "Confirmer le mot de passe",
+    "forgotPassword": "Mot de passe oublié ?",
+    "alreadyHaveAccount": "Déjà un compte ?",
+    "noAccount": "Pas de compte ?"
+  }
+}

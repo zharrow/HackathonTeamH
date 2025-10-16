@@ -1,0 +1,44 @@
+{
+  "common": {
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "signOut": "Sign Out",
+    "welcome": "Welcome",
+    "language": "Language",
+    "french": "Français",
+    "english": "English",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success"
+  },
+  "navigation": {
+    "home": "Home",
+    "bookings": "Bookings",
+    "profile": "Profile",
+    "admin": "Administration"
+  },
+  "booking": {
+    "title": "Babyfoot Booking",
+    "subtitle": "Book your babyfoot slot at Ynov Toulouse",
+    "selectDate": "Select a date",
+    "selectDateDesc": "Choose the date that suits you for your babyfoot game.",
+    "selectTime": "Select a time slot",
+    "selectTimeDesc": "Select the available time slot.",
+    "duration": "Duration",
+    "confirm": "Confirm booking",
+    "confirmDesc": "Confirm your booking and enjoy your game!",
+    "cancel": "Cancel",
+    "myBookings": "My bookings",
+    "noBookings": "No bookings found"
+  },
+  "auth": {
+    "signInTitle": "Sign In",
+    "signUpTitle": "Sign Up",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm password",
+    "forgotPassword": "Forgot password?",
+    "alreadyHaveAccount": "Already have an account?",
+    "noAccount": "Don't have an account?"
+  }
+}
