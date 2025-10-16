@@ -2,13 +2,15 @@
 
 ## 1. 🎯 Contexte & Objectifs
 
-L’objectif est de créer une **application web intelligente** permettant aux étudiants et administrateurs Ynov de **réserver, gérer et visualiser en temps réel l’utilisation des babyfoots** du campus.  
-L’application inclura :
-- un système de **réservation de 15 min** avec **anti-chevauchement**,
-- une **file d’attente** automatique si la table est complète,
-- la possibilité de **terminer plus tôt ou prolonger** une partie,
-- un **dashboard utilisateur et admin**,
-- et des **statistiques avancées** sur les usages.
+Créer une **application web intelligente** pour les étudiants et administrateurs Ynov, permettant de **réserver, gérer et visualiser l’utilisation des babyfoots** du campus.
+
+Fonctionnalités principales :
+- Réservation en créneaux de **15 minutes**, sans chevauchement.
+- **File d’attente** intelligente si la table est complète.
+- Possibilité de **terminer ou prolonger** une réservation.
+- **Classement des joueurs via système ELO**, basé sur leurs résultats.
+- **Joueur MVP** mis en avant grâce à ses performances.
+- **Dashboards** utilisateurs et administrateurs avec statistiques détaillées.
 
 ---
 
@@ -18,15 +20,16 @@ L’application inclura :
 |------|--------------|---------|
 | **Frontend** | **Next.js 15 (App Router)** | SPA/SSR combiné |
 | | **React + TypeScript** | Écosystème complet |
-| | **shadcn/ui** | Composants UI modernes et typés |
+| | **shadcn/ui** | UI Components (moderne et typé) |
 | | **GSAP** | Animations fluides |
-| | **Tailwind CSS** | Design futuriste (dark + néon) |
+| | **ReactBits (Electric Border)** | Carte MVP animée |
+| | **Tailwind CSS** | Design futuriste dark + néon |
 | **Backend/API** | **Next.js API Routes** | RESTful architecture |
 | | **Prisma ORM** | PostgreSQL |
 | | **Zod** | Validation d’inputs |
 | **Auth** | **Clerk** | RBAC USER / ADMIN |
-| **Infra** | **Docker** + `docker-compose` | DB + App |
-| **Docs** | **OpenAPI / Swagger** + Postman | Documentation API |
+| **Infra** | **Docker + Docker Compose** | Déploiement local & cloud |
+| **Docs** | **OpenAPI / Swagger + Postman** | Documentation API |
 
 ---
 
@@ -39,28 +42,28 @@ L’application inclura :
 │   │   ├── babyfoot/             # CRUD Admin des babyfoots
 │   │   ├── reservations/         # Gestion des réservations
 │   │   ├── queue/                # File d’attente
-│   │   ├── stats/                # Statistiques
+│   │   ├── stats/                # Statistiques & classement ELO
 │   │   └── users/                # Gestion utilisateurs (Admin)
 │   ├── (auth)/                   # Pages Clerk
 │   ├── (user)/dashboard/         # Dashboard utilisateur
 │   ├── (admin)/dashboard/        # Dashboard admin
-│   └── (public)/                 # Pages publiques (Home, Présentation)
+│   └── (public)/                 # Accueil (Présentation + MVP)
 ├── components/
 │   ├── ui/                       # shadcn components
-│   ├── charts/                   # Graphiques stats
-│   ├── forms/                    # Formulaires Zod
-│   └── features/                 # Composants métiers (BookingCard, QueueStatus)
+│   ├── charts/                   # Graphiques (stats)
+│   ├── features/                 # BookingCard, QueueStatus, MvpPlayerCard
+│   ├── animations/               # GSAP & ReactBits
+│   └── forms/                    # Zod + RHF
 ├── lib/
 │   ├── prisma.ts                 # Prisma client
 │   ├── auth.ts                   # Clerk + RBAC
-│   └── validations/              # Zod schemas
+│   ├── elo.ts                    # Calcul ELO
+│   └── validations/              # Schémas Zod
 ├── prisma/
-│   ├── schema.prisma             # Modèle BDD
+│   ├── schema.prisma             # Modèle de données
 │   └── seed.ts                   # Données mockées
-├── public/assets/
-├── scripts/
-│   └── openapi.ts                # Génération Swagger
-└── README.md
+└── scripts/
+    └── openapi.ts                # Swagger generation
 ```
 
 ---
@@ -73,6 +76,10 @@ model User {
   clerkId      String   @unique
   email        String   @unique
   role         Role     @default(USER)
+  nickname     String?
+  elo          Float    @default(1000)
+  wins         Int      @default(0)
+  losses       Int      @default(0)
   reservations Reservation[]
   queue        QueueEntry[]
   createdAt    DateTime @default(now())
@@ -102,6 +109,7 @@ model Reservation {
   extended     Boolean   @default(false)
   format       MatchFormat
   status       ReservationStatus @default(CONFIRMED)
+  result       MatchResult?
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
@@ -124,11 +132,31 @@ model QueueEntry {
 enum BabyfootStatus { AVAILABLE OCCUPIED MAINTENANCE }
 enum MatchFormat { ONE_VS_ONE ONE_VS_TWO TWO_VS_TWO }
 enum ReservationStatus { PENDING CONFIRMED IN_PROGRESS FINISHED CANCELLED EXPIRED }
+enum MatchResult { WIN LOSS DRAW }
 ```
 
 ---
 
-## 5. 🔌 API REST — Contrat
+## 5. ⚙️ Système ELO — Calcul & Règles
+
+Chaque joueur a un score initial `ELO = 1000`.
+
+Lorsqu’une partie est terminée :
+1. On calcule la **probabilité de victoire** :
+   `expectedScore = 1 / (1 + 10^((elo_opponent - elo_player)/400))`
+2. On applique :
+   `newElo = oldElo + K * (result - expectedScore)`
+   - `K = 32`
+   - `result = 1` (victoire), `0.5` (match nul), `0` (défaite)
+3. Mise à jour :
+   - `elo`, `wins`, `losses`
+   - `result` dans `Reservation`
+
+📦 Le calcul est effectué dans `lib/elo.ts` à l’appel de `/api/reservations/:id/finish`.
+
+---
+
+## 6. 🧩 API REST — Contrat
 
 ### **Babyfoot (Admin)**
 ```
@@ -143,17 +171,17 @@ PATCH  /api/babyfoot/:id/status
 ### **Réservations**
 ```
 GET    /api/reservations
-POST   /api/reservations                 # création (15min slot)
-PATCH  /api/reservations/:id/finish      # terminer avant la fin
-PATCH  /api/reservations/:id/extend      # prolonger la session
-DELETE /api/reservations/:id             # annuler
+POST   /api/reservations
+PATCH  /api/reservations/:id/finish
+PATCH  /api/reservations/:id/extend
+DELETE /api/reservations/:id
 ```
 
 ### **File d’attente**
 ```
-POST   /api/queue                        # rejoindre la file
-GET    /api/queue/:babyfootId            # voir file d’attente actuelle
-DELETE /api/queue/:id                    # quitter la file
+POST   /api/queue
+GET    /api/queue/:babyfootId
+DELETE /api/queue/:id
 ```
 
 ### **Utilisateurs (Admin)**
@@ -164,137 +192,113 @@ PUT    /api/users/:id/role
 DELETE /api/users/:id
 ```
 
-### **Statistiques**
+### **Statistiques & Classements**
 ```
-GET    /api/stats                        # globales
-GET    /api/stats/babyfoot/:id           # par table
+GET    /api/stats
+GET    /api/stats/mvp
+GET    /api/stats/leaderboard
+GET    /api/stats/babyfoot/:id
 ```
 
 ---
 
-## 6. 🧩 Règles Métier
+## 7. 🧠 Joueur MVP (ReactBits “Electric Border”)
 
-- ⏱ Durée par défaut : **15 min**  
-- 🔒 Aucune réservation chevauchante par babyfoot  
-- 🕓 Un utilisateur peut :
-  - Terminer avant la fin → `/finish`
-  - Prolonger → `/extend`
-- ⛔ Si slot complet → retour 409 `{ queueAvailable: true }`
-- 🧍 L’utilisateur peut alors rejoindre la **file d’attente**
-- ⚙️ L’admin peut forcer la libération ou la mise en maintenance
-- 🪄 Statut du babyfoot = `OCCUPIED` si une réservation `IN_PROGRESS` existe
+### Composant : `MvpPlayerCard.tsx`
+Affiche :
+- 🏆 Nom / pseudo du joueur MVP
+- 📈 ELO, victoires, défaites
+- 🎨 Animation *Electric Border* (ReactBits)
+- 🪩 Style magenta/cyan futuriste
+
+Placements :
+- Page d’accueil publique
+- Dashboard admin (“Top joueur du moment”)
 
 ---
 
-## 7. 📈 Statistiques & Graphiques (shadcn/ui + Recharts)
+## 8. 📈 Statistiques & Graphiques
 
 | Indicateur | Type de chart | Objectif |
 |-------------|----------------|-----------|
-| ⏳ Temps entre création et début | Boxplot / Histogramme | Analyse d’anticipation |
-| 🕒 Durée moyenne effective | Bar chart | Temps réel vs prévu |
-| 🔥 Heures d’affluence | Heatmap / Grouped bar | Pics d’activité |
-| ⚽ Formats (1v1 / 1v2 / 2v2) | Donut chart | Répartition des matchs |
-| 🚦 Taille moyenne de file | Line chart | Mesure de la demande |
-| 📉 Nombre d’annulations / extensions | Bar chart | Suivi d’usage |
+| Temps entre création et début | Boxplot / Histogramme | Anticipation |
+| Durée moyenne effective | Bar chart | Temps réel vs prévu |
+| Heures d’affluence | Heatmap / Grouped bar | Pics d’activité |
+| Formats de match | Donut chart | Répartition |
+| Taille moyenne de file | Line chart | Demande |
+| Annulations / extensions | Bar chart | Suivi |
+| **Top 10 ELO** | Horizontal bar | Classement joueurs |
+| **Progression ELO joueur** | Line chart | Performance historique |
 
 ---
 
-## 8. 🧑‍💻 Répartition des Features (3 Développeurs)
+## 9. 🧑‍💻 Répartition des Features
 
-| Dev | Domaine | Tâches principales |
+| Dev | Domaine | Responsabilités principales |
 |------|-----------|-----------------------------|
-| **Dev A** | 🎮 Réservation (User) | CRUD réservation, anti-chevauchement, UI calendrier, file d’attente |
-| **Dev B** | 🛠️ Dashboard Admin | CRUD babyfoots, gestion utilisateurs, statistiques, charts |
-| **Dev C** | 🎨 UX & Temps Réel | Intégration shadcn + GSAP, statut live, UI futuriste, responsive |
+| **Dev A** | 🎮 Réservation | CRUD, file d’attente, anti-chevauchement, maj ELO |
+| **Dev B** | 🛠️ Dashboard Admin | CRUD Babyfoots, leaderboard, stats, MVP |
+| **Dev C** | 🎨 UI/UX & Temps réel | ReactBits, shadcn, GSAP, dark futuriste |
 
 ---
 
-## 9. 🧪 Données Mockées (Seed)
+## 10. 🧪 Données Mockées (Seed)
 
 `prisma/seed.ts` :
-- 3 babyfoots (`Souk A`, `Souk B`, `Rooftop`)
-- 5 users (`admin@ynov.local`, `user1..4`)
-- 10 réservations (certaines prolongées / terminées tôt)
-- 2 files d’attente actives
+- 5 utilisateurs (dont 1 admin)
+- 3 babyfoots
+- 10 réservations avec résultats variés
+- Scores ELO ajustés
+- 2 files d’attente simulées
 
 ---
 
-## 10. 🧰 TODO Avant Démarrage
+## 11. 🧰 TODO Avant Démarrage
 
-- [ ] Initialiser projet Next.js + shadcn + Clerk
-- [ ] Définir `.env.example` avec `CLERK_*`, `DATABASE_URL`
-- [ ] Créer et migrer `schema.prisma`
-- [ ] Générer `prisma/seed.ts` mock
-- [ ] Mettre en place les routes `/api/reservations`, `/api/queue`
-- [ ] Créer Dashboard Admin + User
-- [ ] Intégrer charts shadcn/ui
-- [ ] Tester les règles métier (chevauchement, file, prolongation)
-- [ ] Ajouter OpenAPI / Swagger / Postman
-- [ ] Dockeriser le projet
-
----
-
-## 11. 🔒 Sécurité & Qualité
-
-- Clerk middleware sur routes `(user)` & `(admin)`
-- Validation Zod sur toutes les requêtes
-- Codes HTTP standard (200, 201, 400, 401, 403, 404, 409, 422, 500)
-- Rate limiting sur endpoints sensibles
-- ESLint, Prettier, TypeScript strict
-- Tests unitaires sur anti-chevauchement et file d’attente
+- [ ] Init Next.js + shadcn + Clerk
+- [ ] Configurer Prisma + seed mock
+- [ ] Implémenter routes + calcul ELO
+- [ ] Créer `MvpPlayerCard.tsx`
+- [ ] Intégrer leaderboard
+- [ ] Ajouter charts shadcn/ui
+- [ ] Dockeriser & OpenAPI
+- [ ] Tester réservations / file / ELO
 
 ---
 
 ## 12. 🎨 Design System
 
-- Thème : **Dark futuriste**, accents **cyan / magenta néon**
-- Micro-interactions GSAP sur hover et transitions
-- Layout responsive grid, cards glassmorphism
-- Font moderne & contrastée
-- Accessibilité (focus visible, ARIA, labels)
+- Thème : **Dark futuriste**, accents **cyan/magenta**
+- shadcn + ReactBits
+- GSAP micro-animations
+- Layout responsive
+- Typo bold, contrastée
+- A11y complète
 
 ---
 
-## 13. 🧾 Variables d’Environnement (exemple)
+## 13. 🧩 Définition de Terminé (DoD)
 
-```
-# Auth Clerk
-CLERK_PUBLISHABLE_KEY=
-CLERK_SECRET_KEY=
-
-# Database
-DATABASE_URL=postgresql://user:pass@db:5432/babyfoot
-
-# Next
-NEXT_PUBLIC_APP_URL=http://localhost:3000
-```
+- [ ] Auth Clerk OK
+- [ ] Réservation 15 min anti-chevauchement
+- [ ] File d’attente active
+- [ ] CRUD Babyfoot & Users
+- [ ] ELO dynamique & leaderboard
+- [ ] MVP Card visible
+- [ ] Charts OK
+- [ ] OpenAPI + Docker OK
 
 ---
 
-## 14. 🧩 Définition de Terminé (DoD)
+## 14. 🧭 Bonnes Pratiques
 
-- [ ] Auth Clerk & RBAC fonctionnels  
-- [ ] Réservation sans chevauchement  
-- [ ] File d’attente opérationnelle  
-- [ ] CRUD Babyfoot & Users OK  
-- [ ] Dashboards User/Admin complets  
-- [ ] Charts shadcn/ui fonctionnels  
-- [ ] OpenAPI généré & Postman exporté  
-- [ ] Docker build & run OK  
-- [ ] README clair & seed fonctionnel
+- Code typé, clair et commenté
+- Conventions PR cohérentes
+- Zod validation obligatoire
+- Calculs côté serveur uniquement
+- Priorité stabilité + UX
 
 ---
 
-## 15. 🧭 Bonnes Pratiques
-
-- PR petites & claires (Conventional Commits)
-- Pas de logique de sécurité côté client
-- Commenter les logiques métiers complexes
-- Favoriser composants réutilisables et typés
-- Priorité à la **stabilité** et **expérience utilisateur**
-
----
-
-💬 **Dernière remarque :**  
-Le projet doit être **fonctionnel avant d’être parfait**.  
-Les animations, micro-interactions et esthétisme sont un bonus — la robustesse des réservations et des statistiques passe en premier.
+💬 **Conclusion :**
+Un projet **fluide, compétitif et fun**, combinant **réservation intelligente**, **classement dynamique** et **design futuriste**.
