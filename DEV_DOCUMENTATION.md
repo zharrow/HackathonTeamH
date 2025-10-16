@@ -1,247 +1,304 @@
-# Documentation Technique - Développement Frontend & API
+# 🧠 Documentation Technique — Projet "Babyfoot Booking" (Hackathon Ynov Toulouse 2025)
 
-## Stack Technique
+## 1. 🎯 Contexte & Objectifs
 
-### Frontend
+Créer une **application web intelligente** pour les étudiants et administrateurs Ynov, permettant de **réserver, gérer et visualiser l’utilisation des babyfoots** du campus.
 
-- **Framework** : Next.js 14/15 (App Router)
-- **UI Library** : shadcn/ui
-- **Composants Modernes** : ReactBits
-- **Animations** : GSAP (GreenSock Animation Platform)
-- **Style** : Tailwind CSS
-- **Design Direction** : Interface futuriste inspirée des sites Awwwards
+Fonctionnalités principales :
+- Réservation en créneaux de **15 minutes**, sans chevauchement.
+- **File d’attente** intelligente si la table est complète.
+- Possibilité de **terminer ou prolonger** une réservation.
+- **Classement des joueurs via système ELO**, basé sur leurs résultats.
+- **Joueur MVP** mis en avant grâce à ses performances.
+- **Dashboards** utilisateurs et administrateurs avec statistiques détaillées.
 
-### Backend/API
+---
 
-- **Framework** : Next.js API Routes (App Router)
-- **Architecture** : API RESTful
-- **ORM** : Prisma
-- **Base de données** : TBD (PostgreSQL/MySQL - fournie par l'équipe Cloud/Infra)
+## 2. 🧱 Stack Technique
 
-### Authentification
+| Côté | Technologie | Détails |
+|------|--------------|---------|
+| **Frontend** | **Next.js 15 (App Router)** | SPA/SSR combiné |
+| | **React + TypeScript** | Écosystème complet |
+| | **shadcn/ui** | UI Components (moderne et typé) |
+| | **GSAP** | Animations fluides |
+| | **ReactBits (Electric Border)** | Carte MVP animée |
+| | **Tailwind CSS** | Design futuriste dark + néon |
+| **Backend/API** | **Next.js API Routes** | RESTful architecture |
+| | **Prisma ORM** | PostgreSQL |
+| | **Zod** | Validation d’inputs |
+| **Auth** | **Clerk** | RBAC USER / ADMIN |
+| **Infra** | **Docker + Docker Compose** | Déploiement local & cloud |
+| **Docs** | **OpenAPI / Swagger + Postman** | Documentation API |
 
-- **Service** : Clerk (https://clerk.com/)
-- **Features** : Gestion des rôles (utilisateur standard / administrateur)
+---
 
-### Infrastructure
-
-- **Containerisation** : Docker + Docker Compose (géré par équipe Infra)
-- **Cloud** : AWS (géré par équipe Infra)
-- **Déploiement cible** : Linux (Debian/Ubuntu), 4Go RAM, 2 CPU x86_64
-
-## Architecture du Projet
+## 3. 🗂️ Architecture du Projet
 
 ```
 /
-├── app/                      # Next.js App Router
-│   ├── api/                  # API Routes
-│   ├── (auth)/              # Pages authentification
-│   ├── (dashboard)/         # Dashboard admin
-│   └── (public)/            # Pages publiques
+├── app/
+│   ├── api/
+│   │   ├── babyfoot/             # CRUD Admin des babyfoots
+│   │   ├── reservations/         # Gestion des réservations
+│   │   ├── queue/                # File d’attente
+│   │   ├── stats/                # Statistiques & classement ELO
+│   │   └── users/                # Gestion utilisateurs (Admin)
+│   ├── (auth)/                   # Pages Clerk
+│   ├── (user)/dashboard/         # Dashboard utilisateur
+│   ├── (admin)/dashboard/        # Dashboard admin
+│   └── (public)/                 # Accueil (Présentation + MVP)
 ├── components/
-│   ├── ui/                  # shadcn components
-│   ├── animations/          # GSAP animations
-│   └── features/            # Feature components
+│   ├── ui/                       # shadcn components
+│   ├── charts/                   # Graphiques (stats)
+│   ├── features/                 # BookingCard, QueueStatus, MvpPlayerCard
+│   ├── animations/               # GSAP & ReactBits
+│   └── forms/                    # Zod + RHF
 ├── lib/
-│   ├── prisma.ts            # Prisma client singleton
-│   └── utils/               # Utilities
+│   ├── prisma.ts                 # Prisma client
+│   ├── auth.ts                   # Clerk + RBAC
+│   ├── elo.ts                    # Calcul ELO
+│   └── validations/              # Schémas Zod
 ├── prisma/
-│   ├── schema.prisma        # Schéma de base de données
-│   └── seed.ts              # Données initiales (from Data team)
-└── public/
-    └── assets/              # Images, fonts, etc.
+│   ├── schema.prisma             # Modèle de données
+│   └── seed.ts                   # Données mockées
+└── scripts/
+    └── openapi.ts                # Swagger generation
 ```
 
-## Fonctionnalités Requises
+---
 
-### 1. Page d'Accueil (Public)
+## 4. ⚙️ Modèle de Données (Prisma)
 
-- [ ] Hero section futuriste avec animations GSAP
-- [ ] Présentation du service
-- [ ] Call-to-action vers inscription/connexion
-- [ ] Design inspiré Awwwards (smooth scrolling, micro-interactions)
+```prisma
+model User {
+  id           String   @id @default(cuid())
+  clerkId      String   @unique
+  email        String   @unique
+  role         Role     @default(USER)
+  nickname     String?
+  elo          Float    @default(1000)
+  wins         Int      @default(0)
+  losses       Int      @default(0)
+  reservations Reservation[]
+  queue        QueueEntry[]
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
 
-### 2. Authentification (Clerk)
+enum Role { USER ADMIN }
 
-- [ ] Configuration Clerk
-- [ ] Sign up / Sign in
-- [ ] Gestion des rôles (user / admin)
-- [ ] Middleware de protection des routes
-- [ ] Redirection post-authentification
+model Babyfoot {
+  id           String         @id @default(cuid())
+  name         String         @unique
+  location     String
+  status       BabyfootStatus @default(AVAILABLE)
+  reservations Reservation[]
+  queue        QueueEntry[]
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
 
-### 3. Dashboard Utilisateur
+model Reservation {
+  id           String   @id @default(cuid())
+  userId       String
+  babyfootId   String
+  startAt      DateTime
+  endAt        DateTime
+  finishedAt   DateTime?
+  extended     Boolean   @default(false)
+  format       MatchFormat
+  status       ReservationStatus @default(CONFIRMED)
+  result       MatchResult?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
-- [ ] Vue des babyfoots disponibles
-- [ ] Statut en temps réel
-- [ ] Fonctionnalités TBD
+  user      User     @relation(fields: [userId], references: [id])
+  babyfoot  Babyfoot @relation(fields: [babyfootId], references: [id])
+}
 
-### 4. Dashboard Administrateur
+model QueueEntry {
+  id          String   @id @default(cuid())
+  userId      String
+  babyfootId  String
+  notifiedAt  DateTime?
+  expiredAt   DateTime?
+  createdAt   DateTime @default(now())
 
-- [ ] Vue d'ensemble des babyfoots
-  - État (disponible, occupé, maintenance)
-  - Statistiques d'utilisation
-- [ ] Gestion CRUD des babyfoots
-- [ ] Gestion des utilisateurs
-  - Visualisation
-  - Modification des rôles
-  - Suppression
-- [ ] Intégration avec données IA/Data
-- [ ] Intégration avec dispositifs IoT
+  user      User     @relation(fields: [userId], references: [id])
+  babyfoot  Babyfoot @relation(fields: [babyfootId], references: [id])
+}
 
-### 5. API RESTful
-
-#### Endpoints Babyfoot (CRUD complet)
-
+enum BabyfootStatus { AVAILABLE OCCUPIED MAINTENANCE }
+enum MatchFormat { ONE_VS_ONE ONE_VS_TWO TWO_VS_TWO }
+enum ReservationStatus { PENDING CONFIRMED IN_PROGRESS FINISHED CANCELLED EXPIRED }
+enum MatchResult { WIN LOSS DRAW }
 ```
-GET    /api/babyfoot          # Liste tous les babyfoots
-GET    /api/babyfoot/:id      # Détails d'un babyfoot
-POST   /api/babyfoot          # Créer un babyfoot (admin)
-PUT    /api/babyfoot/:id      # Modifier un babyfoot (admin)
-DELETE /api/babyfoot/:id      # Supprimer un babyfoot (admin)
+
+---
+
+## 5. ⚙️ Système ELO — Calcul & Règles
+
+Chaque joueur a un score initial `ELO = 1000`.
+
+Lorsqu’une partie est terminée :
+1. On calcule la **probabilité de victoire** :
+   `expectedScore = 1 / (1 + 10^((elo_opponent - elo_player)/400))`
+2. On applique :
+   `newElo = oldElo + K * (result - expectedScore)`
+   - `K = 32`
+   - `result = 1` (victoire), `0.5` (match nul), `0` (défaite)
+3. Mise à jour :
+   - `elo`, `wins`, `losses`
+   - `result` dans `Reservation`
+
+📦 Le calcul est effectué dans `lib/elo.ts` à l’appel de `/api/reservations/:id/finish`.
+
+---
+
+## 6. 🧩 API REST — Contrat
+
+### **Babyfoot (Admin)**
+```
+GET    /api/babyfoot
+GET    /api/babyfoot/:id
+POST   /api/babyfoot
+PUT    /api/babyfoot/:id
+DELETE /api/babyfoot/:id
+PATCH  /api/babyfoot/:id/status
 ```
 
-#### Endpoints Utilisateurs
-
+### **Réservations**
 ```
-GET    /api/users             # Liste utilisateurs (admin)
-GET    /api/users/:id         # Détails utilisateur
-PUT    /api/users/:id/role    # Modifier rôle (admin)
-DELETE /api/users/:id         # Supprimer utilisateur (admin)
-```
-
-#### Endpoints Statistiques
-
-```
-GET    /api/stats             # Stats globales
-GET    /api/stats/babyfoot/:id # Stats par babyfoot
+GET    /api/reservations
+POST   /api/reservations
+PATCH  /api/reservations/:id/finish
+PATCH  /api/reservations/:id/extend
+DELETE /api/reservations/:id
 ```
 
-#### Codes HTTP
+### **File d’attente**
+```
+POST   /api/queue
+GET    /api/queue/:babyfootId
+DELETE /api/queue/:id
+```
 
-- 200 : OK
-- 201 : Created
-- 400 : Bad Request
-- 401 : Unauthorized
-- 403 : Forbidden
-- 404 : Not Found
-- 500 : Internal Server Error
+### **Utilisateurs (Admin)**
+```
+GET    /api/users
+GET    /api/users/:id
+PUT    /api/users/:id/role
+DELETE /api/users/:id
+```
 
-### 6. Documentation API
+### **Statistiques & Classements**
+```
+GET    /api/stats
+GET    /api/stats/mvp
+GET    /api/stats/leaderboard
+GET    /api/stats/babyfoot/:id
+```
 
-- [ ] Swagger / OpenAPI
-- [ ] Collection Postman
+---
 
-## Design System (shadcn + Futuriste)
+## 7. 🧠 Joueur MVP (ReactBits “Electric Border”)
 
-### Inspirations Awwwards
+### Composant : `MvpPlayerCard.tsx`
+Affiche :
+- 🏆 Nom / pseudo du joueur MVP
+- 📈 ELO, victoires, défaites
+- 🎨 Animation *Electric Border* (ReactBits)
+- 🪩 Style magenta/cyan futuriste
 
-- Animations fluides et subtiles (GSAP)
-- Typographie moderne et bold
-- Micro-interactions sur hover/click
-- Transitions de page smooth
-- Glassmorphism / Neumorphism
-- Particules / Background animé
-- Dark mode par défaut avec accents néon
+Placements :
+- Page d’accueil publique
+- Dashboard admin (“Top joueur du moment”)
 
-### Composants ReactBits
+---
 
-À intégrer pour un rendu ultra-moderne
+## 8. 📈 Statistiques & Graphiques
 
-### Palette (TBD)
+| Indicateur | Type de chart | Objectif |
+|-------------|----------------|-----------|
+| Temps entre création et début | Boxplot / Histogramme | Anticipation |
+| Durée moyenne effective | Bar chart | Temps réel vs prévu |
+| Heures d’affluence | Heatmap / Grouped bar | Pics d’activité |
+| Formats de match | Donut chart | Répartition |
+| Taille moyenne de file | Line chart | Demande |
+| Annulations / extensions | Bar chart | Suivi |
+| **Top 10 ELO** | Horizontal bar | Classement joueurs |
+| **Progression ELO joueur** | Line chart | Performance historique |
 
-- Dark theme dominant
-- Accents néon (cyan, magenta, etc.)
-- Contraste élevé pour accessibilité
+---
 
-## Bonnes Pratiques
+## 9. 🧑‍💻 Répartition des Features
 
-### Code
+| Dev | Domaine | Responsabilités principales |
+|------|-----------|-----------------------------|
+| **Dev A** | 🎮 Réservation | CRUD, file d’attente, anti-chevauchement, maj ELO |
+| **Dev B** | 🛠️ Dashboard Admin | CRUD Babyfoots, leaderboard, stats, MVP |
+| **Dev C** | 🎨 UI/UX & Temps réel | ReactBits, shadcn, GSAP, dark futuriste |
 
-- TypeScript strict
-- Conventions de nommage cohérentes
-- Code modulaire et réutilisable
-- Commentaires sur logique complexe
-- Gestion d'erreurs robuste
+---
 
-### Performance
+## 10. 🧪 Données Mockées (Seed)
 
-- Lazy loading des composants
-- Optimisation des images (Next.js Image)
-- Code splitting automatique (Next.js)
-- Minimiser les re-renders (React.memo, useMemo)
+`prisma/seed.ts` :
+- 5 utilisateurs (dont 1 admin)
+- 3 babyfoots
+- 10 réservations avec résultats variés
+- Scores ELO ajustés
+- 2 files d’attente simulées
 
-### Sécurité
+---
 
-- Validation des inputs (Zod)
-- Protection CSRF
-- Rate limiting sur API
-- Variables d'environnement pour secrets
+## 11. 🧰 TODO Avant Démarrage
 
-### Accessibilité
+- [ ] Init Next.js + shadcn + Clerk
+- [ ] Configurer Prisma + seed mock
+- [ ] Implémenter routes + calcul ELO
+- [ ] Créer `MvpPlayerCard.tsx`
+- [ ] Intégrer leaderboard
+- [ ] Ajouter charts shadcn/ui
+- [ ] Dockeriser & OpenAPI
+- [ ] Tester réservations / file / ELO
 
-- Sémantique HTML correcte
-- ARIA labels
-- Contraste suffisant
-- Navigation au clavier
+---
 
-## Intégrations à Prévoir
+## 12. 🎨 Design System
 
-### Équipe Data/IA
+- Thème : **Dark futuriste**, accents **cyan/magenta**
+- shadcn + ReactBits
+- GSAP micro-animations
+- Layout responsive
+- Typo bold, contrastée
+- A11y complète
 
-- [ ] Récupérer le dataset nettoyé pour le seed Prisma
-- [ ] Définir ensemble le schéma Prisma (tables, relations, types)
-- [ ] Endpoints pour recevoir les données nettoyées
-- [ ] Affichage des insights (top joueurs, meilleurs défenseurs, etc.)
-- [ ] Graphiques et visualisations
+---
 
-### Équipe IoT/Embarqué
+## 13. 🧩 Définition de Terminé (DoD)
 
-- [ ] Réception données temps réel
-- [ ] Affichage statut babyfoot en direct
-- [ ] Notifications d'événements
+- [ ] Auth Clerk OK
+- [ ] Réservation 15 min anti-chevauchement
+- [ ] File d’attente active
+- [ ] CRUD Babyfoot & Users
+- [ ] ELO dynamique & leaderboard
+- [ ] MVP Card visible
+- [ ] Charts OK
+- [ ] OpenAPI + Docker OK
 
-### Équipe Infra/Cloud
+---
 
-- [ ] Variables d'environnement pour DB
-- [ ] Configuration Docker
-- [ ] Health check endpoints
+## 14. 🧭 Bonnes Pratiques
 
-## TODO Avant Démarrage
+- Code typé, clair et commenté
+- Conventions PR cohérentes
+- Zod validation obligatoire
+- Calculs côté serveur uniquement
+- Priorité stabilité + UX
 
-- [ ] Définir le schéma Prisma de base de données avec équipe Data
-- [ ] Obtenir credentials AWS/Database de l'équipe Infra (DATABASE_URL)
-- [ ] Setup Clerk project et obtenir API keys
-- [ ] Configurer Prisma et créer les migrations initiales
-- [ ] Créer le script de seed avec les données nettoyées par l'équipe Data
-- [ ] Définir les fonctionnalités exactes avec l'équipe
-- [ ] Wireframes/Maquettes des pages principales
-- [ ] Choisir le nom du projet/branding
+---
 
-## Ressources
-
-### Design Inspiration
-
-- https://www.awwwards.com/websites/animation/
-- https://www.awwwards.com/websites/dark/
-
-### Documentation
-
-- Next.js: https://nextjs.org/docs
-- shadcn/ui: https://ui.shadcn.com/
-- GSAP: https://greensock.com/docs/
-- Clerk: https://clerk.com/docs
-- Prisma: https://www.prisma.io/docs
-- ReactBits: https://reactbits.dev/
-
-### Outils
-
-- Figma/Excalidraw pour wireframes
-- Postman pour tests API
-- Docker Desktop pour tests locaux
-
-## Notes
-
-- **Date limite** : Vendredi 17 octobre 2025 à 21h00
-- **Priorité** : Fonctionnel > Perfection
-- **Collaboration** : Communication constante avec autres équipes
-- Le code généré par IA doit être revu et adapté
+💬 **Conclusion :**
+Un projet **fluide, compétitif et fun**, combinant **réservation intelligente**, **classement dynamique** et **design futuriste**.
