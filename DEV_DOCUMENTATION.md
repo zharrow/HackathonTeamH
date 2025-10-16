@@ -13,7 +13,8 @@
 ### Backend/API
 - **Framework** : Next.js API Routes (App Router)
 - **Architecture** : API RESTful
-- **Base de données** : TBD (fournie par l'équipe Cloud/Infra)
+- **ORM** : Prisma
+- **Base de données** : TBD (PostgreSQL/MySQL - fournie par l'équipe Cloud/Infra)
 
 ### Authentification
 - **Service** : Clerk (https://clerk.com/)
@@ -41,9 +42,12 @@
 │   ├── animations/          # GSAP animations
 │   └── features/            # Feature components
 ├── lib/
-│   ├── db/                  # Database client
+│   ├── prisma.ts            # Prisma client singleton
 │   ├── clerk/               # Clerk configuration
 │   └── utils/               # Utilities
+├── prisma/
+│   ├── schema.prisma        # Schéma de base de données
+│   └── seed.ts              # Données initiales (from Data team)
 └── public/
     └── assets/              # Images, fonts, etc.
 ```
@@ -167,6 +171,8 @@ GET    /api/stats/babyfoot/:id # Stats par babyfoot
 ## Intégrations à Prévoir
 
 ### Équipe Data/IA
+- [ ] Récupérer le dataset nettoyé pour le seed Prisma
+- [ ] Définir ensemble le schéma Prisma (tables, relations, types)
 - [ ] Endpoints pour recevoir les données nettoyées
 - [ ] Affichage des insights (top joueurs, meilleurs défenseurs, etc.)
 - [ ] Graphiques et visualisations
@@ -183,9 +189,11 @@ GET    /api/stats/babyfoot/:id # Stats par babyfoot
 
 ## TODO Avant Démarrage
 
-- [ ] Définir le schéma de base de données avec équipe Data
-- [ ] Obtenir credentials AWS/Database de l'équipe Infra
+- [ ] Définir le schéma Prisma de base de données avec équipe Data
+- [ ] Obtenir credentials AWS/Database de l'équipe Infra (DATABASE_URL)
 - [ ] Setup Clerk project et obtenir API keys
+- [ ] Configurer Prisma et créer les migrations initiales
+- [ ] Créer le script de seed avec les données nettoyées par l'équipe Data
 - [ ] Définir les fonctionnalités exactes avec l'équipe
 - [ ] Wireframes/Maquettes des pages principales
 - [ ] Choisir le nom du projet/branding
@@ -201,6 +209,7 @@ GET    /api/stats/babyfoot/:id # Stats par babyfoot
 - shadcn/ui: https://ui.shadcn.com/
 - GSAP: https://greensock.com/docs/
 - Clerk: https://clerk.com/docs
+- Prisma: https://www.prisma.io/docs
 - ReactBits: [À compléter avec URL]
 
 ### Outils
