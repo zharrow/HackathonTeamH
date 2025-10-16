@@ -24,7 +24,7 @@ module "autoscaling" {
   for_each = {
     # On-demand instances
     ex_1 = {
-      instance_type              = "t3.large"
+      instance_type              = "t3.medium"
       use_mixed_instances_policy = false
       mixed_instances_policy     = null
       user_data                  = <<-EOT
@@ -85,8 +85,8 @@ module "ecs_cluster" {
   cluster_name = "cluster-ecs"
   default_capacity_provider_strategy = {
     ex_1 = {
-      weight = 60
-      base   = 20
+      weight = 100
+      base   = 1
     }
   }
   autoscaling_capacity_providers = {
@@ -100,7 +100,7 @@ module "ecs_cluster" {
         maximum_scaling_step_size = 5
         minimum_scaling_step_size = 1
         status                    = "ENABLED"
-        target_capacity           = 60
+        target_capacity           = 100
       }
     }
   }
