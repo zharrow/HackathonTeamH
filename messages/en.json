@@ -21,7 +21,11 @@
     "button": "Button",
     "limit": "Limit",
     "page": "Page",
-    "search": "Search"
+    "search": "Search",
+    "toggleTheme": "Toggle theme",
+    "lightTheme": "Light",
+    "darkTheme": "Dark",
+    "systemTheme": "System"
   },
   "navigation": {
     "home": "Home",

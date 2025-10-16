@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import { LanguageSwitcher } from "@/components/language-switcher";
+import { ThemeSwitcher } from "@/components/theme-switcher";
 import Link from "next/link";
 import { Roles } from "@/generated/prisma";
 import { getTranslations } from "next-intl/server";
@@ -67,6 +68,7 @@ export default async function AdminLayout({
             </BreadcrumbList>
           </Breadcrumb>
           <div className="ml-auto flex items-center gap-4">
+            <ThemeSwitcher />
             <LanguageSwitcher />
             <Link
               href="/"

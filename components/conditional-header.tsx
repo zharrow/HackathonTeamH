@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { LanguageSwitcher } from "@/components/language-switcher";
+import { ThemeSwitcher } from "@/components/theme-switcher";
 import { AuthHeader } from "@/components/auth-header";
 
 export function ConditionalHeader() {
@@ -24,6 +25,7 @@ export function ConditionalHeader() {
 
       <div className="flex items-center gap-2">
         <AuthHeader />
+        <ThemeSwitcher />
         <LanguageSwitcher />
       </div>
     </header>

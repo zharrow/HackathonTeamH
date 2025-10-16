@@ -21,7 +21,11 @@
     "button": "Bouton",
     "limit": "Limite",
     "page": "Page",
-    "search": "Rechercher"
+    "search": "Rechercher",
+    "toggleTheme": "Changer le thème",
+    "lightTheme": "Clair",
+    "darkTheme": "Sombre",
+    "systemTheme": "Système"
   },
   "navigation": {
     "home": "Accueil",
