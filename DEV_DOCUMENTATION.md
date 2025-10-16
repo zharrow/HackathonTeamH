@@ -3,24 +3,28 @@
 ## Stack Technique
 
 ### Frontend
-- **Framework** : React + Next.js 14/15 (App Router)
+
+- **Framework** : Next.js 14/15 (App Router)
 - **UI Library** : shadcn/ui
 - **Composants Modernes** : ReactBits
 - **Animations** : GSAP (GreenSock Animation Platform)
-- **Style** : Tailwind CSS (via shadcn)
+- **Style** : Tailwind CSS
 - **Design Direction** : Interface futuriste inspirée des sites Awwwards
 
 ### Backend/API
+
 - **Framework** : Next.js API Routes (App Router)
 - **Architecture** : API RESTful
 - **ORM** : Prisma
 - **Base de données** : TBD (PostgreSQL/MySQL - fournie par l'équipe Cloud/Infra)
 
 ### Authentification
+
 - **Service** : Clerk (https://clerk.com/)
 - **Features** : Gestion des rôles (utilisateur standard / administrateur)
 
 ### Infrastructure
+
 - **Containerisation** : Docker + Docker Compose (géré par équipe Infra)
 - **Cloud** : AWS (géré par équipe Infra)
 - **Déploiement cible** : Linux (Debian/Ubuntu), 4Go RAM, 2 CPU x86_64
@@ -31,9 +35,6 @@
 /
 ├── app/                      # Next.js App Router
 │   ├── api/                  # API Routes
-│   │   ├── babyfoot/        # CRUD Babyfoot
-│   │   ├── users/           # Gestion utilisateurs
-│   │   └── stats/           # Statistiques
 │   ├── (auth)/              # Pages authentification
 │   ├── (dashboard)/         # Dashboard admin
 │   └── (public)/            # Pages publiques
@@ -43,7 +44,6 @@
 │   └── features/            # Feature components
 ├── lib/
 │   ├── prisma.ts            # Prisma client singleton
-│   ├── clerk/               # Clerk configuration
 │   └── utils/               # Utilities
 ├── prisma/
 │   ├── schema.prisma        # Schéma de base de données
@@ -55,12 +55,14 @@
 ## Fonctionnalités Requises
 
 ### 1. Page d'Accueil (Public)
+
 - [ ] Hero section futuriste avec animations GSAP
 - [ ] Présentation du service
 - [ ] Call-to-action vers inscription/connexion
 - [ ] Design inspiré Awwwards (smooth scrolling, micro-interactions)
 
 ### 2. Authentification (Clerk)
+
 - [ ] Configuration Clerk
 - [ ] Sign up / Sign in
 - [ ] Gestion des rôles (user / admin)
@@ -68,11 +70,13 @@
 - [ ] Redirection post-authentification
 
 ### 3. Dashboard Utilisateur
+
 - [ ] Vue des babyfoots disponibles
 - [ ] Statut en temps réel
 - [ ] Fonctionnalités TBD
 
 ### 4. Dashboard Administrateur
+
 - [ ] Vue d'ensemble des babyfoots
   - État (disponible, occupé, maintenance)
   - Statistiques d'utilisation
@@ -87,6 +91,7 @@
 ### 5. API RESTful
 
 #### Endpoints Babyfoot (CRUD complet)
+
 ```
 GET    /api/babyfoot          # Liste tous les babyfoots
 GET    /api/babyfoot/:id      # Détails d'un babyfoot
@@ -96,6 +101,7 @@ DELETE /api/babyfoot/:id      # Supprimer un babyfoot (admin)
 ```
 
 #### Endpoints Utilisateurs
+
 ```
 GET    /api/users             # Liste utilisateurs (admin)
 GET    /api/users/:id         # Détails utilisateur
@@ -104,12 +110,14 @@ DELETE /api/users/:id         # Supprimer utilisateur (admin)
 ```
 
 #### Endpoints Statistiques
+
 ```
 GET    /api/stats             # Stats globales
 GET    /api/stats/babyfoot/:id # Stats par babyfoot
 ```
 
 #### Codes HTTP
+
 - 200 : OK
 - 201 : Created
 - 400 : Bad Request
@@ -119,12 +127,14 @@ GET    /api/stats/babyfoot/:id # Stats par babyfoot
 - 500 : Internal Server Error
 
 ### 6. Documentation API
+
 - [ ] Swagger / OpenAPI
 - [ ] Collection Postman
 
 ## Design System (shadcn + Futuriste)
 
 ### Inspirations Awwwards
+
 - Animations fluides et subtiles (GSAP)
 - Typographie moderne et bold
 - Micro-interactions sur hover/click
@@ -134,9 +144,11 @@ GET    /api/stats/babyfoot/:id # Stats par babyfoot
 - Dark mode par défaut avec accents néon
 
 ### Composants ReactBits
+
 À intégrer pour un rendu ultra-moderne
 
 ### Palette (TBD)
+
 - Dark theme dominant
 - Accents néon (cyan, magenta, etc.)
 - Contraste élevé pour accessibilité
@@ -144,6 +156,7 @@ GET    /api/stats/babyfoot/:id # Stats par babyfoot
 ## Bonnes Pratiques
 
 ### Code
+
 - TypeScript strict
 - Conventions de nommage cohérentes
 - Code modulaire et réutilisable
@@ -151,18 +164,21 @@ GET    /api/stats/babyfoot/:id # Stats par babyfoot
 - Gestion d'erreurs robuste
 
 ### Performance
+
 - Lazy loading des composants
 - Optimisation des images (Next.js Image)
 - Code splitting automatique (Next.js)
 - Minimiser les re-renders (React.memo, useMemo)
 
 ### Sécurité
+
 - Validation des inputs (Zod)
 - Protection CSRF
 - Rate limiting sur API
 - Variables d'environnement pour secrets
 
 ### Accessibilité
+
 - Sémantique HTML correcte
 - ARIA labels
 - Contraste suffisant
@@ -171,6 +187,7 @@ GET    /api/stats/babyfoot/:id # Stats par babyfoot
 ## Intégrations à Prévoir
 
 ### Équipe Data/IA
+
 - [ ] Récupérer le dataset nettoyé pour le seed Prisma
 - [ ] Définir ensemble le schéma Prisma (tables, relations, types)
 - [ ] Endpoints pour recevoir les données nettoyées
@@ -178,11 +195,13 @@ GET    /api/stats/babyfoot/:id # Stats par babyfoot
 - [ ] Graphiques et visualisations
 
 ### Équipe IoT/Embarqué
+
 - [ ] Réception données temps réel
 - [ ] Affichage statut babyfoot en direct
 - [ ] Notifications d'événements
 
 ### Équipe Infra/Cloud
+
 - [ ] Variables d'environnement pour DB
 - [ ] Configuration Docker
 - [ ] Health check endpoints
@@ -201,18 +220,21 @@ GET    /api/stats/babyfoot/:id # Stats par babyfoot
 ## Ressources
 
 ### Design Inspiration
+
 - https://www.awwwards.com/websites/animation/
 - https://www.awwwards.com/websites/dark/
 
 ### Documentation
+
 - Next.js: https://nextjs.org/docs
 - shadcn/ui: https://ui.shadcn.com/
 - GSAP: https://greensock.com/docs/
 - Clerk: https://clerk.com/docs
 - Prisma: https://www.prisma.io/docs
-- ReactBits: [À compléter avec URL]
+- ReactBits: https://reactbits.dev/
 
 ### Outils
+
 - Figma/Excalidraw pour wireframes
 - Postman pour tests API
 - Docker Desktop pour tests locaux
