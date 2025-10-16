@@ -40,6 +40,8 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# prisma generated client
+/generated/
 
 PROMPT_VIBE_CODER.md
 .cursorrules

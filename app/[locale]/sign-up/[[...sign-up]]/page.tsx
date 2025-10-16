@@ -2,23 +2,23 @@ import { SignUp } from "@clerk/nextjs";
 
 export default function SignUpPage() {
   return (
-    <div className="min-h-screen bg-gray-950 flex items-center justify-center">
+    <div className="min-h-screen bg-background flex items-center justify-center">
       <div className="w-full max-w-md">
         <SignUp
           appearance={{
             elements: {
               rootBox: "mx-auto",
-              card: "bg-gray-900 border-gray-800",
-              headerTitle: "text-white",
-              headerSubtitle: "text-gray-400",
+              card: "bg-card border-border",
+              headerTitle: "text-foreground",
+              headerSubtitle: "text-muted-foreground",
               socialButtonsBlockButton:
-                "bg-gray-800 border-gray-700 text-white hover:bg-gray-700",
-              formButtonPrimary: "bg-[#6c47ff] hover:bg-[#5a3ae6]",
-              footerActionLink: "text-[#6c47ff] hover:text-[#5a3ae6]",
-              formFieldInput: "bg-gray-800 border-gray-700 text-white",
-              formFieldLabel: "text-gray-300",
-              identityPreviewText: "text-gray-300",
-              formResendCodeLink: "text-[#6c47ff] hover:text-[#5a3ae6]",
+                "bg-secondary border-border text-foreground hover:bg-secondary/80",
+              formButtonPrimary: "bg-primary hover:bg-primary/90",
+              footerActionLink: "text-primary hover:text-primary/90",
+              formFieldInput: "bg-secondary border-border text-foreground",
+              formFieldLabel: "text-muted-foreground",
+              identityPreviewText: "text-muted-foreground",
+              formResendCodeLink: "text-primary hover:text-primary/90",
             },
           }}
         />

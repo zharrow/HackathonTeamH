@@ -40,29 +40,29 @@ export function LanguageSwitcher() {
         <Button
           variant="ghost"
           size="sm"
-          className="h-8 w-8 p-0 hover:bg-gray-800/50 border border-gray-700 hover:border-[#6c47ff]/50 transition-all duration-200"
+          className="h-8 w-8 p-0 hover:bg-secondary border border-border hover:border-primary/50 transition-all duration-200"
           disabled={isPending}
         >
-          <Globe className="h-4 w-4 text-gray-300 hover:text-[#6c47ff] transition-colors" />
+          <Globe className="h-4 w-4 text-muted-foreground hover:text-primary transition-colors" />
           <span className="sr-only">Changer la langue</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
         align="end"
-        className="w-48 bg-gray-900 border-gray-700 shadow-xl"
+        className="w-48 bg-card border-border shadow-xl"
       >
         {languages.map((language) => (
           <DropdownMenuItem
             key={language.code}
             onClick={() => handleLanguageChange(language.code)}
-            className="flex items-center justify-between px-3 py-2 text-sm cursor-pointer hover:bg-gray-800/50 focus:bg-gray-800/50 transition-colors"
+            className="flex items-center justify-between px-3 py-2 text-sm cursor-pointer hover:bg-secondary focus:bg-secondary transition-colors"
           >
             <div className="flex items-center gap-3">
               <span className="text-lg">{language.flag}</span>
-              <span className="text-gray-200">{language.name}</span>
+              <span className="text-foreground">{language.name}</span>
             </div>
             {locale === language.code && (
-              <Check className="h-4 w-4 text-[#6c47ff]" />
+              <Check className="h-4 w-4 text-primary" />
             )}
           </DropdownMenuItem>
         ))}

@@ -12,6 +12,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations } from "next-intl/server";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import "../globals.css";
+import { Button } from "@/components/ui/button";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -45,26 +46,26 @@ export default async function LocaleLayout({
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
           <NextIntlClientProvider messages={messages}>
-            <header className="flex justify-between items-center p-4 gap-4 h-16 bg-gray-900 border-b border-gray-800">
+            <header className="flex justify-between items-center p-4 gap-4 h-16 bg-background border-b border-border">
               <div className="flex items-center gap-4">
-                <h1 className="text-xl font-bold text-white">
+                <h1 className="text-xl font-bold text-foreground">
                   Babyfoot Booking
                 </h1>
               </div>
 
-              <div className="flex items-center gap-4">
-                <LanguageSwitcher />
+              <div className="flex items-center gap-2">
                 <SignedOut>
-                  <SignInButton />
+                  <SignInButton>
+                    <Button variant="secondary">{t("signIn")}</Button>
+                  </SignInButton>
                   <SignUpButton>
-                    <button className="bg-[#6c47ff] text-white rounded-full font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 cursor-pointer hover:bg-[#5a3ae6] transition-colors">
-                      {t("signUp")}
-                    </button>
+                    <Button variant="default">{t("signUp")}</Button>
                   </SignUpButton>
                 </SignedOut>
                 <SignedIn>
                   <UserButton />
                 </SignedIn>
+                <LanguageSwitcher />
               </div>
             </header>
             {children}
