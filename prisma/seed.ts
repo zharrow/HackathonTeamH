@@ -8,7 +8,6 @@ import {
   MatchResult,
   MatchFormat,
 } from "@/generated/prisma";
-import { hash } from "bcryptjs";
 
 const prisma = new PrismaClient();
 
@@ -19,90 +18,63 @@ const prisma = new PrismaClient();
 async function main() {
   console.log("🌱 Starting database seed...");
 
-  // Hash password for all demo users (password: "password123")
-  const hashedPassword = await hash("password123", 12);
-
   const admin = await prisma.user.create({
     data: {
+      id: "admin-001",
       email: "admin@ynov.com",
-      name: "Admin",
-      surname: "Ynov",
-      name: "admin_ynov",
-      password: hashedPassword,
+      name: "Admin Ynov",
       emailVerified: true,
       role: Roles.ADMIN,
-      elo: 1200,
-      wins: 25,
-      losses: 15,
     },
   });
 
   const players = await Promise.all([
     prisma.user.create({
       data: {
+        id: "user-001",
         email: "alex.martin@ynov.com",
-        name: "Alex",
-        surname: "Martin",
-        name: "alex_thechamp",
-        password: hashedPassword,
+        name: "Alex Martin",
         emailVerified: true,
-        elo: 1450,
-        wins: 42,
-        losses: 18,
       },
     }),
     prisma.user.create({
       data: {
+        id: "user-002",
         email: "sarah.durand@ynov.com",
-        name: "Sarah",
-        name: "sarah_pro",
-        password: hashedPassword,
-        elo: 1380,
-        wins: 35,
-        losses: 22,
+        name: "Sarah Durand",
+        emailVerified: true,
       },
     }),
     prisma.user.create({
       data: {
+        id: "user-003",
         email: "thomas.bernard@ynov.com",
-        name: "thomas_gg",
-        password: hashedPassword,
-        elo: 1250,
-        wins: 28,
-        losses: 25,
+        name: "Thomas Bernard",
+        emailVerified: true,
       },
     }),
     prisma.user.create({
       data: {
-        email: "marie.dubois@ynov.com",,
-        name: "marie_mvp",
-        password: hashedPassword,
-        emailVerified: new Date(),
-        elo: 1520,
-        wins: 48,
-        losses: 15,
+        id: "user-004",
+        email: "marie.dubois@ynov.com",
+        name: "Marie Dubois",
+        emailVerified: true,
       },
     }),
     prisma.user.create({
       data: {
+        id: "user-005",
         email: "lucas.petit@ynov.com",
-        name: "lucas_noob",
-        password: hashedPassword,
-        emailVerified: new Date(),
-        elo: 980,
-        wins: 12,
-        losses: 30,
+        name: "Lucas Petit",
+        emailVerified: true,
       },
     }),
     prisma.user.create({
       data: {
+        id: "user-006",
         email: "referee@ynov.com",
-        name: "referee_1",
-        password: hashedPassword,
-        emailVerified: new Date(),
-        elo: 1000,
-        wins: 0,
-        losses: 0,
+        name: "Referee 1",
+        emailVerified: true,
       },
     }),
   ]);

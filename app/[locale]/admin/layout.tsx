@@ -18,6 +18,7 @@ import { Separator } from "@/components/ui/separator";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import Link from "next/link";
 import { Roles } from "@/generated/prisma";
+import { getTranslations } from "next-intl/server";
 
 export default async function AdminLayout({
   children,
@@ -26,6 +27,8 @@ export default async function AdminLayout({
 }) {
   const user = await getCurrentUser();
   const role = await getCurrentUserRole(user?.id || "");
+  const t = await getTranslations("admin");
+
   if (!user) {
     redirect("/sign-in");
   }
@@ -37,7 +40,7 @@ export default async function AdminLayout({
     <SidebarProvider>
       <AdminSidebar
         user={{
-          name: user?.name || "Admin",
+          name: user?.name || t("defaultAdminName"),
           email: user?.email || "",
           avatar: user?.image || null,
           role: role || Roles.USER,
@@ -53,11 +56,13 @@ export default async function AdminLayout({
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem className="hidden md:block">
-                <BreadcrumbLink href="/admin">Administration</BreadcrumbLink>
+                <BreadcrumbLink href="/admin">
+                  {t("administration")}
+                </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator className="hidden md:block" />
               <BreadcrumbItem>
-                <BreadcrumbPage>Dashboard</BreadcrumbPage>
+                <BreadcrumbPage>{t("dashboardLink")}</BreadcrumbPage>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
@@ -67,7 +72,7 @@ export default async function AdminLayout({
               href="/"
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
-              Retour au site
+              {t("backToSite")}
             </Link>
           </div>
         </header>

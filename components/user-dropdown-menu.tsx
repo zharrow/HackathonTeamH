@@ -89,7 +89,7 @@ export function UserDropdownMenuContent({
             <DropdownMenuItem asChild>
               <Link href="/" className="flex items-center">
                 <Home className="mr-2 h-4 w-4" />
-                <span>Retour au site</span>
+                <span>{t("backToSite")}</span>
               </Link>
             </DropdownMenuItem>
           </DropdownMenuGroup>

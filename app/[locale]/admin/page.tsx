@@ -1,14 +1,16 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table2, Users, Calendar, BarChart3 } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export default function AdminDashboard() {
+  const t = useTranslations("admin");
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-bold text-foreground mb-2">Dashboard</h1>
-        <p className="text-muted-foreground">
-          Vue d&apos;ensemble de la plateforme Babyfoot Booking
-        </p>
+        <h1 className="text-3xl font-bold text-foreground mb-2">
+          {t("dashboardTitle")}
+        </h1>
+        <p className="text-muted-foreground">{t("dashboardDescription")}</p>
       </div>
 
       {/* Stats Grid */}
@@ -16,52 +18,60 @@ export default function AdminDashboard() {
         <Card className="border-border bg-card">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">
-              Tables de Babyfoot
+              {t("tablesCount")}
             </CardTitle>
             <Table2 className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-foreground">-</div>
-            <p className="text-xs text-muted-foreground">Tables disponibles</p>
+            <p className="text-xs text-muted-foreground">
+              {t("tablesAvailable")}
+            </p>
           </CardContent>
         </Card>
 
         <Card className="border-border bg-card">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">
-              Utilisateurs
+              {t("usersCount")}
             </CardTitle>
             <Users className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-foreground">-</div>
-            <p className="text-xs text-muted-foreground">Joueurs inscrits</p>
+            <p className="text-xs text-muted-foreground">
+              {t("usersRegistered")}
+            </p>
           </CardContent>
         </Card>
 
         <Card className="border-border bg-card">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">
-              Réservations
+              {t("reservationsCount")}
             </CardTitle>
             <Calendar className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-foreground">-</div>
-            <p className="text-xs text-muted-foreground">Parties en cours</p>
+            <p className="text-xs text-muted-foreground">
+              {t("reservationsInProgress")}
+            </p>
           </CardContent>
         </Card>
 
         <Card className="border-border bg-card">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">
-              Statistiques
+              {t("statsTitle")}
             </CardTitle>
             <BarChart3 className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-foreground">-</div>
-            <p className="text-xs text-muted-foreground">Activité globale</p>
+            <p className="text-xs text-muted-foreground">
+              {t("globalActivity")}
+            </p>
           </CardContent>
         </Card>
       </div>
@@ -70,29 +80,30 @@ export default function AdminDashboard() {
       <Card className="border-border bg-card">
         <CardHeader>
           <CardTitle className="text-xl text-foreground">
-            Bienvenue dans l&apos;administration
+            {t("welcomeAdminTitle")}
           </CardTitle>
         </CardHeader>
         <CardContent>
           <p className="text-muted-foreground">
-            Utilisez la sidebar pour naviguer entre les différentes sections :
+            {t("welcomeAdminDescription")}
           </p>
           <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
             <li className="flex items-center gap-2">
               <Table2 className="h-4 w-4" />
-              <strong>Tables de Babyfoot</strong> - Gérer les tables disponibles
+              <strong>{t("tablesLink")}</strong> - {t("tablesDescription")}
             </li>
             <li className="flex items-center gap-2">
               <Users className="h-4 w-4" />
-              <strong>Joueurs</strong> - Voir et gérer les utilisateurs
+              <strong>{t("playersLink")}</strong> - {t("playersDescription")}
             </li>
             <li className="flex items-center gap-2">
               <Calendar className="h-4 w-4" />
-              <strong>Réservations</strong> - Suivre les parties en cours
+              <strong>{t("reservationsLink")}</strong> -{" "}
+              {t("reservationsDescription")}
             </li>
             <li className="flex items-center gap-2">
               <BarChart3 className="h-4 w-4" />
-              <strong>Statistiques</strong> - Analyser l&apos;activité
+              <strong>{t("statsLink")}</strong> - {t("statsDescription")}
             </li>
           </ul>
         </CardContent>

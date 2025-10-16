@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import {
   Dialog,
   DialogContent,
@@ -36,19 +37,6 @@ interface TableFormDialogProps {
   description: string;
 }
 
-const TABLE_CONDITIONS = [
-  { value: "EXCELLENT", label: "Excellent" },
-  { value: "BON", label: "Bon" },
-  { value: "MOYEN", label: "Moyen" },
-  { value: "MAINTENANCE", label: "Maintenance" },
-];
-
-const TABLE_STATUSES = [
-  { value: "AVAILABLE", label: "Disponible" },
-  { value: "OCCUPIED", label: "Occupée" },
-  { value: "MAINTENANCE", label: "Maintenance" },
-];
-
 export function TableFormDialog({
   open,
   onOpenChange,
@@ -57,6 +45,7 @@ export function TableFormDialog({
   title,
   description,
 }: TableFormDialogProps) {
+  const t = useTranslations("table");
   const [formData, setFormData] = useState<TableFormData>({
     name: "",
     location: "",
@@ -64,6 +53,19 @@ export function TableFormDialog({
     status: "AVAILABLE",
   });
   const [isLoading, setIsLoading] = useState(false);
+
+  const TABLE_CONDITIONS = [
+    { value: "EXCELLENT", label: t("excellent") },
+    { value: "BON", label: t("good") },
+    { value: "MOYEN", label: t("average") },
+    { value: "MAINTENANCE", label: t("maintenance") },
+  ];
+
+  const TABLE_STATUSES = [
+    { value: "AVAILABLE", label: t("available") },
+    { value: "OCCUPIED", label: t("occupied") },
+    { value: "MAINTENANCE", label: t("maintenance") },
+  ];
 
   useEffect(() => {
     if (initialData) {
@@ -100,32 +102,32 @@ export function TableFormDialog({
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="name">Nom de la table *</Label>
+            <Label htmlFor="name">{t("name")} *</Label>
             <Input
               id="name"
               value={formData.name}
               onChange={(e) =>
                 setFormData({ ...formData, name: e.target.value })
               }
-              placeholder="Ex: Table Alpha"
+              placeholder={t("namePlaceholder")}
               required
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="location">Localisation</Label>
+            <Label htmlFor="location">{t("location")}</Label>
             <Input
               id="location"
               value={formData.location}
               onChange={(e) =>
                 setFormData({ ...formData, location: e.target.value })
               }
-              placeholder="Ex: Souk - Zone Gaming"
+              placeholder={t("locationPlaceholder")}
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="condition">État de la table</Label>
+            <Label htmlFor="condition">{t("condition")}</Label>
             <Select
               value={formData.condition}
               onValueChange={(value) =>
@@ -133,7 +135,7 @@ export function TableFormDialog({
               }
             >
               <SelectTrigger>
-                <SelectValue placeholder="Sélectionner un état" />
+                <SelectValue placeholder={t("selectCondition")} />
               </SelectTrigger>
               <SelectContent>
                 {TABLE_CONDITIONS.map((condition) => (
@@ -146,7 +148,7 @@ export function TableFormDialog({
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="status">Statut</Label>
+            <Label htmlFor="status">{t("status")}</Label>
             <Select
               value={formData.status}
               onValueChange={(value) =>
@@ -154,7 +156,7 @@ export function TableFormDialog({
               }
             >
               <SelectTrigger>
-                <SelectValue placeholder="Sélectionner un statut" />
+                <SelectValue placeholder={t("selectStatus")} />
               </SelectTrigger>
               <SelectContent>
                 {TABLE_STATUSES.map((status) => (
@@ -173,14 +175,14 @@ export function TableFormDialog({
               onClick={() => onOpenChange(false)}
               disabled={isLoading}
             >
-              Annuler
+              {t("cancel")}
             </Button>
             <Button type="submit" disabled={isLoading}>
               {isLoading
-                ? "Enregistrement..."
+                ? t("saving")
                 : initialData
-                ? "Modifier"
-                : "Créer"}
+                ? t("update")
+                : t("create")}
             </Button>
           </DialogFooter>
         </form>
