@@ -94,7 +94,7 @@ module "ecs_cluster" {
     ex_1 = {
       auto_scaling_group_arn         = module.autoscaling["ex_1"].autoscaling_group_arn
       managed_draining               = "ENABLED"
-      managed_termination_protection = "ENABLED"
+     
 
       managed_scaling = {
         maximum_scaling_step_size = 5
