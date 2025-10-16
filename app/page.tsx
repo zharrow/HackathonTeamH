@@ -78,4 +78,9 @@ export default function Home() {
       </SignedIn>
     </main>
   );
+import { redirect } from "next/navigation";
+
+export default function HomePage() {
+  // Redirect to default locale
+  redirect("/fr");
 }
