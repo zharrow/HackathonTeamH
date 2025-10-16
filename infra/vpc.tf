@@ -88,7 +88,7 @@ module "ecs_cluster" {
       weight = 60
       base   = 20
     }
-
+  }
   autoscaling_capacity_providers = {
     # On-demand instances
     ex_1 = {
@@ -102,7 +102,6 @@ module "ecs_cluster" {
         status                    = "ENABLED"
         target_capacity           = 60
       }
-    }
     }
   }
 }
