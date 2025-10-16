@@ -17,36 +17,6 @@ module "vpc" {
   }
 }
 
-module "ecs_cluster" {
-  source = "terraform-aws-modules/ecs/aws"
-
-  cluster_name = "cluster-ecs"
-  default_capacity_provider_strategy = {
-    ex_1 = {
-      weight = 60
-      base   = 20
-    }
-
-  autoscaling_capacity_providers = {
-    # On-demand instances
-    ex_1 = {
-      auto_scaling_group_arn         = module.autoscaling["ex_1"].autoscaling_group_arn
-      managed_draining               = "ENABLED"
-      managed_termination_protection = "ENABLED"
-
-      managed_scaling = {
-        maximum_scaling_step_size = 5
-        minimum_scaling_step_size = 1
-        status                    = "ENABLED"
-        target_capacity           = 60
-      }
-    }
-    }
-  }
-}
-
- 
-
 module "autoscaling" {
   source  = "terraform-aws-modules/autoscaling/aws"
   version = "~> 9.0"
@@ -79,7 +49,7 @@ module "autoscaling" {
   image_id      = jsondecode(data.aws_ssm_parameter.ecs_optimized_ami.value)["image_id"]
   instance_type = each.value.instance_type
 
-  security_groups                 = [module.autoscaling_sg.security_group_id]
+//  security_groups                 = [module.autoscaling_sg.security_group_id]
   user_data                       = base64encode(each.value.user_data)
   ignore_desired_capacity_changes = true
 
@@ -108,3 +78,37 @@ module "autoscaling" {
   mixed_instances_policy     = each.value.mixed_instances_policy
 
 }
+
+module "ecs_cluster" {
+  source = "terraform-aws-modules/ecs/aws"
+
+  cluster_name = "cluster-ecs"
+  default_capacity_provider_strategy = {
+    ex_1 = {
+      weight = 60
+      base   = 20
+    }
+
+  autoscaling_capacity_providers = {
+    # On-demand instances
+    ex_1 = {
+      auto_scaling_group_arn         = module.autoscaling["ex_1"].autoscaling_group_arn
+      managed_draining               = "ENABLED"
+      managed_termination_protection = "ENABLED"
+
+      managed_scaling = {
+        maximum_scaling_step_size = 5
+        minimum_scaling_step_size = 1
+        status                    = "ENABLED"
+        target_capacity           = 60
+      }
+    }
+    }
+  }
+}
+
+ 
+data "aws_ssm_parameter" "ecs_optimized_ami" {
+  name = "/aws/service/ecs/optimized-ami/amazon-linux-2023/recommended"
+}
+
