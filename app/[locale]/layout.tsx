@@ -11,6 +11,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations } from "next-intl/server";
 import { LanguageSwitcher } from "@/components/language-switcher";
+import { Toaster } from "sonner";
 import "../globals.css";
 import { Button } from "@/components/ui/button";
 
@@ -69,6 +70,18 @@ export default async function LocaleLayout({
               </div>
             </header>
             {children}
+            <Toaster
+              position="top-right"
+              theme="dark"
+              toastOptions={{
+                style: {
+                  background: '#0f1923',
+                  border: '1px solid #334155',
+                  color: '#ffffff',
+                },
+              }}
+              richColors
+            />
           </NextIntlClientProvider>
         </body>
       </html>
