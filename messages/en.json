@@ -9,13 +9,46 @@
     "english": "English",
     "loading": "Loading...",
     "error": "Error",
-    "success": "Success"
+    "success": "Success",
+    "profile": "Profile",
+    "settings": "Settings",
+    "adminDashboard": "Administration"
   },
   "navigation": {
     "home": "Home",
     "bookings": "Bookings",
     "profile": "Profile",
     "admin": "Administration"
+  },
+  "signIn": {
+    "title": "Sign In",
+    "description": "Sign in to your Babyfoot Booking account",
+    "emailLabel": "Email",
+    "passwordLabel": "Password",
+    "signInButton": "Sign In",
+    "signingIn": "Signing in...",
+    "signInWithGithub": "Continue with GitHub",
+    "orContinueWith": "or continue with",
+    "noAccount": "Don't have an account?",
+    "signUpLink": "Create an account",
+    "signInSuccess": "Successfully signed in!",
+    "signInError": "Sign in error. Please check your credentials."
+  },
+  "signUp": {
+    "title": "Sign Up",
+    "description": "Create your Babyfoot Booking account",
+    "nameLabel": "First Name",
+    "surnameLabel": "Last Name",
+    "usernameLabel": "Username",
+    "emailLabel": "Email",
+    "passwordLabel": "Password",
+    "signUpButton": "Create Account",
+    "signingUp": "Creating account...",
+    "alreadyHaveAccount": "Already have an account?",
+    "signInLink": "Sign in",
+    "signUpSuccess": "Account created successfully!",
+    "signUpError": "Error creating account.",
+    "signInError": "Error during automatic sign in."
   },
   "booking": {
     "title": "Babyfoot Booking",
@@ -31,14 +64,45 @@
     "myBookings": "My bookings",
     "noBookings": "No bookings found"
   },
-  "auth": {
-    "signInTitle": "Sign In",
-    "signUpTitle": "Sign Up",
+  "admin": {
+    "dashboard": "Dashboard",
+    "tables": "Tables",
+    "users": "Users",
+    "reservations": "Reservations",
+    "queue": "Queue",
+    "statistics": "Statistics",
+    "settings": "Settings"
+  },
+  "table": {
+    "name": "Name",
+    "status": "Status",
+    "location": "Location",
+    "condition": "Condition",
+    "available": "Available",
+    "occupied": "Occupied",
+    "maintenance": "Maintenance"
+  },
+  "user": {
+    "name": "Name",
     "email": "Email",
-    "password": "Password",
-    "confirmPassword": "Confirm password",
-    "forgotPassword": "Forgot password?",
-    "alreadyHaveAccount": "Already have an account?",
-    "noAccount": "Don't have an account?"
+    "role": "Role",
+    "elo": "ELO",
+    "wins": "Wins",
+    "losses": "Losses",
+    "username": "Username",
+    "createdAt": "Created At"
+  },
+  "reservation": {
+    "partyDate": "Game Date",
+    "status": "Status",
+    "babyfoot": "Table",
+    "players": "Players",
+    "score": "Score",
+    "pending": "Pending",
+    "confirmed": "Confirmed",
+    "inProgress": "In Progress",
+    "finished": "Finished",
+    "cancelled": "Cancelled",
+    "expired": "Expired"
   }
 }
