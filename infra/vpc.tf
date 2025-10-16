@@ -16,3 +16,95 @@ module "vpc" {
     Environment = "dev"
   }
 }
+
+module "ecs_cluster" {
+  source = "terraform-aws-modules/ecs/aws"
+
+  cluster_name = "cluster-ecs"
+  default_capacity_provider_strategy = {
+    ex_1 = {
+      weight = 60
+      base   = 20
+    }
+
+  autoscaling_capacity_providers = {
+    # On-demand instances
+    ex_1 = {
+      auto_scaling_group_arn         = module.autoscaling["ex_1"].autoscaling_group_arn
+      managed_draining               = "ENABLED"
+      managed_termination_protection = "ENABLED"
+
+      managed_scaling = {
+        maximum_scaling_step_size = 5
+        minimum_scaling_step_size = 1
+        status                    = "ENABLED"
+        target_capacity           = 60
+      }
+    }
+    }
+  }
+}
+
+ 
+
+module "autoscaling" {
+  source  = "terraform-aws-modules/autoscaling/aws"
+  version = "~> 9.0"
+
+  for_each = {
+    # On-demand instances
+    ex_1 = {
+      instance_type              = "t3.large"
+      use_mixed_instances_policy = false
+      mixed_instances_policy     = null
+      user_data                  = <<-EOT
+        #!/bin/bash
+
+        cat <<'EOF' >> /etc/ecs/ecs.config
+        ECS_CLUSTER= ${module.ecs_cluster.cluster_name}
+        EOF
+      EOT
+    }
+  }
+
+  
+
+  min_size = 1
+  max_size = 4
+
+  name = "${module.ecs_cluster.cluster_name}-${each.key}"
+  
+
+
+  image_id      = jsondecode(data.aws_ssm_parameter.ecs_optimized_ami.value)["image_id"]
+  instance_type = each.value.instance_type
+
+  security_groups                 = [module.autoscaling_sg.security_group_id]
+  user_data                       = base64encode(each.value.user_data)
+  ignore_desired_capacity_changes = true
+
+  create_iam_instance_profile = true
+  iam_role_name               = "${module.ecs_cluster.cluster_name}"
+  iam_role_description        = "ECS role for ${module.ecs_cluster.cluster_name}"
+  iam_role_policies = {
+    AmazonEC2ContainerServiceforEC2Role = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
+    AmazonSSMManagedInstanceCore        = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+  }
+
+  vpc_zone_identifier = module.vpc.private_subnets
+  health_check_type   = "EC2"
+  desired_capacity    = 2
+
+  # https://github.com/hashicorp/terraform-provider-aws/issues/12582
+  autoscaling_group_tags = {
+    AmazonECSManaged = true
+  }
+
+  # Required for  managed_termination_protection = "ENABLED"
+  protect_from_scale_in = true
+
+  # Spot instances
+  use_mixed_instances_policy = each.value.use_mixed_instances_policy
+  mixed_instances_policy     = each.value.mixed_instances_policy
+
+}
