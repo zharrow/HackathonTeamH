@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Clock, MapPin, Users, XCircle, Play, CheckCircle, Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import { FinishGameDialog } from "./FinishGameDialog";
 
 interface Reservation {
   id: string;
@@ -36,6 +37,8 @@ export function MyReservations() {
   const [queueEntries, setQueueEntries] = useState<QueueEntry[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [actionLoading, setActionLoading] = useState<string | null>(null);
+  const [finishDialogOpen, setFinishDialogOpen] = useState(false);
+  const [selectedReservationId, setSelectedReservationId] = useState<string | null>(null);
 
   useEffect(() => {
     fetchData();
@@ -119,27 +122,13 @@ export function MyReservations() {
     }
   };
 
-  const handleFinishGame = async (reservationId: string) => {
-    setActionLoading(reservationId);
-    try {
-      const response = await fetch(`/api/reservations/${reservationId}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ action: "finish" }),
-      });
+  const handleFinishGame = (reservationId: string) => {
+    setSelectedReservationId(reservationId);
+    setFinishDialogOpen(true);
+  };
 
-      if (response.ok) {
-        toast.success("Partie terminée !");
-        fetchData();
-      } else {
-        const data = await response.json();
-        toast.error("Erreur", { description: data.error });
-      }
-    } catch (error) {
-      toast.error("Erreur réseau");
-    } finally {
-      setActionLoading(null);
-    }
+  const handleFinishSuccess = () => {
+    fetchData();
   };
 
   const getStatusBadge = (status: string) => {
@@ -251,17 +240,10 @@ export function MyReservations() {
                         <Button
                           size="sm"
                           onClick={() => handleFinishGame(reservation.id)}
-                          disabled={actionLoading === reservation.id}
                           className="bg-[#00FF6C] hover:bg-[#00FF6C]/80 text-black"
                         >
-                          {actionLoading === reservation.id ? (
-                            <Loader2 className="w-4 h-4 animate-spin" />
-                          ) : (
-                            <>
-                              <CheckCircle className="w-4 h-4 mr-1" />
-                              Terminer
-                            </>
-                          )}
+                          <CheckCircle className="w-4 h-4 mr-1" />
+                          Terminer
                         </Button>
                       )}
                       {reservation.status !== "IN_PROGRESS" && (
@@ -328,6 +310,19 @@ export function MyReservations() {
             </div>
           </CardContent>
         </Card>
+      )}
+
+      {/* Finish Game Dialog */}
+      {selectedReservationId && (
+        <FinishGameDialog
+          reservationId={selectedReservationId}
+          isOpen={finishDialogOpen}
+          onClose={() => {
+            setFinishDialogOpen(false);
+            setSelectedReservationId(null);
+          }}
+          onSuccess={handleFinishSuccess}
+        />
       )}
     </div>
   );

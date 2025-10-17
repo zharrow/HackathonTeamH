@@ -101,6 +101,15 @@ export default function ReservationsPage() {
     fetchPlayers();
   }, [fetchReservations, fetchTables, fetchPlayers]);
 
+  // Auto-refresh reservations every 30 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetchReservations();
+    }, 30000); // 30 seconds
+
+    return () => clearInterval(interval);
+  }, [fetchReservations]);
+
   // Filter reservations (only by dropdown for table view)
   const filteredReservations = useMemo(() => {
     if (selectedTable === "ALL") {
@@ -243,6 +252,10 @@ export default function ReservationsPage() {
             {t("pageTitle")}
           </h1>
           <p className="text-muted-foreground mt-1">{t("pageDescription")}</p>
+          <p className="text-xs text-muted-foreground mt-1 flex items-center gap-1">
+            <span className="inline-block w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+            Auto-refresh activé (30s)
+          </p>
         </div>
         <div className="flex items-center gap-2">
           <Button

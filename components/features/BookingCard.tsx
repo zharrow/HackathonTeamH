@@ -1,9 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Clock, Users, Zap } from "lucide-react";
 import { toast } from "sonner";
+
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  image: string | null;
+}
 
 const MATCH_FORMATS = [
   { value: "ONE_VS_ONE", label: "1 vs 1", icon: "👤👤" },
@@ -40,11 +47,57 @@ export function BookingCard({ babyfootId, onClose }: BookingCardProps) {
   const [selectedTime, setSelectedTime] = useState<string>("");
   const [matchFormat, setMatchFormat] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
+  const [users, setUsers] = useState<User[]>([]);
+  const [loadingUsers, setLoadingUsers] = useState(true);
+
+  // Player selection states
+  const [redAttack, setRedAttack] = useState<string>("");
+  const [blueDefense, setBlueDefense] = useState<string>("");
+  const [blueAttack, setBlueAttack] = useState<string>("");
+
+  // Fetch users for player selection
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await fetch("/api/users");
+        if (response.ok) {
+          const data = await response.json();
+          setUsers(data.data);
+        }
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      } finally {
+        setLoadingUsers(false);
+      }
+    };
+
+    fetchUsers();
+  }, []);
 
   const handleBooking = async () => {
     if (!selectedBabyfoot || !selectedTime || !matchFormat) {
       toast.error("Informations manquantes", {
         description: "Veuillez remplir tous les champs pour continuer",
+      });
+      return;
+    }
+
+    // Validate player selection based on format
+    if (matchFormat === "ONE_VS_ONE" && !blueDefense) {
+      toast.error("Joueur manquant", {
+        description: "Veuillez sélectionner l'adversaire",
+      });
+      return;
+    }
+    if (matchFormat === "ONE_VS_TWO" && (!blueDefense || !blueAttack)) {
+      toast.error("Joueurs manquants", {
+        description: "Veuillez sélectionner les deux adversaires",
+      });
+      return;
+    }
+    if (matchFormat === "TWO_VS_TWO" && (!redAttack || !blueDefense || !blueAttack)) {
+      toast.error("Joueurs manquants", {
+        description: "Veuillez sélectionner tous les joueurs",
       });
       return;
     }
@@ -58,17 +111,32 @@ export function BookingCard({ babyfootId, onClose }: BookingCardProps) {
       const reservationDate = new Date(today);
       reservationDate.setHours(hours, minutes, 0, 0);
 
+      // Prepare player IDs based on format
+      const reservationData: any = {
+        babyfootId: selectedBabyfoot,
+        partyDate: reservationDate.toISOString(),
+        format: matchFormat,
+      };
+
+      // Add players based on format
+      if (matchFormat === "ONE_VS_ONE") {
+        reservationData.blueDefenseId = blueDefense;
+      } else if (matchFormat === "ONE_VS_TWO") {
+        reservationData.blueDefenseId = blueDefense;
+        reservationData.blueAttackId = blueAttack;
+      } else if (matchFormat === "TWO_VS_TWO") {
+        reservationData.redAttackId = redAttack;
+        reservationData.blueDefenseId = blueDefense;
+        reservationData.blueAttackId = blueAttack;
+      }
+
       // Call API to create reservation
       const response = await fetch("/api/reservations", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          babyfootId: selectedBabyfoot,
-          partyDate: reservationDate.toISOString(),
-          format: matchFormat,
-        }),
+        body: JSON.stringify(reservationData),
       });
 
       const data = await response.json();
@@ -98,6 +166,9 @@ export function BookingCard({ babyfootId, onClose }: BookingCardProps) {
       setSelectedBabyfoot(babyfootId || "");
       setSelectedTime("");
       setMatchFormat("");
+      setRedAttack("");
+      setBlueDefense("");
+      setBlueAttack("");
 
       // Close dialog after a short delay
       if (onClose) {
@@ -157,6 +228,85 @@ export function BookingCard({ babyfootId, onClose }: BookingCardProps) {
               ))}
             </div>
           </div>
+
+          {/* Player Selection */}
+          {matchFormat && !loadingUsers && (
+            <div className="space-y-3">
+              <label className="text-xs font-bold text-gray-400 uppercase tracking-wider flex items-center gap-2">
+                <Users className="w-3 h-3" />
+                Sélection des joueurs
+              </label>
+
+              <div className="space-y-3">
+                {/* Team Red - You are always Red Defense */}
+                <div className="p-4 bg-red-500/10 border border-red-500/20 rounded">
+                  <p className="text-xs font-bold text-red-400 mb-2">ÉQUIPE ROUGE</p>
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm text-gray-300">Défense:</span>
+                      <span className="text-sm font-bold text-white">Vous</span>
+                    </div>
+                    {matchFormat === "TWO_VS_TWO" && (
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm text-gray-300 flex-shrink-0">Attaque:</span>
+                        <select
+                          value={redAttack}
+                          onChange={(e) => setRedAttack(e.target.value)}
+                          className="flex-1 p-2 bg-gray-800 border border-gray-700 rounded text-sm text-white focus:outline-none focus:border-red-400"
+                        >
+                          <option value="">Sélectionner un coéquipier</option>
+                          {users.map((user) => (
+                            <option key={user.id} value={user.id}>
+                              {user.name}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Team Blue */}
+                <div className="p-4 bg-blue-500/10 border border-blue-500/20 rounded">
+                  <p className="text-xs font-bold text-blue-400 mb-2">ÉQUIPE BLEUE</p>
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm text-gray-300 flex-shrink-0">Défense:</span>
+                      <select
+                        value={blueDefense}
+                        onChange={(e) => setBlueDefense(e.target.value)}
+                        className="flex-1 p-2 bg-gray-800 border border-gray-700 rounded text-sm text-white focus:outline-none focus:border-blue-400"
+                      >
+                        <option value="">Sélectionner un adversaire</option>
+                        {users.map((user) => (
+                          <option key={user.id} value={user.id}>
+                            {user.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    {(matchFormat === "ONE_VS_TWO" || matchFormat === "TWO_VS_TWO") && (
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm text-gray-300 flex-shrink-0">Attaque:</span>
+                        <select
+                          value={blueAttack}
+                          onChange={(e) => setBlueAttack(e.target.value)}
+                          className="flex-1 p-2 bg-gray-800 border border-gray-700 rounded text-sm text-white focus:outline-none focus:border-blue-400"
+                        >
+                          <option value="">Sélectionner un adversaire</option>
+                          {users.map((user) => (
+                            <option key={user.id} value={user.id}>
+                              {user.name}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* Sélection de l'heure - Timeline moderne */}
           <div className="space-y-3">

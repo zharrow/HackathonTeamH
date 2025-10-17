@@ -142,7 +142,7 @@ export async function PATCH(
     const reservationId = params.id;
     const userId = session.user.id;
     const body = await request.json();
-    const { action } = body; // 'start' | 'finish'
+    const { action, finalScoreRed, finalScoreBlue } = body; // 'start' | 'finish'
 
     // Find reservation
     const reservation = await prisma.reservation.findUnique({
@@ -206,13 +206,36 @@ export async function PATCH(
         );
       }
 
-      // For now, just update status without duration
-      // The duration can be calculated from partyDate to now when needed
+      // Validate scores if provided
+      if (finalScoreRed !== undefined && finalScoreBlue !== undefined) {
+        if (
+          typeof finalScoreRed !== "number" ||
+          typeof finalScoreBlue !== "number" ||
+          finalScoreRed < 0 ||
+          finalScoreBlue < 0 ||
+          finalScoreRed > 10 ||
+          finalScoreBlue > 10
+        ) {
+          return Response.json(
+            { error: "Scores invalides. Les scores doivent être entre 0 et 10" },
+            { status: 400 }
+          );
+        }
+      }
+
+      // Update reservation with FINISHED status and scores
+      const updateData: any = {
+        status: "FINISHED",
+      };
+
+      if (finalScoreRed !== undefined && finalScoreBlue !== undefined) {
+        updateData.finalScoreRed = finalScoreRed;
+        updateData.finalScoreBlue = finalScoreBlue;
+      }
+
       const updatedReservation = await prisma.reservation.update({
         where: { id: reservationId },
-        data: {
-          status: "FINISHED",
-        },
+        data: updateData,
       });
 
       // Make babyfoot available or promote next in queue
