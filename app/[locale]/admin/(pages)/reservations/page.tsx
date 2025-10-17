@@ -185,14 +185,7 @@ export default function ReservationsPage() {
 
     return () => clearInterval(interval);
   }, [fetchReservations]);
-
-  // Filter reservations (only by dropdown for table view)
-  const filteredReservations = useMemo(() => {
-    if (selectedTable === "ALL") {
-      return reservations;
-    }
-    return reservations.filter((r) => r.babyfoot.id === selectedTable);
-  }, [reservations, selectedTable]);
+  
   // Separate effect for calendar data
   useEffect(() => {
     fetchCalendarReservations();
