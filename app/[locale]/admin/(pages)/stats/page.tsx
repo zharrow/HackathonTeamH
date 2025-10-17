@@ -55,7 +55,6 @@ interface StatsData {
 }
 
 export default function StatsPage() {
-  const t = useTranslations("admin");
   const [stats, setStats] = useState<StatsData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -211,7 +210,7 @@ export default function StatsPage() {
       <div>
         <h1 className="text-3xl font-bold text-foreground">Statistiques</h1>
         <p className="text-muted-foreground mt-1">
-          Vue d'ensemble de l'activité du babyfoot
+          Vue d&apos;ensemble de l&apos;activité du babyfoot
         </p>
       </div>
 
@@ -261,7 +260,7 @@ export default function StatsPage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">
-              Taux d'occupation
+              Taux d&apos;occupation
             </CardTitle>
             <div className="text-2xl">📊</div>
           </CardHeader>

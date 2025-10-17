@@ -36,7 +36,6 @@ interface Player {
 export default function ReservationsPage() {
   const params = useParams();
   const t = useTranslations("reservation");
-  const tCommon = useTranslations("common");
   const [reservations, setReservations] = useState<Reservation[]>([]);
   const [calendarReservations, setCalendarReservations] = useState<
     Reservation[]
@@ -171,14 +170,7 @@ export default function ReservationsPage() {
 
     return () => clearInterval(interval);
   }, [fetchReservations]);
-
-  // Filter reservations (only by dropdown for table view)
-  const filteredReservations = useMemo(() => {
-    if (selectedTable === "ALL") {
-      return reservations;
-    }
-    return reservations.filter((r) => r.babyfoot.id === selectedTable);
-  }, [reservations, selectedTable]);
+  
   // Separate effect for calendar data
   useEffect(() => {
     fetchCalendarReservations();

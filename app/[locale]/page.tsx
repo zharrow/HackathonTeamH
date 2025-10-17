@@ -3,7 +3,6 @@ import { LeaderboardPodium } from "@/components/features/LeaderboardPodium";
 import { UserStats } from "@/components/features/UserStats";
 import { MyReservations } from "@/components/features/MyReservations";
 import DotGrid from "@/components/DotGrid";
-import { useTranslations } from "next-intl";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { getBabyfoots } from "@/lib/actions/babyfoot";
@@ -19,9 +18,9 @@ export default async function HomePage() {
   const t = await getTranslations();
 
   // Fetch data in parallel
-  let babyfoots = [];
-  let topPlayers = [];
-  let userStats = null;
+  let babyfoots:any = [];
+  let topPlayers:any = [];
+  let userStats:any = null;
 
   if (session) {
     [babyfoots, topPlayers, userStats] = await Promise.all([
@@ -77,7 +76,7 @@ export default async function HomePage() {
                 Mes Réservations
               </h2>
               <p className="font-body text-[#B0B0B0]">
-                Gérez vos réservations et votre position dans la file d'attente
+                Gérez vos réservations et votre position dans la file d&apos;attente
               </p>
             </div>
             <MyReservations />
