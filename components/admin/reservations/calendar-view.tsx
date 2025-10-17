@@ -41,6 +41,8 @@ export function CalendarView({
   const goToPrevious = () => {
     if (viewMode === "day") {
       onDateChange(addDays(selectedDate, -1));
+    } else if (viewMode === "week") {
+      onDateChange(addDays(selectedDate, -7));
     } else if (viewMode === "month") {
       onDateChange(
         new Date(selectedDate.getFullYear(), selectedDate.getMonth() - 1)
@@ -51,6 +53,8 @@ export function CalendarView({
   const goToNext = () => {
     if (viewMode === "day") {
       onDateChange(addDays(selectedDate, 1));
+    } else if (viewMode === "week") {
+      onDateChange(addDays(selectedDate, 7));
     } else if (viewMode === "month") {
       onDateChange(
         new Date(selectedDate.getFullYear(), selectedDate.getMonth() + 1)
@@ -96,7 +100,11 @@ export function CalendarView({
             </div>
             <div className="h-8 w-px bg-border" />
             <h2 className="text-2xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-              {format(selectedDate, "MMMM yyyy")}
+              {viewMode === "day"
+                ? format(selectedDate, "EEEE, MMMM d, yyyy")
+                : viewMode === "week"
+                ? `Week of ${format(selectedDate, "MMM d, yyyy")}`
+                : format(selectedDate, "MMMM yyyy")}
             </h2>
           </div>
 

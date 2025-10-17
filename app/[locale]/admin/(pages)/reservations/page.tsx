@@ -7,19 +7,16 @@ import Link from "next/link";
 import { Plus, RefreshCw } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import { AdvancedDataTable } from "@/components/admin/advanced-data-table";
 import { DeleteAlertDialog } from "@/components/admin/delete-alert-dialog";
-import { ServerPagination } from "@/components/admin/server-pagination";
 import {
-  ReservationStats,
-  ReservationFilters,
-  ReservationEmptyState,
   ReservationFormDialog,
   BabyfootCard,
-  CalendarView,
-  getReservationColumns,
   type Reservation,
 } from "@/components/admin/reservations";
+import { ReservationsStatsSection } from "@/components/admin/reservations/reservations-stats-section";
+import { ReservationsFiltersSection } from "@/components/admin/reservations/reservations-filters-section";
+import { ReservationsCalendarSection } from "@/components/admin/reservations/reservations-calendar-section";
+import { ReservationsTableSection } from "@/components/admin/reservations/reservations-table-section";
 
 interface BabyfootTable {
   id: string;
@@ -39,7 +36,11 @@ interface Player {
 export default function ReservationsPage() {
   const params = useParams();
   const t = useTranslations("reservation");
+  const tCommon = useTranslations("common");
   const [reservations, setReservations] = useState<Reservation[]>([]);
+  const [calendarReservations, setCalendarReservations] = useState<
+    Reservation[]
+  >([]); // Pour le calendrier
   const [allReservations, setAllReservations] = useState<Reservation[]>([]);
   const [tables, setTables] = useState<BabyfootTable[]>([]);
   const [players, setPlayers] = useState<Player[]>([]);
@@ -78,7 +79,7 @@ export default function ReservationsPage() {
     }
   }, []);
 
-  // Fetch data (paginated)
+  // Fetch data for table (paginated, independent from calendar)
   const fetchReservations = useCallback(async () => {
     try {
       const params = new URLSearchParams({
@@ -104,6 +105,32 @@ export default function ReservationsPage() {
       setIsRefreshing(false);
     }
   }, [page, pagination.limit, selectedTable, t]);
+
+  // Fetch data for calendar (temporal pagination, independent from table)
+  const fetchCalendarReservations = useCallback(async () => {
+    try {
+      const params = new URLSearchParams({
+        page: "1",
+        limit: "1000", // Get all reservations for the time period
+      });
+
+      if (selectedTable !== "ALL") {
+        params.append("babyfootId", selectedTable);
+      }
+
+      // Add calendar pagination parameters
+      params.append("viewMode", calendarViewMode);
+      params.append("currentDate", calendarDate.toISOString());
+
+      const response = await fetch(`/api/admin/reservations?${params}`);
+      const data = await response.json();
+      if (data.success) {
+        setCalendarReservations(data.data);
+      }
+    } catch (error) {
+      console.error("Error fetching calendar reservations:", error);
+    }
+  }, [selectedTable, calendarViewMode, calendarDate]);
 
   const fetchTables = useCallback(async () => {
     try {
@@ -131,10 +158,15 @@ export default function ReservationsPage() {
 
   useEffect(() => {
     fetchAllReservations(); // Récupérer toutes les données pour les stats
-    fetchReservations(); // Récupérer les données paginées
+    fetchReservations(); // Récupérer les données paginées pour le tableau
     fetchTables();
     fetchPlayers();
   }, [fetchAllReservations, fetchReservations, fetchTables, fetchPlayers]);
+
+  // Separate effect for calendar data
+  useEffect(() => {
+    fetchCalendarReservations();
+  }, [fetchCalendarReservations]);
 
   // Pagination handlers
   const handlePageChange = (newPage: number) => {
@@ -163,7 +195,11 @@ export default function ReservationsPage() {
   // Handlers
   const handleRefresh = async () => {
     setIsRefreshing(true);
-    await Promise.all([fetchAllReservations(), fetchReservations()]);
+    await Promise.all([
+      fetchAllReservations(),
+      fetchReservations(),
+      fetchCalendarReservations(),
+    ]);
   };
 
   const handleCreate = () => {
@@ -264,13 +300,6 @@ export default function ReservationsPage() {
     }
   };
 
-  // Define table columns
-  const columns = getReservationColumns({
-    t,
-    onEdit: handleEdit,
-    onDelete: handleDeleteClick,
-  });
-
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -307,7 +336,7 @@ export default function ReservationsPage() {
       </div>
 
       {/* Statistics Cards */}
-      {!isLoading && <ReservationStats stats={stats} />}
+      <ReservationsStatsSection stats={stats} isLoading={isLoading} />
 
       {/* Babyfoot Cards - NEW */}
       {!isLoading && tables.length > 0 && (
@@ -332,47 +361,38 @@ export default function ReservationsPage() {
         </div>
       )}
 
-      {/* Calendar View - NEW - Shows ALL reservations */}
-      {!isLoading && reservations.length > 0 && (
-        <CalendarView
-          reservations={reservations}
-          selectedDate={calendarDate}
-          onDateChange={setCalendarDate}
-          viewMode={calendarViewMode}
-          onViewModeChange={setCalendarViewMode}
-          onReservationClick={handleReservationClick}
-        />
-      )}
+      {/* Calendar View - Always visible */}
+      <ReservationsCalendarSection
+        calendarReservations={calendarReservations}
+        calendarDate={calendarDate}
+        onCalendarDateChange={setCalendarDate}
+        calendarViewMode={calendarViewMode}
+        onCalendarViewModeChange={setCalendarViewMode}
+        onReservationClick={handleReservationClick}
+        isLoading={isLoading}
+      />
 
       {/* Filters */}
-      {!isLoading && reservations.length > 0 && (
-        <ReservationFilters
-          tables={tables}
-          selectedTable={selectedTable}
-          onTableChange={setSelectedTable}
-        />
-      )}
+      <ReservationsFiltersSection
+        tables={tables}
+        selectedTable={selectedTable}
+        onTableChange={setSelectedTable}
+        reservations={reservations}
+        isLoading={isLoading}
+      />
 
       {/* Data Table or Empty State */}
-      {!isLoading && allReservations.length === 0 ? (
-        <ReservationEmptyState onCreate={handleCreate} />
-      ) : (
-        <div className="space-y-4">
-          <AdvancedDataTable
-            columns={columns}
-            data={reservations}
-            isLoading={isLoading}
-            enablePagination={false}
-          />
-          {/* Server-side pagination */}
-          <ServerPagination
-            pagination={pagination}
-            onPageChange={handlePageChange}
-            onPageSizeChange={handlePageSizeChange}
-            itemName={t("reservations")}
-          />
-        </div>
-      )}
+      <ReservationsTableSection
+        reservations={reservations}
+        allReservations={allReservations}
+        pagination={pagination}
+        onPageChange={handlePageChange}
+        onPageSizeChange={handlePageSizeChange}
+        onEdit={handleEdit}
+        onDelete={handleDeleteClick}
+        onCreate={handleCreate}
+        isLoading={isLoading}
+      />
 
       {/* Create/Edit Dialog */}
       <ReservationFormDialog

@@ -16,6 +16,14 @@ export async function GET(request: NextRequest) {
     const endDate = searchParams.get("endDate");
     const status = searchParams.get("status");
 
+    // Calendar pagination parameters
+    const viewMode = searchParams.get("viewMode") as
+      | "day"
+      | "week"
+      | "month"
+      | null;
+    const currentDate = searchParams.get("currentDate");
+
     const skip = (page - 1) * limit;
 
     const where: any = {};
@@ -24,7 +32,50 @@ export async function GET(request: NextRequest) {
       where.babyfootId = babyfootId;
     }
 
-    if (startDate && endDate) {
+    // Calendar pagination logic
+    if (viewMode && currentDate) {
+      const date = new Date(currentDate);
+      let start, end;
+
+      switch (viewMode) {
+        case "day":
+          start = new Date(date);
+          start.setHours(0, 0, 0, 0);
+          end = new Date(date);
+          end.setHours(23, 59, 59, 999);
+          break;
+        case "week":
+          // Get Monday of the week
+          const dayOfWeek = date.getDay();
+          const monday = new Date(date);
+          monday.setDate(
+            date.getDate() - (dayOfWeek === 0 ? 6 : dayOfWeek - 1)
+          );
+          start = new Date(monday);
+          start.setHours(0, 0, 0, 0);
+          // Get Sunday of the week
+          end = new Date(monday);
+          end.setDate(monday.getDate() + 6);
+          end.setHours(23, 59, 59, 999);
+          break;
+        case "month":
+          start = new Date(date.getFullYear(), date.getMonth(), 1);
+          start.setHours(0, 0, 0, 0);
+          end = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+          end.setHours(23, 59, 59, 999);
+          break;
+        default:
+          break;
+      }
+
+      if (start && end) {
+        where.partyDate = {
+          gte: start,
+          lte: end,
+        };
+      }
+    } else if (startDate && endDate) {
+      // Fallback to manual date range
       where.partyDate = {
         gte: new Date(startDate),
         lte: new Date(endDate),
@@ -88,6 +139,49 @@ export async function GET(request: NextRequest) {
       prisma.reservation.count({ where }),
     ]);
 
+    // Calculate date range info for calendar pagination
+    let dateRange = null;
+    if (viewMode && currentDate) {
+      const date = new Date(currentDate);
+      let start, end;
+
+      switch (viewMode) {
+        case "day":
+          start = new Date(date);
+          start.setHours(0, 0, 0, 0);
+          end = new Date(date);
+          end.setHours(23, 59, 59, 999);
+          break;
+        case "week":
+          const dayOfWeek = date.getDay();
+          const monday = new Date(date);
+          monday.setDate(
+            date.getDate() - (dayOfWeek === 0 ? 6 : dayOfWeek - 1)
+          );
+          start = new Date(monday);
+          start.setHours(0, 0, 0, 0);
+          end = new Date(monday);
+          end.setDate(monday.getDate() + 6);
+          end.setHours(23, 59, 59, 999);
+          break;
+        case "month":
+          start = new Date(date.getFullYear(), date.getMonth(), 1);
+          start.setHours(0, 0, 0, 0);
+          end = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+          end.setHours(23, 59, 59, 999);
+          break;
+      }
+
+      if (start && end) {
+        dateRange = {
+          start: start.toISOString(),
+          end: end.toISOString(),
+          viewMode,
+          currentDate: currentDate,
+        };
+      }
+    }
+
     return Response.json({
       success: true,
       data: reservations,
@@ -97,6 +191,7 @@ export async function GET(request: NextRequest) {
         total,
         totalPages: Math.ceil(total / limit),
       },
+      dateRange,
     });
   } catch (error) {
     console.error("Error fetching reservations:", error);
