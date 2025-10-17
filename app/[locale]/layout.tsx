@@ -1,19 +1,29 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Orbitron, Rajdhani } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { ConditionalHeader } from "@/components/conditional-header";
 import { ThemeProvider } from "@/components/theme-provider";
 import "../globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Brand Guidelines Fonts
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const orbitron = Orbitron({
+  variable: "--font-orbitron",
   subsets: ["latin"],
+  display: "swap",
+});
+
+const rajdhani = Rajdhani({
+  weight: ["400", "600", "700"],
+  variable: "--font-rajdhani",
+  subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
