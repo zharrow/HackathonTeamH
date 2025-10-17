@@ -2,6 +2,13 @@
 
 Plateforme de gestion et réservation de tables de babyfoot pour Ynov Toulouse.
 
+## 📝 Documentation
+
+- [SPECIFICATIONS.md](./SPECIFICATIONS.md) - Spécifications fonctionnelles
+- [Equipe Fullstack](./rendus/FULLSTACK.md) - Documentation Fullstack
+- [Equipe Infra](./rendus/INFRA.md) - Documentation Infra
+- [Equipe Data](./rendus/IADATA.md) - Documentation Data
+
 ## 🚀 Stack Technique
 
 - **Framework**: Next.js 15 (App Router) + TypeScript
@@ -126,12 +133,6 @@ Changer de langue via le sélecteur dans le header.
 ```bash
 docker-compose up -d
 ```
-
-## 📝 Documentation
-
-- [SPECIFICATIONS.md](./SPECIFICATIONS.md) - Spécifications fonctionnelles
-- [DEV_DOCUMENTATION.md](./DEV_DOCUMENTATION.md) - Documentation technique
-- [PROMPT_VIBE_CODER.md](./PROMPT_VIBE_CODER.md) - Brief de développement
 
 ## 🤝 Contribution
 
