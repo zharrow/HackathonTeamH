@@ -13,7 +13,7 @@ interface ReservationsFiltersSectionProps {
   tables: BabyfootTable[];
   selectedTable: string;
   onTableChange: (value: string) => void;
-  reservations: any[];
+  reservations: unknown[];
   isLoading: boolean;
 }
 

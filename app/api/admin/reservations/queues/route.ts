@@ -33,7 +33,10 @@ export async function GET(request: NextRequest) {
     });
 
     // Group by table and time slot
-    const groupedQueues: Record<string, Record<string, any[]>> = {};
+    const groupedQueues: Record<
+      string,
+      Record<string, typeof pendingReservations>
+    > = {};
 
     pendingReservations.forEach((reservation) => {
       const tableKey = reservation.babyfootId;

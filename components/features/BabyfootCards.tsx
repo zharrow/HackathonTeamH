@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { MapPin, Clock, Zap, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -61,10 +62,12 @@ export function BabyfootCards({ babyfoots = [] }: BabyfootCardsProps) {
           >
             {/* Image */}
             <div className="relative h-48 bg-gray-800 overflow-hidden">
-              <img
+              <Image
                 src={babyfoot.image}
                 alt={babyfoot.name}
                 className="w-full h-full object-cover group-hover:scale-100 transition-transform duration-300"
+                width={100}
+                height={100}
               />
               {/* Overlay gradient */}
               <div className="absolute inset-0 bg-gradient-to-t from-[#0f1923] to-transparent" />
@@ -125,15 +128,17 @@ export function BabyfootCards({ babyfoots = [] }: BabyfootCardsProps) {
               )}
 
               {/* Next reservation info (for available tables with upcoming reservations) */}
-              {babyfoot.status === "available" && babyfoot.nextReservationTime && babyfoot.availableAt && (
-                <div className="flex items-center gap-2 p-2 bg-[#00FFF7]/10 border border-[#00FFF7]/20 rounded">
-                  <Clock className="w-4 h-4 text-[#00FFF7] flex-shrink-0" />
-                  <p className="font-body text-xs text-[#00FFF7]">
-                    Prochaine réservation à{" "}
-                    <span className="font-bold">{babyfoot.availableAt}</span>
-                  </p>
-                </div>
-              )}
+              {babyfoot.status === "available" &&
+                babyfoot.nextReservationTime &&
+                babyfoot.availableAt && (
+                  <div className="flex items-center gap-2 p-2 bg-[#00FFF7]/10 border border-[#00FFF7]/20 rounded">
+                    <Clock className="w-4 h-4 text-[#00FFF7] flex-shrink-0" />
+                    <p className="font-body text-xs text-[#00FFF7]">
+                      Prochaine réservation à{" "}
+                      <span className="font-bold">{babyfoot.availableAt}</span>
+                    </p>
+                  </div>
+                )}
 
               {/* Queue info */}
               {babyfoot.queueCount && babyfoot.queueCount > 0 && (
@@ -141,7 +146,9 @@ export function BabyfootCards({ babyfoots = [] }: BabyfootCardsProps) {
                   <Users className="w-4 h-4 text-[#FF00FF] flex-shrink-0" />
                   <p className="font-body text-xs text-[#FF00FF]">
                     <span className="font-bold">{babyfoot.queueCount}</span>{" "}
-                    {babyfoot.queueCount === 1 ? "réservation en attente" : "réservations en attente"}
+                    {babyfoot.queueCount === 1
+                      ? "réservation en attente"
+                      : "réservations en attente"}
                   </p>
                 </div>
               )}
