@@ -53,8 +53,12 @@ export function BabyfootCards() {
     <>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {BABYFOOTS.map((babyfoot) => (
-          <HoverGlow key={babyfoot.id} glowColor="magenta" intensity="high" className="relative bg-[#0D0D0D] border-2 min-h-100 border-[#00FFF7]/20 rounded-lg overflow-hidden group hover:border-[#00FFF7] transition-colors duration-300">
-
+          <HoverGlow
+            key={babyfoot.id}
+            glowColor="magenta"
+            intensity="high"
+            className="relative bg-[#0D0D0D] border-2 min-h-100 border-[#00FFF7]/20 rounded-lg overflow-hidden group hover:border-[#00FFF7] transition-colors duration-300"
+          >
             {/* Image */}
             <div className="relative h-48 bg-gray-800 overflow-hidden">
               <img
@@ -90,7 +94,9 @@ export function BabyfootCards() {
                 </h3>
                 <div className="flex items-center gap-2 mt-2">
                   <MapPin className="w-4 h-4 text-[#B0B0B0]" />
-                  <p className="font-body text-sm text-[#B0B0B0]">{babyfoot.location}</p>
+                  <p className="font-body text-sm text-[#B0B0B0]">
+                    {babyfoot.location}
+                  </p>
                 </div>
               </div>
 
@@ -99,7 +105,8 @@ export function BabyfootCards() {
                 <div className="flex items-center gap-2 p-2 bg-[#FF00FF]/10 border border-[#FF00FF]/20 rounded">
                   <Clock className="w-4 h-4 text-[#FF00FF] flex-shrink-0" />
                   <p className="font-body text-xs text-[#FF00FF]">
-                    Disponible à <span className="font-bold">{babyfoot.availableAt}</span>
+                    Disponible à{" "}
+                    <span className="font-bold">{babyfoot.availableAt}</span>
                   </p>
                 </div>
               )}
@@ -113,7 +120,6 @@ export function BabyfootCards() {
                 Réserver
               </Button>
             </div>
-
           </HoverGlow>
         ))}
       </div>
@@ -126,10 +132,15 @@ export function BabyfootCards() {
               Réserver un Babyfoot
             </DialogTitle>
             <DialogDescription className="font-body text-[#B0B0B0]">
-              {selectedBabyfoot && (() => {
-                const babyfoot = BABYFOOTS.find(b => b.id === selectedBabyfoot);
-                return babyfoot ? `${babyfoot.name} - ${babyfoot.location}` : '';
-              })()}
+              {selectedBabyfoot &&
+                (() => {
+                  const babyfoot = BABYFOOTS.find(
+                    (b) => b.id === selectedBabyfoot
+                  );
+                  return babyfoot
+                    ? `${babyfoot.name} - ${babyfoot.location}`
+                    : "";
+                })()}
             </DialogDescription>
           </DialogHeader>
           <BookingCard

@@ -1,0 +1,5207 @@
+{
+  "users": [
+    {
+      "name": "Admin Ynov",
+      "email": "admin@ynov.com",
+      "role": "ADMIN",
+      "wins": 0,
+      "losses": 0,
+      "draws": 0,
+      "elo": 1000
+    },
+    {
+      "name": "Sarah Durand",
+      "email": "sarah.durand@ynov.com",
+      "role": "USER",
+      "wins": 0,
+      "losses": 0,
+      "draws": 0,
+      "elo": 1000
+    },
+    {
+      "name": "Alex Martin",
+      "email": "alex.martin@ynov.com",
+      "role": "USER",
+      "wins": 0,
+      "losses": 0,
+      "draws": 0,
+      "elo": 1000
+    },
+    {
+      "name": "Lucas Petit",
+      "email": "lucas.petit@ynov.com",
+      "role": "USER",
+      "wins": 0,
+      "losses": 0,
+      "draws": 0,
+      "elo": 1000
+    },
+    {
+      "name": "Marie Dubois",
+      "email": "marie.dubois@ynov.com",
+      "role": "USER",
+      "wins": 0,
+      "losses": 0,
+      "draws": 0,
+      "elo": 1000
+    },
+    {
+      "name": "Thomas Bernard",
+      "email": "thomas.bernard@ynov.com",
+      "role": "USER",
+      "wins": 0,
+      "losses": 0,
+      "draws": 0,
+      "elo": 1000
+    },
+    {
+      "name": "Referee 1",
+      "email": "referee@ynov.com",
+      "role": "USER",
+      "wins": 0,
+      "losses": 0,
+      "draws": 0,
+      "elo": 1000
+    },
+
+    {
+      "name": "mila_clement",
+      "email": "mila.clement@ynov.com",
+      "role": "USER",
+      "wins": 294,
+      "losses": 186,
+      "draws": 46,
+      "elo": 3049.67
+    },
+    {
+      "name": "jordan_richard",
+      "email": "jordan.richard@ynov.com",
+      "role": "USER",
+      "wins": 374,
+      "losses": 296,
+      "draws": 78,
+      "elo": 2782.15
+    },
+    {
+      "name": "taylor_bianchi",
+      "email": "taylor.bianchi@ynov.com",
+      "role": "USER",
+      "wins": 392,
+      "losses": 316,
+      "draws": 58,
+      "elo": 2681.69
+    },
+    {
+      "name": "lucas_rossi",
+      "email": "lucas.rossi@ynov.com",
+      "role": "USER",
+      "wins": 290,
+      "losses": 206,
+      "draws": 28,
+      "elo": 2599.21
+    },
+    {
+      "name": "morgan_bianchi",
+      "email": "morgan.bianchi@ynov.com",
+      "role": "USER",
+      "wins": 362,
+      "losses": 300,
+      "draws": 66,
+      "elo": 2484.84
+    },
+    {
+      "name": "julien_garnier",
+      "email": "julien.garnier@ynov.com",
+      "role": "USER",
+      "wins": 248,
+      "losses": 178,
+      "draws": 50,
+      "elo": 2356.79
+    },
+    {
+      "name": "hugo_morel",
+      "email": "hugo.morel@ynov.com",
+      "role": "USER",
+      "wins": 272,
+      "losses": 208,
+      "draws": 50,
+      "elo": 2319.33
+    },
+    {
+      "name": "liam_morel",
+      "email": "liam.morel@ynov.com",
+      "role": "USER",
+      "wins": 272,
+      "losses": 208,
+      "draws": 48,
+      "elo": 2312.59
+    },
+    {
+      "name": "sofia_faure",
+      "email": "sofia.faure@ynov.com",
+      "role": "USER",
+      "wins": 346,
+      "losses": 294,
+      "draws": 58,
+      "elo": 2296.9
+    },
+    {
+      "name": "mohamed_schmidt",
+      "email": "mohamed.schmidt@ynov.com",
+      "role": "USER",
+      "wins": 414,
+      "losses": 372,
+      "draws": 102,
+      "elo": 2259.79
+    },
+    {
+      "name": "jamie_schmidt",
+      "email": "jamie.schmidt@ynov.com",
+      "role": "USER",
+      "wins": 268,
+      "losses": 210,
+      "draws": 48,
+      "elo": 2216.16
+    },
+    {
+      "name": "maria_bianchi",
+      "email": "maria.bianchi@ynov.com",
+      "role": "USER",
+      "wins": 572,
+      "losses": 544,
+      "draws": 102,
+      "elo": 2209.29
+    },
+    {
+      "name": "maya_richard",
+      "email": "maya.richard@ynov.com",
+      "role": "USER",
+      "wins": 270,
+      "losses": 218,
+      "draws": 26,
+      "elo": 2200.98
+    },
+    {
+      "name": "ethan_rousseau",
+      "email": "ethan.rousseau@ynov.com",
+      "role": "USER",
+      "wins": 250,
+      "losses": 206,
+      "draws": 42,
+      "elo": 2104.1
+    },
+    {
+      "name": "olivia_robert",
+      "email": "olivia.robert@ynov.com",
+      "role": "USER",
+      "wins": 366,
+      "losses": 328,
+      "draws": 54,
+      "elo": 2090.74
+    },
+    {
+      "name": "mateo_martin",
+      "email": "mateo.martin@ynov.com",
+      "role": "USER",
+      "wins": 264,
+      "losses": 214,
+      "draws": 54,
+      "elo": 2080.06
+    },
+    {
+      "name": "youssef_bernard",
+      "email": "youssef.bernard@ynov.com",
+      "role": "USER",
+      "wins": 468,
+      "losses": 448,
+      "draws": 82,
+      "elo": 2068.33
+    },
+    {
+      "name": "ava_philippe",
+      "email": "ava.philippe@ynov.com",
+      "role": "USER",
+      "wins": 348,
+      "losses": 312,
+      "draws": 72,
+      "elo": 2030.29
+    },
+    {
+      "name": "ethan_blanc",
+      "email": "ethan.blanc@ynov.com",
+      "role": "USER",
+      "wins": 466,
+      "losses": 446,
+      "draws": 104,
+      "elo": 1973.02
+    },
+    {
+      "name": "pierre_muller",
+      "email": "pierre.muller@ynov.com",
+      "role": "USER",
+      "wins": 148,
+      "losses": 96,
+      "draws": 28,
+      "elo": 1968.09
+    },
+    {
+      "name": "diego_andre",
+      "email": "diego.andre@ynov.com",
+      "role": "USER",
+      "wins": 146,
+      "losses": 98,
+      "draws": 30,
+      "elo": 1923.23
+    },
+    {
+      "name": "ava_nakamura",
+      "email": "ava.nakamura@ynov.com",
+      "role": "USER",
+      "wins": 140,
+      "losses": 96,
+      "draws": 12,
+      "elo": 1890.08
+    },
+    {
+      "name": "maria_faure",
+      "email": "maria.faure@ynov.com",
+      "role": "USER",
+      "wins": 252,
+      "losses": 216,
+      "draws": 32,
+      "elo": 1890.0
+    },
+    {
+      "name": "hugo_petit",
+      "email": "hugo.petit@ynov.com",
+      "role": "USER",
+      "wins": 334,
+      "losses": 306,
+      "draws": 66,
+      "elo": 1887.19
+    },
+    {
+      "name": "morgan_morel",
+      "email": "morgan.morel@ynov.com",
+      "role": "USER",
+      "wins": 150,
+      "losses": 108,
+      "draws": 38,
+      "elo": 1887.13
+    },
+    {
+      "name": "antoine_bernard",
+      "email": "antoine.bernard@ynov.com",
+      "role": "USER",
+      "wins": 252,
+      "losses": 216,
+      "draws": 46,
+      "elo": 1879.73
+    },
+    {
+      "name": "alex_durand",
+      "email": "alex.durand@ynov.com",
+      "role": "USER",
+      "wins": 354,
+      "losses": 332,
+      "draws": 66,
+      "elo": 1860.62
+    },
+    {
+      "name": "pierre_leroy",
+      "email": "pierre.leroy@ynov.com",
+      "role": "USER",
+      "wins": 134,
+      "losses": 86,
+      "draws": 24,
+      "elo": 1860.58
+    },
+    {
+      "name": "jamie_thomas",
+      "email": "jamie.thomas@ynov.com",
+      "role": "USER",
+      "wins": 236,
+      "losses": 200,
+      "draws": 44,
+      "elo": 1859.62
+    },
+    {
+      "name": "liam_leroy",
+      "email": "liam.leroy@ynov.com",
+      "role": "USER",
+      "wins": 128,
+      "losses": 80,
+      "draws": 16,
+      "elo": 1858.56
+    },
+    {
+      "name": "casey_rossi",
+      "email": "casey.rossi@ynov.com",
+      "role": "USER",
+      "wins": 354,
+      "losses": 332,
+      "draws": 68,
+      "elo": 1856.2
+    },
+    {
+      "name": "ethan_andre",
+      "email": "ethan.andre@ynov.com",
+      "role": "USER",
+      "wins": 236,
+      "losses": 202,
+      "draws": 32,
+      "elo": 1855.99
+    },
+    {
+      "name": "youssef_moreau",
+      "email": "youssef.moreau@ynov.com",
+      "role": "USER",
+      "wins": 136,
+      "losses": 96,
+      "draws": 26,
+      "elo": 1854.81
+    },
+    {
+      "name": "casey_lopez",
+      "email": "casey.lopez@ynov.com",
+      "role": "USER",
+      "wins": 122,
+      "losses": 74,
+      "draws": 36,
+      "elo": 1840.33
+    },
+    {
+      "name": "julie_andre",
+      "email": "julie.andre@ynov.com",
+      "role": "USER",
+      "wins": 262,
+      "losses": 232,
+      "draws": 48,
+      "elo": 1839.48
+    },
+    {
+      "name": "riley_morel",
+      "email": "riley.morel@ynov.com",
+      "role": "USER",
+      "wins": 252,
+      "losses": 218,
+      "draws": 42,
+      "elo": 1824.77
+    },
+    {
+      "name": "emma_petit",
+      "email": "emma.petit@ynov.com",
+      "role": "USER",
+      "wins": 132,
+      "losses": 94,
+      "draws": 16,
+      "elo": 1824.58
+    },
+    {
+      "name": "lucas_moreau",
+      "email": "lucas.moreau@ynov.com",
+      "role": "USER",
+      "wins": 244,
+      "losses": 212,
+      "draws": 42,
+      "elo": 1823.48
+    },
+    {
+      "name": "youssef_thomas",
+      "email": "youssef.thomas@ynov.com",
+      "role": "USER",
+      "wins": 146,
+      "losses": 102,
+      "draws": 8,
+      "elo": 1822.88
+    },
+    {
+      "name": "luc_schmidt",
+      "email": "luc.schmidt@ynov.com",
+      "role": "USER",
+      "wins": 118,
+      "losses": 76,
+      "draws": 30,
+      "elo": 1822.56
+    },
+    {
+      "name": "jordan_thomas",
+      "email": "jordan.thomas@ynov.com",
+      "role": "USER",
+      "wins": 248,
+      "losses": 224,
+      "draws": 38,
+      "elo": 1801.56
+    },
+    {
+      "name": "chris_blanc",
+      "email": "chris.blanc@ynov.com",
+      "role": "USER",
+      "wins": 258,
+      "losses": 226,
+      "draws": 64,
+      "elo": 1800.22
+    },
+    {
+      "name": "lena_thomas",
+      "email": "lena.thomas@ynov.com",
+      "role": "USER",
+      "wins": 134,
+      "losses": 94,
+      "draws": 12,
+      "elo": 1795.98
+    },
+    {
+      "name": "emma_durand",
+      "email": "emma.durand@ynov.com",
+      "role": "USER",
+      "wins": 262,
+      "losses": 230,
+      "draws": 42,
+      "elo": 1794.76
+    },
+    {
+      "name": "julie_moreau",
+      "email": "julie.moreau@ynov.com",
+      "role": "USER",
+      "wins": 246,
+      "losses": 214,
+      "draws": 46,
+      "elo": 1791.8
+    },
+    {
+      "name": "antoine_girard",
+      "email": "antoine.girard@ynov.com",
+      "role": "USER",
+      "wins": 248,
+      "losses": 220,
+      "draws": 54,
+      "elo": 1785.38
+    },
+    {
+      "name": "mateo_laurent",
+      "email": "mateo.laurent@ynov.com",
+      "role": "USER",
+      "wins": 240,
+      "losses": 212,
+      "draws": 42,
+      "elo": 1784.18
+    },
+    {
+      "name": "lena_garnier",
+      "email": "lena.garnier@ynov.com",
+      "role": "USER",
+      "wins": 148,
+      "losses": 112,
+      "draws": 8,
+      "elo": 1782.92
+    },
+    {
+      "name": "lucas_martin",
+      "email": "lucas.martin@ynov.com",
+      "role": "USER",
+      "wins": 222,
+      "losses": 194,
+      "draws": 34,
+      "elo": 1774.36
+    },
+    {
+      "name": "lena_lopez",
+      "email": "lena.lopez@ynov.com",
+      "role": "USER",
+      "wins": 146,
+      "losses": 108,
+      "draws": 14,
+      "elo": 1772.21
+    },
+    {
+      "name": "alex_andre",
+      "email": "alex.andre@ynov.com",
+      "role": "USER",
+      "wins": 246,
+      "losses": 216,
+      "draws": 40,
+      "elo": 1772.03
+    },
+    {
+      "name": "antoine_bianchi",
+      "email": "antoine.bianchi@ynov.com",
+      "role": "USER",
+      "wins": 144,
+      "losses": 108,
+      "draws": 22,
+      "elo": 1755.29
+    },
+    {
+      "name": "youssef_laurent",
+      "email": "youssef.laurent@ynov.com",
+      "role": "USER",
+      "wins": 118,
+      "losses": 76,
+      "draws": 14,
+      "elo": 1752.69
+    },
+    {
+      "name": "chloe_mercier",
+      "email": "chloe.mercier@ynov.com",
+      "role": "USER",
+      "wins": 272,
+      "losses": 244,
+      "draws": 58,
+      "elo": 1739.66
+    },
+    {
+      "name": "mila_durand",
+      "email": "mila.durand@ynov.com",
+      "role": "USER",
+      "wins": 136,
+      "losses": 102,
+      "draws": 14,
+      "elo": 1739.42
+    },
+    {
+      "name": "sarah_bernard",
+      "email": "sarah.bernard@ynov.com",
+      "role": "USER",
+      "wins": 146,
+      "losses": 108,
+      "draws": 16,
+      "elo": 1737.88
+    },
+    {
+      "name": "chloe_lopez",
+      "email": "chloe.lopez@ynov.com",
+      "role": "USER",
+      "wins": 264,
+      "losses": 238,
+      "draws": 54,
+      "elo": 1734.71
+    },
+    {
+      "name": "chris_garnier",
+      "email": "chris.garnier@ynov.com",
+      "role": "USER",
+      "wins": 142,
+      "losses": 104,
+      "draws": 10,
+      "elo": 1716.73
+    },
+    {
+      "name": "liam_bianchi",
+      "email": "liam.bianchi@ynov.com",
+      "role": "USER",
+      "wins": 132,
+      "losses": 96,
+      "draws": 18,
+      "elo": 1716.25
+    },
+    {
+      "name": "pierre_garnier",
+      "email": "pierre.garnier@ynov.com",
+      "role": "USER",
+      "wins": 228,
+      "losses": 202,
+      "draws": 42,
+      "elo": 1709.64
+    },
+    {
+      "name": "julien_leroy",
+      "email": "julien.leroy@ynov.com",
+      "role": "USER",
+      "wins": 226,
+      "losses": 202,
+      "draws": 42,
+      "elo": 1708.1
+    },
+    {
+      "name": "paul_moreau",
+      "email": "paul.moreau@ynov.com",
+      "role": "USER",
+      "wins": 136,
+      "losses": 102,
+      "draws": 22,
+      "elo": 1705.91
+    },
+    {
+      "name": "mohamed_morel",
+      "email": "mohamed.morel@ynov.com",
+      "role": "USER",
+      "wins": 136,
+      "losses": 104,
+      "draws": 18,
+      "elo": 1701.08
+    },
+    {
+      "name": "mila_robert",
+      "email": "mila.robert@ynov.com",
+      "role": "USER",
+      "wins": 122,
+      "losses": 90,
+      "draws": 38,
+      "elo": 1695.32
+    },
+    {
+      "name": "chloe_moreau",
+      "email": "chloe.moreau@ynov.com",
+      "role": "USER",
+      "wins": 144,
+      "losses": 112,
+      "draws": 24,
+      "elo": 1693.05
+    },
+    {
+      "name": "alex_kovacs",
+      "email": "alex.kovacs@ynov.com",
+      "role": "USER",
+      "wins": 148,
+      "losses": 120,
+      "draws": 24,
+      "elo": 1685.83
+    },
+    {
+      "name": "riley_schmidt",
+      "email": "riley.schmidt@ynov.com",
+      "role": "USER",
+      "wins": 238,
+      "losses": 214,
+      "draws": 52,
+      "elo": 1683.94
+    },
+    {
+      "name": "diego_kim",
+      "email": "diego.kim@ynov.com",
+      "role": "USER",
+      "wins": 342,
+      "losses": 330,
+      "draws": 62,
+      "elo": 1670.88
+    },
+    {
+      "name": "ethan_mercier",
+      "email": "ethan.mercier@ynov.com",
+      "role": "USER",
+      "wins": 234,
+      "losses": 216,
+      "draws": 46,
+      "elo": 1666.12
+    },
+    {
+      "name": "emma_andre",
+      "email": "emma.andre@ynov.com",
+      "role": "USER",
+      "wins": 220,
+      "losses": 196,
+      "draws": 48,
+      "elo": 1666.08
+    },
+    {
+      "name": "jordan_schmidt",
+      "email": "jordan.schmidt@ynov.com",
+      "role": "USER",
+      "wins": 138,
+      "losses": 110,
+      "draws": 28,
+      "elo": 1666.02
+    },
+    {
+      "name": "luc_nakamura",
+      "email": "luc.nakamura@ynov.com",
+      "role": "USER",
+      "wins": 120,
+      "losses": 86,
+      "draws": 30,
+      "elo": 1663.45
+    },
+    {
+      "name": "maria_durand",
+      "email": "maria.durand@ynov.com",
+      "role": "USER",
+      "wins": 342,
+      "losses": 332,
+      "draws": 66,
+      "elo": 1663.32
+    },
+    {
+      "name": "morgan_rossi",
+      "email": "morgan.rossi@ynov.com",
+      "role": "USER",
+      "wins": 132,
+      "losses": 100,
+      "draws": 30,
+      "elo": 1663.02
+    },
+    {
+      "name": "sam_rossi",
+      "email": "sam.rossi@ynov.com",
+      "role": "USER",
+      "wins": 224,
+      "losses": 204,
+      "draws": 40,
+      "elo": 1656.45
+    },
+    {
+      "name": "morgan_bernard",
+      "email": "morgan.bernard@ynov.com",
+      "role": "USER",
+      "wins": 130,
+      "losses": 100,
+      "draws": 14,
+      "elo": 1652.02
+    },
+    {
+      "name": "antoine_petit",
+      "email": "antoine.petit@ynov.com",
+      "role": "USER",
+      "wins": 238,
+      "losses": 222,
+      "draws": 42,
+      "elo": 1651.91
+    },
+    {
+      "name": "sarah_rossi",
+      "email": "sarah.rossi@ynov.com",
+      "role": "USER",
+      "wins": 218,
+      "losses": 194,
+      "draws": 46,
+      "elo": 1651.47
+    },
+    {
+      "name": "liam_faure",
+      "email": "liam.faure@ynov.com",
+      "role": "USER",
+      "wins": 244,
+      "losses": 224,
+      "draws": 42,
+      "elo": 1638.2
+    },
+    {
+      "name": "casey_bianchi",
+      "email": "casey.bianchi@ynov.com",
+      "role": "USER",
+      "wins": 144,
+      "losses": 114,
+      "draws": 24,
+      "elo": 1635.83
+    },
+    {
+      "name": "luc_richard",
+      "email": "luc.richard@ynov.com",
+      "role": "USER",
+      "wins": 242,
+      "losses": 224,
+      "draws": 46,
+      "elo": 1633.29
+    },
+    {
+      "name": "alex_lopez",
+      "email": "alex.lopez@ynov.com",
+      "role": "USER",
+      "wins": 140,
+      "losses": 114,
+      "draws": 24,
+      "elo": 1633.09
+    },
+    {
+      "name": "lucas_nakamura",
+      "email": "lucas.nakamura@ynov.com",
+      "role": "USER",
+      "wins": 152,
+      "losses": 126,
+      "draws": 34,
+      "elo": 1632.15
+    },
+    {
+      "name": "sofia_robert",
+      "email": "sofia.robert@ynov.com",
+      "role": "USER",
+      "wins": 130,
+      "losses": 102,
+      "draws": 18,
+      "elo": 1629.96
+    },
+    {
+      "name": "alex_martin",
+      "email": "alex.martin@ynov.com",
+      "role": "USER",
+      "wins": 228,
+      "losses": 210,
+      "draws": 60,
+      "elo": 1627.66
+    },
+    {
+      "name": "mila_petit",
+      "email": "mila.petit@ynov.com",
+      "role": "USER",
+      "wins": 254,
+      "losses": 236,
+      "draws": 28,
+      "elo": 1626.47
+    },
+    {
+      "name": "pierre_petit",
+      "email": "pierre.petit@ynov.com",
+      "role": "USER",
+      "wins": 124,
+      "losses": 92,
+      "draws": 22,
+      "elo": 1624.89
+    },
+    {
+      "name": "julie_leroy",
+      "email": "julie.leroy@ynov.com",
+      "role": "USER",
+      "wins": 342,
+      "losses": 338,
+      "draws": 80,
+      "elo": 1624.1
+    },
+    {
+      "name": "ethan_silva",
+      "email": "ethan.silva@ynov.com",
+      "role": "USER",
+      "wins": 248,
+      "losses": 224,
+      "draws": 48,
+      "elo": 1622.0
+    },
+    {
+      "name": "casey_schmidt",
+      "email": "casey.schmidt@ynov.com",
+      "role": "USER",
+      "wins": 126,
+      "losses": 100,
+      "draws": 16,
+      "elo": 1616.09
+    },
+    {
+      "name": "ethan_robert",
+      "email": "ethan.robert@ynov.com",
+      "role": "USER",
+      "wins": 138,
+      "losses": 106,
+      "draws": 14,
+      "elo": 1613.38
+    },
+    {
+      "name": "mateo_blanc",
+      "email": "mateo.blanc@ynov.com",
+      "role": "USER",
+      "wins": 128,
+      "losses": 100,
+      "draws": 12,
+      "elo": 1609.9
+    },
+    {
+      "name": "sam_thomas",
+      "email": "sam.thomas@ynov.com",
+      "role": "USER",
+      "wins": 142,
+      "losses": 116,
+      "draws": 28,
+      "elo": 1608.76
+    },
+    {
+      "name": "alex_richard",
+      "email": "alex.richard@ynov.com",
+      "role": "USER",
+      "wins": 132,
+      "losses": 104,
+      "draws": 20,
+      "elo": 1608.18
+    },
+    {
+      "name": "diego_faure",
+      "email": "diego.faure@ynov.com",
+      "role": "USER",
+      "wins": 248,
+      "losses": 234,
+      "draws": 50,
+      "elo": 1606.67
+    },
+    {
+      "name": "eric_girard",
+      "email": "eric.girard@ynov.com",
+      "role": "USER",
+      "wins": 128,
+      "losses": 98,
+      "draws": 22,
+      "elo": 1605.8
+    },
+    {
+      "name": "sam_bernard",
+      "email": "sam.bernard@ynov.com",
+      "role": "USER",
+      "wins": 140,
+      "losses": 116,
+      "draws": 16,
+      "elo": 1604.11
+    },
+    {
+      "name": "emma_martin",
+      "email": "emma.martin@ynov.com",
+      "role": "USER",
+      "wins": 110,
+      "losses": 82,
+      "draws": 28,
+      "elo": 1602.7
+    },
+    {
+      "name": "ana_andre",
+      "email": "ana.andre@ynov.com",
+      "role": "USER",
+      "wins": 128,
+      "losses": 98,
+      "draws": 14,
+      "elo": 1601.72
+    },
+    {
+      "name": "mateo_silva",
+      "email": "mateo.silva@ynov.com",
+      "role": "USER",
+      "wins": 350,
+      "losses": 348,
+      "draws": 80,
+      "elo": 1600.41
+    },
+    {
+      "name": "lena_laurent",
+      "email": "lena.laurent@ynov.com",
+      "role": "USER",
+      "wins": 128,
+      "losses": 96,
+      "draws": 26,
+      "elo": 1597.62
+    },
+    {
+      "name": "riley_richard",
+      "email": "riley.richard@ynov.com",
+      "role": "USER",
+      "wins": 118,
+      "losses": 90,
+      "draws": 26,
+      "elo": 1594.96
+    },
+    {
+      "name": "isabella_leroy",
+      "email": "isabella.leroy@ynov.com",
+      "role": "USER",
+      "wins": 246,
+      "losses": 232,
+      "draws": 38,
+      "elo": 1593.62
+    },
+    {
+      "name": "riley_kim",
+      "email": "riley.kim@ynov.com",
+      "role": "USER",
+      "wins": 232,
+      "losses": 218,
+      "draws": 44,
+      "elo": 1586.75
+    },
+    {
+      "name": "julie_durand",
+      "email": "julie.durand@ynov.com",
+      "role": "USER",
+      "wins": 234,
+      "losses": 216,
+      "draws": 46,
+      "elo": 1582.25
+    },
+    {
+      "name": "luc_rossi",
+      "email": "luc.rossi@ynov.com",
+      "role": "USER",
+      "wins": 158,
+      "losses": 132,
+      "draws": 8,
+      "elo": 1581.12
+    },
+    {
+      "name": "maria_martin",
+      "email": "maria.martin@ynov.com",
+      "role": "USER",
+      "wins": 244,
+      "losses": 226,
+      "draws": 40,
+      "elo": 1580.2
+    },
+    {
+      "name": "sofia_richard",
+      "email": "sofia.richard@ynov.com",
+      "role": "USER",
+      "wins": 318,
+      "losses": 318,
+      "draws": 56,
+      "elo": 1576.21
+    },
+    {
+      "name": "lucas_girard",
+      "email": "lucas.girard@ynov.com",
+      "role": "USER",
+      "wins": 140,
+      "losses": 114,
+      "draws": 24,
+      "elo": 1574.4
+    },
+    {
+      "name": "hugo_mercier",
+      "email": "hugo.mercier@ynov.com",
+      "role": "USER",
+      "wins": 222,
+      "losses": 206,
+      "draws": 44,
+      "elo": 1564.37
+    },
+    {
+      "name": "liam_laurent",
+      "email": "liam.laurent@ynov.com",
+      "role": "USER",
+      "wins": 122,
+      "losses": 96,
+      "draws": 20,
+      "elo": 1564.29
+    },
+    {
+      "name": "youssef_kovacs",
+      "email": "youssef.kovacs@ynov.com",
+      "role": "USER",
+      "wins": 254,
+      "losses": 242,
+      "draws": 32,
+      "elo": 1564.21
+    },
+    {
+      "name": "casey_richard",
+      "email": "casey.richard@ynov.com",
+      "role": "USER",
+      "wins": 134,
+      "losses": 106,
+      "draws": 18,
+      "elo": 1561.69
+    },
+    {
+      "name": "jamie_moreau",
+      "email": "jamie.moreau@ynov.com",
+      "role": "USER",
+      "wins": 138,
+      "losses": 114,
+      "draws": 26,
+      "elo": 1557.63
+    },
+    {
+      "name": "sofia_bernard",
+      "email": "sofia.bernard@ynov.com",
+      "role": "USER",
+      "wins": 132,
+      "losses": 106,
+      "draws": 18,
+      "elo": 1556.14
+    },
+    {
+      "name": "lena_mercier",
+      "email": "lena.mercier@ynov.com",
+      "role": "USER",
+      "wins": 122,
+      "losses": 96,
+      "draws": 10,
+      "elo": 1556.03
+    },
+    {
+      "name": "isabella_martin",
+      "email": "isabella.martin@ynov.com",
+      "role": "USER",
+      "wins": 134,
+      "losses": 110,
+      "draws": 22,
+      "elo": 1552.86
+    },
+    {
+      "name": "maya_durand",
+      "email": "maya.durand@ynov.com",
+      "role": "USER",
+      "wins": 126,
+      "losses": 102,
+      "draws": 18,
+      "elo": 1551.72
+    },
+    {
+      "name": "youssef_muller",
+      "email": "youssef.muller@ynov.com",
+      "role": "USER",
+      "wins": 248,
+      "losses": 238,
+      "draws": 30,
+      "elo": 1546.58
+    },
+    {
+      "name": "emma_nakamura",
+      "email": "emma.nakamura@ynov.com",
+      "role": "USER",
+      "wins": 116,
+      "losses": 92,
+      "draws": 16,
+      "elo": 1542.85
+    },
+    {
+      "name": "hugo_bernard",
+      "email": "hugo.bernard@ynov.com",
+      "role": "USER",
+      "wins": 142,
+      "losses": 118,
+      "draws": 18,
+      "elo": 1540.78
+    },
+    {
+      "name": "sofia_blanc",
+      "email": "sofia.blanc@ynov.com",
+      "role": "USER",
+      "wins": 112,
+      "losses": 88,
+      "draws": 34,
+      "elo": 1531.38
+    },
+    {
+      "name": "julie_mercier",
+      "email": "julie.mercier@ynov.com",
+      "role": "USER",
+      "wins": 138,
+      "losses": 112,
+      "draws": 24,
+      "elo": 1530.42
+    },
+    {
+      "name": "pierre_rossi",
+      "email": "pierre.rossi@ynov.com",
+      "role": "USER",
+      "wins": 124,
+      "losses": 102,
+      "draws": 24,
+      "elo": 1526.96
+    },
+    {
+      "name": "ava_andre",
+      "email": "ava.andre@ynov.com",
+      "role": "USER",
+      "wins": 136,
+      "losses": 114,
+      "draws": 28,
+      "elo": 1526.44
+    },
+    {
+      "name": "sarah_schmidt",
+      "email": "sarah.schmidt@ynov.com",
+      "role": "USER",
+      "wins": 112,
+      "losses": 88,
+      "draws": 22,
+      "elo": 1526.06
+    },
+    {
+      "name": "ana_muller",
+      "email": "ana.muller@ynov.com",
+      "role": "USER",
+      "wins": 124,
+      "losses": 100,
+      "draws": 26,
+      "elo": 1514.18
+    },
+    {
+      "name": "emma_clement",
+      "email": "emma.clement@ynov.com",
+      "role": "USER",
+      "wins": 230,
+      "losses": 220,
+      "draws": 62,
+      "elo": 1513.5
+    },
+    {
+      "name": "liam_garnier",
+      "email": "liam.garnier@ynov.com",
+      "role": "USER",
+      "wins": 120,
+      "losses": 100,
+      "draws": 22,
+      "elo": 1512.83
+    },
+    {
+      "name": "sarah_clement",
+      "email": "sarah.clement@ynov.com",
+      "role": "USER",
+      "wins": 126,
+      "losses": 102,
+      "draws": 34,
+      "elo": 1508.38
+    },
+    {
+      "name": "liam_martin",
+      "email": "liam.martin@ynov.com",
+      "role": "USER",
+      "wins": 118,
+      "losses": 94,
+      "draws": 16,
+      "elo": 1506.78
+    },
+    {
+      "name": "paul_schmidt",
+      "email": "paul.schmidt@ynov.com",
+      "role": "USER",
+      "wins": 334,
+      "losses": 332,
+      "draws": 82,
+      "elo": 1505.87
+    },
+    {
+      "name": "casey_kovacs",
+      "email": "casey.kovacs@ynov.com",
+      "role": "USER",
+      "wins": 130,
+      "losses": 108,
+      "draws": 16,
+      "elo": 1503.68
+    },
+    {
+      "name": "eric_mercier",
+      "email": "eric.mercier@ynov.com",
+      "role": "USER",
+      "wins": 238,
+      "losses": 230,
+      "draws": 42,
+      "elo": 1501.78
+    },
+    {
+      "name": "sarah_silva",
+      "email": "sarah.silva@ynov.com",
+      "role": "USER",
+      "wins": 226,
+      "losses": 216,
+      "draws": 46,
+      "elo": 1500.45
+    },
+    {
+      "name": "antoine_mercier",
+      "email": "antoine.mercier@ynov.com",
+      "role": "USER",
+      "wins": 242,
+      "losses": 230,
+      "draws": 54,
+      "elo": 1499.75
+    },
+    {
+      "name": "lena_kovacs",
+      "email": "lena.kovacs@ynov.com",
+      "role": "USER",
+      "wins": 144,
+      "losses": 126,
+      "draws": 12,
+      "elo": 1498.96
+    },
+    {
+      "name": "jamie_morel",
+      "email": "jamie.morel@ynov.com",
+      "role": "USER",
+      "wins": 128,
+      "losses": 108,
+      "draws": 16,
+      "elo": 1495.72
+    },
+    {
+      "name": "leo_laurent",
+      "email": "leo.laurent@ynov.com",
+      "role": "USER",
+      "wins": 226,
+      "losses": 216,
+      "draws": 54,
+      "elo": 1494.95
+    },
+    {
+      "name": "emma_leroy",
+      "email": "emma.leroy@ynov.com",
+      "role": "USER",
+      "wins": 140,
+      "losses": 122,
+      "draws": 24,
+      "elo": 1494.0
+    },
+    {
+      "name": "ana_bianchi",
+      "email": "ana.bianchi@ynov.com",
+      "role": "USER",
+      "wins": 232,
+      "losses": 226,
+      "draws": 42,
+      "elo": 1489.62
+    },
+    {
+      "name": "julie_schmidt",
+      "email": "julie.schmidt@ynov.com",
+      "role": "USER",
+      "wins": 134,
+      "losses": 114,
+      "draws": 32,
+      "elo": 1487.19
+    },
+    {
+      "name": "emma_thomas",
+      "email": "emma.thomas@ynov.com",
+      "role": "USER",
+      "wins": 112,
+      "losses": 90,
+      "draws": 16,
+      "elo": 1486.89
+    },
+    {
+      "name": "leo_philippe",
+      "email": "leo.philippe@ynov.com",
+      "role": "USER",
+      "wins": 146,
+      "losses": 126,
+      "draws": 24,
+      "elo": 1486.15
+    },
+    {
+      "name": "ava_rossi",
+      "email": "ava.rossi@ynov.com",
+      "role": "USER",
+      "wins": 124,
+      "losses": 106,
+      "draws": 24,
+      "elo": 1484.16
+    },
+    {
+      "name": "chloe_robert",
+      "email": "chloe.robert@ynov.com",
+      "role": "USER",
+      "wins": 138,
+      "losses": 118,
+      "draws": 16,
+      "elo": 1484.06
+    },
+    {
+      "name": "liam_kovacs",
+      "email": "liam.kovacs@ynov.com",
+      "role": "USER",
+      "wins": 244,
+      "losses": 236,
+      "draws": 38,
+      "elo": 1481.67
+    },
+    {
+      "name": "taylor_garnier",
+      "email": "taylor.garnier@ynov.com",
+      "role": "USER",
+      "wins": 222,
+      "losses": 214,
+      "draws": 40,
+      "elo": 1476.2
+    },
+    {
+      "name": "youssef_martin",
+      "email": "youssef.martin@ynov.com",
+      "role": "USER",
+      "wins": 346,
+      "losses": 348,
+      "draws": 82,
+      "elo": 1472.75
+    },
+    {
+      "name": "sam_andre",
+      "email": "sam.andre@ynov.com",
+      "role": "USER",
+      "wins": 112,
+      "losses": 90,
+      "draws": 24,
+      "elo": 1472.13
+    },
+    {
+      "name": "alex_bianchi",
+      "email": "alex.bianchi@ynov.com",
+      "role": "USER",
+      "wins": 122,
+      "losses": 106,
+      "draws": 24,
+      "elo": 1469.5
+    },
+    {
+      "name": "sarah_martin",
+      "email": "sarah.martin@ynov.com",
+      "role": "USER",
+      "wins": 140,
+      "losses": 122,
+      "draws": 18,
+      "elo": 1467.7
+    },
+    {
+      "name": "paul_martin",
+      "email": "paul.martin@ynov.com",
+      "role": "USER",
+      "wins": 148,
+      "losses": 132,
+      "draws": 18,
+      "elo": 1466.27
+    },
+    {
+      "name": "mila_garcia",
+      "email": "mila.garcia@ynov.com",
+      "role": "USER",
+      "wins": 214,
+      "losses": 204,
+      "draws": 46,
+      "elo": 1465.51
+    },
+    {
+      "name": "casey_philippe",
+      "email": "casey.philippe@ynov.com",
+      "role": "USER",
+      "wins": 120,
+      "losses": 102,
+      "draws": 12,
+      "elo": 1465.25
+    },
+    {
+      "name": "hugo_rousseau",
+      "email": "hugo.rousseau@ynov.com",
+      "role": "USER",
+      "wins": 116,
+      "losses": 94,
+      "draws": 30,
+      "elo": 1465.03
+    },
+    {
+      "name": "ethan_rossi",
+      "email": "ethan.rossi@ynov.com",
+      "role": "USER",
+      "wins": 236,
+      "losses": 234,
+      "draws": 54,
+      "elo": 1462.81
+    },
+    {
+      "name": "mila_philippe",
+      "email": "mila.philippe@ynov.com",
+      "role": "USER",
+      "wins": 126,
+      "losses": 106,
+      "draws": 28,
+      "elo": 1460.07
+    },
+    {
+      "name": "leo_schmidt",
+      "email": "leo.schmidt@ynov.com",
+      "role": "USER",
+      "wins": 330,
+      "losses": 330,
+      "draws": 46,
+      "elo": 1459.95
+    },
+    {
+      "name": "taylor_moreau",
+      "email": "taylor.moreau@ynov.com",
+      "role": "USER",
+      "wins": 126,
+      "losses": 108,
+      "draws": 14,
+      "elo": 1456.79
+    },
+    {
+      "name": "ava_girard",
+      "email": "ava.girard@ynov.com",
+      "role": "USER",
+      "wins": 320,
+      "losses": 324,
+      "draws": 98,
+      "elo": 1456.68
+    },
+    {
+      "name": "paul_andre",
+      "email": "paul.andre@ynov.com",
+      "role": "USER",
+      "wins": 130,
+      "losses": 114,
+      "draws": 22,
+      "elo": 1455.26
+    },
+    {
+      "name": "sofia_bianchi",
+      "email": "sofia.bianchi@ynov.com",
+      "role": "USER",
+      "wins": 128,
+      "losses": 106,
+      "draws": 12,
+      "elo": 1453.13
+    },
+    {
+      "name": "camille_muller",
+      "email": "camille.muller@ynov.com",
+      "role": "USER",
+      "wins": 122,
+      "losses": 106,
+      "draws": 18,
+      "elo": 1446.79
+    },
+    {
+      "name": "sofia_philippe",
+      "email": "sofia.philippe@ynov.com",
+      "role": "USER",
+      "wins": 120,
+      "losses": 100,
+      "draws": 26,
+      "elo": 1445.47
+    },
+    {
+      "name": "sarah_rousseau",
+      "email": "sarah.rousseau@ynov.com",
+      "role": "USER",
+      "wins": 240,
+      "losses": 234,
+      "draws": 36,
+      "elo": 1439.19
+    },
+    {
+      "name": "ava_morel",
+      "email": "ava.morel@ynov.com",
+      "role": "USER",
+      "wins": 132,
+      "losses": 120,
+      "draws": 16,
+      "elo": 1437.73
+    },
+    {
+      "name": "ana_bernard",
+      "email": "ana.bernard@ynov.com",
+      "role": "USER",
+      "wins": 128,
+      "losses": 112,
+      "draws": 32,
+      "elo": 1434.38
+    },
+    {
+      "name": "diego_morel",
+      "email": "diego.morel@ynov.com",
+      "role": "USER",
+      "wins": 126,
+      "losses": 108,
+      "draws": 20,
+      "elo": 1431.39
+    },
+    {
+      "name": "lucas_robert",
+      "email": "lucas.robert@ynov.com",
+      "role": "USER",
+      "wins": 122,
+      "losses": 102,
+      "draws": 22,
+      "elo": 1431.33
+    },
+    {
+      "name": "lena_garcia",
+      "email": "lena.garcia@ynov.com",
+      "role": "USER",
+      "wins": 102,
+      "losses": 84,
+      "draws": 22,
+      "elo": 1428.99
+    },
+    {
+      "name": "chloe_garnier",
+      "email": "chloe.garnier@ynov.com",
+      "role": "USER",
+      "wins": 116,
+      "losses": 98,
+      "draws": 14,
+      "elo": 1426.78
+    },
+    {
+      "name": "mila_thomas",
+      "email": "mila.thomas@ynov.com",
+      "role": "USER",
+      "wins": 234,
+      "losses": 224,
+      "draws": 44,
+      "elo": 1424.48
+    },
+    {
+      "name": "emma_blanc",
+      "email": "emma.blanc@ynov.com",
+      "role": "USER",
+      "wins": 136,
+      "losses": 126,
+      "draws": 14,
+      "elo": 1422.72
+    },
+    {
+      "name": "jamie_martin",
+      "email": "jamie.martin@ynov.com",
+      "role": "USER",
+      "wins": 122,
+      "losses": 108,
+      "draws": 22,
+      "elo": 1416.82
+    },
+    {
+      "name": "chris_muller",
+      "email": "chris.muller@ynov.com",
+      "role": "USER",
+      "wins": 114,
+      "losses": 96,
+      "draws": 20,
+      "elo": 1416.34
+    },
+    {
+      "name": "olivia_martin",
+      "email": "olivia.martin@ynov.com",
+      "role": "USER",
+      "wins": 106,
+      "losses": 88,
+      "draws": 34,
+      "elo": 1412.56
+    },
+    {
+      "name": "pierre_blanc",
+      "email": "pierre.blanc@ynov.com",
+      "role": "USER",
+      "wins": 132,
+      "losses": 116,
+      "draws": 16,
+      "elo": 1409.32
+    },
+    {
+      "name": "lena_girard",
+      "email": "lena.girard@ynov.com",
+      "role": "USER",
+      "wins": 118,
+      "losses": 104,
+      "draws": 14,
+      "elo": 1409.24
+    },
+    {
+      "name": "olivia_kim",
+      "email": "olivia.kim@ynov.com",
+      "role": "USER",
+      "wins": 120,
+      "losses": 106,
+      "draws": 34,
+      "elo": 1407.35
+    },
+    {
+      "name": "eric_leroy",
+      "email": "eric.leroy@ynov.com",
+      "role": "USER",
+      "wins": 112,
+      "losses": 98,
+      "draws": 28,
+      "elo": 1406.74
+    },
+    {
+      "name": "mohamed_silva",
+      "email": "mohamed.silva@ynov.com",
+      "role": "USER",
+      "wins": 120,
+      "losses": 106,
+      "draws": 30,
+      "elo": 1405.0
+    },
+    {
+      "name": "riley_blanc",
+      "email": "riley.blanc@ynov.com",
+      "role": "USER",
+      "wins": 254,
+      "losses": 252,
+      "draws": 24,
+      "elo": 1403.96
+    },
+    {
+      "name": "antoine_robert",
+      "email": "antoine.robert@ynov.com",
+      "role": "USER",
+      "wins": 116,
+      "losses": 104,
+      "draws": 16,
+      "elo": 1401.17
+    },
+    {
+      "name": "isabella_richard",
+      "email": "isabella.richard@ynov.com",
+      "role": "USER",
+      "wins": 110,
+      "losses": 94,
+      "draws": 30,
+      "elo": 1398.86
+    },
+    {
+      "name": "jordan_girard",
+      "email": "jordan.girard@ynov.com",
+      "role": "USER",
+      "wins": 126,
+      "losses": 112,
+      "draws": 12,
+      "elo": 1397.45
+    },
+    {
+      "name": "taylor_lopez",
+      "email": "taylor.lopez@ynov.com",
+      "role": "USER",
+      "wins": 118,
+      "losses": 104,
+      "draws": 20,
+      "elo": 1396.37
+    },
+    {
+      "name": "sofia_clement",
+      "email": "sofia.clement@ynov.com",
+      "role": "USER",
+      "wins": 126,
+      "losses": 112,
+      "draws": 20,
+      "elo": 1395.93
+    },
+    {
+      "name": "maria_moreau",
+      "email": "maria.moreau@ynov.com",
+      "role": "USER",
+      "wins": 112,
+      "losses": 94,
+      "draws": 16,
+      "elo": 1395.47
+    },
+    {
+      "name": "emma_rousseau",
+      "email": "emma.rousseau@ynov.com",
+      "role": "USER",
+      "wins": 110,
+      "losses": 96,
+      "draws": 28,
+      "elo": 1392.67
+    },
+    {
+      "name": "ana_durand",
+      "email": "ana.durand@ynov.com",
+      "role": "USER",
+      "wins": 126,
+      "losses": 108,
+      "draws": 16,
+      "elo": 1391.87
+    },
+    {
+      "name": "sarah_andre",
+      "email": "sarah.andre@ynov.com",
+      "role": "USER",
+      "wins": 142,
+      "losses": 128,
+      "draws": 20,
+      "elo": 1388.36
+    },
+    {
+      "name": "eric_nakamura",
+      "email": "eric.nakamura@ynov.com",
+      "role": "USER",
+      "wins": 232,
+      "losses": 228,
+      "draws": 48,
+      "elo": 1388.04
+    },
+    {
+      "name": "hugo_rossi",
+      "email": "hugo.rossi@ynov.com",
+      "role": "USER",
+      "wins": 214,
+      "losses": 216,
+      "draws": 46,
+      "elo": 1383.4
+    },
+    {
+      "name": "casey_kim",
+      "email": "casey.kim@ynov.com",
+      "role": "USER",
+      "wins": 124,
+      "losses": 108,
+      "draws": 10,
+      "elo": 1380.75
+    },
+    {
+      "name": "luc_rousseau",
+      "email": "luc.rousseau@ynov.com",
+      "role": "USER",
+      "wins": 120,
+      "losses": 106,
+      "draws": 24,
+      "elo": 1379.65
+    },
+    {
+      "name": "leo_leroy",
+      "email": "leo.leroy@ynov.com",
+      "role": "USER",
+      "wins": 122,
+      "losses": 110,
+      "draws": 16,
+      "elo": 1379.6
+    },
+    {
+      "name": "sofia_silva",
+      "email": "sofia.silva@ynov.com",
+      "role": "USER",
+      "wins": 234,
+      "losses": 234,
+      "draws": 42,
+      "elo": 1377.35
+    },
+    {
+      "name": "noah_lopez",
+      "email": "noah.lopez@ynov.com",
+      "role": "USER",
+      "wins": 256,
+      "losses": 256,
+      "draws": 56,
+      "elo": 1377.08
+    },
+    {
+      "name": "noah_girard",
+      "email": "noah.girard@ynov.com",
+      "role": "USER",
+      "wins": 244,
+      "losses": 238,
+      "draws": 40,
+      "elo": 1376.57
+    },
+    {
+      "name": "leo_garcia",
+      "email": "leo.garcia@ynov.com",
+      "role": "USER",
+      "wins": 112,
+      "losses": 98,
+      "draws": 16,
+      "elo": 1376.07
+    },
+    {
+      "name": "sam_philippe",
+      "email": "sam.philippe@ynov.com",
+      "role": "USER",
+      "wins": 116,
+      "losses": 98,
+      "draws": 20,
+      "elo": 1373.96
+    },
+    {
+      "name": "chloe_richard",
+      "email": "chloe.richard@ynov.com",
+      "role": "USER",
+      "wins": 246,
+      "losses": 246,
+      "draws": 48,
+      "elo": 1372.6
+    },
+    {
+      "name": "ava_silva",
+      "email": "ava.silva@ynov.com",
+      "role": "USER",
+      "wins": 112,
+      "losses": 100,
+      "draws": 32,
+      "elo": 1372.03
+    },
+    {
+      "name": "mateo_thomas",
+      "email": "mateo.thomas@ynov.com",
+      "role": "USER",
+      "wins": 384,
+      "losses": 392,
+      "draws": 46,
+      "elo": 1371.29
+    },
+    {
+      "name": "lena_rousseau",
+      "email": "lena.rousseau@ynov.com",
+      "role": "USER",
+      "wins": 116,
+      "losses": 102,
+      "draws": 20,
+      "elo": 1370.73
+    },
+    {
+      "name": "pierre_kovacs",
+      "email": "pierre.kovacs@ynov.com",
+      "role": "USER",
+      "wins": 248,
+      "losses": 250,
+      "draws": 34,
+      "elo": 1369.77
+    },
+    {
+      "name": "antoine_faure",
+      "email": "antoine.faure@ynov.com",
+      "role": "USER",
+      "wins": 102,
+      "losses": 88,
+      "draws": 16,
+      "elo": 1364.65
+    },
+    {
+      "name": "jordan_mercier",
+      "email": "jordan.mercier@ynov.com",
+      "role": "USER",
+      "wins": 122,
+      "losses": 106,
+      "draws": 26,
+      "elo": 1359.04
+    },
+    {
+      "name": "julie_girard",
+      "email": "julie.girard@ynov.com",
+      "role": "USER",
+      "wins": 110,
+      "losses": 92,
+      "draws": 16,
+      "elo": 1358.48
+    },
+    {
+      "name": "sam_bianchi",
+      "email": "sam.bianchi@ynov.com",
+      "role": "USER",
+      "wins": 210,
+      "losses": 208,
+      "draws": 40,
+      "elo": 1357.19
+    },
+    {
+      "name": "morgan_mercier",
+      "email": "morgan.mercier@ynov.com",
+      "role": "USER",
+      "wins": 130,
+      "losses": 120,
+      "draws": 26,
+      "elo": 1356.14
+    },
+    {
+      "name": "emma_bianchi",
+      "email": "emma.bianchi@ynov.com",
+      "role": "USER",
+      "wins": 242,
+      "losses": 242,
+      "draws": 66,
+      "elo": 1355.94
+    },
+    {
+      "name": "diego_kovacs",
+      "email": "diego.kovacs@ynov.com",
+      "role": "USER",
+      "wins": 114,
+      "losses": 104,
+      "draws": 20,
+      "elo": 1350.35
+    },
+    {
+      "name": "sarah_richard",
+      "email": "sarah.richard@ynov.com",
+      "role": "USER",
+      "wins": 128,
+      "losses": 114,
+      "draws": 26,
+      "elo": 1349.06
+    },
+    {
+      "name": "chloe_girard",
+      "email": "chloe.girard@ynov.com",
+      "role": "USER",
+      "wins": 144,
+      "losses": 132,
+      "draws": 22,
+      "elo": 1347.05
+    },
+    {
+      "name": "olivia_bernard",
+      "email": "olivia.bernard@ynov.com",
+      "role": "USER",
+      "wins": 104,
+      "losses": 92,
+      "draws": 18,
+      "elo": 1346.11
+    },
+    {
+      "name": "sam_kovacs",
+      "email": "sam.kovacs@ynov.com",
+      "role": "USER",
+      "wins": 218,
+      "losses": 216,
+      "draws": 30,
+      "elo": 1346.1
+    },
+    {
+      "name": "sam_rousseau",
+      "email": "sam.rousseau@ynov.com",
+      "role": "USER",
+      "wins": 108,
+      "losses": 92,
+      "draws": 22,
+      "elo": 1345.76
+    },
+    {
+      "name": "mateo_andre",
+      "email": "mateo.andre@ynov.com",
+      "role": "USER",
+      "wins": 106,
+      "losses": 94,
+      "draws": 22,
+      "elo": 1344.89
+    },
+    {
+      "name": "sarah_thomas",
+      "email": "sarah.thomas@ynov.com",
+      "role": "USER",
+      "wins": 362,
+      "losses": 380,
+      "draws": 66,
+      "elo": 1344.19
+    },
+    {
+      "name": "isabella_bianchi",
+      "email": "isabella.bianchi@ynov.com",
+      "role": "USER",
+      "wins": 214,
+      "losses": 214,
+      "draws": 46,
+      "elo": 1339.81
+    },
+    {
+      "name": "maria_nakamura",
+      "email": "maria.nakamura@ynov.com",
+      "role": "USER",
+      "wins": 114,
+      "losses": 104,
+      "draws": 26,
+      "elo": 1337.34
+    },
+    {
+      "name": "diego_laurent",
+      "email": "diego.laurent@ynov.com",
+      "role": "USER",
+      "wins": 122,
+      "losses": 114,
+      "draws": 16,
+      "elo": 1337.02
+    },
+    {
+      "name": "leo_silva",
+      "email": "leo.silva@ynov.com",
+      "role": "USER",
+      "wins": 220,
+      "losses": 222,
+      "draws": 38,
+      "elo": 1337.02
+    },
+    {
+      "name": "youssef_lopez",
+      "email": "youssef.lopez@ynov.com",
+      "role": "USER",
+      "wins": 118,
+      "losses": 108,
+      "draws": 28,
+      "elo": 1336.19
+    },
+    {
+      "name": "carlos_garcia",
+      "email": "carlos.garcia@ynov.com",
+      "role": "USER",
+      "wins": 120,
+      "losses": 114,
+      "draws": 22,
+      "elo": 1334.22
+    },
+    {
+      "name": "mateo_leroy",
+      "email": "mateo.leroy@ynov.com",
+      "role": "USER",
+      "wins": 146,
+      "losses": 136,
+      "draws": 22,
+      "elo": 1328.32
+    },
+    {
+      "name": "liam_moreau",
+      "email": "liam.moreau@ynov.com",
+      "role": "USER",
+      "wins": 138,
+      "losses": 130,
+      "draws": 14,
+      "elo": 1327.39
+    },
+    {
+      "name": "casey_nakamura",
+      "email": "casey.nakamura@ynov.com",
+      "role": "USER",
+      "wins": 240,
+      "losses": 244,
+      "draws": 56,
+      "elo": 1327.34
+    },
+    {
+      "name": "chris_leroy",
+      "email": "chris.leroy@ynov.com",
+      "role": "USER",
+      "wins": 126,
+      "losses": 116,
+      "draws": 16,
+      "elo": 1322.9
+    },
+    {
+      "name": "maya_nakamura",
+      "email": "maya.nakamura@ynov.com",
+      "role": "USER",
+      "wins": 94,
+      "losses": 82,
+      "draws": 14,
+      "elo": 1321.24
+    },
+    {
+      "name": "ana_faure",
+      "email": "ana.faure@ynov.com",
+      "role": "USER",
+      "wins": 242,
+      "losses": 244,
+      "draws": 30,
+      "elo": 1320.0
+    },
+    {
+      "name": "lena_nakamura",
+      "email": "lena.nakamura@ynov.com",
+      "role": "USER",
+      "wins": 114,
+      "losses": 102,
+      "draws": 36,
+      "elo": 1318.78
+    },
+    {
+      "name": "sofia_rossi",
+      "email": "sofia.rossi@ynov.com",
+      "role": "USER",
+      "wins": 122,
+      "losses": 112,
+      "draws": 34,
+      "elo": 1318.61
+    },
+    {
+      "name": "riley_nakamura",
+      "email": "riley.nakamura@ynov.com",
+      "role": "USER",
+      "wins": 118,
+      "losses": 110,
+      "draws": 22,
+      "elo": 1316.52
+    },
+    {
+      "name": "paul_richard",
+      "email": "paul.richard@ynov.com",
+      "role": "USER",
+      "wins": 122,
+      "losses": 112,
+      "draws": 22,
+      "elo": 1315.3
+    },
+    {
+      "name": "paul_kovacs",
+      "email": "paul.kovacs@ynov.com",
+      "role": "USER",
+      "wins": 228,
+      "losses": 228,
+      "draws": 54,
+      "elo": 1312.44
+    },
+    {
+      "name": "emma_laurent",
+      "email": "emma.laurent@ynov.com",
+      "role": "USER",
+      "wins": 104,
+      "losses": 94,
+      "draws": 22,
+      "elo": 1310.29
+    },
+    {
+      "name": "ethan_bernard",
+      "email": "ethan.bernard@ynov.com",
+      "role": "USER",
+      "wins": 132,
+      "losses": 122,
+      "draws": 28,
+      "elo": 1309.85
+    },
+    {
+      "name": "lena_richard",
+      "email": "lena.richard@ynov.com",
+      "role": "USER",
+      "wins": 138,
+      "losses": 130,
+      "draws": 28,
+      "elo": 1309.29
+    },
+    {
+      "name": "lucas_laurent",
+      "email": "lucas.laurent@ynov.com",
+      "role": "USER",
+      "wins": 114,
+      "losses": 104,
+      "draws": 16,
+      "elo": 1305.61
+    },
+    {
+      "name": "paul_robert",
+      "email": "paul.robert@ynov.com",
+      "role": "USER",
+      "wins": 120,
+      "losses": 114,
+      "draws": 24,
+      "elo": 1301.52
+    },
+    {
+      "name": "mohamed_richard",
+      "email": "mohamed.richard@ynov.com",
+      "role": "USER",
+      "wins": 232,
+      "losses": 234,
+      "draws": 36,
+      "elo": 1298.11
+    },
+    {
+      "name": "julie_garcia",
+      "email": "julie.garcia@ynov.com",
+      "role": "USER",
+      "wins": 128,
+      "losses": 122,
+      "draws": 16,
+      "elo": 1296.09
+    },
+    {
+      "name": "noah_durand",
+      "email": "noah.durand@ynov.com",
+      "role": "USER",
+      "wins": 114,
+      "losses": 106,
+      "draws": 10,
+      "elo": 1295.08
+    },
+    {
+      "name": "ava_thomas",
+      "email": "ava.thomas@ynov.com",
+      "role": "USER",
+      "wins": 128,
+      "losses": 122,
+      "draws": 20,
+      "elo": 1294.11
+    },
+    {
+      "name": "maria_blanc",
+      "email": "maria.blanc@ynov.com",
+      "role": "USER",
+      "wins": 312,
+      "losses": 322,
+      "draws": 66,
+      "elo": 1292.89
+    },
+    {
+      "name": "liam_andre",
+      "email": "liam.andre@ynov.com",
+      "role": "USER",
+      "wins": 234,
+      "losses": 240,
+      "draws": 40,
+      "elo": 1292.14
+    },
+    {
+      "name": "chris_robert",
+      "email": "chris.robert@ynov.com",
+      "role": "USER",
+      "wins": 128,
+      "losses": 116,
+      "draws": 16,
+      "elo": 1290.78
+    },
+    {
+      "name": "morgan_kovacs",
+      "email": "morgan.kovacs@ynov.com",
+      "role": "USER",
+      "wins": 310,
+      "losses": 320,
+      "draws": 88,
+      "elo": 1288.29
+    },
+    {
+      "name": "emma_kim",
+      "email": "emma.kim@ynov.com",
+      "role": "USER",
+      "wins": 118,
+      "losses": 110,
+      "draws": 18,
+      "elo": 1286.63
+    },
+    {
+      "name": "julien_philippe",
+      "email": "julien.philippe@ynov.com",
+      "role": "USER",
+      "wins": 116,
+      "losses": 106,
+      "draws": 20,
+      "elo": 1286.56
+    },
+    {
+      "name": "chloe_muller",
+      "email": "chloe.muller@ynov.com",
+      "role": "USER",
+      "wins": 312,
+      "losses": 328,
+      "draws": 54,
+      "elo": 1286.19
+    },
+    {
+      "name": "julie_philippe",
+      "email": "julie.philippe@ynov.com",
+      "role": "USER",
+      "wins": 114,
+      "losses": 104,
+      "draws": 20,
+      "elo": 1283.1
+    },
+    {
+      "name": "julie_bernard",
+      "email": "julie.bernard@ynov.com",
+      "role": "USER",
+      "wins": 130,
+      "losses": 122,
+      "draws": 22,
+      "elo": 1282.45
+    },
+    {
+      "name": "julie_robert",
+      "email": "julie.robert@ynov.com",
+      "role": "USER",
+      "wins": 104,
+      "losses": 96,
+      "draws": 24,
+      "elo": 1282.01
+    },
+    {
+      "name": "paul_petit",
+      "email": "paul.petit@ynov.com",
+      "role": "USER",
+      "wins": 134,
+      "losses": 132,
+      "draws": 6,
+      "elo": 1281.53
+    },
+    {
+      "name": "ava_blanc",
+      "email": "ava.blanc@ynov.com",
+      "role": "USER",
+      "wins": 226,
+      "losses": 232,
+      "draws": 44,
+      "elo": 1279.78
+    },
+    {
+      "name": "pierre_richard",
+      "email": "pierre.richard@ynov.com",
+      "role": "USER",
+      "wins": 122,
+      "losses": 118,
+      "draws": 30,
+      "elo": 1279.3
+    },
+    {
+      "name": "chris_andre",
+      "email": "chris.andre@ynov.com",
+      "role": "USER",
+      "wins": 114,
+      "losses": 106,
+      "draws": 22,
+      "elo": 1278.93
+    },
+    {
+      "name": "carlos_mercier",
+      "email": "carlos.mercier@ynov.com",
+      "role": "USER",
+      "wins": 132,
+      "losses": 126,
+      "draws": 26,
+      "elo": 1278.41
+    },
+    {
+      "name": "jamie_girard",
+      "email": "jamie.girard@ynov.com",
+      "role": "USER",
+      "wins": 118,
+      "losses": 108,
+      "draws": 28,
+      "elo": 1276.49
+    },
+    {
+      "name": "jordan_kim",
+      "email": "jordan.kim@ynov.com",
+      "role": "USER",
+      "wins": 110,
+      "losses": 102,
+      "draws": 14,
+      "elo": 1270.33
+    },
+    {
+      "name": "chloe_silva",
+      "email": "chloe.silva@ynov.com",
+      "role": "USER",
+      "wins": 106,
+      "losses": 100,
+      "draws": 24,
+      "elo": 1269.98
+    },
+    {
+      "name": "maya_rossi",
+      "email": "maya.rossi@ynov.com",
+      "role": "USER",
+      "wins": 110,
+      "losses": 102,
+      "draws": 20,
+      "elo": 1267.45
+    },
+    {
+      "name": "maria_philippe",
+      "email": "maria.philippe@ynov.com",
+      "role": "USER",
+      "wins": 116,
+      "losses": 110,
+      "draws": 22,
+      "elo": 1267.29
+    },
+    {
+      "name": "youssef_garnier",
+      "email": "youssef.garnier@ynov.com",
+      "role": "USER",
+      "wins": 126,
+      "losses": 120,
+      "draws": 18,
+      "elo": 1267.21
+    },
+    {
+      "name": "hugo_laurent",
+      "email": "hugo.laurent@ynov.com",
+      "role": "USER",
+      "wins": 116,
+      "losses": 114,
+      "draws": 26,
+      "elo": 1265.83
+    },
+    {
+      "name": "diego_garnier",
+      "email": "diego.garnier@ynov.com",
+      "role": "USER",
+      "wins": 126,
+      "losses": 118,
+      "draws": 18,
+      "elo": 1264.88
+    },
+    {
+      "name": "ava_schmidt",
+      "email": "ava.schmidt@ynov.com",
+      "role": "USER",
+      "wins": 318,
+      "losses": 332,
+      "draws": 72,
+      "elo": 1263.68
+    },
+    {
+      "name": "noah_garcia",
+      "email": "noah.garcia@ynov.com",
+      "role": "USER",
+      "wins": 116,
+      "losses": 108,
+      "draws": 22,
+      "elo": 1259.72
+    },
+    {
+      "name": "leo_rossi",
+      "email": "leo.rossi@ynov.com",
+      "role": "USER",
+      "wins": 118,
+      "losses": 114,
+      "draws": 18,
+      "elo": 1258.86
+    },
+    {
+      "name": "morgan_garcia",
+      "email": "morgan.garcia@ynov.com",
+      "role": "USER",
+      "wins": 114,
+      "losses": 108,
+      "draws": 40,
+      "elo": 1258.29
+    },
+    {
+      "name": "maya_kovacs",
+      "email": "maya.kovacs@ynov.com",
+      "role": "USER",
+      "wins": 206,
+      "losses": 210,
+      "draws": 34,
+      "elo": 1256.07
+    },
+    {
+      "name": "sarah_blanc",
+      "email": "sarah.blanc@ynov.com",
+      "role": "USER",
+      "wins": 128,
+      "losses": 126,
+      "draws": 30,
+      "elo": 1255.92
+    },
+    {
+      "name": "pierre_morel",
+      "email": "pierre.morel@ynov.com",
+      "role": "USER",
+      "wins": 110,
+      "losses": 106,
+      "draws": 24,
+      "elo": 1255.78
+    },
+    {
+      "name": "mohamed_clement",
+      "email": "mohamed.clement@ynov.com",
+      "role": "USER",
+      "wins": 218,
+      "losses": 224,
+      "draws": 56,
+      "elo": 1255.36
+    },
+    {
+      "name": "jordan_martin",
+      "email": "jordan.martin@ynov.com",
+      "role": "USER",
+      "wins": 118,
+      "losses": 112,
+      "draws": 26,
+      "elo": 1253.67
+    },
+    {
+      "name": "mohamed_rousseau",
+      "email": "mohamed.rousseau@ynov.com",
+      "role": "USER",
+      "wins": 118,
+      "losses": 112,
+      "draws": 16,
+      "elo": 1252.36
+    },
+    {
+      "name": "sarah_morel",
+      "email": "sarah.morel@ynov.com",
+      "role": "USER",
+      "wins": 122,
+      "losses": 114,
+      "draws": 22,
+      "elo": 1250.81
+    },
+    {
+      "name": "camille_silva",
+      "email": "camille.silva@ynov.com",
+      "role": "USER",
+      "wins": 214,
+      "losses": 222,
+      "draws": 40,
+      "elo": 1250.34
+    },
+    {
+      "name": "camille_mercier",
+      "email": "camille.mercier@ynov.com",
+      "role": "USER",
+      "wins": 120,
+      "losses": 116,
+      "draws": 22,
+      "elo": 1247.21
+    },
+    {
+      "name": "ethan_bianchi",
+      "email": "ethan.bianchi@ynov.com",
+      "role": "USER",
+      "wins": 104,
+      "losses": 100,
+      "draws": 24,
+      "elo": 1246.03
+    },
+    {
+      "name": "isabella_philippe",
+      "email": "isabella.philippe@ynov.com",
+      "role": "USER",
+      "wins": 108,
+      "losses": 102,
+      "draws": 18,
+      "elo": 1244.02
+    },
+    {
+      "name": "jamie_andre",
+      "email": "jamie.andre@ynov.com",
+      "role": "USER",
+      "wins": 114,
+      "losses": 106,
+      "draws": 28,
+      "elo": 1242.19
+    },
+    {
+      "name": "pierre_moreau",
+      "email": "pierre.moreau@ynov.com",
+      "role": "USER",
+      "wins": 122,
+      "losses": 120,
+      "draws": 22,
+      "elo": 1241.9
+    },
+    {
+      "name": "taylor_thomas",
+      "email": "taylor.thomas@ynov.com",
+      "role": "USER",
+      "wins": 212,
+      "losses": 214,
+      "draws": 32,
+      "elo": 1241.51
+    },
+    {
+      "name": "julie_muller",
+      "email": "julie.muller@ynov.com",
+      "role": "USER",
+      "wins": 126,
+      "losses": 122,
+      "draws": 10,
+      "elo": 1241.48
+    },
+    {
+      "name": "liam_girard",
+      "email": "liam.girard@ynov.com",
+      "role": "USER",
+      "wins": 100,
+      "losses": 90,
+      "draws": 32,
+      "elo": 1238.98
+    },
+    {
+      "name": "camille_blanc",
+      "email": "camille.blanc@ynov.com",
+      "role": "USER",
+      "wins": 118,
+      "losses": 112,
+      "draws": 18,
+      "elo": 1238.83
+    },
+    {
+      "name": "jamie_kim",
+      "email": "jamie.kim@ynov.com",
+      "role": "USER",
+      "wins": 108,
+      "losses": 102,
+      "draws": 22,
+      "elo": 1237.84
+    },
+    {
+      "name": "mateo_robert",
+      "email": "mateo.robert@ynov.com",
+      "role": "USER",
+      "wins": 114,
+      "losses": 112,
+      "draws": 16,
+      "elo": 1237.06
+    },
+    {
+      "name": "sarah_leroy",
+      "email": "sarah.leroy@ynov.com",
+      "role": "USER",
+      "wins": 142,
+      "losses": 140,
+      "draws": 18,
+      "elo": 1237.0
+    },
+    {
+      "name": "taylor_muller",
+      "email": "taylor.muller@ynov.com",
+      "role": "USER",
+      "wins": 118,
+      "losses": 112,
+      "draws": 12,
+      "elo": 1236.54
+    },
+    {
+      "name": "liam_rousseau",
+      "email": "liam.rousseau@ynov.com",
+      "role": "USER",
+      "wins": 114,
+      "losses": 110,
+      "draws": 24,
+      "elo": 1232.14
+    },
+    {
+      "name": "julien_morel",
+      "email": "julien.morel@ynov.com",
+      "role": "USER",
+      "wins": 114,
+      "losses": 108,
+      "draws": 14,
+      "elo": 1231.62
+    },
+    {
+      "name": "mila_bianchi",
+      "email": "mila.bianchi@ynov.com",
+      "role": "USER",
+      "wins": 228,
+      "losses": 234,
+      "draws": 36,
+      "elo": 1230.92
+    },
+    {
+      "name": "julie_faure",
+      "email": "julie.faure@ynov.com",
+      "role": "USER",
+      "wins": 114,
+      "losses": 108,
+      "draws": 26,
+      "elo": 1230.68
+    },
+    {
+      "name": "sarah_philippe",
+      "email": "sarah.philippe@ynov.com",
+      "role": "USER",
+      "wins": 118,
+      "losses": 114,
+      "draws": 30,
+      "elo": 1226.43
+    },
+    {
+      "name": "lena_clement",
+      "email": "lena.clement@ynov.com",
+      "role": "USER",
+      "wins": 116,
+      "losses": 112,
+      "draws": 26,
+      "elo": 1224.7
+    },
+    {
+      "name": "sam_schmidt",
+      "email": "sam.schmidt@ynov.com",
+      "role": "USER",
+      "wins": 116,
+      "losses": 116,
+      "draws": 14,
+      "elo": 1223.07
+    },
+    {
+      "name": "jordan_moreau",
+      "email": "jordan.moreau@ynov.com",
+      "role": "USER",
+      "wins": 230,
+      "losses": 236,
+      "draws": 48,
+      "elo": 1222.49
+    },
+    {
+      "name": "mohamed_lopez",
+      "email": "mohamed.lopez@ynov.com",
+      "role": "USER",
+      "wins": 120,
+      "losses": 118,
+      "draws": 14,
+      "elo": 1221.2
+    },
+    {
+      "name": "antoine_martin",
+      "email": "antoine.martin@ynov.com",
+      "role": "USER",
+      "wins": 112,
+      "losses": 108,
+      "draws": 22,
+      "elo": 1219.48
+    },
+    {
+      "name": "julie_petit",
+      "email": "julie.petit@ynov.com",
+      "role": "USER",
+      "wins": 124,
+      "losses": 120,
+      "draws": 26,
+      "elo": 1218.36
+    },
+    {
+      "name": "carlos_andre",
+      "email": "carlos.andre@ynov.com",
+      "role": "USER",
+      "wins": 224,
+      "losses": 230,
+      "draws": 40,
+      "elo": 1213.95
+    },
+    {
+      "name": "julien_garcia",
+      "email": "julien.garcia@ynov.com",
+      "role": "USER",
+      "wins": 122,
+      "losses": 118,
+      "draws": 36,
+      "elo": 1213.8
+    },
+    {
+      "name": "emma_kovacs",
+      "email": "emma.kovacs@ynov.com",
+      "role": "USER",
+      "wins": 104,
+      "losses": 100,
+      "draws": 22,
+      "elo": 1212.28
+    },
+    {
+      "name": "julien_muller",
+      "email": "julien.muller@ynov.com",
+      "role": "USER",
+      "wins": 106,
+      "losses": 104,
+      "draws": 14,
+      "elo": 1206.96
+    },
+    {
+      "name": "antoine_nakamura",
+      "email": "antoine.nakamura@ynov.com",
+      "role": "USER",
+      "wins": 206,
+      "losses": 210,
+      "draws": 40,
+      "elo": 1204.81
+    },
+    {
+      "name": "isabella_laurent",
+      "email": "isabella.laurent@ynov.com",
+      "role": "USER",
+      "wins": 214,
+      "losses": 216,
+      "draws": 34,
+      "elo": 1202.53
+    },
+    {
+      "name": "youssef_faure",
+      "email": "youssef.faure@ynov.com",
+      "role": "USER",
+      "wins": 204,
+      "losses": 212,
+      "draws": 56,
+      "elo": 1201.45
+    },
+    {
+      "name": "taylor_durand",
+      "email": "taylor.durand@ynov.com",
+      "role": "USER",
+      "wins": 100,
+      "losses": 96,
+      "draws": 20,
+      "elo": 1201.29
+    },
+    {
+      "name": "ana_clement",
+      "email": "ana.clement@ynov.com",
+      "role": "USER",
+      "wins": 108,
+      "losses": 106,
+      "draws": 16,
+      "elo": 1201.14
+    },
+    {
+      "name": "mohamed_kovacs",
+      "email": "mohamed.kovacs@ynov.com",
+      "role": "USER",
+      "wins": 112,
+      "losses": 108,
+      "draws": 24,
+      "elo": 1195.48
+    },
+    {
+      "name": "riley_clement",
+      "email": "riley.clement@ynov.com",
+      "role": "USER",
+      "wins": 100,
+      "losses": 98,
+      "draws": 26,
+      "elo": 1195.07
+    },
+    {
+      "name": "chris_moreau",
+      "email": "chris.moreau@ynov.com",
+      "role": "USER",
+      "wins": 108,
+      "losses": 108,
+      "draws": 14,
+      "elo": 1194.05
+    },
+    {
+      "name": "luc_andre",
+      "email": "luc.andre@ynov.com",
+      "role": "USER",
+      "wins": 116,
+      "losses": 114,
+      "draws": 10,
+      "elo": 1192.62
+    },
+    {
+      "name": "jamie_lopez",
+      "email": "jamie.lopez@ynov.com",
+      "role": "USER",
+      "wins": 340,
+      "losses": 362,
+      "draws": 58,
+      "elo": 1190.37
+    },
+    {
+      "name": "alex_bernard",
+      "email": "alex.bernard@ynov.com",
+      "role": "USER",
+      "wins": 226,
+      "losses": 236,
+      "draws": 26,
+      "elo": 1189.15
+    },
+    {
+      "name": "noah_faure",
+      "email": "noah.faure@ynov.com",
+      "role": "USER",
+      "wins": 212,
+      "losses": 220,
+      "draws": 38,
+      "elo": 1185.38
+    },
+    {
+      "name": "lena_kim",
+      "email": "lena.kim@ynov.com",
+      "role": "USER",
+      "wins": 332,
+      "losses": 344,
+      "draws": 60,
+      "elo": 1184.31
+    },
+    {
+      "name": "mila_mercier",
+      "email": "mila.mercier@ynov.com",
+      "role": "USER",
+      "wins": 114,
+      "losses": 116,
+      "draws": 22,
+      "elo": 1184.27
+    },
+    {
+      "name": "liam_bernard",
+      "email": "liam.bernard@ynov.com",
+      "role": "USER",
+      "wins": 114,
+      "losses": 116,
+      "draws": 22,
+      "elo": 1179.25
+    },
+    {
+      "name": "julie_silva",
+      "email": "julie.silva@ynov.com",
+      "role": "USER",
+      "wins": 124,
+      "losses": 126,
+      "draws": 26,
+      "elo": 1177.34
+    },
+    {
+      "name": "morgan_rousseau",
+      "email": "morgan.rousseau@ynov.com",
+      "role": "USER",
+      "wins": 206,
+      "losses": 212,
+      "draws": 54,
+      "elo": 1176.58
+    },
+    {
+      "name": "leo_moreau",
+      "email": "leo.moreau@ynov.com",
+      "role": "USER",
+      "wins": 212,
+      "losses": 224,
+      "draws": 48,
+      "elo": 1175.93
+    },
+    {
+      "name": "chloe_nakamura",
+      "email": "chloe.nakamura@ynov.com",
+      "role": "USER",
+      "wins": 112,
+      "losses": 110,
+      "draws": 20,
+      "elo": 1172.88
+    },
+    {
+      "name": "hugo_garcia",
+      "email": "hugo.garcia@ynov.com",
+      "role": "USER",
+      "wins": 242,
+      "losses": 256,
+      "draws": 56,
+      "elo": 1172.57
+    },
+    {
+      "name": "eric_laurent",
+      "email": "eric.laurent@ynov.com",
+      "role": "USER",
+      "wins": 242,
+      "losses": 258,
+      "draws": 34,
+      "elo": 1170.67
+    },
+    {
+      "name": "antoine_rousseau",
+      "email": "antoine.rousseau@ynov.com",
+      "role": "USER",
+      "wins": 104,
+      "losses": 102,
+      "draws": 22,
+      "elo": 1169.71
+    },
+    {
+      "name": "diego_clement",
+      "email": "diego.clement@ynov.com",
+      "role": "USER",
+      "wins": 122,
+      "losses": 124,
+      "draws": 22,
+      "elo": 1168.78
+    },
+    {
+      "name": "riley_martin",
+      "email": "riley.martin@ynov.com",
+      "role": "USER",
+      "wins": 226,
+      "losses": 236,
+      "draws": 40,
+      "elo": 1167.36
+    },
+    {
+      "name": "alex_thomas",
+      "email": "alex.thomas@ynov.com",
+      "role": "USER",
+      "wins": 136,
+      "losses": 136,
+      "draws": 12,
+      "elo": 1166.15
+    },
+    {
+      "name": "ethan_clement",
+      "email": "ethan.clement@ynov.com",
+      "role": "USER",
+      "wins": 234,
+      "losses": 244,
+      "draws": 54,
+      "elo": 1164.24
+    },
+    {
+      "name": "maria_schmidt",
+      "email": "maria.schmidt@ynov.com",
+      "role": "USER",
+      "wins": 88,
+      "losses": 88,
+      "draws": 28,
+      "elo": 1157.33
+    },
+    {
+      "name": "taylor_clement",
+      "email": "taylor.clement@ynov.com",
+      "role": "USER",
+      "wins": 120,
+      "losses": 120,
+      "draws": 26,
+      "elo": 1157.03
+    },
+    {
+      "name": "isabella_clement",
+      "email": "isabella.clement@ynov.com",
+      "role": "USER",
+      "wins": 106,
+      "losses": 106,
+      "draws": 20,
+      "elo": 1156.42
+    },
+    {
+      "name": "ana_martin",
+      "email": "ana.martin@ynov.com",
+      "role": "USER",
+      "wins": 200,
+      "losses": 214,
+      "draws": 68,
+      "elo": 1154.7
+    },
+    {
+      "name": "alex_garcia",
+      "email": "alex.garcia@ynov.com",
+      "role": "USER",
+      "wins": 122,
+      "losses": 124,
+      "draws": 14,
+      "elo": 1152.9
+    },
+    {
+      "name": "camille_clement",
+      "email": "camille.clement@ynov.com",
+      "role": "USER",
+      "wins": 98,
+      "losses": 92,
+      "draws": 32,
+      "elo": 1146.61
+    },
+    {
+      "name": "mateo_garnier",
+      "email": "mateo.garnier@ynov.com",
+      "role": "USER",
+      "wins": 114,
+      "losses": 118,
+      "draws": 40,
+      "elo": 1144.29
+    },
+    {
+      "name": "antoine_clement",
+      "email": "antoine.clement@ynov.com",
+      "role": "USER",
+      "wins": 102,
+      "losses": 104,
+      "draws": 26,
+      "elo": 1143.87
+    },
+    {
+      "name": "hugo_muller",
+      "email": "hugo.muller@ynov.com",
+      "role": "USER",
+      "wins": 230,
+      "losses": 244,
+      "draws": 56,
+      "elo": 1140.99
+    },
+    {
+      "name": "hugo_kim",
+      "email": "hugo.kim@ynov.com",
+      "role": "USER",
+      "wins": 120,
+      "losses": 128,
+      "draws": 28,
+      "elo": 1139.4
+    },
+    {
+      "name": "antoine_garcia",
+      "email": "antoine.garcia@ynov.com",
+      "role": "USER",
+      "wins": 246,
+      "losses": 262,
+      "draws": 62,
+      "elo": 1136.0
+    },
+    {
+      "name": "isabella_faure",
+      "email": "isabella.faure@ynov.com",
+      "role": "USER",
+      "wins": 98,
+      "losses": 100,
+      "draws": 12,
+      "elo": 1133.78
+    },
+    {
+      "name": "chris_morel",
+      "email": "chris.morel@ynov.com",
+      "role": "USER",
+      "wins": 96,
+      "losses": 98,
+      "draws": 22,
+      "elo": 1133.24
+    },
+    {
+      "name": "hugo_faure",
+      "email": "hugo.faure@ynov.com",
+      "role": "USER",
+      "wins": 106,
+      "losses": 106,
+      "draws": 20,
+      "elo": 1130.5
+    },
+    {
+      "name": "mateo_rousseau",
+      "email": "mateo.rousseau@ynov.com",
+      "role": "USER",
+      "wins": 134,
+      "losses": 136,
+      "draws": 26,
+      "elo": 1129.39
+    },
+    {
+      "name": "morgan_richard",
+      "email": "morgan.richard@ynov.com",
+      "role": "USER",
+      "wins": 226,
+      "losses": 244,
+      "draws": 58,
+      "elo": 1128.18
+    },
+    {
+      "name": "maria_petit",
+      "email": "maria.petit@ynov.com",
+      "role": "USER",
+      "wins": 112,
+      "losses": 116,
+      "draws": 10,
+      "elo": 1128.16
+    },
+    {
+      "name": "ethan_garnier",
+      "email": "ethan.garnier@ynov.com",
+      "role": "USER",
+      "wins": 114,
+      "losses": 118,
+      "draws": 8,
+      "elo": 1127.84
+    },
+    {
+      "name": "sofia_petit",
+      "email": "sofia.petit@ynov.com",
+      "role": "USER",
+      "wins": 118,
+      "losses": 124,
+      "draws": 16,
+      "elo": 1127.19
+    },
+    {
+      "name": "jordan_petit",
+      "email": "jordan.petit@ynov.com",
+      "role": "USER",
+      "wins": 208,
+      "losses": 222,
+      "draws": 52,
+      "elo": 1126.67
+    },
+    {
+      "name": "chris_rossi",
+      "email": "chris.rossi@ynov.com",
+      "role": "USER",
+      "wins": 106,
+      "losses": 106,
+      "draws": 24,
+      "elo": 1126.54
+    },
+    {
+      "name": "emma_muller",
+      "email": "emma.muller@ynov.com",
+      "role": "USER",
+      "wins": 228,
+      "losses": 246,
+      "draws": 52,
+      "elo": 1126.08
+    },
+    {
+      "name": "taylor_silva",
+      "email": "taylor.silva@ynov.com",
+      "role": "USER",
+      "wins": 122,
+      "losses": 124,
+      "draws": 14,
+      "elo": 1125.78
+    },
+    {
+      "name": "emma_silva",
+      "email": "emma.silva@ynov.com",
+      "role": "USER",
+      "wins": 110,
+      "losses": 114,
+      "draws": 10,
+      "elo": 1125.15
+    },
+    {
+      "name": "eric_andre",
+      "email": "eric.andre@ynov.com",
+      "role": "USER",
+      "wins": 100,
+      "losses": 102,
+      "draws": 26,
+      "elo": 1123.38
+    },
+    {
+      "name": "luc_laurent",
+      "email": "luc.laurent@ynov.com",
+      "role": "USER",
+      "wins": 108,
+      "losses": 110,
+      "draws": 14,
+      "elo": 1121.12
+    },
+    {
+      "name": "mohamed_philippe",
+      "email": "mohamed.philippe@ynov.com",
+      "role": "USER",
+      "wins": 108,
+      "losses": 108,
+      "draws": 22,
+      "elo": 1118.94
+    },
+    {
+      "name": "julie_clement",
+      "email": "julie.clement@ynov.com",
+      "role": "USER",
+      "wins": 110,
+      "losses": 114,
+      "draws": 24,
+      "elo": 1112.69
+    },
+    {
+      "name": "liam_mercier",
+      "email": "liam.mercier@ynov.com",
+      "role": "USER",
+      "wins": 124,
+      "losses": 128,
+      "draws": 24,
+      "elo": 1112.25
+    },
+    {
+      "name": "chloe_garcia",
+      "email": "chloe.garcia@ynov.com",
+      "role": "USER",
+      "wins": 102,
+      "losses": 104,
+      "draws": 22,
+      "elo": 1108.31
+    },
+    {
+      "name": "carlos_richard",
+      "email": "carlos.richard@ynov.com",
+      "role": "USER",
+      "wins": 106,
+      "losses": 108,
+      "draws": 22,
+      "elo": 1107.96
+    },
+    {
+      "name": "noah_rossi",
+      "email": "noah.rossi@ynov.com",
+      "role": "USER",
+      "wins": 98,
+      "losses": 100,
+      "draws": 12,
+      "elo": 1107.25
+    },
+    {
+      "name": "casey_thomas",
+      "email": "casey.thomas@ynov.com",
+      "role": "USER",
+      "wins": 94,
+      "losses": 98,
+      "draws": 24,
+      "elo": 1103.98
+    },
+    {
+      "name": "camille_richard",
+      "email": "camille.richard@ynov.com",
+      "role": "USER",
+      "wins": 96,
+      "losses": 96,
+      "draws": 20,
+      "elo": 1103.9
+    },
+    {
+      "name": "luc_durand",
+      "email": "luc.durand@ynov.com",
+      "role": "USER",
+      "wins": 110,
+      "losses": 116,
+      "draws": 22,
+      "elo": 1103.88
+    },
+    {
+      "name": "lucas_morel",
+      "email": "lucas.morel@ynov.com",
+      "role": "USER",
+      "wins": 106,
+      "losses": 110,
+      "draws": 24,
+      "elo": 1103.05
+    },
+    {
+      "name": "olivia_schmidt",
+      "email": "olivia.schmidt@ynov.com",
+      "role": "USER",
+      "wins": 118,
+      "losses": 122,
+      "draws": 30,
+      "elo": 1099.06
+    },
+    {
+      "name": "riley_silva",
+      "email": "riley.silva@ynov.com",
+      "role": "USER",
+      "wins": 120,
+      "losses": 126,
+      "draws": 32,
+      "elo": 1094.46
+    },
+    {
+      "name": "jordan_kovacs",
+      "email": "jordan.kovacs@ynov.com",
+      "role": "USER",
+      "wins": 86,
+      "losses": 86,
+      "draws": 20,
+      "elo": 1091.01
+    },
+    {
+      "name": "isabella_garcia",
+      "email": "isabella.garcia@ynov.com",
+      "role": "USER",
+      "wins": 114,
+      "losses": 114,
+      "draws": 18,
+      "elo": 1090.1
+    },
+    {
+      "name": "antoine_richard",
+      "email": "antoine.richard@ynov.com",
+      "role": "USER",
+      "wins": 118,
+      "losses": 122,
+      "draws": 26,
+      "elo": 1088.69
+    },
+    {
+      "name": "jamie_blanc",
+      "email": "jamie.blanc@ynov.com",
+      "role": "USER",
+      "wins": 110,
+      "losses": 114,
+      "draws": 28,
+      "elo": 1088.41
+    },
+    {
+      "name": "ethan_garcia",
+      "email": "ethan.garcia@ynov.com",
+      "role": "USER",
+      "wins": 126,
+      "losses": 134,
+      "draws": 26,
+      "elo": 1087.17
+    },
+    {
+      "name": "julien_martin",
+      "email": "julien.martin@ynov.com",
+      "role": "USER",
+      "wins": 100,
+      "losses": 106,
+      "draws": 16,
+      "elo": 1085.6
+    },
+    {
+      "name": "chris_richard",
+      "email": "chris.richard@ynov.com",
+      "role": "USER",
+      "wins": 302,
+      "losses": 326,
+      "draws": 60,
+      "elo": 1080.07
+    },
+    {
+      "name": "sofia_morel",
+      "email": "sofia.morel@ynov.com",
+      "role": "USER",
+      "wins": 116,
+      "losses": 120,
+      "draws": 22,
+      "elo": 1079.16
+    },
+    {
+      "name": "camille_nakamura",
+      "email": "camille.nakamura@ynov.com",
+      "role": "USER",
+      "wins": 108,
+      "losses": 116,
+      "draws": 22,
+      "elo": 1077.42
+    },
+    {
+      "name": "mohamed_bernard",
+      "email": "mohamed.bernard@ynov.com",
+      "role": "USER",
+      "wins": 218,
+      "losses": 236,
+      "draws": 54,
+      "elo": 1075.38
+    },
+    {
+      "name": "hugo_garnier",
+      "email": "hugo.garnier@ynov.com",
+      "role": "USER",
+      "wins": 216,
+      "losses": 236,
+      "draws": 50,
+      "elo": 1071.76
+    },
+    {
+      "name": "mohamed_faure",
+      "email": "mohamed.faure@ynov.com",
+      "role": "USER",
+      "wins": 332,
+      "losses": 370,
+      "draws": 72,
+      "elo": 1070.87
+    },
+    {
+      "name": "liam_thomas",
+      "email": "liam.thomas@ynov.com",
+      "role": "USER",
+      "wins": 104,
+      "losses": 108,
+      "draws": 20,
+      "elo": 1068.55
+    },
+    {
+      "name": "morgan_muller",
+      "email": "morgan.muller@ynov.com",
+      "role": "USER",
+      "wins": 102,
+      "losses": 106,
+      "draws": 10,
+      "elo": 1066.91
+    },
+    {
+      "name": "alex_morel",
+      "email": "alex.morel@ynov.com",
+      "role": "USER",
+      "wins": 114,
+      "losses": 122,
+      "draws": 14,
+      "elo": 1065.19
+    },
+    {
+      "name": "julien_moreau",
+      "email": "julien.moreau@ynov.com",
+      "role": "USER",
+      "wins": 196,
+      "losses": 212,
+      "draws": 48,
+      "elo": 1063.11
+    },
+    {
+      "name": "ana_richard",
+      "email": "ana.richard@ynov.com",
+      "role": "USER",
+      "wins": 112,
+      "losses": 120,
+      "draws": 8,
+      "elo": 1062.67
+    },
+    {
+      "name": "lucas_petit",
+      "email": "lucas.petit@ynov.com",
+      "role": "USER",
+      "wins": 100,
+      "losses": 106,
+      "draws": 24,
+      "elo": 1061.53
+    },
+    {
+      "name": "riley_thomas",
+      "email": "riley.thomas@ynov.com",
+      "role": "USER",
+      "wins": 116,
+      "losses": 126,
+      "draws": 18,
+      "elo": 1059.76
+    },
+    {
+      "name": "pierre_robert",
+      "email": "pierre.robert@ynov.com",
+      "role": "USER",
+      "wins": 118,
+      "losses": 126,
+      "draws": 26,
+      "elo": 1058.61
+    },
+    {
+      "name": "jordan_robert",
+      "email": "jordan.robert@ynov.com",
+      "role": "USER",
+      "wins": 202,
+      "losses": 216,
+      "draws": 32,
+      "elo": 1057.23
+    },
+    {
+      "name": "olivia_mercier",
+      "email": "olivia.mercier@ynov.com",
+      "role": "USER",
+      "wins": 220,
+      "losses": 240,
+      "draws": 38,
+      "elo": 1052.65
+    },
+    {
+      "name": "camille_rossi",
+      "email": "camille.rossi@ynov.com",
+      "role": "USER",
+      "wins": 220,
+      "losses": 238,
+      "draws": 42,
+      "elo": 1048.34
+    },
+    {
+      "name": "jordan_clement",
+      "email": "jordan.clement@ynov.com",
+      "role": "USER",
+      "wins": 204,
+      "losses": 222,
+      "draws": 38,
+      "elo": 1046.16
+    },
+    {
+      "name": "isabella_blanc",
+      "email": "isabella.blanc@ynov.com",
+      "role": "USER",
+      "wins": 118,
+      "losses": 126,
+      "draws": 26,
+      "elo": 1046.14
+    },
+    {
+      "name": "lucas_schmidt",
+      "email": "lucas.schmidt@ynov.com",
+      "role": "USER",
+      "wins": 98,
+      "losses": 106,
+      "draws": 32,
+      "elo": 1045.67
+    },
+    {
+      "name": "maria_leroy",
+      "email": "maria.leroy@ynov.com",
+      "role": "USER",
+      "wins": 128,
+      "losses": 140,
+      "draws": 26,
+      "elo": 1044.07
+    },
+    {
+      "name": "casey_faure",
+      "email": "casey.faure@ynov.com",
+      "role": "USER",
+      "wins": 508,
+      "losses": 562,
+      "draws": 116,
+      "elo": 1039.08
+    },
+    {
+      "name": "lena_silva",
+      "email": "lena.silva@ynov.com",
+      "role": "USER",
+      "wins": 114,
+      "losses": 124,
+      "draws": 22,
+      "elo": 1037.75
+    },
+    {
+      "name": "eric_garcia",
+      "email": "eric.garcia@ynov.com",
+      "role": "USER",
+      "wins": 196,
+      "losses": 216,
+      "draws": 38,
+      "elo": 1034.85
+    },
+    {
+      "name": "sam_nakamura",
+      "email": "sam.nakamura@ynov.com",
+      "role": "USER",
+      "wins": 222,
+      "losses": 242,
+      "draws": 54,
+      "elo": 1034.51
+    },
+    {
+      "name": "sofia_durand",
+      "email": "sofia.durand@ynov.com",
+      "role": "USER",
+      "wins": 112,
+      "losses": 118,
+      "draws": 20,
+      "elo": 1034.32
+    },
+    {
+      "name": "maya_martin",
+      "email": "maya.martin@ynov.com",
+      "role": "USER",
+      "wins": 102,
+      "losses": 110,
+      "draws": 26,
+      "elo": 1034.27
+    },
+    {
+      "name": "mateo_girardý",
+      "email": "mateo.girardý@ynov.com",
+      "role": "USER",
+      "wins": 2,
+      "losses": 0,
+      "draws": 0,
+      "elo": 1031.94
+    },
+    {
+      "name": "maria_silva",
+      "email": "maria.silva@ynov.com",
+      "role": "USER",
+      "wins": 102,
+      "losses": 110,
+      "draws": 18,
+      "elo": 1026.98
+    },
+    {
+      "name": "jordan_garcia",
+      "email": "jordan.garcia@ynov.com",
+      "role": "USER",
+      "wins": 120,
+      "losses": 130,
+      "draws": 18,
+      "elo": 1026.63
+    },
+    {
+      "name": "diego_petit",
+      "email": "diego.petit@ynov.com",
+      "role": "USER",
+      "wins": 128,
+      "losses": 138,
+      "draws": 14,
+      "elo": 1025.8
+    },
+    {
+      "name": "paul_philippe",
+      "email": "paul.philippe@ynov.com",
+      "role": "USER",
+      "wins": 252,
+      "losses": 274,
+      "draws": 50,
+      "elo": 1025.12
+    },
+    {
+      "name": "lena_andre",
+      "email": "lena.andre@ynov.com",
+      "role": "USER",
+      "wins": 126,
+      "losses": 136,
+      "draws": 32,
+      "elo": 1014.01
+    },
+    {
+      "name": "ethan_thomas",
+      "email": "ethan.thomas@ynov.com",
+      "role": "USER",
+      "wins": 102,
+      "losses": 112,
+      "draws": 22,
+      "elo": 1010.62
+    },
+    {
+      "name": "hugo_silva",
+      "email": "hugo.silva@ynov.com",
+      "role": "USER",
+      "wins": 196,
+      "losses": 218,
+      "draws": 36,
+      "elo": 1010.48
+    },
+    {
+      "name": "luc_silva",
+      "email": "luc.silva@ynov.com",
+      "role": "USER",
+      "wins": 108,
+      "losses": 116,
+      "draws": 22,
+      "elo": 1009.09
+    },
+    {
+      "name": "chris_petit",
+      "email": "chris.petit@ynov.com",
+      "role": "USER",
+      "wins": 108,
+      "losses": 120,
+      "draws": 20,
+      "elo": 1008.81
+    },
+    {
+      "name": "taylor_morel",
+      "email": "taylor.morel@ynov.com",
+      "role": "USER",
+      "wins": 102,
+      "losses": 114,
+      "draws": 34,
+      "elo": 1008.33
+    },
+    {
+      "name": "mohamed_robert",
+      "email": "mohamed.robert@ynov.com",
+      "role": "USER",
+      "wins": 106,
+      "losses": 116,
+      "draws": 18,
+      "elo": 1008.06
+    },
+    {
+      "name": "jamie_robert",
+      "email": "jamie.robert@ynov.com",
+      "role": "USER",
+      "wins": 120,
+      "losses": 132,
+      "draws": 16,
+      "elo": 1007.42
+    },
+    {
+      "name": "pierre_schmidt",
+      "email": "pierre.schmidt@ynov.com",
+      "role": "USER",
+      "wins": 106,
+      "losses": 114,
+      "draws": 8,
+      "elo": 1006.58
+    },
+    {
+      "name": "alex_garnier",
+      "email": "alex.garnier@ynov.com",
+      "role": "USER",
+      "wins": 110,
+      "losses": 122,
+      "draws": 20,
+      "elo": 1006.26
+    },
+    {
+      "name": "eric_silva",
+      "email": "eric.silva@ynov.com",
+      "role": "USER",
+      "wins": 118,
+      "losses": 128,
+      "draws": 26,
+      "elo": 1004.03
+    },
+    {
+      "name": "taylor_philippe",
+      "email": "taylor.philippe@ynov.com",
+      "role": "USER",
+      "wins": 112,
+      "losses": 124,
+      "draws": 10,
+      "elo": 1003.91
+    },
+    {
+      "name": "sofia_garcia",
+      "email": "sofia.garcia@ynov.com",
+      "role": "USER",
+      "wins": 100,
+      "losses": 110,
+      "draws": 28,
+      "elo": 1002.38
+    },
+    {
+      "name": "taylor_andre",
+      "email": "taylor.andre@ynov.com",
+      "role": "USER",
+      "wins": 106,
+      "losses": 116,
+      "draws": 28,
+      "elo": 1001.54
+    },
+    {
+      "name": "mila_girard",
+      "email": "mila.girard@ynov.com",
+      "role": "USER",
+      "wins": 242,
+      "losses": 268,
+      "draws": 42,
+      "elo": 1000.4
+    },
+    {
+      "name": "julien_kovacs",
+      "email": "julien.kovacs@ynov.com",
+      "role": "USER",
+      "wins": 234,
+      "losses": 258,
+      "draws": 40,
+      "elo": 997.446
+    },
+    {
+      "name": "pierre_garcia",
+      "email": "pierre.garcia@ynov.com",
+      "role": "USER",
+      "wins": 232,
+      "losses": 258,
+      "draws": 50,
+      "elo": 997.086
+    },
+    {
+      "name": "paul_bernard",
+      "email": "paul.bernard@ynov.com",
+      "role": "USER",
+      "wins": 226,
+      "losses": 254,
+      "draws": 38,
+      "elo": 996.991
+    },
+    {
+      "name": "mila_schmidt",
+      "email": "mila.schmidt@ynov.com",
+      "role": "USER",
+      "wins": 216,
+      "losses": 236,
+      "draws": 48,
+      "elo": 996.969
+    },
+    {
+      "name": "maya_leroy",
+      "email": "maya.leroy@ynov.com",
+      "role": "USER",
+      "wins": 114,
+      "losses": 130,
+      "draws": 28,
+      "elo": 995.204
+    },
+    {
+      "name": "ana_kim",
+      "email": "ana.kim@ynov.com",
+      "role": "USER",
+      "wins": 220,
+      "losses": 240,
+      "draws": 26,
+      "elo": 994.838
+    },
+    {
+      "name": "liam_kim",
+      "email": "liam.kim@ynov.com",
+      "role": "USER",
+      "wins": 114,
+      "losses": 124,
+      "draws": 26,
+      "elo": 993.427
+    },
+    {
+      "name": "maria_garcia",
+      "email": "maria.garcia@ynov.com",
+      "role": "USER",
+      "wins": 94,
+      "losses": 108,
+      "draws": 30,
+      "elo": 992.942
+    },
+    {
+      "name": "sofia_martin",
+      "email": "sofia.martin@ynov.com",
+      "role": "USER",
+      "wins": 114,
+      "losses": 124,
+      "draws": 32,
+      "elo": 992.53
+    },
+    {
+      "name": "pierre_lopez",
+      "email": "pierre.lopez@ynov.com",
+      "role": "USER",
+      "wins": 106,
+      "losses": 118,
+      "draws": 10,
+      "elo": 991.904
+    },
+    {
+      "name": "mila_rossi",
+      "email": "mila.rossi@ynov.com",
+      "role": "USER",
+      "wins": 128,
+      "losses": 146,
+      "draws": 18,
+      "elo": 989.39
+    },
+    {
+      "name": "olivia_richard",
+      "email": "olivia.richard@ynov.com",
+      "role": "USER",
+      "wins": 108,
+      "losses": 120,
+      "draws": 22,
+      "elo": 988.352
+    },
+    {
+      "name": "ana_girard",
+      "email": "ana.girard@ynov.com",
+      "role": "USER",
+      "wins": 96,
+      "losses": 104,
+      "draws": 16,
+      "elo": 988.288
+    },
+    {
+      "name": "carlos_lopez",
+      "email": "carlos.lopez@ynov.com",
+      "role": "USER",
+      "wins": 104,
+      "losses": 118,
+      "draws": 36,
+      "elo": 986.254
+    },
+    {
+      "name": "lena_martin",
+      "email": "lena.martin@ynov.com",
+      "role": "USER",
+      "wins": 324,
+      "losses": 358,
+      "draws": 74,
+      "elo": 985.18
+    },
+    {
+      "name": "camille_lopez",
+      "email": "camille.lopez@ynov.com",
+      "role": "USER",
+      "wins": 104,
+      "losses": 118,
+      "draws": 22,
+      "elo": 980.807
+    },
+    {
+      "name": "isabella_rousseau",
+      "email": "isabella.rousseau@ynov.com",
+      "role": "USER",
+      "wins": 106,
+      "losses": 120,
+      "draws": 32,
+      "elo": 978.607
+    },
+    {
+      "name": "julien_richard",
+      "email": "julien.richard@ynov.com",
+      "role": "USER",
+      "wins": 98,
+      "losses": 110,
+      "draws": 24,
+      "elo": 976.429
+    },
+    {
+      "name": "hugo_kovacs",
+      "email": "hugo.kovacs@ynov.com",
+      "role": "USER",
+      "wins": 232,
+      "losses": 260,
+      "draws": 46,
+      "elo": 974.707
+    },
+    {
+      "name": "sofia_girard",
+      "email": "sofia.girard@ynov.com",
+      "role": "USER",
+      "wins": 100,
+      "losses": 112,
+      "draws": 18,
+      "elo": 974.245
+    },
+    {
+      "name": "lucas_bernard",
+      "email": "lucas.bernard@ynov.com",
+      "role": "USER",
+      "wins": 112,
+      "losses": 126,
+      "draws": 20,
+      "elo": 972.947
+    },
+    {
+      "name": "maria_garnier",
+      "email": "maria.garnier@ynov.com",
+      "role": "USER",
+      "wins": 220,
+      "losses": 248,
+      "draws": 58,
+      "elo": 972.76
+    },
+    {
+      "name": "maria_thomas",
+      "email": "maria.thomas@ynov.com",
+      "role": "USER",
+      "wins": 320,
+      "losses": 356,
+      "draws": 58,
+      "elo": 970.899
+    },
+    {
+      "name": "noah_martin",
+      "email": "noah.martin@ynov.com",
+      "role": "USER",
+      "wins": 114,
+      "losses": 130,
+      "draws": 14,
+      "elo": 966.314
+    },
+    {
+      "name": "mila_garnier",
+      "email": "mila.garnier@ynov.com",
+      "role": "USER",
+      "wins": 112,
+      "losses": 126,
+      "draws": 22,
+      "elo": 966.309
+    },
+    {
+      "name": "eric_rousseau",
+      "email": "eric.rousseau@ynov.com",
+      "role": "USER",
+      "wins": 114,
+      "losses": 128,
+      "draws": 24,
+      "elo": 966.057
+    },
+    {
+      "name": "ava_robert",
+      "email": "ava.robert@ynov.com",
+      "role": "USER",
+      "wins": 102,
+      "losses": 114,
+      "draws": 22,
+      "elo": 963.107
+    },
+    {
+      "name": "ava_martin",
+      "email": "ava.martin@ynov.com",
+      "role": "USER",
+      "wins": 108,
+      "losses": 120,
+      "draws": 24,
+      "elo": 961.883
+    },
+    {
+      "name": "chloe_faure",
+      "email": "chloe.faure@ynov.com",
+      "role": "USER",
+      "wins": 92,
+      "losses": 104,
+      "draws": 30,
+      "elo": 961.421
+    },
+    {
+      "name": "liam_lopez",
+      "email": "liam.lopez@ynov.com",
+      "role": "USER",
+      "wins": 110,
+      "losses": 128,
+      "draws": 28,
+      "elo": 956.035
+    },
+    {
+      "name": "isabella_durand",
+      "email": "isabella.durand@ynov.com",
+      "role": "USER",
+      "wins": 128,
+      "losses": 148,
+      "draws": 14,
+      "elo": 951.028
+    },
+    {
+      "name": "alex_kim",
+      "email": "alex.kim@ynov.com",
+      "role": "USER",
+      "wins": 120,
+      "losses": 136,
+      "draws": 28,
+      "elo": 948.346
+    },
+    {
+      "name": "eric_bianchi",
+      "email": "eric.bianchi@ynov.com",
+      "role": "USER",
+      "wins": 98,
+      "losses": 114,
+      "draws": 18,
+      "elo": 945.629
+    },
+    {
+      "name": "casey_garcia",
+      "email": "casey.garcia@ynov.com",
+      "role": "USER",
+      "wins": 112,
+      "losses": 128,
+      "draws": 18,
+      "elo": 943.57
+    },
+    {
+      "name": "casey_mercier",
+      "email": "casey.mercier@ynov.com",
+      "role": "USER",
+      "wins": 116,
+      "losses": 134,
+      "draws": 26,
+      "elo": 942.238
+    },
+    {
+      "name": "jamie_garcia",
+      "email": "jamie.garcia@ynov.com",
+      "role": "USER",
+      "wins": 96,
+      "losses": 110,
+      "draws": 24,
+      "elo": 934.255
+    },
+    {
+      "name": "sam_silva",
+      "email": "sam.silva@ynov.com",
+      "role": "USER",
+      "wins": 92,
+      "losses": 106,
+      "draws": 24,
+      "elo": 929.897
+    },
+    {
+      "name": "chloe_andre",
+      "email": "chloe.andre@ynov.com",
+      "role": "USER",
+      "wins": 170,
+      "losses": 198,
+      "draws": 32,
+      "elo": 927.705
+    },
+    {
+      "name": "lena_petit",
+      "email": "lena.petit@ynov.com",
+      "role": "USER",
+      "wins": 92,
+      "losses": 108,
+      "draws": 22,
+      "elo": 924.345
+    },
+    {
+      "name": "julie_nakamura",
+      "email": "julie.nakamura@ynov.com",
+      "role": "USER",
+      "wins": 118,
+      "losses": 136,
+      "draws": 28,
+      "elo": 921.64
+    },
+    {
+      "name": "antoine_andre",
+      "email": "antoine.andre@ynov.com",
+      "role": "USER",
+      "wins": 96,
+      "losses": 112,
+      "draws": 18,
+      "elo": 918.884
+    },
+    {
+      "name": "emma_garcia",
+      "email": "emma.garcia@ynov.com",
+      "role": "USER",
+      "wins": 114,
+      "losses": 130,
+      "draws": 20,
+      "elo": 915.438
+    },
+    {
+      "name": "diego_lopez",
+      "email": "diego.lopez@ynov.com",
+      "role": "USER",
+      "wins": 204,
+      "losses": 232,
+      "draws": 76,
+      "elo": 909.342
+    },
+    {
+      "name": "carlos_muller",
+      "email": "carlos.muller@ynov.com",
+      "role": "USER",
+      "wins": 102,
+      "losses": 120,
+      "draws": 18,
+      "elo": 907.433
+    },
+    {
+      "name": "carlos_clement",
+      "email": "carlos.clement@ynov.com",
+      "role": "USER",
+      "wins": 110,
+      "losses": 126,
+      "draws": 18,
+      "elo": 906.565
+    },
+    {
+      "name": "sam_laurent",
+      "email": "sam.laurent@ynov.com",
+      "role": "USER",
+      "wins": 314,
+      "losses": 354,
+      "draws": 68,
+      "elo": 899.533
+    },
+    {
+      "name": "paul_garcia",
+      "email": "paul.garcia@ynov.com",
+      "role": "USER",
+      "wins": 116,
+      "losses": 138,
+      "draws": 24,
+      "elo": 887.704
+    },
+    {
+      "name": "mohamed_moreau",
+      "email": "mohamed.moreau@ynov.com",
+      "role": "USER",
+      "wins": 112,
+      "losses": 132,
+      "draws": 20,
+      "elo": 886.687
+    },
+    {
+      "name": "hugo_moreau",
+      "email": "hugo.moreau@ynov.com",
+      "role": "USER",
+      "wins": 214,
+      "losses": 240,
+      "draws": 30,
+      "elo": 882.552
+    },
+    {
+      "name": "jordan_lopez",
+      "email": "jordan.lopez@ynov.com",
+      "role": "USER",
+      "wins": 102,
+      "losses": 120,
+      "draws": 22,
+      "elo": 881.218
+    },
+    {
+      "name": "pierre_kim",
+      "email": "pierre.kim@ynov.com",
+      "role": "USER",
+      "wins": 118,
+      "losses": 142,
+      "draws": 22,
+      "elo": 878.446
+    },
+    {
+      "name": "maya_garcia",
+      "email": "maya.garcia@ynov.com",
+      "role": "USER",
+      "wins": 100,
+      "losses": 122,
+      "draws": 18,
+      "elo": 877.515
+    },
+    {
+      "name": "pierre_bernard",
+      "email": "pierre.bernard@ynov.com",
+      "role": "USER",
+      "wins": 118,
+      "losses": 138,
+      "draws": 28,
+      "elo": 875.564
+    },
+    {
+      "name": "hugo_lopez",
+      "email": "hugo.lopez@ynov.com",
+      "role": "USER",
+      "wins": 92,
+      "losses": 110,
+      "draws": 24,
+      "elo": 868.557
+    },
+    {
+      "name": "casey_garnier",
+      "email": "casey.garnier@ynov.com",
+      "role": "USER",
+      "wins": 78,
+      "losses": 94,
+      "draws": 26,
+      "elo": 862.559
+    },
+    {
+      "name": "noah_bianchi",
+      "email": "noah.bianchi@ynov.com",
+      "role": "USER",
+      "wins": 88,
+      "losses": 108,
+      "draws": 34,
+      "elo": 855.489
+    },
+    {
+      "name": "morgan_faure",
+      "email": "morgan.faure@ynov.com",
+      "role": "USER",
+      "wins": 104,
+      "losses": 124,
+      "draws": 34,
+      "elo": 854.714
+    },
+    {
+      "name": "camille_kovacs",
+      "email": "camille.kovacs@ynov.com",
+      "role": "USER",
+      "wins": 242,
+      "losses": 280,
+      "draws": 36,
+      "elo": 854.497
+    },
+    {
+      "name": "ava_leroy",
+      "email": "ava.leroy@ynov.com",
+      "role": "USER",
+      "wins": 96,
+      "losses": 118,
+      "draws": 28,
+      "elo": 852.921
+    },
+    {
+      "name": "mateo_muller",
+      "email": "mateo.muller@ynov.com",
+      "role": "USER",
+      "wins": 204,
+      "losses": 234,
+      "draws": 48,
+      "elo": 852.717
+    },
+    {
+      "name": "diego_rousseau",
+      "email": "diego.rousseau@ynov.com",
+      "role": "USER",
+      "wins": 108,
+      "losses": 126,
+      "draws": 30,
+      "elo": 849.041
+    },
+    {
+      "name": "maria_morel",
+      "email": "maria.morel@ynov.com",
+      "role": "USER",
+      "wins": 84,
+      "losses": 102,
+      "draws": 20,
+      "elo": 843.815
+    },
+    {
+      "name": "julie_blanc",
+      "email": "julie.blanc@ynov.com",
+      "role": "USER",
+      "wins": 72,
+      "losses": 92,
+      "draws": 30,
+      "elo": 833.582
+    },
+    {
+      "name": "eric_martin",
+      "email": "eric.martin@ynov.com",
+      "role": "USER",
+      "wins": 110,
+      "losses": 136,
+      "draws": 26,
+      "elo": 832.681
+    },
+    {
+      "name": "noah_moreau",
+      "email": "noah.moreau@ynov.com",
+      "role": "USER",
+      "wins": 92,
+      "losses": 114,
+      "draws": 12,
+      "elo": 827.995
+    },
+    {
+      "name": "mila_faure",
+      "email": "mila.faure@ynov.com",
+      "role": "USER",
+      "wins": 190,
+      "losses": 226,
+      "draws": 48,
+      "elo": 826.454
+    },
+    {
+      "name": "julien_robert",
+      "email": "julien.robert@ynov.com",
+      "role": "USER",
+      "wins": 92,
+      "losses": 112,
+      "draws": 12,
+      "elo": 823.004
+    },
+    {
+      "name": "leo_muller",
+      "email": "leo.muller@ynov.com",
+      "role": "USER",
+      "wins": 122,
+      "losses": 146,
+      "draws": 28,
+      "elo": 820.53
+    },
+    {
+      "name": "luc_mercier",
+      "email": "luc.mercier@ynov.com",
+      "role": "USER",
+      "wins": 96,
+      "losses": 118,
+      "draws": 22,
+      "elo": 815.805
+    },
+    {
+      "name": "emma_mercier",
+      "email": "emma.mercier@ynov.com",
+      "role": "USER",
+      "wins": 98,
+      "losses": 118,
+      "draws": 26,
+      "elo": 810.034
+    },
+    {
+      "name": "camille_philippe",
+      "email": "camille.philippe@ynov.com",
+      "role": "USER",
+      "wins": 102,
+      "losses": 128,
+      "draws": 28,
+      "elo": 806.65
+    },
+    {
+      "name": "julien_faure",
+      "email": "julien.faure@ynov.com",
+      "role": "USER",
+      "wins": 100,
+      "losses": 124,
+      "draws": 20,
+      "elo": 794.664
+    },
+    {
+      "name": "camille_moreau",
+      "email": "camille.moreau@ynov.com",
+      "role": "USER",
+      "wins": 318,
+      "losses": 364,
+      "draws": 80,
+      "elo": 788.298
+    },
+    {
+      "name": "morgan_durand",
+      "email": "morgan.durand@ynov.com",
+      "role": "USER",
+      "wins": 96,
+      "losses": 122,
+      "draws": 28,
+      "elo": 778.505
+    },
+    {
+      "name": "emma_richard",
+      "email": "emma.richard@ynov.com",
+      "role": "USER",
+      "wins": 96,
+      "losses": 124,
+      "draws": 32,
+      "elo": 777.547
+    },
+    {
+      "name": "chris_kovacs",
+      "email": "chris.kovacs@ynov.com",
+      "role": "USER",
+      "wins": 210,
+      "losses": 250,
+      "draws": 52,
+      "elo": 762.335
+    },
+    {
+      "name": "luc_leroy",
+      "email": "luc.leroy@ynov.com",
+      "role": "USER",
+      "wins": 106,
+      "losses": 132,
+      "draws": 28,
+      "elo": 761.468
+    },
+    {
+      "name": "sofia_leroy",
+      "email": "sofia.leroy@ynov.com",
+      "role": "USER",
+      "wins": 96,
+      "losses": 122,
+      "draws": 20,
+      "elo": 760.048
+    },
+    {
+      "name": "mohamed_girard",
+      "email": "mohamed.girard@ynov.com",
+      "role": "USER",
+      "wins": 112,
+      "losses": 138,
+      "draws": 20,
+      "elo": 756.912
+    },
+    {
+      "name": "taylor_faure",
+      "email": "taylor.faure@ynov.com",
+      "role": "USER",
+      "wins": 286,
+      "losses": 334,
+      "draws": 74,
+      "elo": 753.597
+    },
+    {
+      "name": "luc_robert",
+      "email": "luc.robert@ynov.com",
+      "role": "USER",
+      "wins": 94,
+      "losses": 120,
+      "draws": 18,
+      "elo": 746.6
+    },
+    {
+      "name": "pierre_faure",
+      "email": "pierre.faure@ynov.com",
+      "role": "USER",
+      "wins": 92,
+      "losses": 116,
+      "draws": 24,
+      "elo": 741.831
+    },
+    {
+      "name": "youssef_andre",
+      "email": "youssef.andre@ynov.com",
+      "role": "USER",
+      "wins": 126,
+      "losses": 152,
+      "draws": 18,
+      "elo": 741.547
+    },
+    {
+      "name": "lena_philippe",
+      "email": "lena.philippe@ynov.com",
+      "role": "USER",
+      "wins": 92,
+      "losses": 120,
+      "draws": 22,
+      "elo": 735.142
+    },
+    {
+      "name": "julie_garnier",
+      "email": "julie.garnier@ynov.com",
+      "role": "USER",
+      "wins": 70,
+      "losses": 94,
+      "draws": 38,
+      "elo": 732.297
+    },
+    {
+      "name": "sarah_muller",
+      "email": "sarah.muller@ynov.com",
+      "role": "USER",
+      "wins": 200,
+      "losses": 242,
+      "draws": 54,
+      "elo": 722.674
+    },
+    {
+      "name": "pierre_nakamura",
+      "email": "pierre.nakamura@ynov.com",
+      "role": "USER",
+      "wins": 96,
+      "losses": 126,
+      "draws": 14,
+      "elo": 710.303
+    },
+    {
+      "name": "lena_moreau",
+      "email": "lena.moreau@ynov.com",
+      "role": "USER",
+      "wins": 100,
+      "losses": 132,
+      "draws": 20,
+      "elo": 700.434
+    },
+    {
+      "name": "pierre_philippe",
+      "email": "pierre.philippe@ynov.com",
+      "role": "USER",
+      "wins": 100,
+      "losses": 134,
+      "draws": 26,
+      "elo": 699.072
+    },
+    {
+      "name": "ana_laurent",
+      "email": "ana.laurent@ynov.com",
+      "role": "USER",
+      "wins": 112,
+      "losses": 148,
+      "draws": 16,
+      "elo": 695.632
+    },
+    {
+      "name": "olivia_garnier",
+      "email": "olivia.garnier@ynov.com",
+      "role": "USER",
+      "wins": 104,
+      "losses": 136,
+      "draws": 22,
+      "elo": 694.406
+    },
+    {
+      "name": "casey_clement",
+      "email": "casey.clement@ynov.com",
+      "role": "USER",
+      "wins": 206,
+      "losses": 250,
+      "draws": 38,
+      "elo": 688.568
+    },
+    {
+      "name": "alex_rossi",
+      "email": "alex.rossi@ynov.com",
+      "role": "USER",
+      "wins": 102,
+      "losses": 132,
+      "draws": 24,
+      "elo": 687.221
+    },
+    {
+      "name": "eric_rossi",
+      "email": "eric.rossi@ynov.com",
+      "role": "USER",
+      "wins": 106,
+      "losses": 142,
+      "draws": 12,
+      "elo": 677.591
+    },
+    {
+      "name": "olivia_laurent",
+      "email": "olivia.laurent@ynov.com",
+      "role": "USER",
+      "wins": 290,
+      "losses": 342,
+      "draws": 58,
+      "elo": 673.054
+    },
+    {
+      "name": "isabella_thomas",
+      "email": "isabella.thomas@ynov.com",
+      "role": "USER",
+      "wins": 332,
+      "losses": 388,
+      "draws": 60,
+      "elo": 669.215
+    },
+    {
+      "name": "liam_richard",
+      "email": "liam.richard@ynov.com",
+      "role": "USER",
+      "wins": 98,
+      "losses": 134,
+      "draws": 18,
+      "elo": 662.133
+    },
+    {
+      "name": "lena_blanc",
+      "email": "lena.blanc@ynov.com",
+      "role": "USER",
+      "wins": 92,
+      "losses": 124,
+      "draws": 28,
+      "elo": 658.896
+    },
+    {
+      "name": "leo_faure",
+      "email": "leo.faure@ynov.com",
+      "role": "USER",
+      "wins": 96,
+      "losses": 128,
+      "draws": 20,
+      "elo": 654.948
+    },
+    {
+      "name": "paul_clement",
+      "email": "paul.clement@ynov.com",
+      "role": "USER",
+      "wins": 106,
+      "losses": 140,
+      "draws": 24,
+      "elo": 654.323
+    },
+    {
+      "name": "hugo_girard",
+      "email": "hugo.girard@ynov.com",
+      "role": "USER",
+      "wins": 82,
+      "losses": 114,
+      "draws": 28,
+      "elo": 654.176
+    },
+    {
+      "name": "riley_faure",
+      "email": "riley.faure@ynov.com",
+      "role": "USER",
+      "wins": 92,
+      "losses": 124,
+      "draws": 18,
+      "elo": 651.437
+    },
+    {
+      "name": "isabella_nakamura",
+      "email": "isabella.nakamura@ynov.com",
+      "role": "USER",
+      "wins": 98,
+      "losses": 128,
+      "draws": 22,
+      "elo": 645.787
+    },
+    {
+      "name": "pierre_andre",
+      "email": "pierre.andre@ynov.com",
+      "role": "USER",
+      "wins": 104,
+      "losses": 140,
+      "draws": 26,
+      "elo": 643.789
+    },
+    {
+      "name": "olivia_nakamura",
+      "email": "olivia.nakamura@ynov.com",
+      "role": "USER",
+      "wins": 100,
+      "losses": 136,
+      "draws": 28,
+      "elo": 639.88
+    },
+    {
+      "name": "julien_andre",
+      "email": "julien.andre@ynov.com",
+      "role": "USER",
+      "wins": 192,
+      "losses": 238,
+      "draws": 40,
+      "elo": 633.088
+    },
+    {
+      "name": "carlos_blanc",
+      "email": "carlos.blanc@ynov.com",
+      "role": "USER",
+      "wins": 100,
+      "losses": 132,
+      "draws": 10,
+      "elo": 623.921
+    },
+    {
+      "name": "maria_muller",
+      "email": "maria.muller@ynov.com",
+      "role": "USER",
+      "wins": 106,
+      "losses": 144,
+      "draws": 10,
+      "elo": 613.616
+    },
+    {
+      "name": "mila_leroy",
+      "email": "mila.leroy@ynov.com",
+      "role": "USER",
+      "wins": 218,
+      "losses": 268,
+      "draws": 46,
+      "elo": 611.919
+    },
+    {
+      "name": "mateo_bernard",
+      "email": "mateo.bernard@ynov.com",
+      "role": "USER",
+      "wins": 100,
+      "losses": 138,
+      "draws": 20,
+      "elo": 609.726
+    },
+    {
+      "name": "jamie_kovacs",
+      "email": "jamie.kovacs@ynov.com",
+      "role": "USER",
+      "wins": 74,
+      "losses": 110,
+      "draws": 10,
+      "elo": 608.172
+    },
+    {
+      "name": "carlos_garnier",
+      "email": "carlos.garnier@ynov.com",
+      "role": "USER",
+      "wins": 96,
+      "losses": 130,
+      "draws": 14,
+      "elo": 605.62
+    },
+    {
+      "name": "julie_lopez",
+      "email": "julie.lopez@ynov.com",
+      "role": "USER",
+      "wins": 94,
+      "losses": 136,
+      "draws": 22,
+      "elo": 594.482
+    },
+    {
+      "name": "jamie_durand",
+      "email": "jamie.durand@ynov.com",
+      "role": "USER",
+      "wins": 94,
+      "losses": 132,
+      "draws": 28,
+      "elo": 589.695
+    },
+    {
+      "name": "chloe_kovacs",
+      "email": "chloe.kovacs@ynov.com",
+      "role": "USER",
+      "wins": 102,
+      "losses": 140,
+      "draws": 36,
+      "elo": 588.647
+    },
+    {
+      "name": "olivia_rousseau",
+      "email": "olivia.rousseau@ynov.com",
+      "role": "USER",
+      "wins": 94,
+      "losses": 136,
+      "draws": 14,
+      "elo": 576.181
+    },
+    {
+      "name": "isabella_bernard",
+      "email": "isabella.bernard@ynov.com",
+      "role": "USER",
+      "wins": 102,
+      "losses": 140,
+      "draws": 22,
+      "elo": 573.798
+    },
+    {
+      "name": "carlos_kim",
+      "email": "carlos.kim@ynov.com",
+      "role": "USER",
+      "wins": 108,
+      "losses": 146,
+      "draws": 16,
+      "elo": 573.435
+    },
+    {
+      "name": "isabella_robert",
+      "email": "isabella.robert@ynov.com",
+      "role": "USER",
+      "wins": 214,
+      "losses": 262,
+      "draws": 54,
+      "elo": 569.393
+    },
+    {
+      "name": "diego_leroy",
+      "email": "diego.leroy@ynov.com",
+      "role": "USER",
+      "wins": 106,
+      "losses": 148,
+      "draws": 20,
+      "elo": 542.455
+    },
+    {
+      "name": "sam_muller",
+      "email": "sam.muller@ynov.com",
+      "role": "USER",
+      "wins": 108,
+      "losses": 150,
+      "draws": 18,
+      "elo": 542.221
+    },
+    {
+      "name": "julie_morel",
+      "email": "julie.morel@ynov.com",
+      "role": "USER",
+      "wins": 202,
+      "losses": 258,
+      "draws": 34,
+      "elo": 540.202
+    },
+    {
+      "name": "ethan_moreau",
+      "email": "ethan.moreau@ynov.com",
+      "role": "USER",
+      "wins": 316,
+      "losses": 384,
+      "draws": 40,
+      "elo": 533.505
+    },
+    {
+      "name": "chris_schmidt",
+      "email": "chris.schmidt@ynov.com",
+      "role": "USER",
+      "wins": 88,
+      "losses": 126,
+      "draws": 20,
+      "elo": 528.981
+    },
+    {
+      "name": "maya_silva",
+      "email": "maya.silva@ynov.com",
+      "role": "USER",
+      "wins": 102,
+      "losses": 144,
+      "draws": 26,
+      "elo": 526.091
+    },
+    {
+      "name": "olivia_lopez",
+      "email": "olivia.lopez@ynov.com",
+      "role": "USER",
+      "wins": 94,
+      "losses": 138,
+      "draws": 32,
+      "elo": 518.516
+    },
+    {
+      "name": "pierre_durand",
+      "email": "pierre.durand@ynov.com",
+      "role": "USER",
+      "wins": 90,
+      "losses": 134,
+      "draws": 28,
+      "elo": 496.089
+    },
+    {
+      "name": "carlos_moreau",
+      "email": "carlos.moreau@ynov.com",
+      "role": "USER",
+      "wins": 74,
+      "losses": 118,
+      "draws": 14,
+      "elo": 489.629
+    },
+    {
+      "name": "mateo_girard",
+      "email": "mateo.girard@ynov.com",
+      "role": "USER",
+      "wins": 102,
+      "losses": 146,
+      "draws": 22,
+      "elo": 487.759
+    },
+    {
+      "name": "olivia_garcia",
+      "email": "olivia.garcia@ynov.com",
+      "role": "USER",
+      "wins": 88,
+      "losses": 132,
+      "draws": 18,
+      "elo": 479.209
+    },
+    {
+      "name": "morgan_garnier",
+      "email": "morgan.garnier@ynov.com",
+      "role": "USER",
+      "wins": 198,
+      "losses": 258,
+      "draws": 48,
+      "elo": 478.08
+    },
+    {
+      "name": "noah_kim",
+      "email": "noah.kim@ynov.com",
+      "role": "USER",
+      "wins": 220,
+      "losses": 280,
+      "draws": 28,
+      "elo": 455.314
+    },
+    {
+      "name": "jordan_laurent",
+      "email": "jordan.laurent@ynov.com",
+      "role": "USER",
+      "wins": 82,
+      "losses": 128,
+      "draws": 16,
+      "elo": 455.129
+    },
+    {
+      "name": "liam_philippe",
+      "email": "liam.philippe@ynov.com",
+      "role": "USER",
+      "wins": 78,
+      "losses": 122,
+      "draws": 24,
+      "elo": 450.578
+    },
+    {
+      "name": "emma_faure",
+      "email": "emma.faure@ynov.com",
+      "role": "USER",
+      "wins": 104,
+      "losses": 152,
+      "draws": 20,
+      "elo": 439.885
+    },
+    {
+      "name": "leo_clement",
+      "email": "leo.clement@ynov.com",
+      "role": "USER",
+      "wins": 178,
+      "losses": 236,
+      "draws": 62,
+      "elo": 432.289
+    },
+    {
+      "name": "chris_laurent",
+      "email": "chris.laurent@ynov.com",
+      "role": "USER",
+      "wins": 94,
+      "losses": 142,
+      "draws": 28,
+      "elo": 413.466
+    },
+    {
+      "name": "morgan_nakamura",
+      "email": "morgan.nakamura@ynov.com",
+      "role": "USER",
+      "wins": 172,
+      "losses": 230,
+      "draws": 46,
+      "elo": 405.468
+    },
+    {
+      "name": "diego_philippe",
+      "email": "diego.philippe@ynov.com",
+      "role": "USER",
+      "wins": 90,
+      "losses": 140,
+      "draws": 24,
+      "elo": 404.247
+    },
+    {
+      "name": "lucas_andre",
+      "email": "lucas.andre@ynov.com",
+      "role": "USER",
+      "wins": 92,
+      "losses": 142,
+      "draws": 12,
+      "elo": 390.845
+    },
+    {
+      "name": "youssef_robert",
+      "email": "youssef.robert@ynov.com",
+      "role": "USER",
+      "wins": 188,
+      "losses": 256,
+      "draws": 48,
+      "elo": 302.533
+    },
+    {
+      "name": "riley_lopez",
+      "email": "riley.lopez@ynov.com",
+      "role": "USER",
+      "wins": 72,
+      "losses": 130,
+      "draws": 16,
+      "elo": 287.235
+    },
+    {
+      "name": "eric_bernard",
+      "email": "eric.bernard@ynov.com",
+      "role": "USER",
+      "wins": 84,
+      "losses": 148,
+      "draws": 28,
+      "elo": 194.692
+    },
+    {
+      "name": "taylor_nakamura",
+      "email": "taylor.nakamura@ynov.com",
+      "role": "USER",
+      "wins": 302,
+      "losses": 396,
+      "draws": 68,
+      "elo": 93.6879
+    }
+  ]
+}

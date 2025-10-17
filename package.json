@@ -11,6 +11,9 @@
     "db:push": "dotenv -e .env.local -- prisma db push --force-reset",
     "db:migrate": "dotenv -e .env.local -- prisma migrate dev",
     "db:seed": "dotenv -e .env.local -- tsx prisma/seed.ts",
+    "db:seed-users": "dotenv -e .env.local -- tsx prisma/seed_users.ts",
+    "db:seed-tables": "dotenv -e .env.local -- tsx prisma/seed_tables.ts",
+    "db:seed-reservations": "dotenv -e .env.local -- tsx prisma/seed_reservations.ts",
     "db:studio": "prisma studio"
   },
   "prisma": {
@@ -47,6 +50,7 @@
     "@radix-ui/react-tooltip": "^1.2.8",
     "@react-three/drei": "^10.7.6",
     "@react-three/fiber": "^9.4.0",
+    "@tanstack/react-table": "^8.21.3",
     "bcryptjs": "^3.0.2",
     "better-auth": "^1.3.27",
     "class-variance-authority": "^0.7.1",
@@ -80,6 +84,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/three": "^0.180.0",
     "dotenv-cli": "^10.0.0",
     "eslint": "^9",
     "eslint-config-next": "15.5.5",
