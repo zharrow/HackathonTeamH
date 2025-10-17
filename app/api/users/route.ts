@@ -1,11 +1,10 @@
-import { NextRequest } from "next/server";
 import { prisma } from "@/lib/prisma";
 
 /**
  * GET /api/users
  * Get list of users for player selection
  */
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     const users = await prisma.user.findMany({
       where: {

@@ -86,7 +86,7 @@ export function FinishGameDialog({
         const data = await response.json();
         toast.error("Erreur", { description: data.error });
       }
-    } catch (error) {
+    } catch {
       toast.error("Erreur réseau");
     } finally {
       setIsLoading(false);
@@ -117,7 +117,10 @@ export function FinishGameDialog({
           <div className="space-y-4">
             {/* Red Team Score */}
             <div className="space-y-2">
-              <Label htmlFor="redScore" className="text-red-400 font-subheading">
+              <Label
+                htmlFor="redScore"
+                className="text-red-400 font-subheading"
+              >
                 Score Équipe Rouge
               </Label>
               <Input
@@ -136,7 +139,10 @@ export function FinishGameDialog({
 
             {/* Blue Team Score */}
             <div className="space-y-2">
-              <Label htmlFor="blueScore" className="text-blue-400 font-subheading">
+              <Label
+                htmlFor="blueScore"
+                className="text-blue-400 font-subheading"
+              >
                 Score Équipe Bleue
               </Label>
               <Input

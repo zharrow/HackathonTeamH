@@ -83,7 +83,7 @@ export async function POST(request: NextRequest) {
       redDefenseId,
       redAttackId,
       blueDefenseId,
-      blueAttackId
+      blueAttackId,
     } = body;
 
     if (!babyfootId || !partyDate || !format) {
@@ -102,10 +102,7 @@ export async function POST(request: NextRequest) {
     });
 
     if (!babyfoot) {
-      return Response.json(
-        { error: "Babyfoot non trouvé" },
-        { status: 404 }
-      );
+      return Response.json({ error: "Babyfoot non trouvé" }, { status: 404 });
     }
 
     if (babyfoot.status === "MAINTENANCE") {
