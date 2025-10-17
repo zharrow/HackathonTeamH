@@ -214,6 +214,7 @@ Toutes les clés primaires et étrangères sont de type **UUID**, garantissant u
 > ✅ Tous les identifiants (`id`, `*_id`) sont de type **UUID**.  
 > Ce modèle garantit la cohérence, la sécurité et la scalabilité de la base de données.
 
+![Modèle Conceptuel de Données - MCD](7859bfa1-1886-4ad2-8652-c55a0ec40122.png)
 
 Pour initialiser la base, nous avons intégré les données issues du fichier CSV de départ à l’aide de **scripts Python** spécialement développés. Ces scripts ont permis de :
 
