@@ -18,9 +18,9 @@ export default async function HomePage() {
   const t = await getTranslations();
 
   // Fetch data in parallel
-  let babyfoots:any = [];
-  let topPlayers:any = [];
-  let userStats:any = null;
+  let babyfoots: Awaited<ReturnType<typeof getBabyfoots>> = [];
+  let topPlayers: Awaited<ReturnType<typeof getTopPlayers>> = [];
+  let userStats: Awaited<ReturnType<typeof getUserStats>> | null = null;
 
   if (session) {
     [babyfoots, topPlayers, userStats] = await Promise.all([
@@ -29,7 +29,7 @@ export default async function HomePage() {
       getUserStats(session.user.id),
     ]);
   }
-  
+
   return (
     <main className="relative min-h-screen bg-[#0D0D0D] overflow-hidden">
       {/* Background dot-grid avec couleurs Brand */}
@@ -52,15 +52,13 @@ export default async function HomePage() {
         <div className="relative z-10 container mx-auto px-4 py-16">
           <div className="max-w-4xl mx-auto text-center space-y-8">
             <h1 className="font-heading text-7xl text-transparent bg-clip-text bg-gradient-to-r from-[#00FFF7] via-[#FF00FF] to-[#00FFF7] animate-gradient-x">
-              {t('home.title')}
+              {t("home.title")}
             </h1>
             <p className="font-subheading text-2xl text-[#B0B0B0]">
-              {t('home.subtitle')}
+              {t("home.subtitle")}
             </p>
             <div className="pt-8">
-              <p className="font-body text-[#B0B0B0]">
-                {t('home.signInCta')}
-              </p>
+              <p className="font-body text-[#B0B0B0]">{t("home.signInCta")}</p>
             </div>
           </div>
         </div>
@@ -76,7 +74,8 @@ export default async function HomePage() {
                 Mes Réservations
               </h2>
               <p className="font-body text-[#B0B0B0]">
-                Gérez vos réservations et votre position dans la file d&apos;attente
+                Gérez vos réservations et votre position dans la file
+                d&apos;attente
               </p>
             </div>
             <MyReservations />
@@ -86,10 +85,10 @@ export default async function HomePage() {
           <section>
             <div className="mb-6">
               <h2 className="font-heading text-4xl text-[#F2F2F2] mb-2 text-glow-cyan">
-                {t('home.availableTables')}
+                {t("home.availableTables")}
               </h2>
               <p className="font-body text-[#B0B0B0]">
-                {t('home.availableTablesDesc')}
+                {t("home.availableTablesDesc")}
               </p>
             </div>
             <BabyfootCards babyfoots={babyfoots} />

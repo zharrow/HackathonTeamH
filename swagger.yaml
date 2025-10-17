@@ -1,0 +1,1133 @@
+openapi: 3.0.3
+info:
+  title: Babyfoot Management API
+  description: API pour la gestion des réservations de babyfoot avec système de files d'attente
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+    description: Serveur de développement
+  - url: https://404infra.aws.corentinptrl.dev
+    description: Serveur de production
+
+tags:
+  - name: Auth
+    description: Authentification et gestion des utilisateurs
+  - name: Reservations
+    description: Gestion des réservations (utilisateurs)
+  - name: Admin
+    description: Administration du système
+  - name: Tables
+    description: Gestion des tables de babyfoot
+  - name: Users
+    description: Gestion des utilisateurs
+  - name: Stats
+    description: Statistiques du système
+  - name: Queue
+    description: Système de files d'attente
+
+paths:
+  # ===== AUTHENTICATION =====
+  /api/auth/register:
+    post:
+      tags: [Auth]
+      summary: Inscription d'un nouvel utilisateur
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, email, password]
+              properties:
+                name:
+                  type: string
+                  example: "John Doe"
+                email:
+                  type: string
+                  format: email
+                  example: "john@example.com"
+                password:
+                  type: string
+                  minLength: 8
+                  example: "password123"
+      responses:
+        "201":
+          description: Utilisateur créé avec succès
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+        "400":
+          description: Données invalides
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "409":
+          description: Email déjà utilisé
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  # ===== USER RESERVATIONS =====
+  /api/reservations:
+    get:
+      tags: [Reservations]
+      summary: Lister les réservations de l'utilisateur connecté
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum:
+              [PENDING, CONFIRMED, IN_PROGRESS, FINISHED, CANCELLED, EXPIRED]
+      responses:
+        "200":
+          description: Liste des réservations
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Reservation"
+                  pagination:
+                    $ref: "#/components/schemas/Pagination"
+        "401":
+          description: Non authentifié
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+    post:
+      tags: [Reservations]
+      summary: Créer une nouvelle réservation
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateReservationRequest"
+      responses:
+        "201":
+          description: Réservation créée
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    $ref: "#/components/schemas/Reservation"
+                  queuePosition:
+                    type: integer
+                    description: Position dans la file d'attente (0 si confirmée)
+                  message:
+                    type: string
+        "400":
+          description: Données invalides
+        "401":
+          description: Non authentifié
+        "409":
+          description: Créneau déjà occupé
+
+  /api/reservations/{id}:
+    get:
+      tags: [Reservations]
+      summary: Obtenir une réservation par ID
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Réservation trouvée
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    $ref: "#/components/schemas/Reservation"
+        "404":
+          description: Réservation non trouvée
+        "401":
+          description: Non authentifié
+
+    patch:
+      tags: [Reservations]
+      summary: Mettre à jour le statut d'une réservation
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [action]
+              properties:
+                action:
+                  type: string
+                  enum: [start, finish]
+                finalScoreRed:
+                  type: integer
+                  minimum: 0
+                finalScoreBlue:
+                  type: integer
+                  minimum: 0
+      responses:
+        "200":
+          description: Réservation mise à jour
+        "400":
+          description: Action invalide
+        "401":
+          description: Non authentifié
+        "403":
+          description: Non autorisé
+        "404":
+          description: Réservation non trouvée
+
+    delete:
+      tags: [Reservations]
+      summary: Annuler une réservation
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Réservation annulée
+        "400":
+          description: Impossible d'annuler
+        "401":
+          description: Non authentifié
+        "403":
+          description: Non autorisé
+        "404":
+          description: Réservation non trouvée
+
+  # ===== QUEUE SYSTEM =====
+  /api/queue:
+    get:
+      tags: [Queue]
+      summary: Obtenir la position dans la file d'attente
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: babyfootId
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: partyDate
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date-time
+      responses:
+        "200":
+          description: Position dans la file
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  position:
+                    type: integer
+                  totalInQueue:
+                    type: integer
+        "401":
+          description: Non authentifié
+
+  # ===== ADMIN ROUTES =====
+  /api/admin/reservations:
+    get:
+      tags: [Admin]
+      summary: Lister toutes les réservations (Admin)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+        - name: babyfootId
+          in: query
+          schema:
+            type: string
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum:
+              [PENDING, CONFIRMED, IN_PROGRESS, FINISHED, CANCELLED, EXPIRED]
+        - name: viewMode
+          in: query
+          schema:
+            type: string
+            enum: [day, week, month]
+        - name: currentDate
+          in: query
+          schema:
+            type: string
+            format: date-time
+      responses:
+        "200":
+          description: Liste des réservations
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Reservation"
+                  pagination:
+                    $ref: "#/components/schemas/Pagination"
+                  dateRange:
+                    $ref: "#/components/schemas/DateRange"
+        "401":
+          description: Non authentifié
+        "403":
+          description: Accès non autorisé
+
+    post:
+      tags: [Admin]
+      summary: Créer une réservation (Admin)
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateReservationRequest"
+      responses:
+        "201":
+          description: Réservation créée
+        "400":
+          description: Données invalides
+        "401":
+          description: Non authentifié
+        "403":
+          description: Accès non autorisé
+
+  /api/admin/reservations/{id}:
+    get:
+      tags: [Admin]
+      summary: Obtenir une réservation par ID (Admin)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Réservation trouvée
+        "404":
+          description: Réservation non trouvée
+        "401":
+          description: Non authentifié
+        "403":
+          description: Accès non autorisé
+
+    patch:
+      tags: [Admin]
+      summary: Mettre à jour une réservation (Admin)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateReservationRequest"
+      responses:
+        "200":
+          description: Réservation mise à jour
+        "400":
+          description: Données invalides
+        "401":
+          description: Non authentifié
+        "403":
+          description: Accès non autorisé
+        "404":
+          description: Réservation non trouvée
+        "409":
+          description: Conflit de créneau
+
+    delete:
+      tags: [Admin]
+      summary: Supprimer une réservation (Admin)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Réservation supprimée
+        "401":
+          description: Non authentifié
+        "403":
+          description: Accès non autorisé
+        "404":
+          description: Réservation non trouvée
+
+  /api/admin/reservations/queues:
+    get:
+      tags: [Admin]
+      summary: Obtenir toutes les files d'attente
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: babyfootId
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Files d'attente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/QueueGroup"
+                  totalPending:
+                    type: integer
+        "401":
+          description: Non authentifié
+        "403":
+          description: Accès non autorisé
+
+  # ===== TABLES MANAGEMENT =====
+  /api/admin/tables:
+    get:
+      tags: [Tables]
+      summary: Lister toutes les tables
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          schema:
+            type: integer
+        - name: search
+          in: query
+          schema:
+            type: string
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [AVAILABLE, OCCUPIED, MAINTENANCE]
+      responses:
+        "200":
+          description: Liste des tables
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/BabyfootTable"
+                  pagination:
+                    $ref: "#/components/schemas/Pagination"
+        "401":
+          description: Non authentifié
+        "403":
+          description: Accès non autorisé
+
+    post:
+      tags: [Tables]
+      summary: Créer une nouvelle table
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateTableRequest"
+      responses:
+        "201":
+          description: Table créée
+        "400":
+          description: Données invalides
+        "401":
+          description: Non authentifié
+        "403":
+          description: Accès non autorisé
+
+  /api/admin/tables/{id}:
+    get:
+      tags: [Tables]
+      summary: Obtenir une table par ID
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Table trouvée
+        "404":
+          description: Table non trouvée
+        "401":
+          description: Non authentifié
+        "403":
+          description: Accès non autorisé
+
+    patch:
+      tags: [Tables]
+      summary: Mettre à jour une table
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateTableRequest"
+      responses:
+        "200":
+          description: Table mise à jour
+        "400":
+          description: Données invalides
+        "401":
+          description: Non authentifié
+        "403":
+          description: Accès non autorisé
+        "404":
+          description: Table non trouvée
+
+    delete:
+      tags: [Tables]
+      summary: Supprimer une table
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Table supprimée
+        "401":
+          description: Non authentifié
+        "403":
+          description: Accès non autorisé
+        "404":
+          description: Table non trouvée
+
+  # ===== USERS MANAGEMENT =====
+  /api/admin/users:
+    get:
+      tags: [Users]
+      summary: Lister tous les utilisateurs
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+        - name: search
+          in: query
+          schema:
+            type: string
+        - name: role
+          in: query
+          schema:
+            type: string
+            enum: [USER, ADMIN]
+      responses:
+        "200":
+          description: Liste des utilisateurs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/User"
+                  pagination:
+                    $ref: "#/components/schemas/Pagination"
+        "401":
+          description: Non authentifié
+        "403":
+          description: Accès non autorisé
+
+  /api/admin/users/{id}:
+    get:
+      tags: [Users]
+      summary: Obtenir un utilisateur par ID
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Utilisateur trouvé
+        "404":
+          description: Utilisateur non trouvé
+        "401":
+          description: Non authentifié
+        "403":
+          description: Accès non autorisé
+
+    delete:
+      tags: [Users]
+      summary: Supprimer un utilisateur
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Utilisateur supprimé
+        "401":
+          description: Non authentifié
+        "403":
+          description: Accès non autorisé
+        "404":
+          description: Utilisateur non trouvé
+
+  /api/admin/users/{id}/role:
+    patch:
+      tags: [Users]
+      summary: Modifier le rôle d'un utilisateur
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [role]
+              properties:
+                role:
+                  type: string
+                  enum: [USER, ADMIN]
+      responses:
+        "200":
+          description: Rôle modifié
+        "400":
+          description: Données invalides
+        "401":
+          description: Non authentifié
+        "403":
+          description: Accès non autorisé
+        "404":
+          description: Utilisateur non trouvé
+
+  # ===== STATISTICS =====
+  /api/admin/stats/reservations:
+    get:
+      tags: [Stats]
+      summary: Statistiques des réservations
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Statistiques des réservations
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Reservation"
+        "401":
+          description: Non authentifié
+        "403":
+          description: Accès non autorisé
+
+  /api/admin/stats/tables:
+    get:
+      tags: [Stats]
+      summary: Statistiques des tables
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Statistiques des tables
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/BabyfootTable"
+        "401":
+          description: Non authentifié
+        "403":
+          description: Accès non autorisé
+
+  /api/admin/stats/users:
+    get:
+      tags: [Stats]
+      summary: Statistiques des utilisateurs
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Statistiques des utilisateurs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/User"
+        "401":
+          description: Non authentifié
+        "403":
+          description: Accès non autorisé
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    SuccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: "Opération réussie"
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "Erreur de validation"
+        details:
+          type: string
+          example: "Détails de l'erreur"
+
+    Pagination:
+      type: object
+      properties:
+        page:
+          type: integer
+          example: 1
+        limit:
+          type: integer
+          example: 10
+        total:
+          type: integer
+          example: 100
+        totalPages:
+          type: integer
+          example: 10
+
+    DateRange:
+      type: object
+      properties:
+        start:
+          type: string
+          format: date-time
+        end:
+          type: string
+          format: date-time
+        viewMode:
+          type: string
+          enum: [day, week, month]
+        currentDate:
+          type: string
+          format: date-time
+
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "uuid"
+        name:
+          type: string
+          example: "John Doe"
+        email:
+          type: string
+          format: email
+          example: "john@example.com"
+        image:
+          type: string
+          nullable: true
+          example: "https://example.com/avatar.jpg"
+        role:
+          type: string
+          enum: [USER, ADMIN]
+          example: "USER"
+        elo:
+          type: integer
+          example: 1000
+        wins:
+          type: integer
+          example: 5
+        losses:
+          type: integer
+          example: 3
+        draws:
+          type: integer
+          example: 2
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+          nullable: true
+
+    BabyfootTable:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "uuid"
+        name:
+          type: string
+          example: "Table 1"
+        status:
+          type: string
+          enum: [AVAILABLE, OCCUPIED, MAINTENANCE]
+          example: "AVAILABLE"
+        location:
+          type: string
+          nullable: true
+          example: "Salle de sport"
+        condition:
+          type: string
+          enum: [EXCELLENT, BON, MOYEN, MAINTENANCE]
+          nullable: true
+          example: "EXCELLENT"
+        _count:
+          type: object
+          properties:
+            reservations:
+              type: integer
+              example: 15
+            queue:
+              type: integer
+              example: 3
+
+    Reservation:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "uuid"
+        babyfootId:
+          type: string
+          example: "uuid"
+        partyDate:
+          type: string
+          format: date-time
+          example: "2024-01-15T14:00:00Z"
+        status:
+          type: string
+          enum: [PENDING, CONFIRMED, IN_PROGRESS, FINISHED, CANCELLED, EXPIRED]
+          example: "CONFIRMED"
+        extended:
+          type: boolean
+          example: false
+        tableCondition:
+          type: string
+          enum: [EXCELLENT, BON, MOYEN, MAINTENANCE]
+          nullable: true
+        ballType:
+          type: string
+          enum: [STANDARD, PRO, COMPETITION]
+          nullable: true
+        gameDuration:
+          type: string
+          format: time
+          nullable: true
+        finalScoreRed:
+          type: integer
+          nullable: true
+          example: 5
+        finalScoreBlue:
+          type: integer
+          nullable: true
+          example: 3
+        result:
+          type: string
+          enum: [WIN, LOSS, DRAW]
+          nullable: true
+        format:
+          type: string
+          enum: [ONE_VS_ONE, ONE_VS_TWO, TWO_VS_TWO]
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+        babyfoot:
+          $ref: "#/components/schemas/BabyfootTable"
+        referee:
+          $ref: "#/components/schemas/User"
+        redDefense:
+          $ref: "#/components/schemas/User"
+        redAttack:
+          $ref: "#/components/schemas/User"
+        blueDefense:
+          $ref: "#/components/schemas/User"
+        blueAttack:
+          $ref: "#/components/schemas/User"
+
+    CreateReservationRequest:
+      type: object
+      required: [babyfootId, partyDate]
+      properties:
+        babyfootId:
+          type: string
+          example: "uuid"
+        partyDate:
+          type: string
+          format: date-time
+          example: "2024-01-15T14:00:00Z"
+        refereeId:
+          type: string
+          nullable: true
+          example: "uuid"
+        redDefenseId:
+          type: string
+          nullable: true
+          example: "uuid"
+        redAttackId:
+          type: string
+          nullable: true
+          example: "uuid"
+        blueDefenseId:
+          type: string
+          nullable: true
+          example: "uuid"
+        blueAttackId:
+          type: string
+          nullable: true
+          example: "uuid"
+
+    UpdateReservationRequest:
+      type: object
+      properties:
+        babyfootId:
+          type: string
+        partyDate:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum: [PENDING, CONFIRMED, IN_PROGRESS, FINISHED, CANCELLED, EXPIRED]
+        refereeId:
+          type: string
+          nullable: true
+        redDefenseId:
+          type: string
+          nullable: true
+        redAttackId:
+          type: string
+          nullable: true
+        blueDefenseId:
+          type: string
+          nullable: true
+        blueAttackId:
+          type: string
+          nullable: true
+
+    CreateTableRequest:
+      type: object
+      required: [name]
+      properties:
+        name:
+          type: string
+          example: "Table 1"
+        location:
+          type: string
+          nullable: true
+          example: "Salle de sport"
+        condition:
+          type: string
+          enum: [EXCELLENT, BON, MOYEN, MAINTENANCE]
+          nullable: true
+        status:
+          type: string
+          enum: [AVAILABLE, OCCUPIED, MAINTENANCE]
+          default: "AVAILABLE"
+
+    UpdateTableRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        location:
+          type: string
+          nullable: true
+        condition:
+          type: string
+          enum: [EXCELLENT, BON, MOYEN, MAINTENANCE]
+          nullable: true
+        status:
+          type: string
+          enum: [AVAILABLE, OCCUPIED, MAINTENANCE]
+
+    QueueGroup:
+      type: object
+      properties:
+        babyfootId:
+          type: string
+          example: "uuid"
+        babyfootName:
+          type: string
+          example: "Table 1"
+        slots:
+          type: array
+          items:
+            type: object
+            properties:
+              time:
+                type: string
+                format: date-time
+              queueLength:
+                type: integer
+                example: 3
+              reservations:
+                type: array
+                items:
+                  allOf:
+                    - $ref: "#/components/schemas/Reservation"
+                    - type: object
+                      properties:
+                        queuePosition:
+                          type: integer
+                          example: 1

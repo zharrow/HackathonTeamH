@@ -4,7 +4,15 @@ import { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Clock, MapPin, Users, XCircle, Play, CheckCircle, Loader2 } from "lucide-react";
+import {
+  Clock,
+  MapPin,
+  Users,
+  XCircle,
+  Play,
+  CheckCircle,
+  Loader2,
+} from "lucide-react";
 import { toast } from "sonner";
 import { FinishGameDialog } from "./FinishGameDialog";
 
@@ -38,7 +46,9 @@ export function MyReservations() {
   const [isLoading, setIsLoading] = useState(true);
   const [actionLoading, setActionLoading] = useState<string | null>(null);
   const [finishDialogOpen, setFinishDialogOpen] = useState(false);
-  const [selectedReservationId, setSelectedReservationId] = useState<string | null>(null);
+  const [selectedReservationId, setSelectedReservationId] = useState<
+    string | null
+  >(null);
 
   useEffect(() => {
     fetchData();
@@ -92,7 +102,7 @@ export function MyReservations() {
         const data = await response.json();
         toast.error("Erreur", { description: data.error });
       }
-    } catch (error) {
+    } catch {
       toast.error("Erreur réseau");
     } finally {
       setActionLoading(null);
@@ -115,7 +125,7 @@ export function MyReservations() {
         const data = await response.json();
         toast.error("Erreur", { description: data.error });
       }
-    } catch (error) {
+    } catch {
       toast.error("Erreur réseau");
     } finally {
       setActionLoading(null);
@@ -135,16 +145,18 @@ export function MyReservations() {
     const statusMap: Record<string, { label: string; className: string }> = {
       CONFIRMED: { label: "Confirmé", className: "bg-[#00FF6C] text-black" },
       IN_PROGRESS: { label: "En cours", className: "bg-[#00FFF7] text-black" },
-      PENDING: { label: "En attente", className: "bg-[#FF00FF]/20 text-[#FF00FF]" },
+      PENDING: {
+        label: "En attente",
+        className: "bg-[#FF00FF]/20 text-[#FF00FF]",
+      },
     };
 
-    const config = statusMap[status] || { label: status, className: "bg-[#B0B0B0]" };
+    const config = statusMap[status] || {
+      label: status,
+      className: "bg-[#B0B0B0]",
+    };
 
-    return (
-      <Badge className={config.className}>
-        {config.label}
-      </Badge>
-    );
+    return <Badge className={config.className}>{config.label}</Badge>;
   };
 
   const formatDate = (dateString: string) => {
@@ -250,7 +262,9 @@ export function MyReservations() {
                         <Button
                           size="sm"
                           variant="destructive"
-                          onClick={() => handleCancelReservation(reservation.id)}
+                          onClick={() =>
+                            handleCancelReservation(reservation.id)
+                          }
                           disabled={actionLoading === reservation.id}
                         >
                           {actionLoading === reservation.id ? (
@@ -277,7 +291,7 @@ export function MyReservations() {
         <Card className="bg-[#0D0D0D] border-[#FF00FF]/20">
           <CardHeader>
             <CardTitle className="font-subheading text-[#FF00FF]">
-              File d'attente
+              File d&apos;attente
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -293,8 +307,11 @@ export function MyReservations() {
                         {entry.babyfoot.name}
                       </h3>
                       <p className="text-sm text-[#B0B0B0] mt-1">
-                        Position: <span className="text-[#FF00FF] font-bold">#{entry.queuePosition}</span>
-                        {" "} • Temps estimé: {entry.estimatedWaitTime} min
+                        Position:{" "}
+                        <span className="text-[#FF00FF] font-bold">
+                          #{entry.queuePosition}
+                        </span>{" "}
+                        • Temps estimé: {entry.estimatedWaitTime} min
                       </p>
                       <p className="text-xs text-[#B0B0B0] mt-1">
                         <Clock className="w-3 h-3 inline mr-1" />

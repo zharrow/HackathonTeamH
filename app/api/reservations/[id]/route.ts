@@ -9,7 +9,7 @@ import { headers } from "next/headers";
  */
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await auth.api.getSession({
@@ -20,7 +20,7 @@ export async function DELETE(
       return Response.json({ error: "Non authentifié" }, { status: 401 });
     }
 
-    const reservationId = params.id;
+    const { id: reservationId } = await params;
     const userId = session.user.id;
 
     // Find reservation
@@ -59,7 +59,9 @@ export async function DELETE(
       );
     }
 
-    const wasConfirmed = reservation.status === "CONFIRMED" || reservation.status === "IN_PROGRESS";
+    const wasConfirmed =
+      reservation.status === "CONFIRMED" ||
+      reservation.status === "IN_PROGRESS";
 
     // Cancel the reservation
     await prisma.reservation.update({
@@ -128,7 +130,7 @@ export async function DELETE(
  */
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await auth.api.getSession({
@@ -139,7 +141,7 @@ export async function PATCH(
       return Response.json({ error: "Non authentifié" }, { status: 401 });
     }
 
-    const reservationId = params.id;
+    const { id: reservationId } = await params;
     const userId = session.user.id;
     const body = await request.json();
     const { action, finalScoreRed, finalScoreBlue } = body; // 'start' | 'finish'
@@ -176,7 +178,9 @@ export async function PATCH(
       // Start the game
       if (reservation.status !== "CONFIRMED") {
         return Response.json(
-          { error: "Seules les réservations confirmées peuvent être démarrées" },
+          {
+            error: "Seules les réservations confirmées peuvent être démarrées",
+          },
           { status: 400 }
         );
       }
@@ -217,14 +221,21 @@ export async function PATCH(
           finalScoreBlue > 10
         ) {
           return Response.json(
-            { error: "Scores invalides. Les scores doivent être entre 0 et 10" },
+            {
+              error: "Scores invalides. Les scores doivent être entre 0 et 10",
+            },
             { status: 400 }
           );
         }
       }
 
       // Update reservation with FINISHED status and scores
-      const updateData: any = {
+      const updateData: {
+        status: "FINISHED";
+        finalScoreRed?: number;
+        finalScoreBlue?: number;
+        result?: "WIN" | "LOSS" | "DRAW";
+      } = {
         status: "FINISHED",
       };
 
@@ -257,10 +268,7 @@ export async function PATCH(
             gte: now,
           },
         },
-        orderBy: [
-          { partyDate: "asc" },
-          { createdAt: "asc" },
-        ],
+        orderBy: [{ partyDate: "asc" }, { createdAt: "asc" }],
       });
 
       if (nextPendingReservation) {
@@ -296,19 +304,17 @@ export async function PATCH(
       });
     }
 
-    return Response.json(
-      { error: "Action invalide" },
-      { status: 400 }
-    );
+    return Response.json({ error: "Action invalide" }, { status: 400 });
   } catch (error) {
     console.error("Error updating reservation:", error);
     // Return more detailed error for debugging
-    const errorMessage = error instanceof Error ? error.message : "Unknown error";
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error";
     return Response.json(
       {
         error: "Erreur lors de la mise à jour de la réservation",
         details: errorMessage,
-        stack: error instanceof Error ? error.stack : undefined
+        stack: error instanceof Error ? error.stack : undefined,
       },
       { status: 500 }
     );
