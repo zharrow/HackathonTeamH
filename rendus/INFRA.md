@@ -89,9 +89,45 @@ Voici une démonstration complète du processus de déploiement depuis l'initial
   - Gestion des accès (IAM, rôles, permissions).
 
 - **Base de données** :
+### Objectif
+Mettre en place une base de données PostgreSQL managée sur Amazon RDS, déployée automatiquement via Terraform
 
-  - Déploiement d’une base de données relationnelle ou NoSQL.
-  - Sauvegardes régulières et restauration des données.
+---
+
+### Déploiement
+L’infrastructure est déployée via Terraform, assurant une configuration facilement reproductible.
+
+Deux ressources principales sont créées :
+
+- **aws_db_subnet_group** : associe la base à des subnets privés du VPC.  
+- **aws_db_instance** : crée l’instance PostgreSQL avec les paramètres du projet.
+
+
+### Réseau et accès
+
+- L’instance RDS PostgreSQL est déployée dans le VPC du projet, et en dehors du cluster ECS.  
+- Elle est rattachée aux subnets privés définis dans le `db_subnet_group`.  
+- Le port 5432 est restreint aux services internes autorisés : ECS, bastion et Power BI.  
+- Une NAT Gateway placée dans un subnet public permet les connexions sortantes vers AWS sans exposition directe à Internet.  
+- Le paramètre `publicly_accessible` est activé uniquement pour la phase de développement — le désactiver en production.
+
+### Sécurité
+
+- **Isolation réseau** : hébergement dans des subnets privés du VPC.  
+- **Contrôle d’accès** : Security Groups limitant le trafic entrant au port `5432`.  
+- **Authentification** : utiliser des variables Terraform ou AWS Secrets Manager — pas de credentials en clair.  
+- **Chiffrement** : activer `storage_encrypted` en production.  
+- **Connexion sécurisée** : forcer SSL/TLS côté client (Prisma, Power BI).
+
+
+### Intégration
+
+- Backend : connexion via Prisma ORM
+- Power BI : connexion directe à l’endpoint RDS pour analyses. Autoriser l’IP ou le Security Group approprié et vérifier la configuration SSL.
+- HeidiSQL : outil de test et visualisation manuelle en développement. Restreindre l’accès et ne pas stocker les identifiants en clair.
+
+## Supervision et maintenance
+- CloudWatch : suivi CPU, connexions, IOPS, stockage.
 
 - **Scalabilité** :
 
