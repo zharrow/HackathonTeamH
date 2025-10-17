@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { signUp } from "@/lib/auth-client";
+import { signUp, signIn } from "@/lib/auth-client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -16,6 +16,7 @@ import {
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { toast } from "sonner";
+import { Github } from "lucide-react";
 
 export default function SignUpPage() {
   const [name, setName] = useState("");
@@ -46,6 +47,21 @@ export default function SignUpPage() {
     }
   };
 
+  const handleGitHubSignUp = async () => {
+    setIsLoading(true);
+    try {
+      await signIn.social({
+        provider: "github",
+        callbackURL: "/",
+      });
+    } catch (error) {
+      console.error("GitHub sign up error:", error);
+      toast.error(t("signUpError"));
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
       <Card className="w-full max-w-md">
@@ -54,6 +70,27 @@ export default function SignUpPage() {
           <CardDescription>{t("description")}</CardDescription>
         </CardHeader>
         <CardContent className="grid gap-4">
+          <div className="grid gap-2">
+            <Button
+              variant="outline"
+              onClick={handleGitHubSignUp}
+              disabled={isLoading}
+              className="w-full"
+            >
+              <Github className="mr-2 h-4 w-4" />
+              {t("signInWithGithub")}
+            </Button>
+          </div>
+          <div className="relative">
+            <div className="absolute inset-0 flex items-center">
+              <span className="w-full border-t" />
+            </div>
+            <div className="relative flex justify-center text-xs uppercase">
+              <span className="bg-background px-2 text-muted-foreground">
+                {t("orContinueWith")}
+              </span>
+            </div>
+          </div>
           <form onSubmit={handleSignUp} className="grid gap-4">
             <div className="grid gap-2">
               <Label htmlFor="name">{t("nameLabel")}</Label>
