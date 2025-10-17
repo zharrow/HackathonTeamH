@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { AdvancedDataTable } from "@/components/admin/advanced-data-table";
 import { DeleteAlertDialog } from "@/components/admin/delete-alert-dialog";
+import { ServerPagination } from "@/components/admin/server-pagination";
 import {
   PlayerStats,
   PlayerFilters,
@@ -21,6 +22,7 @@ import { usePlayerStats } from "@/hooks/use-player-stats";
 export default function PlayersPage() {
   const t = useTranslations("user");
   const [players, setPlayers] = useState<Player[]>([]);
+  const [allPlayers, setAllPlayers] = useState<Player[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [selectedPlayer, setSelectedPlayer] = useState<Player | null>(null);
@@ -38,20 +40,30 @@ export default function PlayersPage() {
   });
 
   // Custom hooks for filtering and stats
-  const {
-    searchQuery,
-    setSearchQuery,
-    roleFilter,
-    setRoleFilter,
-    filteredPlayers,
-  } = usePlayerFilters(players);
+  const { searchQuery, setSearchQuery, roleFilter, setRoleFilter } =
+    usePlayerFilters(players);
 
-  const stats = usePlayerStats(players);
+  const stats = usePlayerStats(allPlayers); // Utiliser allPlayers pour les stats
 
-  // Fetch players from API
+  // Fetch all players for stats
+  const fetchAllPlayers = useCallback(async () => {
+    try {
+      const response = await fetch("/api/admin/stats/users");
+      const data = await response.json();
+      if (data.success) {
+        setAllPlayers(data.data);
+      }
+    } catch (error) {
+      console.error("Error fetching all players for stats:", error);
+    }
+  }, []);
+
+  // Fetch players from API (paginated)
   const fetchPlayers = useCallback(async () => {
     try {
-      const response = await fetch(`/api/admin/users?page=${page}&limit=1000`);
+      const response = await fetch(
+        `/api/admin/users?page=${page}&limit=${pagination.limit}`
+      );
       const data = await response.json();
       if (data.success) {
         setPlayers(data.data);
@@ -64,16 +76,17 @@ export default function PlayersPage() {
       setIsLoading(false);
       setIsRefreshing(false);
     }
-  }, [page, t]);
+  }, [page, pagination.limit, t]);
 
   useEffect(() => {
-    fetchPlayers();
-  }, [fetchPlayers]);
+    fetchAllPlayers(); // Récupérer toutes les données pour les stats
+    fetchPlayers(); // Récupérer les données paginées
+  }, [fetchAllPlayers, fetchPlayers]);
 
   // Handlers
   const handleRefresh = async () => {
     setIsRefreshing(true);
-    await fetchPlayers();
+    await Promise.all([fetchAllPlayers(), fetchPlayers()]);
   };
 
   const handleChangeRole = (player: Player) => {
@@ -140,6 +153,16 @@ export default function PlayersPage() {
     }
   };
 
+  // Pagination handlers
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+  };
+
+  const handlePageSizeChange = (newPageSize: number) => {
+    setPagination((prev) => ({ ...prev, limit: newPageSize }));
+    setPage(1); // Reset to first page when changing page size
+  };
+
   // Define table columns
   const columns = getPlayerColumns({
     t,
@@ -177,7 +200,7 @@ export default function PlayersPage() {
       {!isLoading && <PlayerStats stats={stats} />}
 
       {/* Filters and Search */}
-      {!isLoading && players.length > 0 && (
+      {!isLoading && allPlayers.length > 0 && (
         <PlayerFilters
           searchQuery={searchQuery}
           onSearchChange={setSearchQuery}
@@ -187,14 +210,24 @@ export default function PlayersPage() {
       )}
 
       {/* Data Table or Empty State */}
-      {!isLoading && players.length === 0 ? (
+      {!isLoading && allPlayers.length === 0 ? (
         <PlayerEmptyState />
       ) : (
-        <AdvancedDataTable
-          columns={columns}
-          data={filteredPlayers}
-          isLoading={isLoading}
-        />
+        <div className="space-y-4">
+          <AdvancedDataTable
+            columns={columns}
+            data={players}
+            isLoading={isLoading}
+            enablePagination={false}
+          />
+          {/* Server-side pagination */}
+          <ServerPagination
+            pagination={pagination}
+            onPageChange={handlePageChange}
+            onPageSizeChange={handlePageSizeChange}
+            itemName={t("players")}
+          />
+        </div>
       )}
 
       {/* Role Change Dialog */}

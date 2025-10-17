@@ -4,23 +4,96 @@ import { createTableSchema } from "@/lib/validations/table";
 
 /**
  * GET /api/admin/tables
- * List all babyfoot tables
+ * List all babyfoot tables with pagination
  */
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
-    const tables = await prisma.babyfoot.findMany({
-      include: {
-        _count: {
-          select: {
-            reservations: true,
-            queue: true,
+    const searchParams = request.nextUrl.searchParams;
+    const page = searchParams.get("page");
+    const limit = searchParams.get("limit");
+    const search = searchParams.get("search") || "";
+    const status = searchParams.get("status") || "";
+
+    // Si pas de pagination demandée, retourner toutes les données
+    if (!page || !limit) {
+      const where: any = {};
+
+      if (search) {
+        where.OR = [
+          { name: { contains: search, mode: "insensitive" as const } },
+          { location: { contains: search, mode: "insensitive" as const } },
+        ];
+      }
+
+      if (status && status !== "ALL") {
+        where.status = status;
+      }
+
+      const tables = await prisma.babyfoot.findMany({
+        where,
+        include: {
+          _count: {
+            select: {
+              reservations: true,
+              queue: true,
+            },
           },
         },
-      },
-      orderBy: { name: "asc" },
-    });
+        orderBy: { name: "asc" },
+      });
 
-    return Response.json({ success: true, data: tables });
+      return Response.json({
+        success: true,
+        data: tables,
+      });
+    }
+
+    // Pagination demandée
+    const pageNum = parseInt(page);
+    const limitNum = parseInt(limit);
+    const skip = (pageNum - 1) * limitNum;
+
+    const where: any = {};
+
+    if (search) {
+      where.OR = [
+        { name: { contains: search, mode: "insensitive" as const } },
+        { location: { contains: search, mode: "insensitive" as const } },
+      ];
+    }
+
+    if (status && status !== "ALL") {
+      where.status = status;
+    }
+
+    const [tables, total] = await Promise.all([
+      prisma.babyfoot.findMany({
+        where,
+        skip,
+        take: limitNum,
+        include: {
+          _count: {
+            select: {
+              reservations: true,
+              queue: true,
+            },
+          },
+        },
+        orderBy: { name: "asc" },
+      }),
+      prisma.babyfoot.count({ where }),
+    ]);
+
+    return Response.json({
+      success: true,
+      data: tables,
+      pagination: {
+        page: pageNum,
+        limit: limitNum,
+        total,
+        totalPages: Math.ceil(total / limitNum),
+      },
+    });
   } catch (error) {
     if (error instanceof Error && error.message.includes("Unauthorized")) {
       return Response.json({ error: "Accès non autorisé" }, { status: 403 });

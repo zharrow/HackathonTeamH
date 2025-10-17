@@ -26,7 +26,17 @@
     "toggleTheme": "Toggle theme",
     "lightTheme": "Light",
     "darkTheme": "Dark",
-    "systemTheme": "System"
+    "systemTheme": "System",
+    "rowsPerPage": "Rows per page",
+    "showing": "Showing",
+    "to": "to",
+    "of": "of",
+    "items": "items",
+    "players": "players",
+    "reservations": "reservations",
+    "tables": "tables",
+    "previous": "Previous",
+    "next": "Next"
   },
   "navigation": {
     "home": "Home",

@@ -7,18 +7,16 @@ import Link from "next/link";
 import { Plus, RefreshCw } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import { AdvancedDataTable } from "@/components/admin/advanced-data-table";
 import { DeleteAlertDialog } from "@/components/admin/delete-alert-dialog";
 import {
-  ReservationStats,
-  ReservationFilters,
-  ReservationEmptyState,
   ReservationFormDialog,
   BabyfootCard,
-  CalendarView,
-  getReservationColumns,
   type Reservation,
 } from "@/components/admin/reservations";
+import { ReservationsStatsSection } from "@/components/admin/reservations/reservations-stats-section";
+import { ReservationsFiltersSection } from "@/components/admin/reservations/reservations-filters-section";
+import { ReservationsCalendarSection } from "@/components/admin/reservations/reservations-calendar-section";
+import { ReservationsTableSection } from "@/components/admin/reservations/reservations-table-section";
 
 interface BabyfootTable {
   id: string;
@@ -38,7 +36,12 @@ interface Player {
 export default function ReservationsPage() {
   const params = useParams();
   const t = useTranslations("reservation");
+  const tCommon = useTranslations("common");
   const [reservations, setReservations] = useState<Reservation[]>([]);
+  const [calendarReservations, setCalendarReservations] = useState<
+    Reservation[]
+  >([]); // Pour le calendrier
+  const [allReservations, setAllReservations] = useState<Reservation[]>([]);
   const [tables, setTables] = useState<BabyfootTable[]>([]);
   const [players, setPlayers] = useState<Player[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -54,13 +57,45 @@ export default function ReservationsPage() {
     "day" | "week" | "month"
   >("month");
 
-  // Fetch data
+  // Pagination state
+  const [page, setPage] = useState(1);
+  const [pagination, setPagination] = useState({
+    page: 1,
+    limit: 10,
+    total: 0,
+    totalPages: 0,
+  });
+
+  // Fetch all reservations for stats
+  const fetchAllReservations = useCallback(async () => {
+    try {
+      const response = await fetch("/api/admin/stats/reservations");
+      const data = await response.json();
+      if (data.success) {
+        setAllReservations(data.data);
+      }
+    } catch (error) {
+      console.error("Error fetching all reservations for stats:", error);
+    }
+  }, []);
+
+  // Fetch data for table (paginated, independent from calendar)
   const fetchReservations = useCallback(async () => {
     try {
-      const response = await fetch("/api/admin/reservations");
+      const params = new URLSearchParams({
+        page: page.toString(),
+        limit: pagination.limit.toString(),
+      });
+
+      if (selectedTable !== "ALL") {
+        params.append("babyfootId", selectedTable);
+      }
+
+      const response = await fetch(`/api/admin/reservations?${params}`);
       const data = await response.json();
       if (data.success) {
         setReservations(data.data);
+        setPagination(data.pagination);
       }
     } catch (error) {
       console.error("Error fetching reservations:", error);
@@ -69,7 +104,33 @@ export default function ReservationsPage() {
       setIsLoading(false);
       setIsRefreshing(false);
     }
-  }, [t]);
+  }, [page, pagination.limit, selectedTable, t]);
+
+  // Fetch data for calendar (temporal pagination, independent from table)
+  const fetchCalendarReservations = useCallback(async () => {
+    try {
+      const params = new URLSearchParams({
+        page: "1",
+        limit: "1000", // Get all reservations for the time period
+      });
+
+      if (selectedTable !== "ALL") {
+        params.append("babyfootId", selectedTable);
+      }
+
+      // Add calendar pagination parameters
+      params.append("viewMode", calendarViewMode);
+      params.append("currentDate", calendarDate.toISOString());
+
+      const response = await fetch(`/api/admin/reservations?${params}`);
+      const data = await response.json();
+      if (data.success) {
+        setCalendarReservations(data.data);
+      }
+    } catch (error) {
+      console.error("Error fetching calendar reservations:", error);
+    }
+  }, [selectedTable, calendarViewMode, calendarDate]);
 
   const fetchTables = useCallback(async () => {
     try {
@@ -96,11 +157,13 @@ export default function ReservationsPage() {
   }, []);
 
   useEffect(() => {
-    fetchReservations();
+    fetchAllReservations(); // Récupérer toutes les données pour les stats
+    fetchReservations(); // Récupérer les données paginées pour le tableau
     fetchTables();
     fetchPlayers();
-  }, [fetchReservations, fetchTables, fetchPlayers]);
+  }, [fetchAllReservations, fetchReservations, fetchTables, fetchPlayers]);
 
+<<<<<<< HEAD
   // Auto-refresh reservations every 30 seconds
   useEffect(() => {
     const interval = setInterval(() => {
@@ -117,25 +180,45 @@ export default function ReservationsPage() {
     }
     return reservations.filter((r) => r.babyfoot.id === selectedTable);
   }, [reservations, selectedTable]);
+=======
+  // Separate effect for calendar data
+  useEffect(() => {
+    fetchCalendarReservations();
+  }, [fetchCalendarReservations]);
+>>>>>>> 805e55d0bbb5b5744cf31901d2696d73743c6180
 
-  // Calculate statistics
+  // Pagination handlers
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+  };
+
+  const handlePageSizeChange = (newPageSize: number) => {
+    setPagination((prev) => ({ ...prev, limit: newPageSize }));
+    setPage(1); // Reset to first page when changing page size
+  };
+
+  // Calculate statistics (using all reservations, not paginated ones)
   const stats = useMemo(() => {
     return {
-      total: reservations.length,
-      active: reservations.filter((r) =>
+      total: allReservations.length,
+      active: allReservations.filter((r) =>
         ["PENDING", "CONFIRMED", "IN_PROGRESS"].includes(r.status)
       ).length,
-      completed: reservations.filter((r) => r.status === "FINISHED").length,
-      cancelled: reservations.filter((r) =>
+      completed: allReservations.filter((r) => r.status === "FINISHED").length,
+      cancelled: allReservations.filter((r) =>
         ["CANCELLED", "EXPIRED"].includes(r.status)
       ).length,
     };
-  }, [reservations]);
+  }, [allReservations]);
 
   // Handlers
   const handleRefresh = async () => {
     setIsRefreshing(true);
-    await fetchReservations();
+    await Promise.all([
+      fetchAllReservations(),
+      fetchReservations(),
+      fetchCalendarReservations(),
+    ]);
   };
 
   const handleCreate = () => {
@@ -236,13 +319,6 @@ export default function ReservationsPage() {
     }
   };
 
-  // Define table columns
-  const columns = getReservationColumns({
-    t,
-    onEdit: handleEdit,
-    onDelete: handleDeleteClick,
-  });
-
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -283,7 +359,7 @@ export default function ReservationsPage() {
       </div>
 
       {/* Statistics Cards */}
-      {!isLoading && <ReservationStats stats={stats} />}
+      <ReservationsStatsSection stats={stats} isLoading={isLoading} />
 
       {/* Babyfoot Cards - NEW */}
       {!isLoading && tables.length > 0 && (
@@ -308,37 +384,38 @@ export default function ReservationsPage() {
         </div>
       )}
 
-      {/* Calendar View - NEW - Shows ALL reservations */}
-      {!isLoading && reservations.length > 0 && (
-        <CalendarView
-          reservations={reservations}
-          selectedDate={calendarDate}
-          onDateChange={setCalendarDate}
-          viewMode={calendarViewMode}
-          onViewModeChange={setCalendarViewMode}
-          onReservationClick={handleReservationClick}
-        />
-      )}
+      {/* Calendar View - Always visible */}
+      <ReservationsCalendarSection
+        calendarReservations={calendarReservations}
+        calendarDate={calendarDate}
+        onCalendarDateChange={setCalendarDate}
+        calendarViewMode={calendarViewMode}
+        onCalendarViewModeChange={setCalendarViewMode}
+        onReservationClick={handleReservationClick}
+        isLoading={isLoading}
+      />
 
       {/* Filters */}
-      {!isLoading && reservations.length > 0 && (
-        <ReservationFilters
-          tables={tables}
-          selectedTable={selectedTable}
-          onTableChange={setSelectedTable}
-        />
-      )}
+      <ReservationsFiltersSection
+        tables={tables}
+        selectedTable={selectedTable}
+        onTableChange={setSelectedTable}
+        reservations={reservations}
+        isLoading={isLoading}
+      />
 
       {/* Data Table or Empty State */}
-      {!isLoading && reservations.length === 0 ? (
-        <ReservationEmptyState onCreate={handleCreate} />
-      ) : (
-        <AdvancedDataTable
-          columns={columns}
-          data={filteredReservations}
-          isLoading={isLoading}
-        />
-      )}
+      <ReservationsTableSection
+        reservations={reservations}
+        allReservations={allReservations}
+        pagination={pagination}
+        onPageChange={handlePageChange}
+        onPageSizeChange={handlePageSizeChange}
+        onEdit={handleEdit}
+        onDelete={handleDeleteClick}
+        onCreate={handleCreate}
+        isLoading={isLoading}
+      />
 
       {/* Create/Edit Dialog */}
       <ReservationFormDialog
