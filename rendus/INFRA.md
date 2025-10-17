@@ -106,8 +106,7 @@ Voici une démonstration complète du processus de déploiement depuis l'initial
 
 - **Surveillance et journalisation** :
 
-  - Mise en place de services de surveillance (CPU, mémoire, latence, etc.).
-  - Journalisation des événements importants (logs d’accès, erreurs, etc.).
+  - Cloudwatch est un outil de surveillance et de journalisation de métriques nativement installé sur aws. C'est ce qui va nous permettre de générer des alertes en fonctions des différentes métriques renvoyé par nos différentes instances et tâches. Ces métriques et alertes sont également stockés (logs).
 
 
 ### Supplémentaires (bonus)
