@@ -13,6 +13,16 @@ import {
   ReservationFormDialog,
   type Reservation,
 } from "@/components/admin/reservations";
+
+interface ReservationFormData {
+  babyfootId: string;
+  partyDate: string;
+  refereeId?: string | null;
+  redDefenseId?: string | null;
+  redAttackId?: string | null;
+  blueDefenseId?: string | null;
+  blueAttackId?: string | null;
+}
 import Link from "next/link";
 
 interface BabyfootTable {
@@ -92,7 +102,12 @@ export default function TableReservationsPage() {
       const response = await fetch("/api/admin/users?limit=1000");
       const data = await response.json();
       if (data.success) {
-        setPlayers(data.data.map((u: any) => ({ id: u.id, name: u.name })));
+        setPlayers(
+          data.data.map((u: { id: string; name: string }) => ({
+            id: u.id,
+            name: u.name,
+          }))
+        );
       }
     } catch (error) {
       console.error("Error fetching players:", error);
@@ -121,16 +136,11 @@ export default function TableReservationsPage() {
     setIsFormOpen(true);
   };
 
-  const handleDeleteClick = (reservation: Reservation) => {
-    setSelectedReservation(reservation);
-    setIsDeleteOpen(true);
-  };
-
   const handleReservationClick = (reservation: Reservation) => {
     handleEdit(reservation);
   };
 
-  const handleFormSubmit = async (data: any) => {
+  const handleFormSubmit = async (data: ReservationFormData) => {
     try {
       // Force the tableId for new reservations
       const submissionData = { ...data, babyfootId: tableId };

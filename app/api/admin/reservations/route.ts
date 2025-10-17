@@ -1,5 +1,6 @@
 import { NextRequest } from "next/server";
 import { prisma } from "@/lib/prisma";
+import type { Prisma, ReservationStatus } from "@prisma/client";
 import { createReservationSchema } from "@/lib/validations/reservation";
 
 /**
@@ -26,7 +27,7 @@ export async function GET(request: NextRequest) {
 
     const skip = (page - 1) * limit;
 
-    const where: any = {};
+    const where: Prisma.ReservationWhereInput = {};
 
     if (babyfootId) {
       where.babyfootId = babyfootId;
@@ -83,7 +84,7 @@ export async function GET(request: NextRequest) {
     }
 
     if (status) {
-      where.status = status;
+      where.status = status as ReservationStatus;
     }
 
     const [reservations, total] = await Promise.all([

@@ -1,6 +1,7 @@
 import { NextRequest } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { createTableSchema } from "@/lib/validations/table";
+import type { Prisma, BabyfootStatus } from "@prisma/client";
 
 /**
  * GET /api/admin/tables
@@ -16,7 +17,7 @@ export async function GET(request: NextRequest) {
 
     // Si pas de pagination demandée, retourner toutes les données
     if (!page || !limit) {
-      const where: any = {};
+      const where: Prisma.BabyfootWhereInput = {};
 
       if (search) {
         where.OR = [
@@ -26,7 +27,7 @@ export async function GET(request: NextRequest) {
       }
 
       if (status && status !== "ALL") {
-        where.status = status;
+        where.status = status as BabyfootStatus;
       }
 
       const tables = await prisma.babyfoot.findMany({
@@ -53,7 +54,7 @@ export async function GET(request: NextRequest) {
     const limitNum = parseInt(limit);
     const skip = (pageNum - 1) * limitNum;
 
-    const where: any = {};
+    const where: Prisma.BabyfootWhereInput = {};
 
     if (search) {
       where.OR = [
@@ -63,7 +64,7 @@ export async function GET(request: NextRequest) {
     }
 
     if (status && status !== "ALL") {
-      where.status = status;
+      where.status = status as BabyfootStatus;
     }
 
     const [tables, total] = await Promise.all([

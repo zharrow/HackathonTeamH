@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useTranslations } from "next-intl";
 import {
   Card,
   CardContent,
@@ -86,30 +85,39 @@ export default function StatsPage() {
           // Calculate stats
           const reservationStats = {
             total: reservations.length,
-            confirmed: reservations.filter((r: any) => r.status === "CONFIRMED")
-              .length,
-            pending: reservations.filter((r: any) => r.status === "PENDING")
-              .length,
-            completed: reservations.filter((r: any) => r.status === "FINISHED")
-              .length,
-            cancelled: reservations.filter((r: any) =>
+            confirmed: reservations.filter(
+              (r: { status: string }) => r.status === "CONFIRMED"
+            ).length,
+            pending: reservations.filter(
+              (r: { status: string }) => r.status === "PENDING"
+            ).length,
+            completed: reservations.filter(
+              (r: { status: string }) => r.status === "FINISHED"
+            ).length,
+            cancelled: reservations.filter((r: { status: string }) =>
               ["CANCELLED", "EXPIRED"].includes(r.status)
             ).length,
           };
 
           const tableStats = {
             total: tables.length,
-            available: tables.filter((t: any) => t.status === "AVAILABLE")
-              .length,
-            occupied: tables.filter((t: any) => t.status === "OCCUPIED").length,
-            maintenance: tables.filter((t: any) => t.status === "MAINTENANCE")
-              .length,
+            available: tables.filter(
+              (t: { status: string }) => t.status === "AVAILABLE"
+            ).length,
+            occupied: tables.filter(
+              (t: { status: string }) => t.status === "OCCUPIED"
+            ).length,
+            maintenance: tables.filter(
+              (t: { status: string }) => t.status === "MAINTENANCE"
+            ).length,
           };
 
           const playerStats = {
             total: players.length,
-            admins: players.filter((p: any) => p.role === "ADMIN").length,
-            users: players.filter((p: any) => p.role === "USER").length,
+            admins: players.filter((p: { role: string }) => p.role === "ADMIN")
+              .length,
+            users: players.filter((p: { role: string }) => p.role === "USER")
+              .length,
           };
 
           // Generate mock daily data for the last 7 days

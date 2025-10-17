@@ -1,6 +1,5 @@
 "use client";
 
-import { useTranslations } from "next-intl";
 import {
   format,
   startOfMonth,
@@ -35,8 +34,6 @@ export function CalendarView({
   onViewModeChange,
   onReservationClick,
 }: CalendarViewProps) {
-  const t = useTranslations("reservation");
-
   // Navigation
   const goToPrevious = () => {
     if (viewMode === "day") {
