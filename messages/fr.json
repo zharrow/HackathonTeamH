@@ -33,6 +33,14 @@
     "profile": "Profil",
     "admin": "Administration"
   },
+  "home": {
+    "title": "Babyfoot Booking",
+    "subtitle": "Réservez votre table de babyfoot, affrontez vos amis et grimpez dans le classement ELO !",
+    "signInCta": "Connectez-vous pour accéder à votre dashboard et commencer à jouer",
+    "availableTables": "Tables disponibles",
+    "availableTablesDesc": "Choisissez votre table et réservez votre créneau",
+    "mvpPlayer": "Joueur MVP du Campus",
+    "mvpPlayerDesc": "Le meilleur joueur du moment"
   "signIn": {
     "title": "Connexion",
     "description": "Connectez-vous à votre compte Babyfoot Booking",
