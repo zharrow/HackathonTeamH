@@ -1,0 +1,35 @@
+{
+"tempsbabyfoot": [
+	{
+		"location" : "Bar Le Foos",
+		"latest_table_condition" : "out of alignment"
+	},
+	{
+		"location" : "Campus - Cafeteria",
+		"latest_table_condition" : "new"
+	},
+	{
+		"location" : "Gym Hall",
+		"latest_table_condition" : "out of alignment"
+	},
+	{
+		"location" : "Lab 204",
+		"latest_table_condition" : "needs cleaning"
+	},
+	{
+		"location" : "Salle Polyvalente",
+		"latest_table_condition" : "good"
+	},
+	{
+		"location" : "Student House",
+		"latest_table_condition" : "out of alignment"
+	},
+	{
+		"location" : "Ynov - Bâtiment A",
+		"latest_table_condition" : "good"
+	},
+	{
+		"location" : "Ynov Toulouse",
+		"latest_table_condition" : "new"
+	}
+]}
