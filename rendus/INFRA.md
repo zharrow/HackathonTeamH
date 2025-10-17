@@ -79,7 +79,6 @@ Déployer une infrastructure cloud complète pour héberger et gérer l’applic
 
 ### Supplémentaires (bonus)
 
-- **Réplication de la base de données** : Mise en place de la réplication pour assurer la haute disponibilité.
-- **Guide de récupération après sinistre** : Documentation et procédures pour la récupération en cas de panne majeure.
 - **Optimisation des coûts** : Stratégies pour minimiser les coûts d’infrastructure
-- **Tests de charge** : Simulation de trafic pour tester la robustesse de l’infrastructure.
+  - Concernant l'optimisation des coûts, nous avons eu l'idée d'utiliser des instances EC2 "spot" afin de réduire les coûts (de €26.255 pour les instances basiques à €9.985 pour les instances "spot". Les instances spot nous permettent d'utiliser le surplus cloud d'aws.
+  - Nous avons aussi utiliser des types d'instances dites "micro". Des "t3.micro" coûtant donc bien moins chers et suffisant pour l'ampleur de notre projet.
