@@ -160,37 +160,6 @@ Usage:
 
 ---
 
-## 🚀 Phase 4 : Three.js Background (EN COURS)
-
-### Composant créé :
-
-#### `components/three/ThreeBackground.tsx`
-**Background 3D interactif avec géométrie wireframe**
-
-Fonctionnalités:
-- Icosaèdre wireframe animé (rotation automatique)
-- Double couche pour effet de profondeur
-- Points flottants (particules)
-- Lumières colorées (cyan/magenta)
-- Auto-rotation avec OrbitControls
-
-Lumières:
-- Point light cyan (10, 10, 10)
-- Point light magenta (-10, -10, -10)
-- Ambient light pour remplissage
-
-Usage:
-```tsx
-<ThreeBackground className="opacity-20" />
-```
-
-### Installation :
-```bash
-npm install three @react-three/fiber @react-three/drei
-```
-
----
-
 ## 🌐 Internationalisation (i18n)
 
 ### Clés ajoutées :
@@ -232,10 +201,6 @@ components/
 │   ├── ScanLine.tsx                # Ligne de scan
 │   └── index.ts                     # Exports
 │
-├── three/                           # 🆕 NOUVEAU
-│   ├── ThreeBackground.tsx         # Background 3D
-│   └── index.ts                     # Exports
-│
 ├── features/
 │   └── MvpPlayerCard.tsx           # ✨ Cyan + Magenta
 │
@@ -248,35 +213,27 @@ messages/
 
 ---
 
-## 🎯 Prochaines Étapes (Phase 5)
+## 🎯 Prochaines Étapes (Phase 4)
 
 ### Micro-interactions suggérées :
 
 1. **Intégrer GlitchText** sur le titre principal
 2. **Utiliser HoverGlow** sur les cards de babyfoot
 3. **Ajouter ScanLine** en overlay
-4. **Intégrer ThreeBackground** (lazy load pour performance)
-5. **Améliorer DotGrid** :
+4. **Améliorer DotGrid** :
    - Transition cyan → magenta sur interaction
    - Trail effect du curseur
 
 ### Composants à créer (optionnel) :
 - `ParallaxCard.tsx` : Cards avec effet parallaxe
 - `TypewriterText.tsx` : Animation typewriter
-- `FloatingParticles.tsx` : Particules Three.js localisées
 
 ---
 
 ## 🚨 Notes Importantes
 
 ### Performance :
-- ThreeBackground en lazy loading recommandé :
-  ```tsx
-  const ThreeBackground = dynamic(() => import('@/components/three'), {
-    ssr: false,
-    loading: () => <div>Loading 3D...</div>
-  })
-  ```
+- Lazy loading recommandé pour les animations GSAP complexes
 
 ### Accessibilité :
 - ScanLine a `pointer-events-none`
@@ -285,7 +242,6 @@ messages/
 
 ### Responsive :
 - Fonts adaptatifs (text-7xl → text-5xl sur mobile)
-- ThreeBackground optimisé pour mobile (réduire particules)
 - Glow intensity réduite sur petit écran
 
 ---
@@ -336,4 +292,4 @@ messages/
 
 **Dernière mise à jour** : 2025-10-17
 **Version** : 1.0
-**Statut** : Phase 4 en cours ✨
+**Statut** : Phase 3 complétée ✨

@@ -45,6 +45,17 @@
 
 :root {
   --radius: 0.65rem;
+
+  /* Brand Guidelines Colors */
+  --neon-cyan: #2e7976;
+  --electric-magenta: #FF00FF;
+  --dark-void: #0D0D0D;
+  --off-white: #F2F2F2;
+  --gray-mist: #B0B0B0;
+  --neon-red: #FF4B4B;
+  --neon-green: #00FF6C;
+
+  /* OKLCH Conversions */
   --background: oklch(1 0 0);
   --foreground: oklch(0.141 0.005 285.823);
   --card: oklch(1 0 0);

@@ -47,3 +47,6 @@ PROMPT_VIBE_CODER.md
 .cursor/
 # clerk configuration (can include secrets)
 /.clerk/
+
+
+.idea/

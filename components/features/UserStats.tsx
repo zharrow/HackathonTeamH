@@ -32,26 +32,15 @@ interface UserStatsProps {
     totalGames: number;
     averageGameDuration: number;
   };
+  eloProgression?: Array<{ date: string; elo: number }>;
+  matchFormatsData?: Array<{ format: string; games: number }>;
+  recentGames?: Array<{
+    date: string;
+    format: string;
+    result: string;
+    eloChange: string;
+  }>;
 }
-
-// Données mockées pour la progression ELO
-const eloProgressionData = [
-  { date: "Sem 1", elo: 1000 },
-  { date: "Sem 2", elo: 1050 },
-  { date: "Sem 3", elo: 1120 },
-  { date: "Sem 4", elo: 1180 },
-  { date: "Sem 5", elo: 1150 },
-  { date: "Sem 6", elo: 1220 },
-  { date: "Sem 7", elo: 1280 },
-  { date: "Sem 8", elo: 1320 },
-];
-
-// Données mockées pour les formats de match
-const matchFormatsData = [
-  { format: "1v1", games: 15 },
-  { format: "1v2", games: 8 },
-  { format: "2v2", games: 22 },
-];
 
 // Configuration des couleurs pour les graphiques
 const chartConfig = {
@@ -65,18 +54,43 @@ const chartConfig = {
   },
 };
 
-export function UserStats({ user }: UserStatsProps) {
+// Default data for fallback
+const DEFAULT_ELO_PROGRESSION = [
+  { date: "Sem 1", elo: 1000 },
+  { date: "Sem 2", elo: 1000 },
+  { date: "Sem 3", elo: 1000 },
+  { date: "Sem 4", elo: 1000 },
+  { date: "Sem 5", elo: 1000 },
+  { date: "Sem 6", elo: 1000 },
+  { date: "Sem 7", elo: 1000 },
+  { date: "Sem 8", elo: 1000 },
+];
+
+const DEFAULT_MATCH_FORMATS = [
+  { format: "1v1", games: 0 },
+  { format: "1v2", games: 0 },
+  { format: "2v2", games: 0 },
+];
+
+export function UserStats({
+  user,
+  eloProgression = DEFAULT_ELO_PROGRESSION,
+  matchFormatsData = DEFAULT_MATCH_FORMATS,
+  recentGames = []
+}: UserStatsProps) {
   // Données mockées si aucun utilisateur n'est fourni
   const userData = user || {
     nickname: "Joueur",
-    elo: 1320,
-    wins: 28,
-    losses: 17,
-    totalGames: 45,
-    averageGameDuration: 12.5,
+    elo: 1000,
+    wins: 0,
+    losses: 0,
+    totalGames: 0,
+    averageGameDuration: 0,
   };
 
-  const winRate = Math.round((userData.wins / userData.totalGames) * 100);
+  const winRate = userData.totalGames > 0
+    ? Math.round((userData.wins / userData.totalGames) * 100)
+    : 0;
 
   return (
     <div className="space-y-6">
@@ -174,7 +188,7 @@ export function UserStats({ user }: UserStatsProps) {
           </CardHeader>
           <CardContent>
             <ChartContainer config={chartConfig} className="h-[250px] w-full">
-              <LineChart data={eloProgressionData}>
+              <LineChart data={eloProgression}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
                 <XAxis
                   dataKey="date"
@@ -243,39 +257,13 @@ export function UserStats({ user }: UserStatsProps) {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="space-y-3">
-            {[
-              {
-                date: "Aujourd'hui 14:30",
-                format: "2v2",
-                result: "Victoire",
-                eloChange: "+24",
-              },
-              {
-                date: "Hier 16:45",
-                format: "1v1",
-                result: "Défaite",
-                eloChange: "-18",
-              },
-              {
-                date: "Hier 12:15",
-                format: "2v2",
-                result: "Victoire",
-                eloChange: "+22",
-              },
-              {
-                date: "15 Oct 17:00",
-                format: "1v2",
-                result: "Victoire",
-                eloChange: "+28",
-              },
-              {
-                date: "15 Oct 10:30",
-                format: "1v1",
-                result: "Défaite",
-                eloChange: "-16",
-              },
-            ].map((game, index) => (
+          {recentGames.length === 0 ? (
+            <p className="text-center text-gray-500 py-8">
+              Aucune partie jouée récemment
+            </p>
+          ) : (
+            <div className="space-y-3">
+              {recentGames.map((game, index) => (
               <div
                 key={index}
                 className="flex items-center justify-between p-3 bg-gray-800/50 rounded-lg border border-gray-700/50"
@@ -314,8 +302,9 @@ export function UserStats({ user }: UserStatsProps) {
                   </span>
                 </div>
               </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </CardContent>
       </Card>
     </div>
