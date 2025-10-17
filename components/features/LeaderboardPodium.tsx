@@ -4,6 +4,7 @@ import { Trophy, Medal, Award, Star } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import ElectricBorder from "@/components/ElectricBorder";
 import { HoverGlow } from "@/components/animations";
+import { JSX } from "react";
 
 interface Player {
   rank: number;
