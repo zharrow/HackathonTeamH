@@ -1,199 +1,98 @@
-# Hackathon - Ynov Toulouse 2025 : Babyfoot du futur - FullStack
+<h1>Hackathon - Ynov Toulouse 2025 :Babyfoot du futur - FullStack</h1>
 
-## Equipe
+### <span style="color:#00E0FF;">Equipe</span>
 
-- Dev' FullStack 1 : ALBORA Florian
-- Dev' FullStack 2 : NOM Prénom
-- Dev' FullStack 3 : NOM Prénom
+<ul>
+  <li><span style="color:#FF5C93;">Dev' FullStack 1 :</span> DETRES Florent</li>
+  <li><span style="color:#FF5C93;">Dev' FullStack 2 :</span> ALBORA Florian</li>
+  <li><span style="color:#FF5C93;">Dev' FullStack 3 :</span> AUVRAY Quentin</li>
+</ul>
 
-Et si on réinventait l’expérience babyfoot à Ynov ? L’objectif de ce hackathon est de moderniser et digitaliser l’usage des babyfoots présents dans le Souk pour créer un service _next-gen_, pensé pour près de 1000 étudiants !
+<p>Et si on réinventait l’expérience babyfoot à Ynov ? L’objectif de ce hackathon est de moderniser et digitaliser l’usage des babyfoots présents dans le Souk pour créer un service <i><span style="color:#FFD700;">next-gen</span></i>, pensé pour près de <span style="color:#9EFF7A;">1000 étudiants</span> !</p>
 
-Que ce soit via des gadgets connectés, un système de réservation intelligent, des statistiques en temps réel ou des fonctionnalités robustes pour une utilisation massive, nous cherchons des solutions innovantes qui allient créativité et technologie.
+<p>Que ce soit via des gadgets connectés, un système de réservation intelligent, des statistiques en temps réel ou des fonctionnalités robustes pour une utilisation massive, nous cherchons des solutions innovantes qui allient <span style="color:#C084FC;">créativité</span> et <span style="color:#9EFF7A;">technologie</span>.</p>
 
-Toutes les filières sont invitées à contribuer : Dev, Data, Infra, IoT, Systèmes embarqués… chaque idée compte pour rendre le babyfoot plus fun, plus pratique et plus connecté.
+<p>Toutes les filières sont invitées à contribuer : <span style="color:#FFD700;">Dev</span>, <span style="color:#FFD700;">Data</span>, <span style="color:#FFD700;">Infra</span>, <span style="color:#FFD700;">IoT</span>, <span style="color:#FFD700;">Systèmes embarqués</span>… chaque idée compte pour rendre le babyfoot plus fun, plus pratique et plus connecté.</p>
 
-Votre mission : transformer le babyfoot classique en expérience high-tech pour Ynov !
+<p><b>Votre mission :</b> transformer le babyfoot classique en expérience <span style="color:#FF5C93;">high-tech</span> pour Ynov !</p>
 
----
 
-> Ce fichier contient les informations spécifiques au développement FullStack de votre projet. Il suffit d'en remplir une seule fois, même si vous êtes plusieurs développeurs FullStack dans l'équipe.
+### <span style="color:#00E0FF;">Présentation du projet.</span>
 
-# Requis
+<h2>🎯 <b><span style="color:#9EFF7A;">Pitch Projet - Babyfoot Booking Ynov</span></b></h2>
 
-Ce README contient les requis fonctionnels de la partie FullStack de votre projet. Il doit compléter le README principal à la racine du projet, et servira la partie de votre note propre à votre spécialité.
+<p><b><span style="color:#FF5C93;">"Transformons l'expérience babyfoot à Ynov en une plateforme digitale compétitive et intelligente !"</span></b></p>
 
-Basez-vous sur les spécifications dans [SPECIFICATIONS.md](../SPECIFICATIONS.md) pour remplir ce document.
+<p>Avec Babyfoot Booking, l’idée est simple : remettre du fair-play dans les pauses... robuste pour <span style="color:#9EFF7A;">1000 étudiants</span>.</p>
 
-Décrivez ici les fonctionnalités que vous avez implémentées, votre démarche, les choix techniques que vous avez faits, les difficultés rencontrées, etc. Précisez également dans quelle mesure vous avez pu collaborer avec les autres spécialités.
+<p><b><span style="color:#FFD700;">Le problème :</span></b> Gestion chaotique des tables, chacun arrive, et se sert. Pas de suivi des performances, et des files d’attente non organisées.</p>
 
-Autrement, il n'y a pas de format imposé, mais essayez de rester clair et concis, je ne vous demande pas de rédiger un roman, passez à l'essentiel, et épargnez-moi de longues pages générées par IA (malusée).
+<h3><span style="color:#00E0FF;">Notre solution, c'est la solution intelligente à adopter !</span></h3>
 
-En conclusion, cela doit résumer votre travail en tant que développeur.se FullStack, et vous permettre de garder un trace écrite de votre contribution au projet.
+<p><b><span style="color:#FF5C93;">Florent (Chef de projet)</span></b><br>
+<b><span style="color:#9EFF7A;">Réservation intelligente</span></b> en créneaux de 15 minutes avec anti-chevauchement<br>
+> Un algorithme pensé pour améliorer l’expérience utilisateur.<br><br>
+<b><span style="color:#9EFF7A;">Système ELO</span></b> pour classer les joueurs et créer de la compétition<br>
+> Fidélise, motive et challenge la communauté.<br><br>
+<b><span style="color:#9EFF7A;">File d'attente automatique</span></b> quand les tables sont pleines<br>
+> Réduit la frustration et régule l’utilisation des babyfoots.<br><br>
+<b><span style="color:#9EFF7A;">Interface futuriste</span></b> dark + néon avec animations GSAP<br>
+> Une ambiance gamer marquée, pour mêler fun et technologie.
+</p>
 
-Merci de votre participation, et bon courage pour la suite du hackathon !
+<p><b><span style="color:#FF5C93;">Florian (Développeur)</span></b><br>
+<b><span style="color:#9EFF7A;">Dashboard admin</span></b> complet pour gérer tables, utilisateurs et statistiques<br>
+> Incontournable pour une gestion claire et fluide.<br><br>
+<b><span style="color:#9EFF7A;">Authentification sécurisée</span></b> complète avec outils modernes<br>
+> Sécurise efficacement les accès utilisateurs.<br><br>
+<b><span style="color:#9EFF7A;">Internationalisation + thèmes</span></b> (dark/light)<br>
+> Pour un site inclusif et accessible à tous.
+</p>
 
----
+<p><b><span style="color:#FFD700;">Impact :</span></b> Une expérience gamifiée qui transforme le babyfoot en véritable sport compétitif...<br>
+<span style="color:#C084FC;"><b>Que peuvent-ils rêver de plus ?</b></span>
 
-# Présentation du projet.
+<p><b><span style="color:#FFD700;">Résultat :</span></b> Un babyfoot <span style="color:#FF5C93;">next-gen</span> qui booste l'engagement étudiant et crée une vraie communauté compétitive autour du sport 🏆</p>
 
-## 🎯 **Pitch Projet - Babyfoot Booking Ynov**
+<h2>🛠️ <b><span style="color:#00E0FF;">Stack Technique - Points Clés</span></b></h2>
 
-**"Transformons l'expérience babyfoot à Ynov en une plateforme digitale compétitive et intelligente !"**
+<h3><b><span style="color:#9EFF7A;">Frontend</span></b></h3>
 
-Notre solution **Babyfoot Booking** modernise complètement l'usage des babyfoots du campus pour près de 1000 étudiants.
+<p><span style="color:#FF5C93;">Florent (Chef de projet)</span><br>
+<span style="color:#FF5C93;">Florian (Développeur)</span></p>
 
-**Le problème** : Gestion chaotique des tables, pas de suivi des performances, files d'attente non organisées.
+<ul>
+  <li><b><span style="color:#FFD700;">Next.js 15</span></b> (App Router) - Framework React avec SSR/SSG</li>
+  <li><b><span style="color:#FFD700;">TypeScript</span></b> - Typage statique pour la robustesse</li>
+  <li><b><span style="color:#FFD700;">Tailwind CSS</span></b> - Framework utility-first</li>
+  <li><b><span style="color:#FFD700;">shadcn/ui</span></b> - Composants UI modernes</li>
+  <li><b><span style="color:#FFD700;">GSAP</span></b> - Animations fluides</li>
+  <li><b><span style="color:#FFD700;">next-intl</span></b> - Internationalisation (FR/EN)</li>
+  <li><b><span style="color:#FFD700;">Sonner</span></b> - Notifications toast</li>
+</ul>
 
-**Notre solution** :
+<h3><b><span style="color:#9EFF7A;">Backend & API</span></b></h3>
 
-- **Réservation intelligente** en créneaux de 15 minutes avec anti-chevauchement
-- **Système ELO** pour classer les joueurs et créer de la compétition
-- **File d'attente** automatique quand les tables sont pleines
-- **Dashboard admin** complet pour gérer tables, utilisateurs et statistiques
-- **Interface futuriste** dark + néon avec animations GSAP
+<p><span style="color:#FF5C93;">Florent (Chef de projet)</span><br>
+<span style="color:#FF5C93;">Florian (Développeur)</span></p>
 
-**Stack technique** : Next.js 15 + TypeScript + Prisma + PostgreSQL + Better-Auth + shadcn/ui
+<ul>
+  <li><b><span style="color:#FFD700;">Next.js API Routes</span></b> - API REST intégrée</li>
+  <li><b><span style="color:#FFD700;">Prisma ORM</span></b> - Gestion BDD type-safe</li>
+  <li><b><span style="color:#FFD700;">PostgreSQL</span></b> - Stockage des données</li>
+  <li><b><span style="color:#FFD700;">Zod</span></b> - Validation des schémas</li>
+  <li><b><span style="color:#FFD700;">Better Auth</span></b> - Authentification email/password + GitHub OAuth</li>
+</ul>
 
-**Impact** : Une expérience gamifiée qui transforme le babyfoot en véritable sport compétitif, avec classements, statistiques et notifications en temps réel. Les étudiants peuvent réserver, jouer, progresser et se mesurer aux autres dans un environnement moderne et connecté.
+<h3><b><span style="color:#9EFF7A;">Authentification</span></b></h3>
 
-**Résultat** : Un babyfoot "next-gen" qui booste l'engagement étudiant et crée une vraie communauté compétitive autour du sport ! 🏆
+<span style="color:#FF5C93;">Florian (Développeur)</span></p>
+> Utilisation de <b><span style="color:#FFD700;">Better Auth</span></b> pour une intégration rapide, fiable et fluide, avec support OAuth (GitHub, Google...)</p>
 
-## 💻 **Stack technique**
+<h2><b><span style="color:#FF5C93;">⚠️ Difficultés rencontrées</span></b></h2>
 
-## 🛠️ **Stack Technique - Points Clés**
+<p><span style="color:#9EFF7A;">DETRES Florent</span> - Chef de projet<br>
+Gestion du travail en équipe... coordination constante pour garantir cohérence et qualité finale.</p>
 
-### **Frontend**
-
-- **Next.js 15** (App Router) - Framework React avec SSR/SSG
-
-> Nous avons choisi **Next.js (v15, App Router)** car il permet de développer une application **fullstack moderne**, performante et bien structurée dans un >**même framework**.
-> Il combine **frontend réactif** et **API backend** en un seul environnement, ce qui simplifie la maintenance et accélère le développement — un atout clé dans >un contexte de **hackathon**.
->
-> **Justifications principales :**
->
-> - **Architecture unifiée** : Next.js App Router permet d’héberger le frontend et le backend (API Routes) dans un seul monorepo, idéal pour un MVP rapide et cohérent.
-> - **Performances natives** : Rendu côté serveur (SSR) et génération statique (SSG) intégrés, optimisant le temps de chargement et le référencement.
-> - **API intégrée** : Les routes `app/api/` servent directement de points d’entrée REST sécurisés sans besoin d’un serveur séparé (comme Express).
-> - **Scalabilité** : Compatible avec l’hébergement moderne (Vercel, Docker, etc.) et les middlewares edge.
-
----
-
-- **TypeScript** - Typage statique pour la robustesse
-- **Tailwind CSS** - Framework CSS utility-first
-- **shadcn/ui** - Composants UI modernes (Radix UI)
-
-> Nous avons choisi shadcn/ui combiné à TailwindCSS pour accélérer la conception d’une interface moderne et cohérente.
-> shadcn/ui fournit des composants réutilisables, accessibles et typés en TypeScript, parfaitement intégrés à l’écosystème React/Next.js, tandis que TailwindCSS permet un style rapide, maintenable et responsive.
-> Ensemble, ils offrent un design dark + néon fluide, aligné avec notre identité visuelle et l’esprit futuriste du projet.
-
----
-
-- **GSAP** - Animations fluides et micro-interactions
-- **next-intl** - Internationalisation (FR/EN)
-- **Sonner** - Notifications toast/push
-
-### **Backend & API**
-
-- **Next.js API Routes** - API REST intégrée
-- **Prisma ORM** - Gestion base de données type-safe
-- **PostgreSQL** - Base de données relationnelle
-- **Zod** - Validation des schémas et inputs
-- **Better-Auth** - Authentification (email/password + GitHub OAuth)
-
-### **Base de Données**
-
-- **PostgreSQL** - Stockage des données
-- **Prisma ORM** -
-
-> Nous avons choisi Prisma comme ORM pour sa simplicité, sa robustesse et sa parfaite intégration avec TypeScript et PostgreSQL.
-> Il permet une gestion claire du schéma de données, des migrations automatisées et un typage fort côté backend, réduisant ainsi les erreurs.
-> Son client généré automatiquement offre une syntaxe fluide et lisible, idéale pour un développement rapide en contexte de hackathon.
-> Combiné à PostgreSQL, il assure une base de données fiable, relationnelle et scalable, adaptée à la gestion des réservations, utilisateurs et statistiques du projet.
-
-### **Authentification**
-
-- **Better Auth**
-
-> Nous avons choisi Better Auth pour sa rapidité d’implémentation et sa simplicité de configuration, des atouts essentiels dans un contexte de hackathon où le temps est limité. La solution offre une gestion des rôles intégrée, un stockage de sessions efficace et une manipulation simplifiée des JWT, ce qui permet de sécuriser rapidement l’application sans complexité excessive. Ce choix nous a permis d’avoir une authentification fiable, légère et parfaitement adaptée à notre stack fullstack moderne.
->
-> Elle offre également une intégration très simple des providers externes comme Google, GitHub ou d’autres réseaux sociaux, facilitant la connexion des utilisateurs en un clic. Ce choix nous a permis de déployer rapidement une authentification complète, fluide et parfaitement adaptée à notre stack fullstack moderne.
-
-## **⚠️ Difficultés rencontrés**
-
-La principale difficulté rencontrée durant ce hackathon a été la gestion du travail en équipe dans un temps très limité. Il a fallu rapidement s’organiser, définir les rôles et répartir les tâches de manière efficace pour avancer sans se bloquer mutuellement. Cette contrainte de temps a mis en évidence l’importance de la communication et de la coordination technique dans un projet collaboratif.
-
-Sur le plan technique, j’ai également rencontré des difficultés liées à l’implémentation de l’authentification. J’ai testé plusieurs solutions, notamment Clerk et Auth.js, qui se sont révélées plus complexes à configurer dans notre environnement Next.js qu’anticipé.
-C’est ce qui m’a conduit à opter pour Better Auth, une alternative plus légère et plus adaptée au contexte du hackathon, offrant une intégration rapide, une gestion simplifiée des rôles et une configuration fluide des providers externes.
-
-Voici la **liste claire et structurée** des fonctionnalités que vous avez implémentées pour **Babyfoot Booking** 👇
-
----
-
-## ⚙️ Fonctionnalités Implémentées
-
-### Authentification & Autorisation
-
-- Authentification via Clerk avec gestion des sessions et comptes utilisateurs
-- **RBAC (Role-Based Access Control)** : rôles **USER** et **ADMIN**
-- Protection des routes et API selon les rôles
-- Connection avec **Github**
-
----
-
-### Système de Réservation
-
-- Réservation en **créneaux de 15 minutes** sans chevauchement
-- **Anti-chevauchement intelligent** avec gestion d’erreur **409 Conflict**
-- **File d’attente automatique** lorsqu’aucune table n’est disponible
-- Possibilité de **prolonger** ou **terminer** une réservation
-- **Formats de match** : 1v1, 1v2, 2v2
-- **Gestion des scores** et résultats de match intégrés
-
----
-
-### Système ELO & Compétition
-
-- **Classement ELO dynamique** mis à jour après chaque match
-- Calcul automatique du score ELO selon les performances des joueurs
-- Mise en avant du **joueur MVP** avec animations GSAP
-- **Leaderboard** des meilleurs joueurs
-- **Statistiques détaillées** : victoires, défaites, nuls
-
----
-
-### Dashboard Administrateur
-
-- CRUD complet des **tables de babyfoot**
-- Gestion des **utilisateurs** (changement de rôle, suppression)
-- Vue d’ensemble sur **les réservations** et **les files d’attente**
-- **Statistiques en temps réel** (taux d’occupation, top joueurs, etc.)
-- Interface de gestion **avancée avec pagination et filtres**
-
----
-
-### Interface Utilisateur
-
-- **Page d’accueil** immersive présentant le service
-- **Dashboard utilisateur** pour gérer ses réservations et consulter son historique
-- **Notifications push** via **Sonner**
-- **Design futuriste** dark + accents néon
-- **Responsive Design** adapté mobile & tablette
-- **Multilingue (FR/EN)** via **next-intl**
-
----
-
-### API REST
-
-- API complète documentée avec **OpenAPI/Swagger**
-- Endpoints REST sécurisés et typés
-- Codes HTTP standardisés : 200, 201, 400, 401, 403, 404, 409, 500
-- **Pagination et filtres avancés** sur les ressources principales
-
----
-
-### **Fonctionnalités Spéciales**
-
-- **Système ELO** - Calcul de classement des joueurs
-- **File d'attente** - Gestion intelligente des réservations
-- **RBAC** - Contrôle d'accès basé sur les rôles (USER/ADMIN)
-- **Responsive Design** - Interface adaptative mobile/desktop
+<p><span style="color:#9EFF7A;">ALBORA Florian</span> - Développeur Fullstack<br>
+Difficultés initiales avec Clerk/Auth.js → adoption de <span style="color:#FFD700;">Better Auth</span> pour un gain de temps et une intégration optimale.</p>
