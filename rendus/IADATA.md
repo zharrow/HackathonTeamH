@@ -64,6 +64,16 @@ Il inclut également le **défi Data Science**, enrichi d’une prévision visue
 
 L’ensemble des graphiques et indicateurs a été élaboré à partir de mesures **DAX personnalisées** et de l’exploitation des colonnes disponibles dans le jeu de données, garantissant une analyse cohérente et pertinente.
 
+![stat generale](Capture_d'écran_2025-10-17_194250.png)
+
+![Top 10 Butteur](Capture_d'écran_2025-10-17_194332.png)
+
+![Top 5 Gardien](Capture_d'écran_2025-10-17_194408.png)
+
+![Repartition des victoires selon la couleur de l'équipe](Capture_d'écran_2025-10-17_194420.png)
+
+![Nombre de match par mois avec prevision par IA sur 6 mois](Capture_d'écran_2025-10-17_194434.png)
+
 ---
 
 # Participation à l'élaboration de la base de données du projet
@@ -203,6 +213,7 @@ Toutes les clés primaires et étrangères sont de type **UUID**, garantissant u
 
 > ✅ Tous les identifiants (`id`, `*_id`) sont de type **UUID**.  
 > Ce modèle garantit la cohérence, la sécurité et la scalabilité de la base de données.
+
 
 Pour initialiser la base, nous avons intégré les données issues du fichier CSV de départ à l’aide de **scripts Python** spécialement développés. Ces scripts ont permis de :
 
