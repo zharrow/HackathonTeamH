@@ -163,7 +163,6 @@ export default function ReservationsPage() {
     fetchPlayers();
   }, [fetchAllReservations, fetchReservations, fetchTables, fetchPlayers]);
 
-<<<<<<< HEAD
   // Auto-refresh reservations every 30 seconds
   useEffect(() => {
     const interval = setInterval(() => {
@@ -180,12 +179,10 @@ export default function ReservationsPage() {
     }
     return reservations.filter((r) => r.babyfoot.id === selectedTable);
   }, [reservations, selectedTable]);
-=======
   // Separate effect for calendar data
   useEffect(() => {
     fetchCalendarReservations();
   }, [fetchCalendarReservations]);
->>>>>>> 805e55d0bbb5b5744cf31901d2696d73743c6180
 
   // Pagination handlers
   const handlePageChange = (newPage: number) => {
