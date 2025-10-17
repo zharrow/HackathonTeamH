@@ -121,11 +121,6 @@ export default function TableReservationsPage() {
     setIsFormOpen(true);
   };
 
-  const handleDeleteClick = (reservation: Reservation) => {
-    setSelectedReservation(reservation);
-    setIsDeleteOpen(true);
-  };
-
   const handleReservationClick = (reservation: Reservation) => {
     handleEdit(reservation);
   };

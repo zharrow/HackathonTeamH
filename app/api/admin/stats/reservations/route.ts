@@ -1,11 +1,10 @@
-import { NextRequest } from "next/server";
 import { prisma } from "@/lib/prisma";
 
 /**
  * GET /api/admin/stats/reservations
  * Get all reservations for statistics (no pagination)
  */
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     const reservations = await prisma.reservation.findMany({
       include: {

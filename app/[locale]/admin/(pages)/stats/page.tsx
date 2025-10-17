@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useTranslations } from "next-intl";
 import {
   Card,
   CardContent,
@@ -55,7 +54,6 @@ interface StatsData {
 }
 
 export default function StatsPage() {
-  const t = useTranslations("admin");
   const [stats, setStats] = useState<StatsData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 

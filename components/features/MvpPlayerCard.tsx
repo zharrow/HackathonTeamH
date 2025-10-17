@@ -3,7 +3,6 @@
 import { Trophy, Star } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import ElectricBorder from "@/components/ElectricBorder";
-import { useTranslations } from "next-intl";
 
 interface MvpPlayerCardProps {
   player?: {
@@ -13,7 +12,6 @@ interface MvpPlayerCardProps {
 }
 
 export function MvpPlayerCard({ player }: MvpPlayerCardProps) {
-  const t = useTranslations();
   // Données mockées si aucun joueur n'est fourni
   const mvpPlayer = player || {
     nickname: "Faker",
@@ -22,9 +20,9 @@ export function MvpPlayerCard({ player }: MvpPlayerCardProps) {
 
   // Initiales pour le fallback
   const initials = mvpPlayer.nickname
-    .split(' ')
-    .map(n => n[0])
-    .join('')
+    .split(" ")
+    .map((n) => n[0])
+    .join("")
     .toUpperCase()
     .slice(0, 2);
 
@@ -32,8 +30,8 @@ export function MvpPlayerCard({ player }: MvpPlayerCardProps) {
     <div className="w-full max-w-4xl mx-auto">
       <ElectricBorder
         color="#00FFF7"
-        speed={.8}
-        chaos={.6}
+        speed={0.8}
+        chaos={0.6}
         thickness={5}
         className="bg-[#0D0D0D]"
         style={{ borderRadius: 2 }}
@@ -52,7 +50,9 @@ export function MvpPlayerCard({ player }: MvpPlayerCardProps) {
               <div className="absolute -top-3 -left-3 z-10 bg-[#00FFF7] px-3 py-1 clip-path-corner glow-cyan">
                 <div className="flex items-center gap-1.5">
                   <Star className="w-4 h-4 text-black fill-black" />
-                  <span className="text-black font-black text-xs tracking-wider">MVP</span>
+                  <span className="text-black font-black text-xs tracking-wider">
+                    MVP
+                  </span>
                 </div>
               </div>
 

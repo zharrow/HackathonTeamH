@@ -36,7 +36,6 @@ interface Player {
 export default function ReservationsPage() {
   const params = useParams();
   const t = useTranslations("reservation");
-  const tCommon = useTranslations("common");
   const [reservations, setReservations] = useState<Reservation[]>([]);
   const [calendarReservations, setCalendarReservations] = useState<
     Reservation[]
