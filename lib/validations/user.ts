@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { Roles } from "@/generated/prisma";
+import { Roles } from "@prisma/client";
 
 export const updateUserRoleSchema = z.object({
   role: z.nativeEnum(Roles),

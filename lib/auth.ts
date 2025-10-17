@@ -3,7 +3,7 @@ import { customSession } from "better-auth/plugins";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { prisma } from "@/lib/prisma";
 import { headers } from "next/headers";
-import { Roles } from "@/generated/prisma";
+import { Roles } from "@prisma/client";
 
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
