@@ -2,12 +2,13 @@ import { NextRequest } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+import { MatchFormat } from "@prisma/client";
 
 /**
  * GET /api/reservations
  * Get user's reservations
  */
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     const session = await auth.api.getSession({
       headers: await headers(),
@@ -165,7 +166,16 @@ export async function POST(request: NextRequest) {
     }
 
     // Create reservation with user in their chosen team
-    const reservationData: any = {
+    const reservationData: {
+      babyfootId: string;
+      partyDate: Date;
+      status: "CONFIRMED" | "PENDING";
+      format: MatchFormat;
+      redDefenseId?: string;
+      redAttackId?: string;
+      blueDefenseId?: string;
+      blueAttackId?: string;
+    } = {
       babyfootId: babyfootId,
       partyDate: reservationDate,
       status: reservationStatus,
@@ -229,7 +239,7 @@ export async function POST(request: NextRequest) {
         message:
           reservationStatus === "CONFIRMED"
             ? "Réservation confirmée !"
-            : `Ajouté à la file d'attente (position ${queuePosition})`,
+            : `Ajouté à la file d&apos;attente (position ${queuePosition})`,
       },
       { status: 201 }
     );
