@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { MapPin, Clock, Zap } from "lucide-react";
+import { MapPin, Clock, Zap, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import {
   Dialog,
   DialogContent,
@@ -13,34 +14,22 @@ import {
 import { BookingCard } from "./BookingCard";
 import { HoverGlow } from "@/components/animations";
 
-const BABYFOOTS = [
-  {
-    id: "1",
-    name: "Babyfoot A",
-    location: "Salle commune - RDC",
-    status: "available",
-    availableAt: null,
-    image: "/baby1.png", // Image par défaut
-  },
-  {
-    id: "2",
-    name: "Babyfoot B",
-    location: "Cafétéria - 1er étage",
-    status: "occupied",
-    availableAt: "14:30",
-    image: "/baby2.png",
-  },
-  {
-    id: "3",
-    name: "Babyfoot C",
-    location: "Espace détente - 2ème étage",
-    status: "available",
-    availableAt: null,
-    image: "/baby1.png",
-  },
-];
+interface Babyfoot {
+  id: string;
+  name: string;
+  location: string;
+  status: "available" | "occupied" | "maintenance";
+  availableAt: string | null;
+  image: string;
+  queueCount?: number;
+  nextReservationTime?: string | null;
+}
 
-export function BabyfootCards() {
+interface BabyfootCardsProps {
+  babyfoots?: Babyfoot[];
+}
+
+export function BabyfootCards({ babyfoots = [] }: BabyfootCardsProps) {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [selectedBabyfoot, setSelectedBabyfoot] = useState<string | null>(null);
 
@@ -49,10 +38,21 @@ export function BabyfootCards() {
     setIsBookingOpen(true);
   };
 
+  // Show message if no babyfoots
+  if (babyfoots.length === 0) {
+    return (
+      <div className="text-center py-12">
+        <p className="font-body text-[#B0B0B0] text-lg">
+          Aucun babyfoot disponible pour le moment.
+        </p>
+      </div>
+    );
+  }
+
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {BABYFOOTS.map((babyfoot) => (
+        {babyfoots.map((babyfoot) => (
           <HoverGlow
             key={babyfoot.id}
             glowColor="magenta"
@@ -70,17 +70,30 @@ export function BabyfootCards() {
               <div className="absolute inset-0 bg-gradient-to-t from-[#0f1923] to-transparent" />
 
               {/* Status badge */}
-              <div className="absolute top-3 right-3">
+              <div className="absolute top-3 right-3 flex gap-2">
                 {babyfoot.status === "occupied" ? (
                   <span className="px-3 py-1 bg-[#FF4B4B] backdrop-blur-sm text-white text-xs font-black rounded uppercase flex items-center gap-1 glow-cyan">
                     <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
                     Occupé
+                  </span>
+                ) : babyfoot.status === "maintenance" ? (
+                  <span className="px-3 py-1 bg-[#B0B0B0] backdrop-blur-sm text-black text-xs font-black rounded uppercase flex items-center gap-1">
+                    <div className="w-2 h-2 bg-black rounded-full" />
+                    Maintenance
                   </span>
                 ) : (
                   <span className="px-3 py-1 bg-[#00FF6C] backdrop-blur-sm text-black text-xs font-black rounded uppercase flex items-center gap-1">
                     <div className="w-2 h-2 bg-black rounded-full" />
                     Libre
                   </span>
+                )}
+
+                {/* Queue badge */}
+                {babyfoot.queueCount && babyfoot.queueCount > 0 && (
+                  <Badge className="bg-[#FF00FF] text-white text-xs font-black flex items-center gap-1">
+                    <Users className="w-3 h-3" />
+                    {babyfoot.queueCount}
+                  </Badge>
                 )}
               </div>
             </div>
@@ -102,11 +115,33 @@ export function BabyfootCards() {
 
               {/* Availability info */}
               {babyfoot.status === "occupied" && babyfoot.availableAt && (
-                <div className="flex items-center gap-2 p-2 bg-[#FF00FF]/10 border border-[#FF00FF]/20 rounded">
-                  <Clock className="w-4 h-4 text-[#FF00FF] flex-shrink-0" />
-                  <p className="font-body text-xs text-[#FF00FF]">
+                <div className="flex items-center gap-2 p-2 bg-[#FF4B4B]/10 border border-[#FF4B4B]/20 rounded">
+                  <Clock className="w-4 h-4 text-[#FF4B4B] flex-shrink-0" />
+                  <p className="font-body text-xs text-[#FF4B4B]">
                     Disponible à{" "}
                     <span className="font-bold">{babyfoot.availableAt}</span>
+                  </p>
+                </div>
+              )}
+
+              {/* Next reservation info (for available tables with upcoming reservations) */}
+              {babyfoot.status === "available" && babyfoot.nextReservationTime && babyfoot.availableAt && (
+                <div className="flex items-center gap-2 p-2 bg-[#00FFF7]/10 border border-[#00FFF7]/20 rounded">
+                  <Clock className="w-4 h-4 text-[#00FFF7] flex-shrink-0" />
+                  <p className="font-body text-xs text-[#00FFF7]">
+                    Prochaine réservation à{" "}
+                    <span className="font-bold">{babyfoot.availableAt}</span>
+                  </p>
+                </div>
+              )}
+
+              {/* Queue info */}
+              {babyfoot.queueCount && babyfoot.queueCount > 0 && (
+                <div className="flex items-center gap-2 p-2 bg-[#FF00FF]/10 border border-[#FF00FF]/20 rounded">
+                  <Users className="w-4 h-4 text-[#FF00FF] flex-shrink-0" />
+                  <p className="font-body text-xs text-[#FF00FF]">
+                    <span className="font-bold">{babyfoot.queueCount}</span>{" "}
+                    {babyfoot.queueCount === 1 ? "réservation en attente" : "réservations en attente"}
                   </p>
                 </div>
               )}
@@ -134,7 +169,7 @@ export function BabyfootCards() {
             <DialogDescription className="font-body text-[#B0B0B0]">
               {selectedBabyfoot &&
                 (() => {
-                  const babyfoot = BABYFOOTS.find(
+                  const babyfoot = babyfoots.find(
                     (b) => b.id === selectedBabyfoot
                   );
                   return babyfoot
