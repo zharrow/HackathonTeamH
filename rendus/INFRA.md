@@ -43,7 +43,7 @@ Déployer une infrastructure cloud complète pour héberger et gérer l’applic
 - Services de surveillance et de journalisation
 - Mise en place de la sécurité (firewalls, gestion des accès, etc.)
 
-### Requis fonctionnels
+### Travail effectué
 
 - **Simplicité de déploiement** :
 
