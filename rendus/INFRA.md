@@ -45,10 +45,43 @@ Déployer une infrastructure cloud complète pour héberger et gérer l’applic
 
 ### Travail effectué
 
-- **Simplicité de déploiement** :
+### Simplicité de déploiement
 
-  - Utilisation d’outils d’automatisation (Terraform, Ansible, Scripts shell...) pour déployer l’infrastructure en une seule commande.
-  - Documentation claire pour le déploiement.
+L’un des objectifs principaux du projet était de garantir un **déploiement rapide, automatisé et reproductible** de l’infrastructure. Cet objectif a été atteint grâce à l’utilisation de **Terraform**, outil d’Infrastructure as Code (IaC) permettant de décrire et de provisionner les ressources cloud de manière déclarative.
+
+#### Automatisation complète via Terraform
+
+L’ensemble de l’infrastructure a été conçu et déployé entièrement à l’aide de Terraform, couvrant tous les composants nécessaires à la mise en production de l’application :
+
+* **Réseau (VPC, sous-réseaux publics/privés, tables de routage, gateways, security groups)**
+* **Équilibreur de charge (ALB)** pour la répartition du trafic
+* **Service ECS (Elastic Container Service)** pour l’orchestration et le déploiement des conteneurs
+* **Route53** pour la gestion du nom de domaine et des enregistrements DNS
+* **IAM Roles & Policies** pour la sécurité et la gestion des permissions
+
+L’exécution du déploiement se fait via une seule commande :
+
+```bash
+terraform init
+terraform apply -auto-approve
+```
+
+Ce qui permet de créer ou de mettre à jour l’infrastructure de manière entièrement automatisée, sans intervention manuelle sur la console AWS.
+
+#### Avantages de cette approche
+
+* **Reproductibilité** : le même code Terraform peut être utilisé pour recréer l’environnement dans une autre région ou un autre compte AWS.
+* **Traçabilité et versionnement** : le code étant stocké dans un dépôt Git, chaque modification est historisée et peut être facilement auditée.
+* **Cohérence entre environnements** : développement, staging et production sont alignés sur la même configuration.
+* **Facilité de maintenance** : les mises à jour ou ajouts de ressources sont effectués directement dans le code Terraform, assurant la cohérence et limitant les erreurs humaines.
+
+### Démonstration en vidéo
+
+Voici une démonstration complète du processus de déploiement depuis l'initialisation jusqu'à la mise en ligne de l'application :
+
+[![Terraform apply](https://asciinema.org/a/3VhblrZPUuOO5T0xVYeOKELUY.svg)](https://asciinema.org/a/3VhblrZPUuOO5T0xVYeOKELUY)
+
+*Cette démonstration montre le déploiement complet de l'infrastructure AWS avec Terraform, incluant la création du VPC, du cluster ECS, de l'ALB et la configuration des certificats SSL.*
 
 - **Host sécurisé et protégé** :
 
