@@ -10,9 +10,6 @@ Ce guide explique comment utiliser tous les nouveaux composants d'animation et e
 // Animations GSAP
 import { GlitchText, HoverGlow, ScanLine } from '@/components/animations'
 
-// Three.js Background
-import { ThreeBackground } from '@/components/three'
-
 // Composants existants
 import ElectricBorder from '@/components/ElectricBorder'
 import DotGrid from '@/components/DotGrid'
@@ -286,82 +283,6 @@ interface ScanLineProps {
 
 ---
 
-## 🌌 Composant : ThreeBackground
-
-### Description :
-Background 3D avec géométrie wireframe animée (icosaèdre).
-
-### Props :
-```tsx
-interface ThreeBackgroundProps {
-  className?: string
-}
-```
-
-### Exemple :
-
-#### Usage basique :
-```tsx
-<ThreeBackground className="opacity-20" />
-```
-
-#### Dans une page :
-```tsx
-export default function Page() {
-  return (
-    <main className="relative min-h-screen bg-[#0D0D0D]">
-      {/* Background 3D */}
-      <ThreeBackground className="opacity-15" />
-
-      {/* DotGrid par-dessus */}
-      <div className="absolute inset-0">
-        <DotGrid activeColor="#00FFF7" />
-      </div>
-
-      {/* Contenu */}
-      <div className="relative z-10">
-        {children}
-      </div>
-    </main>
-  )
-}
-```
-
-### Lazy Loading (recommandé) :
-```tsx
-import dynamic from 'next/dynamic'
-
-const ThreeBackground = dynamic(
-  () => import('@/components/three').then(mod => mod.ThreeBackground),
-  {
-    ssr: false,
-    loading: () => <div className="fixed inset-0 bg-[#0D0D0D]" />
-  }
-)
-```
-
-### Performance :
-- Auto-rotation à 0.5 vitesse
-- Points limités (32x32 sphere)
-- Transparent background
-- Désactiver zoom/pan pour performance
-
-### Customisation :
-Modifier `components/three/ThreeBackground.tsx` :
-
-```tsx
-// Changer la géométrie
-<icosahedronGeometry args={[2.5, 1]} /> // [rayon, détail]
-
-// Changer la vitesse de rotation
-<OrbitControls autoRotateSpeed={1.0} />
-
-// Ajouter plus de particules
-<sphereGeometry args={[5, 64, 64]} /> // Plus de points
-```
-
----
-
 ## ⚡ Composant : ElectricBorder (existant)
 
 ### Description :
@@ -422,7 +343,6 @@ interface ElectricBorderProps {
 ```tsx
 <main className="relative min-h-screen bg-[#0D0D0D] overflow-hidden">
   {/* Background layers */}
-  <ThreeBackground className="opacity-15" />
   <DotGrid activeColor="#00FFF7" />
   <ScanLine color="#00FFF7" duration={6} />
 
@@ -531,8 +451,6 @@ interface ElectricBorderProps {
 <h1 className="font-heading text-4xl md:text-7xl">
   {title}
 </h1>
-
-<ThreeBackground className="opacity-10 md:opacity-20" />
 ```
 
 ### Réduire les effets sur mobile :
@@ -550,10 +468,6 @@ const isMobile = useMediaQuery('(max-width: 768px)')
 
 ### Lazy loading recommandé :
 ```tsx
-const ThreeBackground = dynamic(() => import('@/components/three'), {
-  ssr: false
-})
-
 const GlitchText = dynamic(() => import('@/components/animations').then(m => m.GlitchText), {
   ssr: false
 })
@@ -562,19 +476,11 @@ const GlitchText = dynamic(() => import('@/components/animations').then(m => m.G
 ### Désactiver animations sur mobile :
 ```tsx
 {!isMobile && <ScanLine />}
-{!isMobile && <ThreeBackground />}
 ```
 
 ---
 
 ## 🐛 Troubleshooting
-
-### Three.js ne s'affiche pas :
-- Vérifier que les dépendances sont installées :
-  ```bash
-  npm install three @react-three/fiber @react-three/drei
-  ```
-- Ajouter `'use client'` en haut du fichier
 
 ### Glitch trop fréquent :
 ```tsx
