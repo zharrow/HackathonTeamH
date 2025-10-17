@@ -31,9 +31,10 @@
 
 <p><b><span style="color:#FF5C93;">Florent (Chef de projet)</span></b><br>
 <b><span style="color:#9EFF7A;">Réservation intelligente</span></b> en créneaux de 15 minutes avec anti-chevauchement<br>
-> Un algorithme pensé pour améliorer l’expérience utilisateur.<br><br>
+> Un algorithme pensé pour améliorer l’expérience utilisateur.
+<img src="reservation.png"><img src="reservation_player.png"><br><br>
 <b><span style="color:#9EFF7A;">Système ELO</span></b> pour classer les joueurs et créer de la compétition<br>
-> Fidélise, motive et challenge la communauté.<br><br>
+> Fidélise, motive et challenge la communauté.<img src="podium.png"><br><br>
 <b><span style="color:#9EFF7A;">File d'attente automatique</span></b> quand les tables sont pleines<br>
 > Réduit la frustration et régule l’utilisation des babyfoots.<br><br>
 <b><span style="color:#9EFF7A;">Interface futuriste</span></b> dark + néon avec animations GSAP<br>
@@ -42,7 +43,7 @@
 
 <p><b><span style="color:#FF5C93;">Florian (Développeur)</span></b><br>
 <b><span style="color:#9EFF7A;">Dashboard admin</span></b> complet pour gérer tables, utilisateurs et statistiques<br>
-> Incontournable pour une gestion claire et fluide.<br><br>
+> Incontournable pour une gestion claire et fluide.<img src="baby_admin.png"><img src="player_admin.png"><img src="stat_admin.png"><img src="reservation_admin.png"><br><br>
 <b><span style="color:#9EFF7A;">Authentification sécurisée</span></b> complète avec outils modernes<br>
 > Sécurise efficacement les accès utilisateurs.<br><br>
 <b><span style="color:#9EFF7A;">Internationalisation + thèmes</span></b> (dark/light)<br>
@@ -88,6 +89,7 @@
 
 <span style="color:#FF5C93;">Florian (Développeur)</span></p>
 > Utilisation de <b><span style="color:#FFD700;">Better Auth</span></b> pour une intégration rapide, fiable et fluide, avec support OAuth (GitHub, Google...)</p>
+<img src="login.png"> <img src="register.png">
 
 <h2><b><span style="color:#FF5C93;">⚠️ Difficultés rencontrées</span></b></h2>
 
