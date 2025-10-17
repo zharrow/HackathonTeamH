@@ -2,8 +2,8 @@
 
 ## Equipe
 
-- Cloud & Infra 1 : pupille Florian
-- Cloud & Infra : ALAMICHE CHENTOUFI Ilias
+- Cloud & Infra 1 : Pupille Florian
+- Cloud & Infra : ALAMI CHENTOUFI Ilias
 - CLoud & Infra : Pitrel Corentin 
 
 Et si on réinventait l’expérience babyfoot à Ynov ? L’objectif de ce hackathon est de moderniser et digitaliser l’usage des babyfoots présents dans le Souk pour créer un service _next-gen_, pensé pour près de 1000 étudiants !
