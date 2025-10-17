@@ -1,19 +1,23 @@
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 import { BabyfootCards } from "@/components/features/BabyfootCards";
 import { MvpPlayerCard } from "@/components/features/MvpPlayerCard";
+import { LeaderboardPodium } from "@/components/features/LeaderboardPodium";
 import { UserStats } from "@/components/features/UserStats";
 import DotGrid from "@/components/DotGrid";
+import { GlitchText } from "@/components/animations";
+import { useTranslations } from "next-intl";
 
 export default function HomePage() {
+  const t = useTranslations();
   return (
-    <main className="relative min-h-screen bg-gray-950 overflow-hidden">
-      {/* Background dot-grid de ReactBits */}
+    <main className="relative min-h-screen bg-[#0D0D0D] overflow-hidden">
+      {/* Background dot-grid avec couleurs Brand */}
       <div className="absolute inset-0">
         <DotGrid
-          dotSize={2}
-          gap={25}
-          baseColor="#1e293b"
-          activeColor="#06b6d4"
+          dotSize={6}
+          gap={20}
+          baseColor="#1a1a1a"
+          activeColor="#00FFF7"
           proximity={150}
           shockRadius={300}
           shockStrength={8}
@@ -26,15 +30,17 @@ export default function HomePage() {
       <SignedOut>
         <div className="relative z-10 container mx-auto px-4 py-16">
           <div className="max-w-4xl mx-auto text-center space-y-8">
-            <h1 className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-magenta-500 to-cyan-400">
-              Babyfoot Booking
+            <h1 className="font-heading text-7xl text-transparent bg-clip-text bg-gradient-to-r from-[#00FFF7] via-[#FF00FF] to-[#00FFF7] animate-gradient-x">
+              <GlitchText intensity="high" glitchInterval={5}>
+                {t('home.title')}
+              </GlitchText>
             </h1>
-            <p className="text-xl text-gray-400">
-              Réservez votre table de babyfoot, affrontez vos amis et grimpez dans le classement ELO !
+            <p className="font-subheading text-2xl text-[#B0B0B0]">
+              {t('home.subtitle')}
             </p>
             <div className="pt-8">
-              <p className="text-gray-500">
-                Connectez-vous pour accéder à votre dashboard et commencer à jouer
+              <p className="font-body text-[#B0B0B0]">
+                {t('home.signInCta')}
               </p>
             </div>
           </div>
@@ -47,27 +53,40 @@ export default function HomePage() {
           {/* Section 1 : Sélection des Babyfoots */}
           <section>
             <div className="mb-6">
-              <h2 className="text-3xl font-black text-white uppercase tracking-tight mb-2">
-                Tables disponibles
+              <h2 className="font-heading text-4xl text-[#F2F2F2] mb-2 text-glow-cyan">
+                {t('home.availableTables')}
               </h2>
-              <p className="text-gray-400">
-                Choisissez votre table et réservez votre créneau
+              <p className="font-body text-[#B0B0B0]">
+                {t('home.availableTablesDesc')}
               </p>
             </div>
             <BabyfootCards />
           </section>
 
-          {/* Section 2 : MVP Player */}
+          {/* Section 2 : MVP Player
           <section className="max-w-xl mx-auto">
             <div className="text-center mb-6">
-              <h2 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600">
-                Joueur MVP du Campus
+              <h2 className="font-subheading text-3xl text-transparent bg-clip-text bg-gradient-to-r from-[#00FFF7] to-[#FF00FF]">
+                {t('home.mvpPlayer')}
               </h2>
-              <p className="text-sm text-gray-400 mt-2">
-                Le meilleur joueur du moment
+              <p className="font-body text-sm text-[#B0B0B0] mt-2">
+                {t('home.mvpPlayerDesc')}
               </p>
             </div>
             <MvpPlayerCard />
+          </section> */}
+
+          {/* Section 2.5 : Leaderboard Podium */}
+          <section>
+            <div className="text-center mb-8">
+              <h2 className="font-heading text-4xl text-[#F2F2F2] mb-2 text-glow-cyan">
+                TOP 3 LEADERBOARD
+              </h2>
+              <p className="font-body text-[#B0B0B0]">
+                Les meilleurs joueurs du campus
+              </p>
+            </div>
+            <LeaderboardPodium />
           </section>
 
           {/* Section 3 : Statistiques utilisateur */}

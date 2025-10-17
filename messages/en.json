@@ -17,6 +17,15 @@
     "profile": "Profile",
     "admin": "Administration"
   },
+  "home": {
+    "title": "Babyfoot Booking",
+    "subtitle": "Book your foosball table, challenge your friends and climb the ELO rankings!",
+    "signInCta": "Sign in to access your dashboard and start playing",
+    "availableTables": "Available Tables",
+    "availableTablesDesc": "Choose your table and book your time slot",
+    "mvpPlayer": "Campus MVP Player",
+    "mvpPlayerDesc": "The best player right now"
+  },
   "booking": {
     "title": "Babyfoot Booking",
     "subtitle": "Book your babyfoot slot at Ynov Toulouse",
