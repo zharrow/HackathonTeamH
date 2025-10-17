@@ -38,20 +38,25 @@ export default function TablesPage() {
   const [isDeleting, setIsDeleting] = useState(false);
 
   // Custom hooks for filtering and stats
-  const {
-    searchQuery,
-    setSearchQuery,
-    statusFilter,
-    setStatusFilter,
-    filteredTables,
-  } = useTableFilters(tables);
+  const { searchQuery, setSearchQuery, statusFilter, setStatusFilter } =
+    useTableFilters(tables);
 
   const stats = useTableStats(tables);
 
-  // Fetch tables from API
+  // Fetch tables from API (no pagination)
   const fetchTables = useCallback(async () => {
     try {
-      const response = await fetch("/api/admin/tables");
+      const params = new URLSearchParams();
+
+      if (searchQuery) {
+        params.append("search", searchQuery);
+      }
+
+      if (statusFilter) {
+        params.append("status", statusFilter);
+      }
+
+      const response = await fetch(`/api/admin/tables?${params}`);
       const data = await response.json();
       if (data.success) {
         setTables(data.data);
@@ -63,7 +68,7 @@ export default function TablesPage() {
       setIsLoading(false);
       setIsRefreshing(false);
     }
-  }, [t]);
+  }, [searchQuery, statusFilter, t]);
 
   useEffect(() => {
     fetchTables();
@@ -205,8 +210,9 @@ export default function TablesPage() {
       ) : (
         <AdvancedDataTable
           columns={columns}
-          data={filteredTables}
+          data={tables}
           isLoading={isLoading}
+          enablePagination={true}
         />
       )}
 

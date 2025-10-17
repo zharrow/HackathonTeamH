@@ -26,7 +26,17 @@
     "toggleTheme": "Changer le thème",
     "lightTheme": "Clair",
     "darkTheme": "Sombre",
-    "systemTheme": "Système"
+    "systemTheme": "Système",
+    "rowsPerPage": "Lignes par page",
+    "showing": "Affichage de",
+    "to": "à",
+    "of": "sur",
+    "items": "éléments",
+    "players": "joueurs",
+    "reservations": "réservations",
+    "tables": "tables",
+    "previous": "Précédent",
+    "next": "Suivant"
   },
   "navigation": {
     "home": "Accueil",
