@@ -154,7 +154,7 @@ module "ecs_service" {
   # Container definition(s)
   container_definitions = {
     "${local.container_name}" = {
-      image = "nginx:latest"
+      image = "907099097883.dkr.ecr.eu-west-3.amazonaws.com/404infra/web:latest"
       portMappings = [
         {
           name          = "${local.container_name}"
@@ -189,21 +189,188 @@ module "ecs_service" {
     }
   }
 
-  /*load_balancer = {
+
+
+  load_balancer = {
     service = {
-      target_group_arn = module.alb.target_groups["ex_ecs"].arn
-      container_name   = local.container_name
-      container_port   = local.container_port
+      target_group_arn = "${module.alb.target_groups}"["ex_ecs"].arn
+      container_name   = "${local.container_name}"
+      container_port   = "${local.container_port}"
     }
   }
 
-  subnet_ids = module.vpc.private_subnets
   security_group_ingress_rules = {
     alb_http = {
-      from_port                    = local.container_port
+      from_port                    = "${local.container_port}"
       description                  = "Service port"
-      referenced_security_group_id = module.alb.security_group_id
+      referenced_security_group_id = "${module.alb.security_group_id}"
     }
-  }*/
+  }
+  security_group_egress_rules = {
+    all = {
+      ip_protocol = "-1"
+      cidr_ipv4   = "0.0.0.0/0"
+    }
+  }
 }
 
+
+
+  module "autoscaling_sg" {
+  source  = "terraform-aws-modules/security-group/aws"
+  version = "~> 5.0"
+
+  name        = "${local.name_as_sg}"
+  description = "Autoscaling group security group"
+  vpc_id      = module.vpc.vpc_id
+
+  computed_ingress_with_source_security_group_id = [
+    {
+      rule                     = "https-443-tcp"
+      source_security_group_id = "${module.alb.security_group_id}"
+    }
+  ]
+  number_of_computed_ingress_with_source_security_group_id = 1
+
+  egress_rules = ["all-all"]
+
+}
+
+module "alb" {
+  source  = "terraform-aws-modules/alb/aws"
+  version = "~> 9.0"
+
+  name = local.name_alb
+
+  load_balancer_type = "application"
+
+  vpc_id  = module.vpc.vpc_id
+  subnets = module.vpc.public_subnets
+
+  # For example only
+  enable_deletion_protection = false
+
+  # Security Group
+  security_group_ingress_rules = {
+    all_http = {
+      from_port   = 80
+      to_port     = 80
+      ip_protocol = "tcp"
+      cidr_ipv4   = "0.0.0.0/0"
+    }
+    all_https = {
+      from_port   = 443
+      to_port     = 443
+      ip_protocol = "tcp"
+      cidr_ipv4   = "0.0.0.0/0"
+    }
+  }
+  security_group_egress_rules = {
+    all = {
+      ip_protocol = "-1"
+      cidr_ipv4   = module.vpc.vpc_cidr_block
+    }
+  }
+
+  listeners = {
+    http-https-redirect = {
+      port     = 80
+      protocol = "HTTP"
+      redirect = {
+        port        = "443"
+        protocol    = "HTTPS"
+        status_code = "HTTP_301"
+      }
+    }
+    ex_https = {
+      port     = 443
+      protocol = "HTTPS"
+      certificate_arn = aws_acm_certificate.mycert_acm.arn
+      forward = {
+        target_group_key = "ex_ecs"
+      }
+    }
+  }
+
+  target_groups = {
+    ex_ecs = {
+      backend_protocol                  = "HTTPS"
+      backend_port                      = 443
+      target_type                       = "ip"
+      deregistration_delay              = 5
+      load_balancing_cross_zone_enabled = true
+
+      health_check = {
+        enabled             = true
+        healthy_threshold   = 5
+        interval            = 30
+        matcher             = "200"
+        path                = "/"
+        port                = "traffic-port"
+        protocol            = "HTTPS"
+        timeout             = 5
+        unhealthy_threshold = 2
+      }
+
+      # Theres nothing to attach here in this definition. Instead,
+      # ECS will attach the IPs of the tasks to this target group
+      create_attachment = false
+    }
+  }
+
+}
+
+
+
+#### Certificat ACM ####
+
+resource "aws_acm_certificate" "mycert_acm" {
+  domain_name               = "404infra.${local.domain_name}"
+
+  validation_method = "DNS"
+  key_algorithm = "RSA_2048"
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+data "aws_route53_zone" "selected_zone" {
+  name         = "${local.domain_name}."
+}
+
+resource "aws_route53_record" "cert_validation_record" {
+  for_each = {
+    for dvo in aws_acm_certificate.mycert_acm.domain_validation_options : dvo.domain_name => {
+      name   = dvo.resource_record_name
+      record = dvo.resource_record_value
+      type   = dvo.resource_record_type
+    }
+  }
+
+  allow_overwrite = true
+  name            = each.value.name
+  records         = [each.value.record]
+  ttl             = 60
+  type            = each.value.type
+  zone_id         = data.aws_route53_zone.selected_zone.zone_id
+}
+
+resource "aws_acm_certificate_validation" "cert_validation" {
+  timeouts {
+    create = "5m"
+  }
+  certificate_arn         = aws_acm_certificate.mycert_acm.arn
+  validation_record_fqdns = [for record in aws_route53_record.cert_validation_record : record.fqdn]
+}
+
+resource "aws_route53_record" "route53_A_record" {
+  zone_id = data.aws_route53_zone.selected_zone.zone_id
+  name    = "404infra.${local.domain_name}"
+  type    = "A"
+  alias {
+    name                   = module.alb.dns_name
+    zone_id                = module.alb.zone_id
+    evaluate_target_health = true
+  }
+}
