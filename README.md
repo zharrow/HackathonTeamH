@@ -1,36 +1,136 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Babyfoot Booking - Ynov Toulouse
 
-## Getting Started
+Plateforme de gestion et réservation de tables de babyfoot pour Ynov Toulouse.
 
-First, run the development server:
+## 🚀 Stack Technique
+
+- **Framework**: Next.js 15 (App Router) + TypeScript
+- **Base de données**: PostgreSQL + Prisma ORM
+- **Authentification**: Better-Auth (email/password + GitHub OAuth)
+- **UI**: Tailwind CSS + shadcn/ui
+- **Internationalisation**: next-intl (FR/EN)
+- **Animations**: GSAP (micro-interactions)
+
+## 📋 Prérequis
+
+- Node.js 18+ (LTS recommandé)
+- pnpm (gestionnaire de paquets)
+- PostgreSQL 14+
+- Docker & Docker Compose (optionnel, pour faciliter le déploiement)
+
+## ⚙️ Installation
+
+1. **Cloner le repository**
+
+   ```bash
+   git clone <repo-url>
+   cd hackathon
+   ```
+
+2. **Installer les dépendances**
+
+   ```bash
+   pnpm install
+   ```
+
+3. **Configurer les variables d'environnement**
+
+   ```bash
+   cp env.example .env.local
+   ```
+
+   Remplir les variables dans `.env.local`:
+
+   - `DATABASE_URL`: URL de connexion PostgreSQL
+   - `BETTER_AUTH_SECRET`: Secret pour Better-Auth (32+ caractères)
+   - `BETTER_AUTH_URL`: URL de base de l'application
+   - `GITHUB_ID` & `GITHUB_SECRET`: OAuth GitHub (optionnel)
+
+4. **Initialiser la base de données**
+   ```bash
+   pnpm db:push        # Créer les tables
+   pnpm db:seed        # Insérer les données de test
+   ```
+
+## 🏃 Lancement en développement
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+L'application sera accessible sur [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🔐 Authentification
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Comptes de test (après seed)
 
-## Learn More
+- **Admin**: `admin@ynov.com` / `password123`
+- **User**: `user1@ynov.com` / `password123`
 
-To learn more about Next.js, take a look at the following resources:
+### Configuration GitHub OAuth
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Créer une OAuth App sur GitHub
+2. Callback URL: `http://localhost:3000/api/auth/callback/github`
+3. Copier Client ID et Secret dans `.env.local`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📦 Scripts disponibles
 
-## Deploy on Vercel
+```bash
+pnpm dev          # Développement
+pnpm build        # Build production
+pnpm start        # Lancer en production
+pnpm lint         # Vérification ESLint
+pnpm db:push      # Appliquer les changements du schéma Prisma
+pnpm db:seed      # Seed la base de données
+pnpm db:studio    # Interface Prisma Studio
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🏗️ Architecture
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+/app
+  /[locale]       # Routes internationalisées
+    /admin        # Dashboard admin (RBAC)
+    /sign-in      # Connexion
+    /sign-up      # Inscription
+  /api
+    /auth         # Routes Better-Auth
+    /admin        # API admin
+/components       # Composants réutilisables
+/lib              # Utilitaires & configs
+/prisma           # Schéma & migrations
+```
+
+## 🔒 RBAC (Role-Based Access Control)
+
+- **USER**: Réservation de tables, consultation
+- **ADMIN**: Gestion complète (tables, users, reservations)
+
+## 🌐 Internationalisation
+
+Langues supportées:
+
+- Français (par défaut)
+- Anglais
+
+Changer de langue via le sélecteur dans le header.
+
+## 🐳 Docker (Production)
+
+```bash
+docker-compose up -d
+```
+
+## 📝 Documentation
+
+- [SPECIFICATIONS.md](./SPECIFICATIONS.md) - Spécifications fonctionnelles
+- [DEV_DOCUMENTATION.md](./DEV_DOCUMENTATION.md) - Documentation technique
+- [PROMPT_VIBE_CODER.md](./PROMPT_VIBE_CODER.md) - Brief de développement
+
+## 🤝 Contribution
+
+Voir [CONTRIBUTORS](./CONTRIBUTORS) pour la liste des contributeurs.
+
+## 📄 License
+
+MIT

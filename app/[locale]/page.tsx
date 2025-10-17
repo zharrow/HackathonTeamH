@@ -1,4 +1,5 @@
-import { SignedIn, SignedOut } from "@clerk/nextjs";
+"use client";
+
 import { BabyfootCards } from "@/components/features/BabyfootCards";
 import { MvpPlayerCard } from "@/components/features/MvpPlayerCard";
 import { LeaderboardPodium } from "@/components/features/LeaderboardPodium";
@@ -6,9 +7,12 @@ import { UserStats } from "@/components/features/UserStats";
 import DotGrid from "@/components/DotGrid";
 import { GlitchText } from "@/components/animations";
 import { useTranslations } from "next-intl";
+import { useSession } from "@/lib/auth-client";
 
 export default function HomePage() {
   const t = useTranslations();
+  const { data: session } = useSession();
+  
   return (
     <main className="relative min-h-screen bg-[#0D0D0D] overflow-hidden">
       {/* Background dot-grid avec couleurs Brand */}
@@ -27,7 +31,7 @@ export default function HomePage() {
       </div>
 
       {/* Vue non connecté */}
-      <SignedOut>
+      {!session && (
         <div className="relative z-10 container mx-auto px-4 py-16">
           <div className="max-w-4xl mx-auto text-center space-y-8">
             <h1 className="font-heading text-7xl text-transparent bg-clip-text bg-gradient-to-r from-[#00FFF7] via-[#FF00FF] to-[#00FFF7] animate-gradient-x">
@@ -45,10 +49,10 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-      </SignedOut>
+      )}
 
       {/* Vue connecté - Dashboard utilisateur */}
-      <SignedIn>
+      {session && (
         <div className="relative z-10 container mx-auto px-4 py-8 space-y-12">
           {/* Section 1 : Sélection des Babyfoots */}
           <section>
@@ -94,7 +98,7 @@ export default function HomePage() {
             <UserStats />
           </section>
         </div>
-      </SignedIn>
+      )}
     </main>
   );
 }
