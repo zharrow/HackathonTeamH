@@ -49,7 +49,7 @@ module "autoscaling" {
   image_id      = jsondecode(data.aws_ssm_parameter.ecs_optimized_ami.value)["image_id"]
   instance_type = each.value.instance_type
 
-//  security_groups                 = [module.autoscaling_sg.security_group_id]
+  security_groups                 = [module.autoscaling_sg.security_group_id]
   user_data                       = base64encode(each.value.user_data)
   ignore_desired_capacity_changes = true
 
@@ -109,5 +109,101 @@ module "ecs_cluster" {
  
 data "aws_ssm_parameter" "ecs_optimized_ami" {
   name = "/aws/service/ecs/optimized-ami/amazon-linux-2023/recommended"
+}
+
+
+
+module "ecs_service" {
+  source = "terraform-aws-modules/ecs/aws//modules/service"
+
+  # Service
+  name        = "web"
+  cluster_arn = module.ecs_cluster.cluster_arn
+  subnet_ids = module.vpc.private_subnets
+
+
+  # Task Definition
+  requires_compatibilities = ["EC2"]
+  capacity_provider_strategy = {  
+    # On-demand instances
+    ex_1 = {
+      capacity_provider = module.ecs_cluster.autoscaling_capacity_providers["ex_1"].name
+      weight            = 100
+      base              = 1
+    }
+  }
+
+  volume_configuration = {
+    name = "ebs-volume"
+    managed_ebs_volume = {
+      encrypted        = true
+      file_system_type = "xfs"
+      size_in_gb       = 5
+      volume_type      = "gp3"
+    }
+  }
+
+  volume = {
+    my-vol = {},
+    ebs-volume = {
+      name                = "ebs-volume"
+      configure_at_launch = true
+    }
+  }
+
+  # Container definition(s)
+  container_definitions = {
+    "${local.container_name}" = {
+      image = "nginx:latest"
+      portMappings = [
+        {
+          name          = "${local.container_name}"
+          containerPort = "${local.container_port}"
+          hostPort      = "${local.container_port}"
+          protocol      = "tcp"
+        }
+      ]
+
+      mountPoints = [
+        {
+          sourceVolume  = "my-vol",
+          containerPath = "/var/www/my-vol"
+        },
+        {
+          sourceVolume  = "ebs-volume"
+          containerPath = "/ebs/data"
+        }
+      ]
+
+      # Example image used requires access to write to root filesystem
+      readonlyRootFilesystem = false
+
+      enable_cloudwatch_logging              = true
+      create_cloudwatch_log_group            = true
+      cloudwatch_log_group_name              = "/aws/ecs/${module.ecs_cluster.cluster_name}/${local.container_name}"
+      cloudwatch_log_group_retention_in_days = 7
+
+      logLonfiguration = {
+        logDriver = "awslogs"
+      }
+    }
+  }
+
+  /*load_balancer = {
+    service = {
+      target_group_arn = module.alb.target_groups["ex_ecs"].arn
+      container_name   = local.container_name
+      container_port   = local.container_port
+    }
+  }
+
+  subnet_ids = module.vpc.private_subnets
+  security_group_ingress_rules = {
+    alb_http = {
+      from_port                    = local.container_port
+      description                  = "Service port"
+      referenced_security_group_id = module.alb.security_group_id
+    }
+  }*/
 }
 
