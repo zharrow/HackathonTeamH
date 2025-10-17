@@ -1,15 +1,35 @@
-"use client";
-
 import { BabyfootCards } from "@/components/features/BabyfootCards";
 import { LeaderboardPodium } from "@/components/features/LeaderboardPodium";
 import { UserStats } from "@/components/features/UserStats";
+import { MyReservations } from "@/components/features/MyReservations";
 import DotGrid from "@/components/DotGrid";
 import { useTranslations } from "next-intl";
-import { useSession } from "@/lib/auth-client";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
+import { getBabyfoots } from "@/lib/actions/babyfoot";
+import { getTopPlayers } from "@/lib/actions/leaderboard";
+import { getUserStats } from "@/lib/actions/user-stats";
+import { getTranslations } from "next-intl/server";
 
-export default function HomePage() {
-  const t = useTranslations();
-  const { data: session } = useSession();
+export default async function HomePage() {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  const t = await getTranslations();
+
+  // Fetch data in parallel
+  let babyfoots = [];
+  let topPlayers = [];
+  let userStats = null;
+
+  if (session) {
+    [babyfoots, topPlayers, userStats] = await Promise.all([
+      getBabyfoots(),
+      getTopPlayers(3),
+      getUserStats(session.user.id),
+    ]);
+  }
   
   return (
     <main className="relative min-h-screen bg-[#0D0D0D] overflow-hidden">
@@ -50,6 +70,19 @@ export default function HomePage() {
       {/* Vue connecté - Dashboard utilisateur */}
       {session && (
         <div className="relative z-10 container mx-auto px-4 py-8 space-y-12">
+          {/* Section 0: My Reservations */}
+          <section>
+            <div className="mb-6">
+              <h2 className="font-heading text-4xl text-[#F2F2F2] mb-2 text-glow-cyan">
+                Mes Réservations
+              </h2>
+              <p className="font-body text-[#B0B0B0]">
+                Gérez vos réservations et votre position dans la file d'attente
+              </p>
+            </div>
+            <MyReservations />
+          </section>
+
           {/* Section 1 : Sélection des Babyfoots */}
           <section>
             <div className="mb-6">
@@ -60,7 +93,7 @@ export default function HomePage() {
                 {t('home.availableTablesDesc')}
               </p>
             </div>
-            <BabyfootCards />
+            <BabyfootCards babyfoots={babyfoots} />
           </section>
 
           {/* Section 2: Leaderboard Podium */}
@@ -73,12 +106,17 @@ export default function HomePage() {
                 Les meilleurs joueurs du campus
               </p>
             </div>
-            <LeaderboardPodium />
+            <LeaderboardPodium players={topPlayers} />
           </section>
 
           {/* Section 3 : Statistiques utilisateur */}
           <section className="max-w-7xl mx-auto">
-            <UserStats />
+            <UserStats
+              user={userStats?.user}
+              eloProgression={userStats?.eloProgression}
+              matchFormatsData={userStats?.matchFormatsData}
+              recentGames={userStats?.recentGames}
+            />
           </section>
         </div>
       )}

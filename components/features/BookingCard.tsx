@@ -5,12 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Clock, Users, Zap } from "lucide-react";
 import { toast } from "sonner";
 
-const BABYFOOTS = [
-  { id: "1", name: "Babyfoot A", location: "Salle commune - RDC", status: "available", availableAt: null },
-  { id: "2", name: "Babyfoot B", location: "Cafétéria - 1er étage", status: "occupied", availableAt: "14:30" },
-  { id: "3", name: "Babyfoot C", location: "Espace détente - 2ème étage", status: "available", availableAt: null },
-];
-
 const MATCH_FORMATS = [
   { value: "ONE_VS_ONE", label: "1 vs 1", icon: "👤👤" },
   { value: "ONE_VS_TWO", label: "1 vs 2", icon: "👤👥" },
@@ -55,56 +49,72 @@ export function BookingCard({ babyfootId, onClose }: BookingCardProps) {
       return;
     }
 
-    const babyfoot = BABYFOOTS.find(b => b.id === selectedBabyfoot);
-
-    // Vérification si le créneau est valide pour un babyfoot occupé
-    if (babyfoot?.status === "occupied" && babyfoot.availableAt) {
-      const [selectedHour, selectedMin] = selectedTime.split(':').map(Number);
-      const [availableHour, availableMin] = babyfoot.availableAt.split(':').map(Number);
-      const selectedMinutes = selectedHour * 60 + selectedMin;
-      const availableMinutes = availableHour * 60 + availableMin;
-
-      if (selectedMinutes < availableMinutes) {
-        toast.error("Créneau non disponible", {
-          description: `Ce babyfoot sera libre à partir de ${babyfoot.availableAt}. Veuillez choisir un créneau ultérieur.`,
-        });
-        return;
-      }
-    }
-
     setIsLoading(true);
 
-    // TODO: Appel API pour créer la réservation
-    // const response = await fetch("/api/reservations", { method: "POST", ... });
+    try {
+      // Create reservation date from selected time
+      const today = new Date();
+      const [hours, minutes] = selectedTime.split(':').map(Number);
+      const reservationDate = new Date(today);
+      reservationDate.setHours(hours, minutes, 0, 0);
 
-    setTimeout(() => {
-      const isLater = babyfoot?.status === "occupied";
-      toast.success("Réservation confirmée !", {
-        description: isLater
-          ? `${babyfoot?.name} réservé pour ${selectedTime} (après sa libération). Vous serez notifié !`
-          : `${babyfoot?.name} réservé pour ${selectedTime}. Bon match !`,
-        duration: 5000,
+      // Call API to create reservation
+      const response = await fetch("/api/reservations", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          babyfootId: selectedBabyfoot,
+          partyDate: reservationDate.toISOString(),
+          format: matchFormat,
+        }),
       });
 
-      // Simulation notification de disponibilité
-      setTimeout(() => {
-        toast.info("Babyfoot bientôt disponible", {
-          description: "Le Babyfoot B sera libre dans 5 minutes !",
-          duration: 10000,
-        });
-      }, 3000);
+      const data = await response.json();
 
-      setIsLoading(false);
+      if (!response.ok) {
+        toast.error("Erreur", {
+          description: data.error || "Impossible de créer la réservation",
+        });
+        setIsLoading(false);
+        return;
+      }
+
+      // Success - show appropriate message
+      if (data.queuePosition > 0) {
+        toast.success("Ajouté à la file d'attente !", {
+          description: `Position ${data.queuePosition} dans la file d'attente. Vous serez notifié quand c'est votre tour.`,
+          duration: 5000,
+        });
+      } else {
+        toast.success("Réservation confirmée !", {
+          description: `Votre partie est confirmée pour ${selectedTime}. Bon match !`,
+          duration: 5000,
+        });
+      }
+
       // Reset form
-      setSelectedBabyfoot("");
+      setSelectedBabyfoot(babyfootId || "");
       setSelectedTime("");
       setMatchFormat("");
 
-      // Close dialog if callback provided
+      // Close dialog after a short delay
       if (onClose) {
-        setTimeout(() => onClose(), 500);
+        setTimeout(() => {
+          onClose();
+          // Refresh the page to show updated data
+          window.location.reload();
+        }, 1500);
       }
-    }, 1500);
+    } catch (error) {
+      console.error("Error creating reservation:", error);
+      toast.error("Erreur réseau", {
+        description: "Impossible de contacter le serveur",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const timeSlots = generateTimeSlots();
