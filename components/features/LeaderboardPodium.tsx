@@ -1,5 +1,6 @@
 "use client";
 
+import { JSX } from "react";
 import { Trophy, Medal, Award, Star } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import ElectricBorder from "@/components/ElectricBorder";

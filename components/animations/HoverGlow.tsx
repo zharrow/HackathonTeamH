@@ -20,20 +20,20 @@ export function HoverGlow({
   const containerRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
 
-  const glowColors = {
-    cyan: "#00FFF7",
-    magenta: "#FF00FF",
-    dual: "#00FFF7, #FF00FF",
-  };
-
-  const intensityValues = {
-    low: { blur: 8, spread: 12, lift: -2 },
-    medium: { blur: 12, spread: 18, lift: -3 },
-    high: { blur: 18, spread: 25, lift: -4 },
-  };
-
   useEffect(() => {
     if (!containerRef.current) return;
+
+    const glowColors = {
+      cyan: "#00FFF7",
+      magenta: "#FF00FF",
+      dual: "#00FFF7, #FF00FF",
+    };
+
+    const intensityValues = {
+      low: { blur: 8, spread: 12, lift: -2 },
+      medium: { blur: 12, spread: 18, lift: -3 },
+      high: { blur: 18, spread: 25, lift: -4 },
+    };
 
     const config = intensityValues[intensity];
     const color = glowColors[glowColor];
@@ -53,7 +53,7 @@ export function HoverGlow({
         ease: "power2.out",
       });
     }
-  }, [isHovered, glowColor, intensity, glowColors, intensityValues]);
+  }, [isHovered, glowColor, intensity]);
 
   return (
     <div

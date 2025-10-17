@@ -13,6 +13,16 @@ import {
   BabyfootCard,
   type Reservation,
 } from "@/components/admin/reservations";
+
+interface ReservationFormData {
+  babyfootId: string;
+  partyDate: string;
+  refereeId?: string | null;
+  redDefenseId?: string | null;
+  redAttackId?: string | null;
+  blueDefenseId?: string | null;
+  blueAttackId?: string | null;
+}
 import { ReservationsStatsSection } from "@/components/admin/reservations/reservations-stats-section";
 import { ReservationsFiltersSection } from "@/components/admin/reservations/reservations-filters-section";
 import { ReservationsCalendarSection } from "@/components/admin/reservations/reservations-calendar-section";
@@ -148,7 +158,12 @@ export default function ReservationsPage() {
       const response = await fetch("/api/admin/users?limit=1000");
       const data = await response.json();
       if (data.success) {
-        setPlayers(data.data.map((u: any) => ({ id: u.id, name: u.name })));
+        setPlayers(
+          data.data.map((u: { id: string; name: string }) => ({
+            id: u.id,
+            name: u.name,
+          }))
+        );
       }
     } catch (error) {
       console.error("Error fetching players:", error);
@@ -220,7 +235,7 @@ export default function ReservationsPage() {
     handleEdit(reservation);
   };
 
-  const handleFormSubmit = async (data: any) => {
+  const handleFormSubmit = async (data: ReservationFormData) => {
     try {
       const url = selectedReservation
         ? `/api/admin/reservations/${selectedReservation.id}`

@@ -138,7 +138,7 @@ export default function QueuesMonitoringPage() {
             </div>
             <p className="text-sm text-muted-foreground mt-1">
               {totalPending === 1 ? "réservation" : "réservations"} dans les
-              files d'attente
+              files d&apos;attente
             </p>
           </CardContent>
         </Card>
@@ -150,7 +150,7 @@ export default function QueuesMonitoringPage() {
           <CardContent className="flex flex-col items-center justify-center py-16">
             <div className="text-6xl mb-4">🎉</div>
             <h3 className="text-lg font-semibold mb-2">
-              Aucune file d'attente
+              Aucune file d&apos;attente
             </h3>
             <p className="text-sm text-muted-foreground">
               Tous les créneaux sont disponibles ou confirmés

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { MapPin, Clock, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -61,10 +62,12 @@ export function BabyfootCards() {
           >
             {/* Image */}
             <div className="relative h-48 bg-gray-800 overflow-hidden">
-              <img
+              <Image
                 src={babyfoot.image}
                 alt={babyfoot.name}
                 className="w-full h-full object-cover group-hover:scale-100 transition-transform duration-300"
+                width={100}
+                height={100}
               />
               {/* Overlay gradient */}
               <div className="absolute inset-0 bg-gradient-to-t from-[#0f1923] to-transparent" />

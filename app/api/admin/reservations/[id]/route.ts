@@ -1,6 +1,7 @@
 import { NextRequest } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { updateReservationSchema } from "@/lib/validations/reservation";
+import type { Prisma } from "@prisma/client";
 
 /**
  * GET /api/admin/reservations/:id
@@ -98,7 +99,7 @@ export async function PATCH(
       }
     }
 
-    const updateData: any = {};
+    const updateData: Prisma.ReservationUncheckedUpdateInput = {};
     if (validated.babyfootId) updateData.babyfootId = validated.babyfootId;
     if (validated.partyDate)
       updateData.partyDate = new Date(validated.partyDate);
