@@ -88,13 +88,9 @@ Voici une démonstration complète du processus de déploiement depuis l'initial
   - Mise en place de règles de sécurité (firewalls, groupes de sécurité).
   - Gestion des accès (IAM, rôles, permissions).
 
-- **Base de données** :
-### Objectif
-Mettre en place une base de données PostgreSQL managée sur Amazon RDS, déployée automatiquement via Terraform
+### Base de données
 
----
-
-### Déploiement
+#### Déploiement
 L’infrastructure est déployée via Terraform, assurant une configuration facilement reproductible.
 
 Deux ressources principales sont créées :
@@ -102,8 +98,7 @@ Deux ressources principales sont créées :
 - **aws_db_subnet_group** : associe la base à des subnets privés du VPC.  
 - **aws_db_instance** : crée l’instance PostgreSQL avec les paramètres du projet.
 
-
-### Réseau et accès
+#### Réseau et accès
 
 - L’instance RDS PostgreSQL est déployée dans le VPC du projet, et en dehors du cluster ECS.  
 - Elle est rattachée aux subnets privés définis dans le `db_subnet_group`.  
@@ -111,7 +106,7 @@ Deux ressources principales sont créées :
 - Une NAT Gateway placée dans un subnet public permet les connexions sortantes vers AWS sans exposition directe à Internet.  
 - Le paramètre `publicly_accessible` est activé uniquement pour la phase de développement — le désactiver en production.
 
-### Sécurité
+#### Sécurité
 
 - **Isolation réseau** : hébergement dans des subnets privés du VPC.  
 - **Contrôle d’accès** : Security Groups limitant le trafic entrant au port `5432`.  
@@ -119,28 +114,24 @@ Deux ressources principales sont créées :
 - **Chiffrement** : activer `storage_encrypted` en production.  
 - **Connexion sécurisée** : forcer SSL/TLS côté client (Prisma, Power BI).
 
-
-### Intégration
+#### Intégration
 
 - Backend : connexion via Prisma ORM
 - Power BI : connexion directe à l’endpoint RDS pour analyses. Autoriser l’IP ou le Security Group approprié et vérifier la configuration SSL.
 - HeidiSQL : outil de test et visualisation manuelle en développement. Restreindre l’accès et ne pas stocker les identifiants en clair.
 
-## Supervision et maintenance
-- CloudWatch : suivi CPU, connexions, IOPS, stockage.
-
-- **Scalabilité** :
+### Scalabilité
 
   - Afin de gérer la mise à l'échelle automatique, nous avons utilisé Amazon ECS ainsi qu'un module d'auto-scaling nous permettant de gérer le dimensionnement de notre cluster ECS en fonction du trafic rentrant. Pour chaques auto scaling group, Amazon ECS crée et gère les ressources suivantes :
     - Une alarme CloudWatch à faible valeur métrique
     - Une alarme CloudWatch à valeur métrique élevée
     Nous devions également établir un pourcentage cible (targetCapacity) pour l'utilisation de l'instance dans le groupe Auto Scaling.
 
-- **Haute disponibilité** :
-  
+### Haute disponibilité
+
   - En plus de l'utilisation de l'auto-scaling sur le cluster ECS pour la scalabilité, nos applications tournent sur 3 zones de disponibilités (AZ) différentes (eu-west-3a, eu-west-3b, eu-west-3c) pour garder une haute disponibilité. En cas de panne d'une AZ, l'une des deux autres prendrait le relais.
 
-- **Surveillance et journalisation** :
+### Surveillance et journalisation
 
   - Cloudwatch est un outil de surveillance et de journalisation de métriques nativement installé sur aws. C'est ce qui va nous permettre de générer des alertes en fonctions des différentes métriques renvoyé par nos différentes instances et tâches. Ces métriques et alertes sont également stockés (logs).
 
