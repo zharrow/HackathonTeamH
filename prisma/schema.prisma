@@ -11,157 +11,191 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
-// ==================== Player (User) Model ====================
-
-model Player {
-    id         String   @id @default(cuid())
-    clerkId    String?  @unique // Optional pour permettre import du dataset
-    email      String   @unique
-    surname    String?
-    name       String
-    username   String?  @unique
-    profilePic String?  @map("profile_pic")
-    elo        Float    @default(1000)
-    wins       Int      @default(0)
-    losses     Int      @default(0)
-    role       Role     @default(USER)
-    createdAt  DateTime @default(now())
-    updatedAt  DateTime @updatedAt
-
-    // Relations
-    partiesAsRedDefense  Party[]      @relation("RedDefense")
-    partiesAsRedAttack   Party[]      @relation("RedAttack")
-    partiesAsBlueDefense Party[]      @relation("BlueDefense")
-    partiesAsBlueAttack  Party[]      @relation("BlueAttack")
-    partiesAsReferee     Party[]      @relation("Referee")
-    queue                QueueEntry[]
-
-    @@index([elo])
-    @@index([clerkId])
-    @@index([username])
-    @@map("player")
-}
-
-enum Role {
+enum Roles {
     USER
     ADMIN
 }
 
-// ==================== Table Condition Model ====================
-
-model TableCondition {
-    id          String   @id @default(cuid())
-    description String
-    createdAt   DateTime @default(now())
-
-    // Relations
-    tables  Table[]
-    parties Party[]
-
-    @@map("table_condition")
+enum BabyfootStatus {
+    AVAILABLE
+    OCCUPIED
+    MAINTENANCE
 }
 
-// ==================== Table (Babyfoot) Model ====================
-
-model Table {
-    id          String   @id @default(cuid())
-    name        String   @unique
-    location    String?
-    conditionId String   @map("condition_id")
-    createdAt   DateTime @default(now())
-    updatedAt   DateTime @updatedAt
-
-    // Relations
-    condition TableCondition @relation(fields: [conditionId], references: [id])
-    parties   Party[]
-    queue     QueueEntry[]
-
-    @@index([conditionId])
-    @@map("tables")
+enum TableCondition {
+    EXCELLENT
+    BON
+    MOYEN
+    MAINTENANCE
 }
 
-// ==================== Ball Type Model ====================
-
-model BallType {
-    id          String   @id @default(cuid())
-    description String
-    createdAt   DateTime @default(now())
-
-    // Relations
-    parties Party[]
-
-    @@map("balls")
+enum ReservationStatus {
+    PENDING
+    CONFIRMED
+    IN_PROGRESS
+    FINISHED
+    CANCELLED
+    EXPIRED
 }
 
-// ==================== Result Model ====================
-
-model Result {
-    id        String   @id @default(cuid())
-    text      String   @unique
-    createdAt DateTime @default(now())
-
-    // Relations
-    parties Party[]
-
-    @@map("result")
+enum BallType {
+    STANDARD
+    PRO
+    COMPETITION
 }
 
-// ==================== Party (Match) Model ====================
+enum MatchResult {
+    WIN
+    LOSS
+    DRAW
+}
 
-model Party {
-    id               String   @id @default(cuid())
-    tableId          String   @map("table_id")
-    partyDate        DateTime @map("party_date")
-    tableConditionId String   @map("table_condition_id")
-    ballTypeId       String   @map("ball_type_id")
-    refereeId        String?  @map("referee_id")
-    gameDuration     Int?     @map("game_duration") // en minutes
-    finalScoreRed    Int      @map("final_score_red")
-    finalScoreBlue   Int      @map("final_score_blue")
-    resultId         String   @map("result_id")
-    redDefenseId     String   @map("red_defense_id")
-    redAttackId      String   @map("red_attack_id")
-    blueDefenseId    String   @map("blue_defense_id")
-    blueAttackId     String   @map("blue_attack_id")
-    createdAt        DateTime @default(now()) @map("created_at")
-    updatedAt        DateTime @updatedAt
+enum MatchFormat {
+    ONE_VS_ONE
+    ONE_VS_TWO
+    TWO_VS_TWO
+}
 
-    // Relations
-    table          Table          @relation(fields: [tableId], references: [id])
-    tableCondition TableCondition @relation(fields: [tableConditionId], references: [id])
-    ballType       BallType       @relation(fields: [ballTypeId], references: [id])
-    result         Result         @relation(fields: [resultId], references: [id])
-    referee        Player?        @relation("Referee", fields: [refereeId], references: [id])
-    redDefense     Player         @relation("RedDefense", fields: [redDefenseId], references: [id])
-    redAttack      Player         @relation("RedAttack", fields: [redAttackId], references: [id])
-    blueDefense    Player         @relation("BlueDefense", fields: [blueDefenseId], references: [id])
-    blueAttack     Player         @relation("BlueAttack", fields: [blueAttackId], references: [id])
+model User {
+    id            String    @id
+    name          String
+    email         String    @unique
+    emailVerified Boolean
+    image         String?
+    createdAt     DateTime  @default(now()) @db.Timestamp(6)
+    updatedAt     DateTime? @db.Timestamp(6)
+    deletedAt     DateTime? @db.Timestamp(6)
+    created_at    DateTime  @default(now()) @db.Timestamp(6)
+    updated_at    DateTime? @db.Timestamp(6)
+    deleted_at    DateTime? @db.Timestamp(6)
+    role          Roles     @default(USER)
+    elo           Int       @default(1000)
+    wins          Int       @default(0)
+    losses        Int       @default(0)
+    draws         Int       @default(0)
+    accounts      Account[]
+    sessions      Session[]
 
-    @@index([tableId])
+    // Game relations
+    reservationsAsReferee     Reservation[] @relation("Referee")
+    reservationsAsRedDefense  Reservation[] @relation("RedDefense")
+    reservationsAsRedAttack   Reservation[] @relation("RedAttack")
+    reservationsAsBlueDefense Reservation[] @relation("BlueDefense")
+    reservationsAsBlueAttack  Reservation[] @relation("BlueAttack")
+    queue                     QueueEntry[]
+
+    @@map("user")
+}
+
+model Session {
+    id        String    @id
+    expiresAt DateTime
+    token     String    @unique
+    createdAt DateTime  @default(now()) @db.Timestamp(6)
+    updatedAt DateTime? @db.Timestamp(6)
+    deletedAt DateTime? @db.Timestamp(6)
+    ipAddress String?
+    userAgent String?
+    userId    String
+    user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@map("session")
+}
+
+model Account {
+    id                    String    @id
+    accountId             String
+    providerId            String
+    userId                String
+    accessToken           String?
+    refreshToken          String?
+    idToken               String?
+    accessTokenExpiresAt  DateTime?
+    refreshTokenExpiresAt DateTime?
+    scope                 String?
+    password              String?
+    createdAt             DateTime  @default(now()) @db.Timestamp(6)
+    updatedAt             DateTime? @db.Timestamp(6)
+    deletedAt             DateTime? @db.Timestamp(6)
+    user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@map("account")
+}
+
+model Verification {
+    id         String    @id
+    identifier String
+    value      String
+    expiresAt  DateTime
+    createdAt  DateTime  @default(now()) @db.Timestamp(6)
+    updatedAt  DateTime? @db.Timestamp(6)
+    deletedAt  DateTime? @db.Timestamp(6)
+
+    @@map("verification")
+}
+
+model Babyfoot {
+    id           String          @id @default(uuid())
+    name         String
+    status       BabyfootStatus  @default(AVAILABLE)
+    location     String?
+    condition    TableCondition?
+    reservations Reservation[]
+    queue        QueueEntry[]
+
+    @@map("babyfoot")
+}
+
+model Reservation {
+    id             String            @id @default(uuid())
+    babyfootId     String            @map("babyfoot_id")
+    createdAt      DateTime          @default(now()) @map("created_at")
+    partyDate      DateTime          @map("party_date")
+    extended       Boolean           @default(false)
+    status         ReservationStatus @default(CONFIRMED)
+    tableCondition TableCondition?   @map("table_condition")
+    ballType       BallType?         @map("ball_type")
+    refereeId      String?           @map("referee_id")
+    gameDuration   DateTime?         @map("game_duration") @db.Time
+    finalScoreRed  Int?              @map("final_score_red")
+    finalScoreBlue Int?              @map("final_score_blue")
+    result         MatchResult?
+    redDefenseId   String?           @map("red_defense_id")
+    redAttackId    String?           @map("red_attack_id")
+    blueAttackId   String?           @map("blue_attack_id")
+    blueDefenseId  String?           @map("blue_defense_id")
+    format         MatchFormat?
+
+    babyfoot    Babyfoot @relation(fields: [babyfootId], references: [id], onDelete: Cascade)
+    referee     User?    @relation("Referee", fields: [refereeId], references: [id])
+    redDefense  User?    @relation("RedDefense", fields: [redDefenseId], references: [id])
+    redAttack   User?    @relation("RedAttack", fields: [redAttackId], references: [id])
+    blueDefense User?    @relation("BlueDefense", fields: [blueDefenseId], references: [id])
+    blueAttack  User?    @relation("BlueAttack", fields: [blueAttackId], references: [id])
+
+    @@index([babyfootId])
     @@index([partyDate])
-    @@index([resultId])
+    @@index([status])
+    @@index([refereeId])
     @@index([redDefenseId])
     @@index([redAttackId])
     @@index([blueDefenseId])
     @@index([blueAttackId])
-    @@index([refereeId])
-    @@map("party")
+    @@map("reservation")
 }
 
-// ==================== Queue Model (pour réservations futures) ====================
-
 model QueueEntry {
-    id         String    @id @default(cuid())
-    playerId   String    @map("player_id")
-    tableId    String    @map("table_id")
+    id         String    @id @default(uuid())
+    userId     String    @map("user_id")
+    babyfootId String    @map("babyfoot_id")
     notifiedAt DateTime? @map("notified_at")
     expiredAt  DateTime? @map("expired_at")
     createdAt  DateTime  @default(now()) @map("created_at")
 
-    player Player @relation(fields: [playerId], references: [id], onDelete: Cascade)
-    table  Table  @relation(fields: [tableId], references: [id], onDelete: Cascade)
+    user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    babyfoot Babyfoot @relation(fields: [babyfootId], references: [id], onDelete: Cascade)
 
-    @@index([tableId, createdAt])
-    @@index([playerId])
-    @@map("queue_entry")
+    @@index([babyfootId, createdAt])
+    @@index([userId])
+    @@map("queueentry")
 }

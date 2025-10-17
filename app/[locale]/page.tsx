@@ -1,10 +1,14 @@
-import { SignedIn, SignedOut } from "@clerk/nextjs";
+"use client";
+
 import { BabyfootCards } from "@/components/features/BabyfootCards";
 import { MvpPlayerCard } from "@/components/features/MvpPlayerCard";
 import { UserStats } from "@/components/features/UserStats";
 import DotGrid from "@/components/DotGrid";
+import { useSession } from "@/lib/auth-client";
 
 export default function HomePage() {
+  const { data: session } = useSession();
+
   return (
     <main className="relative min-h-screen bg-gray-950 overflow-hidden">
       {/* Background dot-grid de ReactBits */}
@@ -23,26 +27,28 @@ export default function HomePage() {
       </div>
 
       {/* Vue non connecté */}
-      <SignedOut>
+      {!session && (
         <div className="relative z-10 container mx-auto px-4 py-16">
           <div className="max-w-4xl mx-auto text-center space-y-8">
             <h1 className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-magenta-500 to-cyan-400">
               Babyfoot Booking
             </h1>
             <p className="text-xl text-gray-400">
-              Réservez votre table de babyfoot, affrontez vos amis et grimpez dans le classement ELO !
+              Réservez votre table de babyfoot, affrontez vos amis et grimpez
+              dans le classement ELO !
             </p>
             <div className="pt-8">
               <p className="text-gray-500">
-                Connectez-vous pour accéder à votre dashboard et commencer à jouer
+                Connectez-vous pour accéder à votre dashboard et commencer à
+                jouer
               </p>
             </div>
           </div>
         </div>
-      </SignedOut>
+      )}
 
       {/* Vue connecté - Dashboard utilisateur */}
-      <SignedIn>
+      {session && (
         <div className="relative z-10 container mx-auto px-4 py-8 space-y-12">
           {/* Section 1 : Sélection des Babyfoots */}
           <section>
@@ -75,7 +81,7 @@ export default function HomePage() {
             <UserStats />
           </section>
         </div>
-      </SignedIn>
+      )}
     </main>
   );
 }

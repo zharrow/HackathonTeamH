@@ -10,7 +10,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Globe, Check } from "lucide-react";
-import { useTransition } from "react";
+import { useTransition, useEffect } from "react";
+import { setPreferredLanguage } from "@/lib/language";
 
 const languages = [
   { code: "fr", name: "Français", flag: "🇫🇷" },
@@ -23,7 +24,20 @@ export function LanguageSwitcher() {
   const pathname = usePathname();
   const [isPending, startTransition] = useTransition();
 
+  // Restore language preference from localStorage on mount
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem("babyfoot-booking-language");
+    if (savedLanguage && savedLanguage !== locale) {
+      // Only redirect if the saved language is different from current locale
+      const pathWithoutLocale = pathname.replace(`/${locale}`, "") || "/";
+      router.push(`/${savedLanguage}${pathWithoutLocale}`);
+    }
+  }, [locale, pathname, router]);
+
   const handleLanguageChange = (newLocale: string) => {
+    // Save language preference to localStorage
+    setPreferredLanguage(newLocale);
+
     startTransition(() => {
       // Remove the current locale from the pathname
       const pathWithoutLocale = pathname.replace(`/${locale}`, "") || "/";

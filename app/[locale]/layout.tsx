@@ -1,19 +1,10 @@
 import type { Metadata } from "next";
-import {
-  ClerkProvider,
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/nextjs";
 import { Geist, Geist_Mono } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages, getTranslations } from "next-intl/server";
-import { LanguageSwitcher } from "@/components/language-switcher";
-import { Toaster } from "sonner";
+import { getMessages } from "next-intl/server";
+import { ConditionalHeader } from "@/components/conditional-header";
+import { ThemeProvider } from "@/components/theme-provider";
 import "../globals.css";
-import { Button } from "@/components/ui/button";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,53 +29,24 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>;
 }) {
   const messages = await getMessages();
-  const t = await getTranslations("common");
 
   return (
-    <ClerkProvider>
-      <html>
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+    <html suppressHydrationWarning>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
         >
           <NextIntlClientProvider messages={messages}>
-            <header className="flex justify-between items-center p-4 gap-4 h-16 bg-background border-b border-border">
-              <div className="flex items-center gap-4">
-                <h1 className="text-xl font-bold text-foreground">
-                  Babyfoot Booking
-                </h1>
-              </div>
-
-              <div className="flex items-center gap-2">
-                <SignedOut>
-                  <SignInButton>
-                    <Button variant="secondary">{t("signIn")}</Button>
-                  </SignInButton>
-                  <SignUpButton>
-                    <Button variant="default">{t("signUp")}</Button>
-                  </SignUpButton>
-                </SignedOut>
-                <SignedIn>
-                  <UserButton />
-                </SignedIn>
-                <LanguageSwitcher />
-              </div>
-            </header>
+            <ConditionalHeader />
             {children}
-            <Toaster
-              position="top-right"
-              theme="dark"
-              toastOptions={{
-                style: {
-                  background: '#0f1923',
-                  border: '1px solid #334155',
-                  color: '#ffffff',
-                },
-              }}
-              richColors
-            />
           </NextIntlClientProvider>
-        </body>
-      </html>
-    </ClerkProvider>
+        </ThemeProvider>
+      </body>
+    </html>
   );
 }
