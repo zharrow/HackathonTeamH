@@ -1,6 +1,5 @@
 import { NextRequest } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { requireAdmin } from "@/lib/auth";
 import { createTableSchema } from "@/lib/validations/table";
 
 /**
@@ -9,8 +8,6 @@ import { createTableSchema } from "@/lib/validations/table";
  */
 export async function GET() {
   try {
-    await requireAdmin();
-
     const tables = await prisma.babyfoot.findMany({
       include: {
         _count: {
@@ -42,8 +39,6 @@ export async function GET() {
  */
 export async function POST(request: NextRequest) {
   try {
-    await requireAdmin();
-
     const body = await request.json();
     const validated = createTableSchema.parse(body);
 

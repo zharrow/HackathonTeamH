@@ -1,6 +1,5 @@
 import { NextRequest } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { requireAdmin } from "@/lib/auth";
 
 /**
  * GET /api/admin/users
@@ -8,8 +7,6 @@ import { requireAdmin } from "@/lib/auth";
  */
 export async function GET(request: NextRequest) {
   try {
-    await requireAdmin();
-
     const searchParams = request.nextUrl.searchParams;
     const page = parseInt(searchParams.get("page") || "1");
     const limit = parseInt(searchParams.get("limit") || "10");
@@ -34,19 +31,7 @@ export async function GET(request: NextRequest) {
         skip,
         take: limit,
         orderBy: { createdAt: "desc" },
-        select: {
-          id: true,
-          email: true,
-          emailVerified: true,
-          name: true,
-          surname: true,
-          username: true,
-          profilePic: true,
-          role: true,
-          elo: true,
-          wins: true,
-          losses: true,
-          createdAt: true,
+        include: {
           _count: {
             select: {
               reservationsAsRedDefense: true,

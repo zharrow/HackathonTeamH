@@ -69,6 +69,10 @@ model User {
     updated_at    DateTime? @db.Timestamp(6)
     deleted_at    DateTime? @db.Timestamp(6)
     role          Roles     @default(USER)
+    elo           Int       @default(1000)
+    wins          Int       @default(0)
+    losses        Int       @default(0)
+    draws         Int       @default(0)
     accounts      Account[]
     sessions      Session[]
 
@@ -131,7 +135,7 @@ model Verification {
 }
 
 model Babyfoot {
-    id           Int             @id @default(autoincrement())
+    id           String          @id @default(uuid())
     name         String
     status       BabyfootStatus  @default(AVAILABLE)
     location     String?
@@ -143,8 +147,8 @@ model Babyfoot {
 }
 
 model Reservation {
-    id             Int               @id @default(autoincrement())
-    babyfootId     Int               @map("babyfoot_id")
+    id             String            @id @default(uuid())
+    babyfootId     String            @map("babyfoot_id")
     createdAt      DateTime          @default(now()) @map("created_at")
     partyDate      DateTime          @map("party_date")
     extended       Boolean           @default(false)
@@ -181,9 +185,9 @@ model Reservation {
 }
 
 model QueueEntry {
-    id         Int       @id @default(autoincrement())
+    id         String    @id @default(uuid())
     userId     String    @map("user_id")
-    babyfootId Int       @map("babyfoot_id")
+    babyfootId String    @map("babyfoot_id")
     notifiedAt DateTime? @map("notified_at")
     expiredAt  DateTime? @map("expired_at")
     createdAt  DateTime  @default(now()) @map("created_at")

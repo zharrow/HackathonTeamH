@@ -1,6 +1,5 @@
 import { NextRequest } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { requireAdmin } from "@/lib/auth";
 import { updateTableSchema } from "@/lib/validations/table";
 
 /**
@@ -12,7 +11,6 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    await requireAdmin();
     const { id } = await params;
 
     const table = await prisma.babyfoot.findUnique({
@@ -53,7 +51,6 @@ export async function PATCH(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    await requireAdmin();
     const { id } = await params;
 
     const body = await request.json();
@@ -86,7 +83,6 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    await requireAdmin();
     const { id } = await params;
 
     await prisma.babyfoot.delete({

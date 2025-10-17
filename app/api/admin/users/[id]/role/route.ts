@@ -1,6 +1,5 @@
 import { NextRequest } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { requireAdmin } from "@/lib/auth";
 import { updateUserRoleSchema } from "@/lib/validations/user";
 
 /**
@@ -12,7 +11,6 @@ export async function PATCH(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    await requireAdmin();
     const { id } = await params;
 
     const body = await request.json();

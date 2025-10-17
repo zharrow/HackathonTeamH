@@ -1,6 +1,5 @@
 import { NextRequest } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { requireAdmin } from "@/lib/auth";
 
 /**
  * GET /api/admin/users/:id
@@ -11,7 +10,6 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    await requireAdmin();
     const { id } = await params;
 
     const user = await prisma.user.findUnique({
@@ -58,7 +56,6 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    await requireAdmin();
     const { id } = await params;
 
     await prisma.user.delete({
