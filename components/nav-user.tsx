@@ -11,7 +11,6 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  useSidebar,
 } from "@/components/ui/sidebar";
 import { UserDropdownMenuContent } from "@/components/user-dropdown-menu";
 
@@ -25,8 +24,6 @@ export function NavUser({
     role?: string;
   };
 }) {
-  const { isMobile } = useSidebar();
-
   return (
     <SidebarMenu>
       <SidebarMenuItem>

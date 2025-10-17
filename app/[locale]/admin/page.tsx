@@ -42,13 +42,14 @@ export default function AdminDashboard() {
           // Calculer les statistiques
           const totalTables = tablesData.data.length;
           const availableTables = tablesData.data.filter(
-            (table: any) => table.status === "AVAILABLE"
+            (table: { status: string }) => table.status === "AVAILABLE"
           ).length;
           const totalUsers = usersData.pagination.total;
 
           // Calculer les réservations totales depuis les tables
           const totalReservations = tablesData.data.reduce(
-            (sum: number, table: any) => sum + table._count.reservations,
+            (sum: number, table: { _count: { reservations: number } }) =>
+              sum + table._count.reservations,
             0
           );
 

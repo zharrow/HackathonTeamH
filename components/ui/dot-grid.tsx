@@ -23,7 +23,10 @@ export function DotGrid({
   const maskId = useId();
 
   return (
-    <div className={`absolute inset-0 ${className}`} style={{ backgroundColor }}>
+    <div
+      className={`absolute inset-0 ${className}`}
+      style={{ backgroundColor }}
+    >
       <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <pattern
@@ -48,7 +51,11 @@ export function DotGrid({
               width="100%"
               height="100%"
               fill={`url(#${maskId})`}
-              style={{ mixBlendMode: "destination-out" }}
+              style={
+                {
+                  mixBlendMode: "destination-out",
+                } as unknown as React.CSSProperties
+              }
             />
           </>
         ) : (
