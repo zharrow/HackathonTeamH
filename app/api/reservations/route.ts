@@ -75,7 +75,16 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
-    const { babyfootId, partyDate, format } = body;
+    const {
+      babyfootId,
+      partyDate,
+      format,
+      userTeam,
+      redDefenseId,
+      redAttackId,
+      blueDefenseId,
+      blueAttackId
+    } = body;
 
     if (!babyfootId || !partyDate || !format) {
       return Response.json(
@@ -158,20 +167,45 @@ export async function POST(request: NextRequest) {
       queuePosition = pendingCount + 1;
     }
 
-    // Create reservation with user as red defense (solo player)
+    // Create reservation with user in their chosen team
     const reservationData: any = {
       babyfootId: babyfootId,
       partyDate: reservationDate,
       status: reservationStatus,
       format: format,
-      redDefenseId: userId, // User who makes the reservation
     };
+
+    // Assign user to their chosen team (default RED if not specified)
+    const chosenTeam = userTeam || "RED";
+
+    if (chosenTeam === "RED") {
+      // User is in red team as defense
+      reservationData.redDefenseId = userId;
+      if (redAttackId) reservationData.redAttackId = redAttackId;
+      if (blueDefenseId) reservationData.blueDefenseId = blueDefenseId;
+      if (blueAttackId) reservationData.blueAttackId = blueAttackId;
+    } else {
+      // User is in blue team as defense
+      reservationData.blueDefenseId = userId;
+      if (blueAttackId) reservationData.blueAttackId = blueAttackId;
+      if (redDefenseId) reservationData.redDefenseId = redDefenseId;
+      if (redAttackId) reservationData.redAttackId = redAttackId;
+    }
 
     const reservation = await prisma.reservation.create({
       data: reservationData,
       include: {
         babyfoot: true,
         redDefense: {
+          select: { id: true, name: true, email: true, image: true },
+        },
+        redAttack: {
+          select: { id: true, name: true, email: true, image: true },
+        },
+        blueDefense: {
+          select: { id: true, name: true, email: true, image: true },
+        },
+        blueAttack: {
           select: { id: true, name: true, email: true, image: true },
         },
       },

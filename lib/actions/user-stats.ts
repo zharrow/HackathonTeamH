@@ -131,15 +131,29 @@ export async function getUserStats(userId: string) {
       let result = "Défaite";
       let eloChange = "-15";
 
-      if (r.result === "WIN" && userInRedTeam) {
-        result = "Victoire";
-        eloChange = "+20";
-      } else if (r.result === "LOSS" && !userInRedTeam) {
-        result = "Victoire";
-        eloChange = "+20";
-      } else if (r.result === "DRAW") {
+      // result field stores the outcome from RED team's perspective
+      // WIN = Red team won, LOSS = Red team lost, DRAW = tie
+      if (r.result === "DRAW") {
         result = "Égalité";
         eloChange = "+0";
+      } else if (r.result === "WIN") {
+        // Red team won
+        if (userInRedTeam) {
+          result = "Victoire";
+          eloChange = "+20";
+        } else {
+          result = "Défaite";
+          eloChange = "-15";
+        }
+      } else if (r.result === "LOSS") {
+        // Red team lost (Blue team won)
+        if (userInRedTeam) {
+          result = "Défaite";
+          eloChange = "-15";
+        } else {
+          result = "Victoire";
+          eloChange = "+20";
+        }
       }
 
       const formatMap = {

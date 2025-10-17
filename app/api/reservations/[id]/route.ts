@@ -231,6 +231,15 @@ export async function PATCH(
       if (finalScoreRed !== undefined && finalScoreBlue !== undefined) {
         updateData.finalScoreRed = finalScoreRed;
         updateData.finalScoreBlue = finalScoreBlue;
+
+        // Calculate result from RED team's perspective
+        if (finalScoreRed > finalScoreBlue) {
+          updateData.result = "WIN"; // Red team won
+        } else if (finalScoreRed < finalScoreBlue) {
+          updateData.result = "LOSS"; // Red team lost (Blue won)
+        } else {
+          updateData.result = "DRAW"; // Tie
+        }
       }
 
       const updatedReservation = await prisma.reservation.update({

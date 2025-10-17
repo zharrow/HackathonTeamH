@@ -50,7 +50,11 @@ export function BookingCard({ babyfootId, onClose }: BookingCardProps) {
   const [users, setUsers] = useState<User[]>([]);
   const [loadingUsers, setLoadingUsers] = useState(true);
 
+  // Team selection - which team the current user wants to join
+  const [selectedTeam, setSelectedTeam] = useState<"RED" | "BLUE">("RED");
+
   // Player selection states
+  const [redDefense, setRedDefense] = useState<string>("");
   const [redAttack, setRedAttack] = useState<string>("");
   const [blueDefense, setBlueDefense] = useState<string>("");
   const [blueAttack, setBlueAttack] = useState<string>("");
@@ -82,24 +86,55 @@ export function BookingCard({ babyfootId, onClose }: BookingCardProps) {
       return;
     }
 
-    // Validate player selection based on format
-    if (matchFormat === "ONE_VS_ONE" && !blueDefense) {
-      toast.error("Joueur manquant", {
-        description: "Veuillez sélectionner l'adversaire",
-      });
-      return;
+    // Validate player selection based on format and selected team
+    if (matchFormat === "ONE_VS_ONE") {
+      const opponentSelected = selectedTeam === "RED" ? blueDefense : redDefense;
+      if (!opponentSelected) {
+        toast.error("Joueur manquant", {
+          description: "Veuillez sélectionner l'adversaire",
+        });
+        return;
+      }
     }
-    if (matchFormat === "ONE_VS_TWO" && (!blueDefense || !blueAttack)) {
-      toast.error("Joueurs manquants", {
-        description: "Veuillez sélectionner les deux adversaires",
-      });
-      return;
+
+    if (matchFormat === "ONE_VS_TWO") {
+      if (selectedTeam === "RED") {
+        // User is alone in red, needs 2 opponents in blue
+        if (!blueDefense || !blueAttack) {
+          toast.error("Joueurs manquants", {
+            description: "Veuillez sélectionner les deux adversaires",
+          });
+          return;
+        }
+      } else {
+        // User is in blue defense, needs 1 teammate in blue and 1 opponent in red
+        if (!blueAttack || !redDefense) {
+          toast.error("Joueurs manquants", {
+            description: "Veuillez sélectionner votre coéquipier et l'adversaire",
+          });
+          return;
+        }
+      }
     }
-    if (matchFormat === "TWO_VS_TWO" && (!redAttack || !blueDefense || !blueAttack)) {
-      toast.error("Joueurs manquants", {
-        description: "Veuillez sélectionner tous les joueurs",
-      });
-      return;
+
+    if (matchFormat === "TWO_VS_TWO") {
+      if (selectedTeam === "RED") {
+        // User in red defense, needs red attack and both blue players
+        if (!redAttack || !blueDefense || !blueAttack) {
+          toast.error("Joueurs manquants", {
+            description: "Veuillez sélectionner tous les joueurs",
+          });
+          return;
+        }
+      } else {
+        // User in blue defense, needs blue attack and both red players
+        if (!blueAttack || !redDefense || !redAttack) {
+          toast.error("Joueurs manquants", {
+            description: "Veuillez sélectionner tous les joueurs",
+          });
+          return;
+        }
+      }
     }
 
     setIsLoading(true);
@@ -111,23 +146,45 @@ export function BookingCard({ babyfootId, onClose }: BookingCardProps) {
       const reservationDate = new Date(today);
       reservationDate.setHours(hours, minutes, 0, 0);
 
-      // Prepare player IDs based on format
+      // Prepare player IDs based on format and selected team
       const reservationData: any = {
         babyfootId: selectedBabyfoot,
         partyDate: reservationDate.toISOString(),
         format: matchFormat,
+        userTeam: selectedTeam, // Tell API which team the user chose
       };
 
       // Add players based on format
       if (matchFormat === "ONE_VS_ONE") {
-        reservationData.blueDefenseId = blueDefense;
+        if (selectedTeam === "RED") {
+          // User is red defense, opponent is blue defense
+          reservationData.blueDefenseId = blueDefense;
+        } else {
+          // User is blue defense, opponent is red defense
+          reservationData.redDefenseId = redDefense;
+        }
       } else if (matchFormat === "ONE_VS_TWO") {
-        reservationData.blueDefenseId = blueDefense;
-        reservationData.blueAttackId = blueAttack;
+        if (selectedTeam === "RED") {
+          // User alone in red defense vs 2 in blue
+          reservationData.blueDefenseId = blueDefense;
+          reservationData.blueAttackId = blueAttack;
+        } else {
+          // User in blue defense with teammate vs 1 in red
+          reservationData.redDefenseId = redDefense;
+          reservationData.blueAttackId = blueAttack;
+        }
       } else if (matchFormat === "TWO_VS_TWO") {
-        reservationData.redAttackId = redAttack;
-        reservationData.blueDefenseId = blueDefense;
-        reservationData.blueAttackId = blueAttack;
+        if (selectedTeam === "RED") {
+          // User in red defense
+          reservationData.redAttackId = redAttack;
+          reservationData.blueDefenseId = blueDefense;
+          reservationData.blueAttackId = blueAttack;
+        } else {
+          // User in blue defense
+          reservationData.redDefenseId = redDefense;
+          reservationData.redAttackId = redAttack;
+          reservationData.blueAttackId = blueAttack;
+        }
       }
 
       // Call API to create reservation
@@ -166,6 +223,8 @@ export function BookingCard({ babyfootId, onClose }: BookingCardProps) {
       setSelectedBabyfoot(babyfootId || "");
       setSelectedTime("");
       setMatchFormat("");
+      setSelectedTeam("RED");
+      setRedDefense("");
       setRedAttack("");
       setBlueDefense("");
       setBlueAttack("");
@@ -229,6 +288,40 @@ export function BookingCard({ babyfootId, onClose }: BookingCardProps) {
             </div>
           </div>
 
+          {/* Team Selection */}
+          {matchFormat && (
+            <div className="space-y-3">
+              <label className="text-xs font-bold text-gray-400 uppercase tracking-wider flex items-center gap-2">
+                <Users className="w-3 h-3" />
+                Choisir votre équipe
+              </label>
+              <div className="flex gap-3">
+                <button
+                  onClick={() => setSelectedTeam("RED")}
+                  className={`flex-1 p-4 rounded border-2 transition-all ${
+                    selectedTeam === "RED"
+                      ? "border-red-400 bg-red-400/10"
+                      : "border-gray-700 bg-gray-800/30 hover:border-gray-600"
+                  }`}
+                >
+                  <div className="text-2xl mb-1">🔴</div>
+                  <p className="text-sm font-bold text-white">Équipe Rouge</p>
+                </button>
+                <button
+                  onClick={() => setSelectedTeam("BLUE")}
+                  className={`flex-1 p-4 rounded border-2 transition-all ${
+                    selectedTeam === "BLUE"
+                      ? "border-blue-400 bg-blue-400/10"
+                      : "border-gray-700 bg-gray-800/30 hover:border-gray-600"
+                  }`}
+                >
+                  <div className="text-2xl mb-1">🔵</div>
+                  <p className="text-sm font-bold text-white">Équipe Bleue</p>
+                </button>
+              </div>
+            </div>
+          )}
+
           {/* Player Selection */}
           {matchFormat && !loadingUsers && (
             <div className="space-y-3">
@@ -238,13 +331,28 @@ export function BookingCard({ babyfootId, onClose }: BookingCardProps) {
               </label>
 
               <div className="space-y-3">
-                {/* Team Red - You are always Red Defense */}
+                {/* Team Red */}
                 <div className="p-4 bg-red-500/10 border border-red-500/20 rounded">
                   <p className="text-xs font-bold text-red-400 mb-2">ÉQUIPE ROUGE</p>
                   <div className="space-y-2">
                     <div className="flex items-center gap-2">
-                      <span className="text-sm text-gray-300">Défense:</span>
-                      <span className="text-sm font-bold text-white">Vous</span>
+                      <span className="text-sm text-gray-300 flex-shrink-0">Défense:</span>
+                      {selectedTeam === "RED" ? (
+                        <span className="text-sm font-bold text-white">Vous</span>
+                      ) : (
+                        <select
+                          value={redDefense}
+                          onChange={(e) => setRedDefense(e.target.value)}
+                          className="flex-1 p-2 bg-gray-800 border border-gray-700 rounded text-sm text-white focus:outline-none focus:border-red-400"
+                        >
+                          <option value="">Sélectionner un joueur</option>
+                          {users.map((user) => (
+                            <option key={user.id} value={user.id}>
+                              {user.name}
+                            </option>
+                          ))}
+                        </select>
+                      )}
                     </div>
                     {matchFormat === "TWO_VS_TWO" && (
                       <div className="flex items-center gap-2">
@@ -272,18 +380,22 @@ export function BookingCard({ babyfootId, onClose }: BookingCardProps) {
                   <div className="space-y-2">
                     <div className="flex items-center gap-2">
                       <span className="text-sm text-gray-300 flex-shrink-0">Défense:</span>
-                      <select
-                        value={blueDefense}
-                        onChange={(e) => setBlueDefense(e.target.value)}
-                        className="flex-1 p-2 bg-gray-800 border border-gray-700 rounded text-sm text-white focus:outline-none focus:border-blue-400"
-                      >
-                        <option value="">Sélectionner un adversaire</option>
-                        {users.map((user) => (
-                          <option key={user.id} value={user.id}>
-                            {user.name}
-                          </option>
-                        ))}
-                      </select>
+                      {selectedTeam === "BLUE" ? (
+                        <span className="text-sm font-bold text-white">Vous</span>
+                      ) : (
+                        <select
+                          value={blueDefense}
+                          onChange={(e) => setBlueDefense(e.target.value)}
+                          className="flex-1 p-2 bg-gray-800 border border-gray-700 rounded text-sm text-white focus:outline-none focus:border-blue-400"
+                        >
+                          <option value="">Sélectionner un joueur</option>
+                          {users.map((user) => (
+                            <option key={user.id} value={user.id}>
+                              {user.name}
+                            </option>
+                          ))}
+                        </select>
+                      )}
                     </div>
                     {(matchFormat === "ONE_VS_TWO" || matchFormat === "TWO_VS_TWO") && (
                       <div className="flex items-center gap-2">
