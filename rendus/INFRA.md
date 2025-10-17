@@ -30,3 +30,62 @@ Autrement, il n'y a pas de format imposé, mais essayez de rester clair et conci
 En conclusion, cela doit résumer votre travail en tant qu'expert.e infra, et vous permettre de garder un trace écrite de votre contribution au projet.
 
 Merci de votre participation, et bon courage pour la suite du hackathon !
+
+
+
+### Objectif général
+
+Déployer une infrastructure cloud complète pour héberger et gérer l’application web de gestion des babyfoots, incluant des services de base de données, de mise à l’échelle automatique et de surveillance.
+
+Exemple:
+
+- Hébergement de l’application web (frontend et backend)
+- Base de données pour stocker les informations des babyfoots et des utilisateurs
+- Services de surveillance et de journalisation
+- Mise en place de la sécurité (firewalls, gestion des accès, etc.)
+
+### Requis fonctionnels
+
+- **Simplicité de déploiement** :
+
+  - Utilisation d’outils d’automatisation (Terraform, Ansible, Scripts shell...) pour déployer l’infrastructure en une seule commande.
+  - Documentation claire pour le déploiement.
+
+- **Host sécurisé et protégé** :
+
+  - Mise en place de règles de sécurité (firewalls, groupes de sécurité).
+  - Gestion des accès (IAM, rôles, permissions).
+
+- **Base de données** :
+
+  - Déploiement d’une base de données relationnelle ou NoSQL.
+  - Sauvegardes régulières et restauration des données.
+
+- **Scalabilité** :
+
+  - Mise en place de la mise à l’échelle automatique pour gérer les pics de trafic.
+
+- **Surveillance et journalisation** :
+
+  - Mise en place de services de surveillance (CPU, mémoire, latence, etc.).
+  - Journalisation des événements importants (logs d’accès, erreurs, etc.).
+
+================================================================================
+============================== SI VOUS ÊTES PLUS DE 2 ==========================
+================================================================================
+
+Essayer de mettre en place une architecture plus complexe, par exemple :
+
+- **Haute disponibilité** :
+
+  - Mise en place de la redondance pour assurer la disponibilité du service. (2 serveurs minimum)
+  - Utilisation de plusieurs zones de disponibilité si possible.
+
+### Supplémentaires (bonus)
+
+Vous êtes encouragés à implémenter autant de fonctionnalités supplémentaires que possible. Voici quelques idées :
+
+- **Réplication de la base de données** : Mise en place de la réplication pour assurer la haute disponibilité.
+- **Guide de récupération après sinistre** : Documentation et procédures pour la récupération en cas de panne majeure.
+- **Optimisation des coûts** : Stratégies pour minimiser les coûts d’infrastructure
+- **Tests de charge** : Simulation de trafic pour tester la robustesse de l’infrastructure.
