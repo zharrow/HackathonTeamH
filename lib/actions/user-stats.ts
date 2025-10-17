@@ -57,36 +57,11 @@ export async function getUserStats(userId: string) {
         if (!r.gameDuration) return sum;
         // gameDuration is stored as Time, convert to minutes
         const timeStr = r.gameDuration.toString();
-        const [hours, minutes, seconds] = timeStr.split(":").map(Number);
+        const [hours, minutes] = timeStr.split(":").map(Number);
         return sum + (hours * 60 + minutes);
       }, 0);
       averageGameDuration = Math.round(totalMinutes / gamesWithDuration.length * 10) / 10;
     }
-
-    // Get ELO progression (last 8 weeks)
-    const eightWeeksAgo = new Date();
-    eightWeeksAgo.setDate(eightWeeksAgo.getDate() - 56);
-
-    const recentReservations = await prisma.reservation.findMany({
-      where: {
-        status: "FINISHED",
-        partyDate: {
-          gte: eightWeeksAgo,
-        },
-        OR: [
-          { redDefenseId: userId },
-          { redAttackId: userId },
-          { blueDefenseId: userId },
-          { blueAttackId: userId },
-        ],
-      },
-      orderBy: {
-        partyDate: "asc",
-      },
-      select: {
-        partyDate: true,
-      },
-    });
 
     // Group by week and calculate ELO progression (simulated)
     const eloProgression = [];
