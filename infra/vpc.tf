@@ -164,6 +164,32 @@ module "ecs_service" {
         }
       ]
 
+      environment = [
+        {
+          "name": "NEXT_PUBLIC_APP_URL",
+          "value": "http://404infra.aws.corentinptrl.dev:3000"
+        
+        
+          "name": "BETTER_AUTH_URL",
+          "value": "https://404infra.aws.corentinptrl.dev"
+        
+        
+          "name": "NEXT_PUBLIC_APP_URL" ,
+          "value": "https://404infra.aws.corentinptrl.dev"
+        
+          "name": "BETTER_AUTH_SECRET",
+          "value": "votre-secret-fort-32-caracteres-minimum" 
+        
+        
+          "name": "DATABASE_URL" ,
+          "value": "postgresql://adminuser:MyStrongPassword@replica-postgresql-master.c5q6sgo20rt2.eu-west-3.rds.amazonaws.com:5432/hackathon"
+        }
+
+      ]
+
+
+
+
       mountPoints = [
         {
           sourceVolume  = "my-vol",
