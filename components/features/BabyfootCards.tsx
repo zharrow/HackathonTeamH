@@ -11,6 +11,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { BookingCard } from "./BookingCard";
+import { HoverGlow } from "@/components/animations";
 
 const BABYFOOTS = [
   {
@@ -52,10 +53,8 @@ export function BabyfootCards() {
     <>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {BABYFOOTS.map((babyfoot) => (
-          <div
-            key={babyfoot.id}
-            className="relative bg-[#0f1923] border-2 border-gray-700 rounded-lg overflow-hidden group hover:border-cyan-400 transition-all duration-300"
-          >
+          <HoverGlow key={babyfoot.id} glowColor="magenta" intensity="high" className="relative bg-[#0D0D0D] border-2 min-h-100 border-[#00FFF7]/20 rounded-lg overflow-hidden group hover:border-[#00FFF7] transition-colors duration-300">
+
             {/* Image */}
             <div className="relative h-48 bg-gray-800 overflow-hidden">
               <img
@@ -69,13 +68,13 @@ export function BabyfootCards() {
               {/* Status badge */}
               <div className="absolute top-3 right-3">
                 {babyfoot.status === "occupied" ? (
-                  <span className="px-3 py-1 bg-red-500/90 backdrop-blur-sm text-white text-xs font-black rounded uppercase flex items-center gap-1">
+                  <span className="px-3 py-1 bg-[#FF4B4B] backdrop-blur-sm text-white text-xs font-black rounded uppercase flex items-center gap-1 glow-cyan">
                     <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
                     Occupé
                   </span>
                 ) : (
-                  <span className="px-3 py-1 bg-green-500/90 backdrop-blur-sm text-white text-xs font-black rounded uppercase flex items-center gap-1">
-                    <div className="w-2 h-2 bg-white rounded-full" />
+                  <span className="px-3 py-1 bg-[#00FF6C] backdrop-blur-sm text-black text-xs font-black rounded uppercase flex items-center gap-1">
+                    <div className="w-2 h-2 bg-black rounded-full" />
                     Libre
                   </span>
                 )}
@@ -86,20 +85,20 @@ export function BabyfootCards() {
             <div className="p-5 space-y-4">
               {/* Title */}
               <div>
-                <h3 className="text-xl font-black text-white uppercase tracking-tight">
+                <h3 className="font-subheading text-xl text-[#F2F2F2] uppercase tracking-tight">
                   {babyfoot.name}
                 </h3>
                 <div className="flex items-center gap-2 mt-2">
-                  <MapPin className="w-4 h-4 text-gray-400" />
-                  <p className="text-sm text-gray-400">{babyfoot.location}</p>
+                  <MapPin className="w-4 h-4 text-[#B0B0B0]" />
+                  <p className="font-body text-sm text-[#B0B0B0]">{babyfoot.location}</p>
                 </div>
               </div>
 
               {/* Availability info */}
               {babyfoot.status === "occupied" && babyfoot.availableAt && (
-                <div className="flex items-center gap-2 p-2 bg-yellow-500/10 border border-yellow-500/20 rounded">
-                  <Clock className="w-4 h-4 text-yellow-400 flex-shrink-0" />
-                  <p className="text-xs text-yellow-400">
+                <div className="flex items-center gap-2 p-2 bg-[#FF00FF]/10 border border-[#FF00FF]/20 rounded">
+                  <Clock className="w-4 h-4 text-[#FF00FF] flex-shrink-0" />
+                  <p className="font-body text-xs text-[#FF00FF]">
                     Disponible à <span className="font-bold">{babyfoot.availableAt}</span>
                   </p>
                 </div>
@@ -108,27 +107,25 @@ export function BabyfootCards() {
               {/* CTA Button */}
               <Button
                 onClick={() => handleBooking(babyfoot.id)}
-                className="w-full bg-gradient-to-r from-cyan-500 to-magenta-500 hover:from-cyan-600 hover:to-magenta-600 text-black font-black uppercase text-sm py-5 transition-all"
+                className="w-full bg-gradient-to-r from-[#00FFF7] to-[#FF00FF] hover:from-[#00FFF7]/80 hover:to-[#FF00FF]/80 text-black font-black uppercase text-sm py-5 transition-colors"
               >
                 <Zap className="w-4 h-4 mr-2" />
                 Réserver
               </Button>
             </div>
 
-            {/* Corner accent */}
-            <div className="absolute top-0 left-0 w-0 h-0 border-t-[30px] border-t-cyan-400/20 border-r-[30px] border-r-transparent group-hover:border-t-cyan-400 transition-all" />
-          </div>
+          </HoverGlow>
         ))}
       </div>
 
       {/* Booking Dialog */}
       <Dialog open={isBookingOpen} onOpenChange={setIsBookingOpen}>
-        <DialogContent className="max-w-2xl bg-gray-950 border-gray-800 max-h-[90vh] overflow-y-auto">
+        <DialogContent className="max-w-2xl bg-[#0D0D0D] border-[#00FFF7]/30 max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle className="text-2xl font-black text-white uppercase">
+            <DialogTitle className="font-heading text-2xl text-[#F2F2F2]">
               Réserver un Babyfoot
             </DialogTitle>
-            <DialogDescription className="text-gray-400">
+            <DialogDescription className="font-body text-[#B0B0B0]">
               {selectedBabyfoot && (() => {
                 const babyfoot = BABYFOOTS.find(b => b.id === selectedBabyfoot);
                 return babyfoot ? `${babyfoot.name} - ${babyfoot.location}` : '';
