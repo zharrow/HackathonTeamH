@@ -1,11 +1,13 @@
+"use client";
+
 import { BabyfootCards } from "@/components/features/BabyfootCards";
 import { MvpPlayerCard } from "@/components/features/MvpPlayerCard";
 import { UserStats } from "@/components/features/UserStats";
 import DotGrid from "@/components/DotGrid";
-import { getCurrentUser } from "@/lib/auth";
+import { useSession } from "@/lib/auth-client";
 
-export default async function HomePage() {
-  const user = await getCurrentUser();
+export default function HomePage() {
+  const { data: session } = useSession();
 
   return (
     <main className="relative min-h-screen bg-gray-950 overflow-hidden">
@@ -25,7 +27,7 @@ export default async function HomePage() {
       </div>
 
       {/* Vue non connecté */}
-      {!user && (
+      {!session && (
         <div className="relative z-10 container mx-auto px-4 py-16">
           <div className="max-w-4xl mx-auto text-center space-y-8">
             <h1 className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-magenta-500 to-cyan-400">
@@ -46,7 +48,7 @@ export default async function HomePage() {
       )}
 
       {/* Vue connecté - Dashboard utilisateur */}
-      {user && (
+      {session && (
         <div className="relative z-10 container mx-auto px-4 py-8 space-y-12">
           {/* Section 1 : Sélection des Babyfoots */}
           <section>
