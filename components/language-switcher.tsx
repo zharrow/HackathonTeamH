@@ -46,8 +46,6 @@ export function LanguageSwitcher() {
     });
   };
 
-  const currentLanguage = languages.find((lang) => lang.code === locale);
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

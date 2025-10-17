@@ -18,7 +18,7 @@ import { Separator } from "@/components/ui/separator";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import Link from "next/link";
-import { Roles } from "@/generated/prisma";
+import { Roles } from "@prisma/client";
 import { getTranslations } from "next-intl/server";
 
 export default async function AdminLayout({

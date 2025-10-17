@@ -1,14 +1,6 @@
 "use client";
 
-import {
-  BadgeCheck,
-  Bell,
-  LogOut,
-  Shield,
-  Settings,
-  User,
-  Home,
-} from "lucide-react";
+import { LogOut, Shield, Settings, User, Home } from "lucide-react";
 import { signOut } from "@/lib/auth-client";
 import Link from "next/link";
 import { useTranslations } from "next-intl";

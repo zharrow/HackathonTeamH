@@ -39,7 +39,7 @@ export function AuthHeader() {
             name: user?.name || "",
             email: user?.email || "",
             avatar: user?.image,
-            role: (user as any)?.role,
+            role: (user as { role?: string })?.role,
           }}
           showAdminLink={true}
           showBackToSite={false}

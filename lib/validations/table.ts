@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { BabyfootStatus, TableCondition } from "@/generated/prisma";
+import { BabyfootStatus, TableCondition } from "@prisma/client";
 
 export const createTableSchema = z.object({
   name: z.string().min(1, "Le nom est requis").max(100),
