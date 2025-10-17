@@ -44,6 +44,6 @@ next-env.d.ts
 /generated/
 
 PROMPT_VIBE_CODER.md
-.cursorrules
+.cursor/
 # clerk configuration (can include secrets)
 /.clerk/

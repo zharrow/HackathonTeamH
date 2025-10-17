@@ -37,6 +37,7 @@ interface AdvancedDataTableProps<TData, TValue> {
   searchColumn?: string;
   isLoading?: boolean;
   onRowClick?: (row: TData) => void;
+  enablePagination?: boolean;
 }
 
 export function AdvancedDataTable<TData, TValue>({
@@ -44,6 +45,7 @@ export function AdvancedDataTable<TData, TValue>({
   data,
   isLoading = false,
   onRowClick,
+  enablePagination = true,
 }: AdvancedDataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -57,7 +59,9 @@ export function AdvancedDataTable<TData, TValue>({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
+    getPaginationRowModel: enablePagination
+      ? getPaginationRowModel()
+      : undefined,
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     onSortingChange: setSorting,
@@ -179,7 +183,7 @@ export function AdvancedDataTable<TData, TValue>({
       </div>
 
       {/* Pagination */}
-      <DataTablePagination table={table} />
+      {enablePagination && <DataTablePagination table={table} />}
     </div>
   );
 }

@@ -13,13 +13,8 @@ export function RoleBadge({ role, label }: RoleBadgeProps) {
     ADMIN: "default",
   } as const;
 
-  const colors = {
-    USER: "text-blue-500",
-    ADMIN: "text-purple-500",
-  } as const;
-
   return (
-    <Badge variant={variants[role]} className={`font-medium ${colors[role]}`}>
+    <Badge variant={variants[role]} className="font-medium">
       {label}
     </Badge>
   );
