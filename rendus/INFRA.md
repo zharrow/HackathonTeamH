@@ -61,20 +61,21 @@ Déployer une infrastructure cloud complète pour héberger et gérer l’applic
   - Sauvegardes régulières et restauration des données.
 
 - **Scalabilité** :
-  - Mise en place de la mise à l’échelle automatique pour gérer les pics de trafic : Afin de gérer la mise à l'échelle automatique, nous avons utilisé Amazon ECS ainsi qu'un module d'auto-scaling nous permettant de gérer le dimensionnement de notre cluster ECS en fonction du trafic rentrant. Pour chaques auto scaling group, Amazon ECS crée et gère les ressources suivantes :
+
+  - Afin de gérer la mise à l'échelle automatique, nous avons utilisé Amazon ECS ainsi qu'un module d'auto-scaling nous permettant de gérer le dimensionnement de notre cluster ECS en fonction du trafic rentrant. Pour chaques auto scaling group, Amazon ECS crée et gère les ressources suivantes :
     - Une alarme CloudWatch à faible valeur métrique
     - Une alarme CloudWatch à valeur métrique élevée
     Nous devions également établir un pourcentage cible (targetCapacity) pour l'utilisation de l'instance dans le groupe Auto Scaling.
+
+- **Haute disponibilité** :
+  
+  - En plus de l'utilisation de l'auto-scaling sur le cluster ECS pour la scalabilité, nos applications tournent sur 3 zones de disponibilités (AZ) différentes (eu-west-3a, eu-west-3b, eu-west-3c) pour garder une haute disponibilité. En cas de panne d'une AZ, l'une des deux autres prendrait le relais.
 
 - **Surveillance et journalisation** :
 
   - Mise en place de services de surveillance (CPU, mémoire, latence, etc.).
   - Journalisation des événements importants (logs d’accès, erreurs, etc.).
 
-- **Haute disponibilité** :
-
-  - Mise en place de la redondance pour assurer la disponibilité du service. (2 serveurs minimum)
-  - Utilisation de plusieurs zones de disponibilité si possible.
 
 ### Supplémentaires (bonus)
 
