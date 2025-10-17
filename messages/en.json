@@ -42,6 +42,7 @@
     "availableTablesDesc": "Choose your table and book your time slot",
     "mvpPlayer": "Campus MVP Player",
     "mvpPlayerDesc": "The best player right now"
+  },
   "signIn": {
     "title": "Sign In",
     "description": "Sign in to your Babyfoot Booking account",
