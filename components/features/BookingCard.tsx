@@ -147,7 +147,16 @@ export function BookingCard({ babyfootId, onClose }: BookingCardProps) {
       reservationDate.setHours(hours, minutes, 0, 0);
 
       // Prepare player IDs based on format and selected team
-      const reservationData: any = {
+      const reservationData: {
+        babyfootId: string;
+        partyDate: string;
+        format: string;
+        userTeam: string;
+        redDefenseId?: string;
+        redAttackId?: string;
+        blueDefenseId?: string;
+        blueAttackId?: string;
+      } = {
         babyfootId: selectedBabyfoot,
         partyDate: reservationDate.toISOString(),
         format: matchFormat,
