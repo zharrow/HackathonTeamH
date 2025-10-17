@@ -77,6 +77,8 @@
     "passwordLabel": "Mot de passe",
     "signUpButton": "Créer un compte",
     "signingUp": "Création en cours...",
+    "signInWithGithub": "Continuer avec GitHub",
+    "orContinueWith": "ou continuer avec",
     "alreadyHaveAccount": "Déjà un compte ?",
     "signInLink": "Se connecter",
     "signUpSuccess": "Compte créé avec succès !",
