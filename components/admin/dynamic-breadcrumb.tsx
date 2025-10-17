@@ -1,7 +1,8 @@
 "use client";
 
-import { usePathname } from "next/navigation";
+import { usePathname, useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { useEffect, useState } from "react";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -13,13 +14,35 @@ import {
 
 export function DynamicBreadcrumb() {
   const pathname = usePathname();
+  const params = useParams();
   const t = useTranslations("admin");
+  const [tableName, setTableName] = useState<string | null>(null);
 
   // Remove locale from pathname and split into segments
   const segments = pathname
     .replace(/^\/(en|fr)/, "")
     .split("/")
     .filter(Boolean);
+
+  // Check if we're on a table detail page
+  const tableId = params.tableId as string | undefined;
+  const isTableDetailPage = segments.includes("reservations") && tableId;
+
+  // Fetch table name if we're on a table detail page
+  useEffect(() => {
+    if (isTableDetailPage && tableId) {
+      fetch(`/api/admin/tables/${tableId}`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.success) {
+            setTableName(data.data.name);
+          }
+        })
+        .catch(() => {
+          setTableName(null);
+        });
+    }
+  }, [isTableDetailPage, tableId]);
 
   // Get page title based on current route
   const getPageTitle = () => {
@@ -38,6 +61,30 @@ export function DynamicBreadcrumb() {
     return pageMap[currentPage] || t("dashboardLink");
   };
 
+  // Render breadcrumb for table detail page
+  if (isTableDetailPage) {
+    return (
+      <Breadcrumb>
+        <BreadcrumbList>
+          <BreadcrumbItem className="hidden md:block">
+            <BreadcrumbLink href="/admin">{t("administration")}</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator className="hidden md:block" />
+          <BreadcrumbItem>
+            <BreadcrumbLink href={`/${params.locale}/admin/reservations`}>
+              {t("reservationsLink")}
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>{tableName || "Loading..."}</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+    );
+  }
+
+  // Regular breadcrumb
   return (
     <Breadcrumb>
       <BreadcrumbList>

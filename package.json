@@ -13,6 +13,7 @@
     "db:seed": "dotenv -e .env.local -- tsx prisma/seed.ts",
     "db:seed-users": "dotenv -e .env.local -- tsx prisma/seed_users.ts",
     "db:seed-tables": "dotenv -e .env.local -- tsx prisma/seed_tables.ts",
+    "db:seed-reservations": "dotenv -e .env.local -- tsx prisma/seed_reservations.ts",
     "db:studio": "prisma studio"
   },
   "prisma": {

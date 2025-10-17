@@ -48,10 +48,11 @@ Plateforme de gestion et réservation de tables de babyfoot pour Ynov Toulouse.
 
 4. **Initialiser la base de données**
    ```bash
-   pnpm db:push         # Créer les tables
-   pnpm db:seed         # Insérer les données de test
-   pnpm db:seed-users   # Importer les utilisateurs depuis users.json (optionnel)
-   pnpm db:seed-tables  # Importer les tables de babyfoot depuis tables.json (optionnel)
+   pnpm db:push              # Créer les tables
+   pnpm db:seed              # Insérer les données de test
+   pnpm db:seed-users        # Importer les utilisateurs depuis users.json (optionnel)
+   pnpm db:seed-tables       # Importer les tables de babyfoot depuis tables.json (optionnel)
+   pnpm db:seed-reservations # Générer 50 réservations aléatoires (optionnel)
    ```
 
 ## 🏃 Lancement en développement
@@ -78,15 +79,16 @@ L'application sera accessible sur [http://localhost:3000](http://localhost:3000)
 ## 📦 Scripts disponibles
 
 ```bash
-pnpm dev            # Développement
-pnpm build          # Build production
-pnpm start          # Lancer en production
-pnpm lint           # Vérification ESLint
-pnpm db:push        # Appliquer les changements du schéma Prisma
-pnpm db:seed        # Seed la base de données avec des données de test
-pnpm db:seed-users  # Importer les utilisateurs depuis users.json
-pnpm db:seed-tables # Importer les tables de babyfoot depuis tables.json
-pnpm db:studio      # Interface Prisma Studio
+pnpm dev                 # Développement
+pnpm build               # Build production
+pnpm start               # Lancer en production
+pnpm lint                # Vérification ESLint
+pnpm db:push             # Appliquer les changements du schéma Prisma
+pnpm db:seed             # Seed la base de données avec des données de test
+pnpm db:seed-users       # Importer les utilisateurs depuis users.json
+pnpm db:seed-tables      # Importer les tables de babyfoot depuis tables.json
+pnpm db:seed-reservations # Générer 50 réservations aléatoires
+pnpm db:studio           # Interface Prisma Studio
 ```
 
 ## 🏗️ Architecture

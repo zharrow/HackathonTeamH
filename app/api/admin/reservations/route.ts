@@ -1,0 +1,179 @@
+import { NextRequest } from "next/server";
+import { prisma } from "@/lib/prisma";
+import { createReservationSchema } from "@/lib/validations/reservation";
+
+/**
+ * GET /api/admin/reservations
+ * List all reservations with filters
+ */
+export async function GET(request: NextRequest) {
+  try {
+    const searchParams = request.nextUrl.searchParams;
+    const babyfootId = searchParams.get("babyfootId");
+    const startDate = searchParams.get("startDate");
+    const endDate = searchParams.get("endDate");
+    const status = searchParams.get("status");
+
+    const where: any = {};
+
+    if (babyfootId) {
+      where.babyfootId = babyfootId;
+    }
+
+    if (startDate && endDate) {
+      where.partyDate = {
+        gte: new Date(startDate),
+        lte: new Date(endDate),
+      };
+    }
+
+    if (status) {
+      where.status = status;
+    }
+
+    const reservations = await prisma.reservation.findMany({
+      where,
+      include: {
+        babyfoot: true,
+        referee: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            image: true,
+          },
+        },
+        redDefense: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            image: true,
+          },
+        },
+        redAttack: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            image: true,
+          },
+        },
+        blueDefense: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            image: true,
+          },
+        },
+        blueAttack: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            image: true,
+          },
+        },
+      },
+      orderBy: { partyDate: "desc" },
+    });
+
+    return Response.json({ success: true, data: reservations });
+  } catch (error) {
+    console.error("Error fetching reservations:", error);
+    return Response.json(
+      { error: "Erreur lors de la récupération des réservations" },
+      { status: 500 }
+    );
+  }
+}
+
+/**
+ * POST /api/admin/reservations
+ * Create a new reservation with queue system
+ * - First to reserve a slot → CONFIRMED
+ * - Others → PENDING (waiting list)
+ * - Duration fixed at 15 minutes
+ */
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json();
+    const validated = createReservationSchema.parse(body);
+
+    const partyDate = new Date(validated.partyDate);
+
+    // Check if there's already a CONFIRMED reservation for this exact slot
+    const confirmedReservation = await prisma.reservation.findFirst({
+      where: {
+        babyfootId: validated.babyfootId,
+        partyDate: partyDate,
+        status: "CONFIRMED",
+      },
+    });
+
+    // Determine status: CONFIRMED if slot is free, PENDING if occupied
+    const reservationStatus = confirmedReservation ? "PENDING" : "CONFIRMED";
+
+    // Get queue position if PENDING
+    let queuePosition = 0;
+    if (reservationStatus === "PENDING") {
+      const pendingCount = await prisma.reservation.count({
+        where: {
+          babyfootId: validated.babyfootId,
+          partyDate: partyDate,
+          status: "PENDING",
+        },
+      });
+      queuePosition = pendingCount + 1;
+    }
+
+    const reservation = await prisma.reservation.create({
+      data: {
+        babyfootId: validated.babyfootId,
+        partyDate: partyDate,
+        status: reservationStatus,
+        refereeId: validated.refereeId,
+        redDefenseId: validated.redDefenseId,
+        redAttackId: validated.redAttackId,
+        blueDefenseId: validated.blueDefenseId,
+        blueAttackId: validated.blueAttackId,
+      },
+      include: {
+        babyfoot: true,
+        referee: { select: { id: true, name: true, email: true, image: true } },
+        redDefense: {
+          select: { id: true, name: true, email: true, image: true },
+        },
+        redAttack: {
+          select: { id: true, name: true, email: true, image: true },
+        },
+        blueDefense: {
+          select: { id: true, name: true, email: true, image: true },
+        },
+        blueAttack: {
+          select: { id: true, name: true, email: true, image: true },
+        },
+      },
+    });
+
+    return Response.json(
+      {
+        success: true,
+        data: reservation,
+        queuePosition: reservationStatus === "PENDING" ? queuePosition : 0,
+        message:
+          reservationStatus === "CONFIRMED"
+            ? "Réservation confirmée"
+            : `Ajouté à la file d'attente (position ${queuePosition})`,
+      },
+      { status: 201 }
+    );
+  } catch (error) {
+    console.error("Error creating reservation:", error);
+    return Response.json(
+      { error: "Erreur lors de la création de la réservation" },
+      { status: 500 }
+    );
+  }
+}

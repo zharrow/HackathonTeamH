@@ -1,13 +1,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import {
-  LayoutDashboard,
-  Users,
-  Table2,
-  Gamepad2,
-  BarChart3,
-} from "lucide-react";
+import { LayoutDashboard, Users, Table2, BarChart3 } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -19,6 +13,7 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 import { NavUser } from "@/components/nav-user";
+import { ReservationsMenu } from "@/components/reservations-menu";
 
 export function AdminSidebar({
   user,
@@ -50,16 +45,12 @@ export function AdminSidebar({
       icon: Users,
     },
     {
-      title: t("admin.reservationsLink"),
-      url: "/admin/reservations",
-      icon: Gamepad2,
-    },
-    {
       title: t("admin.statsLink"),
       url: "/admin/stats",
       icon: BarChart3,
     },
   ];
+
   return (
     <Sidebar {...props}>
       <SidebarHeader>
@@ -97,6 +88,9 @@ export function AdminSidebar({
               </SidebarMenuButton>
             </SidebarMenuItem>
           ))}
+
+          {/* Reservations with submenu - Client Component */}
+          <ReservationsMenu />
         </SidebarMenu>
       </SidebarContent>
       <SidebarFooter>
