@@ -1,7 +1,6 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { BabyfootStatus } from "@prisma/client";
 
 export async function getBabyfoots() {
   try {
